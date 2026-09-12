@@ -89,7 +89,12 @@ const EQUIPMENT = [
   { key: "air", icon: "◉", name: "かぜおくり", copy: "ファンが つよくなります" },
   { key: "sensor", icon: "⌁", name: "みまもり", copy: "センサーが ふえます" },
 ];
-const FACILITY_BACKGROUNDS = ["assets/original-sand-factory-v2.png"];
+const FACILITY_BACKGROUNDS = {
+  base: "assets/original-sand-factory-v2.png",
+  air: "assets/factory-air.png",
+  sensor: "assets/factory-sensor.png",
+  complete: "assets/sand-factory-automatic.png?v=3",
+};
 const PLANT_VARIANTS = [
   { scale: 1.06, rotate: -1.1, shift: -1.2, flip: 1, hue: -2, bright: 1.01 },
   { scale: .96, rotate: 1.4, shift: .8, flip: -1, hue: 1, bright: .98 },
@@ -104,7 +109,7 @@ const PLANT_VARIANTS = [
   { scale: 1.01, rotate: .4, shift: 1, flip: 1, hue: -1, bright: .99 },
   { scale: .94, rotate: -1.7, shift: -.4, flip: -1, hue: 2, bright: 1.02 },
 ];
-["assets/equipment-air.png?v=2", "assets/equipment-sensor.png?v=2", "assets/equipment-rail.png?v=2"].forEach(function (src) { const image = new Image(); image.src = src; });
+Object.values(FACILITY_BACKGROUNDS).forEach(function (src) { const image = new Image(); image.src = src; });
 let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }
@@ -195,7 +200,15 @@ function render() {
   });
   coinCount.textContent = state.coins;
   equipmentLevelText.textContent = equipmentTotal() + " / 12";
-  document.querySelector(".greenhouse-back").src = FACILITY_BACKGROUNDS[0];
+  const hasAir = state.equipment.air >= 2;
+  const hasSensor = state.equipment.sensor >= 2;
+  document.querySelector(".greenhouse-back").src = hasAir && hasSensor
+    ? FACILITY_BACKGROUNDS.complete
+    : hasAir
+      ? FACILITY_BACKGROUNDS.air
+      : hasSensor
+        ? FACILITY_BACKGROUNDS.sensor
+        : FACILITY_BACKGROUNDS.base;
   game.className = game.className.replace(/\b(light|mist|air|sensor)-level-\d+\b/g, "").trim();
   Object.keys(state.equipment).forEach(function (key) { game.classList.add(key + "-level-" + state.equipment[key]); });
   save();
