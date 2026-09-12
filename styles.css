@@ -1,5 +1,6 @@
 :root{--green:#244d3d;--deep:#172c25;--yellow:#e4b743;--cream:#f5f0df;--ink:#25352e}
-*{box-sizing:border-box}
+*{box-sizing:border-box;-webkit-user-select:none;user-select:none}
+img{-webkit-user-drag:none;user-drag:none}
 html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--deep);font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;color:var(--ink);-webkit-tap-highlight-color:transparent;touch-action:manipulation;-webkit-text-size-adjust:100%}
 button{font:inherit}
 button:focus-visible{outline:3px solid #ffe17b;outline-offset:2px}
