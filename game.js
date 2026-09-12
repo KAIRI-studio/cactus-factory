@@ -104,7 +104,7 @@ const PLANT_VARIANTS = [
   { scale: 1.01, rotate: .4, shift: 1, flip: 1, hue: -1, bright: .99 },
   { scale: .94, rotate: -1.7, shift: -.4, flip: -1, hue: 2, bright: 1.02 },
 ];
-["assets/sand-factory-controlled.png", "assets/sand-factory-automatic.png"].forEach(function (src) { const image = new Image(); image.src = src; });
+["assets/equipment-air.png", "assets/equipment-sensor.png", "assets/equipment-rail.png"].forEach(function (src) { const image = new Image(); image.src = src; });
 let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }

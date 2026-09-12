@@ -1,16 +1,17 @@
-const CACHE_NAME = "cactus-factory-2026-09-12-5";
+const CACHE_NAME = "cactus-factory-2026-09-12-7";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=93",
-  "./game.js?v=91",
+  "./styles.css?v=95",
+  "./game.js?v=92",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./assets/original-sand-factory-v2.png",
-  "./assets/sand-factory-controlled.png",
-  "./assets/sand-factory-automatic.png?v=2",
+  "./assets/equipment-air.png",
+  "./assets/equipment-sensor.png",
+  "./assets/equipment-rail.png",
   "./assets/simple-bold-sprout.png",
   "./assets/cactus-normal.png",
   "./assets/cactus-rare-flower.png",
