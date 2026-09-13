@@ -499,7 +499,7 @@ function renderEquipment() {
   grid.innerHTML = "";
   const total = equipmentTotal();
   document.querySelector("#equipmentTotalText").textContent = total + " / 12";
-  document.querySelector("#equipmentMeterFill").style.width = ((total - 4) / 8 * 100) + "%";
+  document.querySelector("#equipmentMeterFill").style.width = (total / 12 * 100) + "%";
   EQUIPMENT.forEach(function (item) {
     const level = state.equipment[item.key];
     const cost = level === 1 ? 100 : 300;
