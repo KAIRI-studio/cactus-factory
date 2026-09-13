@@ -48,6 +48,7 @@ function loadState() {
       });
       if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
       if (!Array.isArray(saved.batchQueue)) saved.batchQueue = makeBatchQueue();
+      saved.specialSeedQueued = saved.batchQueue.some(function (id) { return typeof id === "string" && id.startsWith("special:"); });
       if (saved.visualVersion !== 4) {
         saved.visualVersion = 4;
         saved.pots.forEach(function (pot) {
@@ -69,6 +70,7 @@ function loadState() {
     visualVersion: 4,
     collections: { normal: 0, rare: 0, super: 0, legend: 0 },
     batchQueue: makeBatchQueue(),
+    specialSeedQueued: false,
     layoutSeed: Math.floor(Math.random() * 2147483647),
     pots: Array.from({ length: POT_COUNT }, function (_, i) {
       const showcase = i === 2 ? "rare" : i === 10 ? "super" : i === 18 ? "legend" : "normal";
@@ -114,6 +116,11 @@ let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }
 function growthSeconds() { return Math.max(20, 70 - (equipmentTotal() - 4) * 4); }
+
+function rollSpecialSeed() {
+  const roll = Math.random() * 100;
+  return roll < 1 ? "legend" : roll < 10 ? "super" : "rare";
+}
 
 function seededUnit(index, salt) {
   const generation = state.pots[index].generation || 0;
@@ -280,7 +287,13 @@ function harvest(indexes) {
     harvestedItems.push({ index: index, cactusId: type.id, reward: type.reward });
     state.collections[type.id] = (state.collections[type.id] || 0) + 1;
     if (!state.batchQueue.length) state.batchQueue = makeBatchQueue();
-    pot.cactusId = state.batchQueue.shift();
+    const queuedId = state.batchQueue.shift();
+    if (typeof queuedId === "string" && queuedId.startsWith("special:")) {
+      pot.cactusId = queuedId.slice(8);
+      state.specialSeedQueued = false;
+    } else {
+      pot.cactusId = queuedId;
+    }
     pot.ready = false; pot.stage = -1; pot.startedAt = Date.now(); pot.generation = (pot.generation || 0) + 1;
   });
   if (!harvestedItems.length) return;
@@ -460,7 +473,15 @@ function renderEquipment() {
     card.append(button);
     grid.append(card);
   });
-  document.querySelector("#equipmentFeedback").textContent = equipmentTotal() >= 12 ? "ぜんぶ かんせいしました！" : "";
+  const complete = equipmentTotal() >= 12;
+  const specialShop = document.querySelector("#specialShop");
+  specialShop.hidden = !complete;
+  if (complete) {
+    const specialButton = document.querySelector("#specialSeedButton");
+    specialButton.disabled = state.specialSeedQueued || state.coins < 300;
+    specialButton.textContent = state.specialSeedQueued ? "よやくずみ" : "300コイン";
+  }
+  document.querySelector("#equipmentFeedback").textContent = complete ? "せつび かんせい！ コインで とくべつさいばいが できます" : "";
 }
 document.querySelector("#equipmentButton").addEventListener("click", function () { renderEquipment(); equipmentDialog.showModal(); });
 document.querySelector("#equipmentClose").addEventListener("click", function () { equipmentDialog.close(); });
@@ -477,6 +498,16 @@ document.querySelector("#equipmentGrid").addEventListener("click", function (eve
   game.classList.add("facility-installing");
   render(); renderEquipment();
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
+});
+document.querySelector("#specialSeedButton").addEventListener("click", function () {
+  if (equipmentTotal() < 12 || state.specialSeedQueued || state.coins < 300) return;
+  if (!state.batchQueue.length) state.batchQueue = makeBatchQueue();
+  const slot = Math.floor(Math.random() * state.batchQueue.length);
+  state.batchQueue[slot] = "special:" + rollSpecialSeed();
+  state.specialSeedQueued = true;
+  state.coins -= 300;
+  render();
+  renderEquipment();
 });
 
 const zukanDialog = document.querySelector("#zukanDialog");

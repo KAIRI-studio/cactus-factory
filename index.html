@@ -10,8 +10,8 @@
   <title>サボテン育成ライン</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=98" />
-  <script src="game.js?v=93" defer></script>
+  <link rel="stylesheet" href="styles.css?v=99" />
+  <script src="game.js?v=94" defer></script>
 </head>
 <body>
   <main class="game" aria-label="サボテン育成ゲーム">
@@ -44,6 +44,10 @@
       <button class="close" id="equipmentClose" aria-label="閉じる">×</button>
       <small>おんしつの せつび</small><h2>どれを そだてる？</h2>
       <div class="equipment-grid" id="equipmentGrid"></div>
+      <section class="special-shop" id="specialShop" hidden>
+        <div><span>★</span><p><b>とくべつなタネ</b><small>つぎにそだつ 1たいが レアいじょう</small></p></div>
+        <button id="specialSeedButton" type="button">300コイン</button>
+      </section>
       <p class="feedback" id="equipmentFeedback"></p>
     </section></dialog>
     <dialog id="zukanDialog"><section class="dialog-card zukan-card">
