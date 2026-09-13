@@ -536,17 +536,25 @@ function renderZukan() {
     const entry = document.createElement("button");
     entry.className = "zukan-entry rarity-" + type.rarityKey + (count ? " found" : " not-found");
     entry.type = "button";
-    entry.innerHTML = '<span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + type.name + '</b><em>' + count + 'たい</em></span>';
+    entry.innerHTML = '<span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい</em></span>';
     entry.addEventListener("click", function () {
+      document.querySelector(".zukan-hero").classList.toggle("not-found", !count);
       document.querySelector("#zukanHeroImage").src = type.sprite;
       document.querySelector("#zukanHeroRarity").textContent = type.rarity;
-      document.querySelector("#zukanHeroName").textContent = type.name;
+      document.querySelector("#zukanHeroName").textContent = count ? type.name : "？？？";
     });
     grid.append(entry);
   });
 }
 document.querySelector("#zukanButton").addEventListener("click", function () {
-  renderZukan(); zukanDialog.showModal();
+  renderZukan();
+  const firstFound = CACTUS_TYPES.find(function (type) { return (state.collections[type.id] || 0) > 0; }) || CACTUS_TYPES[0];
+  const firstFoundCount = state.collections[firstFound.id] || 0;
+  document.querySelector(".zukan-hero").classList.toggle("not-found", !firstFoundCount);
+  document.querySelector("#zukanHeroImage").src = firstFound.sprite;
+  document.querySelector("#zukanHeroRarity").textContent = firstFound.rarity;
+  document.querySelector("#zukanHeroName").textContent = firstFoundCount ? firstFound.name : "？？？";
+  zukanDialog.showModal();
 });
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
 [mathDialog, equipmentDialog, zukanDialog].forEach(function (dialog) {
