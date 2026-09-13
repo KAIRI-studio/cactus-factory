@@ -7,19 +7,27 @@ const CACTUS_TYPES = [
   { id: "super", name: "うさみみサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-super-bunny.png", reward: 20 },
   { id: "legend", name: "ほしのサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-legend-star.png", reward: 20 },
   { id: "superSuit", name: "エリートサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-suit.png", reward: 50 },
+  { id: "superRed", name: "あかサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-red.png", reward: 50 },
+  { id: "superBlue", name: "あおサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-blue.png", reward: 50 },
+  { id: "superYellow", name: "きいろサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-yellow.png", reward: 50 },
   { id: "legendSage", name: "せんにんサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-legend-sage.png", reward: 150 },
 ];
 
 const RARE_CACTUS_IDS = ["rare", "super", "legend"];
+const SUPER_CACTUS_IDS = ["superSuit", "superRed", "superBlue", "superYellow"];
 
 function randomRareCactusId() {
   return RARE_CACTUS_IDS[Math.floor(Math.random() * RARE_CACTUS_IDS.length)];
 }
 
+function randomSuperCactusId() {
+  return SUPER_CACTUS_IDS[Math.floor(Math.random() * SUPER_CACTUS_IDS.length)];
+}
+
 function rollCactusId() {
   const roll = Math.random() * 100;
   if (roll < .5) return "legendSage";
-  if (roll < 2) return "superSuit";
+  if (roll < 2) return randomSuperCactusId();
   if (roll < 5) return randomRareCactusId();
   return "normal";
 }
@@ -56,8 +64,8 @@ function loadState() {
       });
       if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
       if (!Array.isArray(saved.batchQueue)) saved.batchQueue = makeBatchQueue();
-      if (saved.rarityVersion !== 3) {
-        saved.rarityVersion = 3;
+      if (saved.rarityVersion !== 4) {
+        saved.rarityVersion = 4;
         saved.batchQueue = makeBatchQueue();
       }
       saved.specialSeedQueued = saved.batchQueue.some(function (id) { return typeof id === "string" && id.startsWith("special:"); });
@@ -80,7 +88,7 @@ function loadState() {
     equipment: { light: 1, mist: 1, air: 1, sensor: 1 },
     harvested: 0,
     visualVersion: 4,
-    rarityVersion: 3,
+    rarityVersion: 4,
     collections: { normal: 0, rare: 0, super: 0, legend: 0 },
     batchQueue: makeBatchQueue(),
     specialSeedQueued: false,
@@ -136,7 +144,7 @@ function growthSeconds() {
 
 function rollSpecialSeed() {
   const roll = Math.random() * 100;
-  return roll < 1 ? "legendSage" : roll < 10 ? "superSuit" : randomRareCactusId();
+  return roll < 1 ? "legendSage" : roll < 10 ? randomSuperCactusId() : randomRareCactusId();
 }
 
 function seededUnit(index, salt) {
