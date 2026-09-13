@@ -127,9 +127,10 @@ Object.values(FACILITY_BACKGROUNDS).forEach(function (src) { const image = new I
 let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }
+function equipmentUpgradeCost(level) { return level === 1 ? 200 : 500; }
 function growthSeconds() {
-  const BASE_GROWTH_SECONDS = 8 * 60 * 60;
-  const REDUCTION_PER_LEVEL_SECONDS = 45 * 60;
+  const BASE_GROWTH_SECONDS = 4 * 60 * 60;
+  const REDUCTION_PER_LEVEL_SECONDS = 15 * 60;
   return BASE_GROWTH_SECONDS - (equipmentTotal() - 4) * REDUCTION_PER_LEVEL_SECONDS;
 }
 
@@ -502,7 +503,7 @@ function renderEquipment() {
   document.querySelector("#equipmentMeterFill").style.width = (total / 12 * 100) + "%";
   EQUIPMENT.forEach(function (item) {
     const level = state.equipment[item.key];
-    const cost = level === 1 ? 100 : 300;
+    const cost = equipmentUpgradeCost(level);
     const card = document.createElement("article");
     card.className = "equipment-item" + (level >= 3 ? " completed" : "");
     card.innerHTML = '<div class="equipment-icon">' + item.icon + '</div><span class="equipment-level-badge">LV.' + level + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + item.copy + '</small></div><div class="level-dots" aria-label="レベル ' + level + '"><i></i><i></i><i></i></div>';
@@ -533,7 +534,7 @@ document.querySelector("#equipmentGrid").addEventListener("click", function (eve
   if (!button) return;
   const key = button.dataset.equipment;
   const level = state.equipment[key];
-  const cost = level === 1 ? 100 : 300;
+  const cost = equipmentUpgradeCost(level);
   if (level >= 3 || state.coins < cost) return;
   state.coins -= cost; state.equipment[key] += 1;
   game.classList.remove("facility-installing");
