@@ -141,9 +141,10 @@ function equipmentTotal() { return Object.values(state.equipment).reduce(functio
 function equipmentUpgradeCost(level) { return level === 1 ? 200 : 500; }
 function renderSpecialNutrient() {
   const activeIndex = state.nutrientActivePot;
-  const activePot = Number.isInteger(activeIndex) ? state.pots[activeIndex] : null;
-  if (activePot && activePot.ready) state.nutrientActivePot = null;
-  specialNutrient.hidden = !(state.specialSeedQueued || (activePot && !activePot.ready));
+  const growingBatch = Number.isInteger(activeIndex);
+  const allPotsReady = state.pots.every(function (pot) { return pot.ready; });
+  if (growingBatch && allPotsReady) state.nutrientActivePot = null;
+  specialNutrient.hidden = !(state.specialSeedQueued || (growingBatch && !allPotsReady));
 }
 function growthSeconds() {
   const BASE_GROWTH_SECONDS = 4 * 60 * 60;
