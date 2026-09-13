@@ -61,6 +61,14 @@ function loadState() {
       if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
       saved.rarityVersion = 5;
       saved.specialSeedQueued = Boolean(saved.specialSeedQueued);
+      if (saved.nutrientTrackingVersion !== 1) {
+        saved.nutrientTrackingVersion = 1;
+        saved.nutrientActivePot = null;
+        if (!saved.specialSeedQueued) {
+          const growingRare = saved.pots.findIndex(function (pot) { return !pot.ready && cactusType(pot.cactusId).rarityKey !== "normal"; });
+          if (growingRare >= 0) saved.nutrientActivePot = growingRare;
+        }
+      } else if (!Number.isInteger(saved.nutrientActivePot)) saved.nutrientActivePot = null;
       if (saved.visualVersion !== 4) {
         saved.visualVersion = 4;
         saved.pots.forEach(function (pot) {
@@ -83,6 +91,8 @@ function loadState() {
     rarityVersion: 5,
     collections: { normal: 0, rare: 0, super: 0, legend: 0 },
     specialSeedQueued: false,
+    nutrientActivePot: null,
+    nutrientTrackingVersion: 1,
     layoutSeed: Math.floor(Math.random() * 2147483647),
     pots: Array.from({ length: POT_COUNT }, function (_, i) {
       const showcase = i === 2 ? "rare" : i === 10 ? "super" : i === 18 ? "legend" : "normal";
@@ -129,7 +139,12 @@ let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }
 function equipmentUpgradeCost(level) { return level === 1 ? 200 : 500; }
-function renderSpecialNutrient() { specialNutrient.hidden = !state.specialSeedQueued; }
+function renderSpecialNutrient() {
+  const activeIndex = state.nutrientActivePot;
+  const activePot = Number.isInteger(activeIndex) ? state.pots[activeIndex] : null;
+  if (activePot && activePot.ready) state.nutrientActivePot = null;
+  specialNutrient.hidden = !(state.specialSeedQueued || (activePot && !activePot.ready));
+}
 function growthSeconds() {
   const BASE_GROWTH_SECONDS = 4 * 60 * 60;
   const REDUCTION_PER_LEVEL_SECONDS = 15 * 60;
@@ -334,6 +349,7 @@ function harvest(indexes) {
     if (state.specialSeedQueued) {
       pot.cactusId = rollSpecialSeed();
       state.specialSeedQueued = false;
+      state.nutrientActivePot = index;
     } else {
       pot.cactusId = rollCactusId();
     }
