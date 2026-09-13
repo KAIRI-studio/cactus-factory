@@ -121,3 +121,4 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .topbar{justify-content:flex-end}
 .zukan-hero.rarity-legend{border-color:#b7463f;background:radial-gradient(circle at 23% 35%,#fff 0 5%,transparent 28%),linear-gradient(135deg,#fff0e8,#eaa49b);box-shadow:0 4px 0 #7f2e293d,0 0 18px #d85c5231,inset 0 1px #fff}
 .zukan-entry.rarity-legend{border-color:#b7463f;background:linear-gradient(150deg,#fff5ee,#f2b2aa);box-shadow:0 3px 0 #7f2e2938,0 0 11px #d85c5220,inset 0 1px #fff}
+.actions .action-icon svg{width:20px;height:20px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.actions .action-icon svg path[d*=".01"]{stroke-width:3}
