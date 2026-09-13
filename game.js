@@ -32,10 +32,6 @@ function rollCactusId() {
   return "normal";
 }
 
-function makeBatchQueue() {
-  return Array.from({ length: POT_COUNT }, rollCactusId);
-}
-
 function cactusType(id) {
   return CACTUS_TYPES.find(function (type) { return type.id === id; }) || CACTUS_TYPES[0];
 }
@@ -63,12 +59,8 @@ function loadState() {
         if (!pot.cactusId) pot.cactusId = "normal";
       });
       if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
-      if (!Array.isArray(saved.batchQueue)) saved.batchQueue = makeBatchQueue();
-      if (saved.rarityVersion !== 4) {
-        saved.rarityVersion = 4;
-        saved.batchQueue = makeBatchQueue();
-      }
-      saved.specialSeedQueued = saved.batchQueue.some(function (id) { return typeof id === "string" && id.startsWith("special:"); });
+      saved.rarityVersion = 5;
+      saved.specialSeedQueued = Boolean(saved.specialSeedQueued);
       if (saved.visualVersion !== 4) {
         saved.visualVersion = 4;
         saved.pots.forEach(function (pot) {
@@ -88,9 +80,8 @@ function loadState() {
     equipment: { light: 1, mist: 1, air: 1, sensor: 1 },
     harvested: 0,
     visualVersion: 4,
-    rarityVersion: 4,
+    rarityVersion: 5,
     collections: { normal: 0, rare: 0, super: 0, legend: 0 },
-    batchQueue: makeBatchQueue(),
     specialSeedQueued: false,
     layoutSeed: Math.floor(Math.random() * 2147483647),
     pots: Array.from({ length: POT_COUNT }, function (_, i) {
@@ -336,13 +327,11 @@ function harvest(indexes) {
     const type = cactusType(pot.cactusId);
     harvestedItems.push({ index: index, cactusId: type.id, reward: type.reward });
     state.collections[type.id] = (state.collections[type.id] || 0) + 1;
-    if (!state.batchQueue.length) state.batchQueue = makeBatchQueue();
-    const queuedId = state.batchQueue.shift();
-    if (typeof queuedId === "string" && queuedId.startsWith("special:")) {
-      pot.cactusId = queuedId.slice(8);
+    if (state.specialSeedQueued) {
+      pot.cactusId = rollSpecialSeed();
       state.specialSeedQueued = false;
     } else {
-      pot.cactusId = queuedId;
+      pot.cactusId = rollCactusId();
     }
     pot.ready = false; pot.stage = -1; pot.startedAt = Date.now(); pot.generation = (pot.generation || 0) + 1;
   });
@@ -552,9 +541,6 @@ document.querySelector("#equipmentGrid").addEventListener("click", function (eve
 });
 document.querySelector("#specialSeedButton").addEventListener("click", function () {
   if (equipmentTotal() < 12 || state.specialSeedQueued || state.coins < 300) return;
-  if (!state.batchQueue.length) state.batchQueue = makeBatchQueue();
-  const slot = Math.floor(Math.random() * state.batchQueue.length);
-  state.batchQueue[slot] = "special:" + rollSpecialSeed();
   state.specialSeedQueued = true;
   state.coins -= 300;
   render();
