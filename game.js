@@ -95,6 +95,7 @@ function save() { localStorage.setItem(STORAGE, JSON.stringify(state)); }
 const nursery = document.querySelector("#nursery");
 const coinCount = document.querySelector("#coinCount");
 const equipmentLevelText = document.querySelector("#equipmentLevelText");
+const specialNutrient = document.querySelector("#specialNutrient");
 const game = document.querySelector(".game");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const EQUIPMENT = [
@@ -128,6 +129,7 @@ let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }
 function equipmentUpgradeCost(level) { return level === 1 ? 200 : 500; }
+function renderSpecialNutrient() { specialNutrient.hidden = !state.specialSeedQueued; }
 function growthSeconds() {
   const BASE_GROWTH_SECONDS = 4 * 60 * 60;
   const REDUCTION_PER_LEVEL_SECONDS = 15 * 60;
@@ -224,6 +226,7 @@ function render() {
   });
   coinCount.textContent = state.coins;
   equipmentLevelText.textContent = equipmentTotal() + " / 12";
+  renderSpecialNutrient();
   const hasAir = state.equipment.air >= 2;
   const hasSensor = state.equipment.sensor >= 2;
   document.querySelector(".greenhouse-back").src = hasAir && hasSensor
@@ -337,6 +340,7 @@ function harvest(indexes) {
     pot.ready = false; pot.stage = -1; pot.startedAt = Date.now(); pot.generation = (pot.generation || 0) + 1;
   });
   if (!harvestedItems.length) return;
+  renderSpecialNutrient();
   harvestAnimationCount += harvestedItems.length;
   harvestedItems.forEach(playHarvestAnimation);
   harvestedItems.forEach(showRarityReveal);
