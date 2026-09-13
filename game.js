@@ -529,7 +529,7 @@ function renderEquipment() {
     specialButton.disabled = state.specialSeedQueued || state.coins < 300;
     specialButton.textContent = state.specialSeedQueued ? "よやくずみ" : "300コイン";
   }
-  document.querySelector("#equipmentFeedback").textContent = complete ? "せつび かんせい！ コインで とくべつさいばいが できます" : "";
+  document.querySelector("#equipmentFeedback").textContent = complete ? "せつび かんせい！ コインで レア栄養剤が つかえます" : "";
 }
 document.querySelector("#equipmentButton").addEventListener("click", function () { renderEquipment(); equipmentDialog.showModal(); });
 document.querySelector("#equipmentClose").addEventListener("click", function () { equipmentDialog.close(); });
@@ -553,6 +553,26 @@ document.querySelector("#specialSeedButton").addEventListener("click", function 
   state.coins -= 300;
   render();
   renderEquipment();
+});
+
+document.querySelector("#fillTestButton").addEventListener("click", function () {
+  state.pots.forEach(function (pot) {
+    pot.stage = 2;
+    pot.ready = true;
+    pot.startedAt = Date.now() - growthSeconds() * 1000;
+  });
+  potSignatures.fill("");
+  save();
+  render();
+  equipmentDialog.close();
+});
+
+const resetDialog = document.querySelector("#resetDialog");
+document.querySelector("#resetTestButton").addEventListener("click", function () { equipmentDialog.close(); resetDialog.showModal(); });
+document.querySelector("#resetCancelButton").addEventListener("click", function () { resetDialog.close(); });
+document.querySelector("#resetConfirmButton").addEventListener("click", function () {
+  localStorage.removeItem(STORAGE);
+  location.reload();
 });
 
 const zukanDialog = document.querySelector("#zukanDialog");
@@ -588,7 +608,7 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   zukanDialog.showModal();
 });
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
-[mathDialog, equipmentDialog, zukanDialog].forEach(function (dialog) {
+[mathDialog, equipmentDialog, zukanDialog, resetDialog].forEach(function (dialog) {
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
 });
 mathDialog.addEventListener("close", function () { clearTimeout(nextTimer); });
