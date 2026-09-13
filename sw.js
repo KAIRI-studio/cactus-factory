@@ -1,9 +1,9 @@
-const CACHE_NAME = "cactus-factory-2026-09-13-33";
+const CACHE_NAME = "cactus-factory-2026-09-13-34";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=118",
-  "./game.js?v=118",
+  "./styles.css?v=119",
+  "./game.js?v=119",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -22,7 +22,7 @@ const APP_FILES = [
   "./assets/cactus-super-yellow.png",
   "./assets/cactus-legend-sage.png?v=2",
   "./assets/cactus-legend-star.png",
-  "./assets/rare-nutrient-bottle.png"
+  "./assets/rare-nutrient-crate.png"
 ];
 
 self.addEventListener("install", function (event) {
