@@ -303,17 +303,29 @@ function playHarvestAnimation(item, order) {
   reward.addEventListener("animationend", function () { reward.remove(); }, { once: true });
 }
 
+const rarityRevealQueue = [];
+let rarityRevealActive = false;
 function showRarityReveal(item) {
+  if (cactusType(item.cactusId).rarityKey === "normal") return;
+  rarityRevealQueue.push(item);
+  playNextRarityReveal();
+}
+
+function playNextRarityReveal() {
+  if (rarityRevealActive || !rarityRevealQueue.length) return;
+  rarityRevealActive = true;
+  const item = rarityRevealQueue.shift();
   const type = cactusType(item.cactusId);
-  if (type.rarityKey === "normal") return;
-  const current = game.querySelector(".rarity-reveal");
-  if (current) current.remove();
   const reveal = document.createElement("div");
   reveal.className = "rarity-reveal " + type.rarityKey;
   reveal.setAttribute("aria-hidden", "true");
   reveal.innerHTML = '<div class="rarity-reveal-card"><img src="' + type.sprite + '" alt="" /><span><small>' + type.rarity.toUpperCase() + '</small><b>' + type.name + '</b></span></div>';
   game.append(reveal);
-  window.setTimeout(function () { reveal.remove(); }, 1650);
+  window.setTimeout(function () {
+    reveal.remove();
+    rarityRevealActive = false;
+    playNextRarityReveal();
+  }, 1650);
 }
 
 function harvest(indexes) {
@@ -337,11 +349,7 @@ function harvest(indexes) {
   if (!harvestedItems.length) return;
   harvestAnimationCount += harvestedItems.length;
   harvestedItems.forEach(playHarvestAnimation);
-  const rarityRank = { normal: 0, rare: 1, super: 2, legend: 3 };
-  const highlight = harvestedItems.reduce(function (best, item) {
-    return rarityRank[cactusType(item.cactusId).rarityKey] > rarityRank[cactusType(best.cactusId).rarityKey] ? item : best;
-  }, harvestedItems[0]);
-  showRarityReveal(highlight);
+  harvestedItems.forEach(showRarityReveal);
   state.coins += harvestedItems.reduce(function (sum, item) { return sum + item.reward; }, 0);
   state.harvested += harvestedItems.length;
   coinCount.textContent = state.coins;
