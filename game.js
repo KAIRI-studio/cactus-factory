@@ -303,6 +303,19 @@ function playHarvestAnimation(item, order) {
   reward.addEventListener("animationend", function () { reward.remove(); }, { once: true });
 }
 
+function showRarityReveal(item) {
+  const type = cactusType(item.cactusId);
+  if (type.rarityKey === "normal") return;
+  const current = game.querySelector(".rarity-reveal");
+  if (current) current.remove();
+  const reveal = document.createElement("div");
+  reveal.className = "rarity-reveal " + type.rarityKey;
+  reveal.setAttribute("aria-hidden", "true");
+  reveal.innerHTML = '<div class="rarity-reveal-card"><img src="' + type.sprite + '" alt="" /><span><small>' + type.rarity.toUpperCase() + '</small><b>' + type.name + '</b></span></div>';
+  game.append(reveal);
+  window.setTimeout(function () { reveal.remove(); }, 1650);
+}
+
 function harvest(indexes) {
   const harvestedItems = [];
   indexes.forEach(function (index) {
@@ -324,6 +337,11 @@ function harvest(indexes) {
   if (!harvestedItems.length) return;
   harvestAnimationCount += harvestedItems.length;
   harvestedItems.forEach(playHarvestAnimation);
+  const rarityRank = { normal: 0, rare: 1, super: 2, legend: 3 };
+  const highlight = harvestedItems.reduce(function (best, item) {
+    return rarityRank[cactusType(item.cactusId).rarityKey] > rarityRank[cactusType(best.cactusId).rarityKey] ? item : best;
+  }, harvestedItems[0]);
+  showRarityReveal(highlight);
   state.coins += harvestedItems.reduce(function (sum, item) { return sum + item.reward; }, 0);
   state.harvested += harvestedItems.length;
   coinCount.textContent = state.coins;
@@ -539,6 +557,8 @@ const zukanDialog = document.querySelector("#zukanDialog");
 function renderZukan() {
   const grid = document.querySelector("#zukanGrid");
   grid.replaceChildren();
+  const foundCount = CACTUS_TYPES.filter(function (type) { return (state.collections[type.id] || 0) > 0; }).length;
+  document.querySelector("#zukanDialog .collection-progress").textContent = foundCount + " / " + CACTUS_TYPES.length;
   CACTUS_TYPES.forEach(function (type) {
     const count = state.collections[type.id] || 0;
     const entry = document.createElement("button");
@@ -546,7 +566,8 @@ function renderZukan() {
     entry.type = "button";
     entry.innerHTML = '<span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい</em></span>';
     entry.addEventListener("click", function () {
-      document.querySelector(".zukan-hero").classList.toggle("not-found", !count);
+      const hero = document.querySelector(".zukan-hero");
+      hero.className = "zukan-hero rarity-" + type.rarityKey + (count ? "" : " not-found");
       document.querySelector("#zukanHeroImage").src = type.sprite;
       document.querySelector("#zukanHeroRarity").textContent = type.rarity;
       document.querySelector("#zukanHeroName").textContent = count ? type.name : "？？？";
@@ -558,7 +579,7 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   renderZukan();
   const firstFound = CACTUS_TYPES.find(function (type) { return (state.collections[type.id] || 0) > 0; }) || CACTUS_TYPES[0];
   const firstFoundCount = state.collections[firstFound.id] || 0;
-  document.querySelector(".zukan-hero").classList.toggle("not-found", !firstFoundCount);
+  document.querySelector(".zukan-hero").className = "zukan-hero rarity-" + firstFound.rarityKey + (firstFoundCount ? "" : " not-found");
   document.querySelector("#zukanHeroImage").src = firstFound.sprite;
   document.querySelector("#zukanHeroRarity").textContent = firstFound.rarity;
   document.querySelector("#zukanHeroName").textContent = firstFoundCount ? firstFound.name : "？？？";
