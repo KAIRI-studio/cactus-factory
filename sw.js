@@ -1,9 +1,9 @@
-const CACHE_NAME = "cactus-factory-2026-09-13-22";
+const CACHE_NAME = "cactus-factory-2026-09-13-23";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=105",
-  "./game.js?v=107",
+  "./styles.css?v=108",
+  "./game.js?v=108",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",

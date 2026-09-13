@@ -10,8 +10,8 @@
   <title>サボテン育成ライン</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=105" />
-  <script src="game.js?v=107" defer></script>
+  <link rel="stylesheet" href="styles.css?v=108" />
+  <script src="game.js?v=108" defer></script>
 </head>
 <body>
   <main class="game" aria-label="サボテン育成ゲーム">
@@ -42,9 +42,10 @@
       <div class="result-growth"><b id="grownCount">0こ</b><span>しゅうかく できるようになりました</span></div>
       <button class="confirm" id="resultClose">おんしつに もどる</button>
     </section></dialog>
-    <dialog id="equipmentDialog"><section class="dialog-card">
+    <dialog id="equipmentDialog"><section class="dialog-card equipment-dialog-card">
       <button class="close" id="equipmentClose" aria-label="閉じる">×</button>
-      <small>おんしつの せつび</small><h2>どれを そだてる？</h2>
+      <small>おんしつの せつび</small><h2>せつびを つよくする</h2>
+      <div class="equipment-summary"><div><span>ぜんたいレベル</span><b id="equipmentTotalText">4 / 12</b></div><div class="equipment-meter"><i id="equipmentMeterFill"></i></div></div>
       <div class="equipment-grid" id="equipmentGrid"></div>
       <section class="special-shop" id="specialShop" hidden>
         <div><span>★</span><p><b>とくべつなタネ</b><small>つぎにそだつ 1たいが レアいじょう</small></p></div>

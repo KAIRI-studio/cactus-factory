@@ -98,10 +98,10 @@ const equipmentLevelText = document.querySelector("#equipmentLevelText");
 const game = document.querySelector(".game");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const EQUIPMENT = [
-  { key: "light", icon: "☀", name: "そだてるライト", copy: "ひかりが つよくなります" },
-  { key: "mist", icon: "💧", name: "ミスト", copy: "きりが こまかくなります" },
-  { key: "air", icon: "◉", name: "かぜおくり", copy: "ファンが つよくなります" },
-  { key: "sensor", icon: "⌁", name: "みまもり", copy: "センサーが ふえます" },
+  { key: "light", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="15" r="6"/><path d="M16 3v4M16 23v4M4 15h4M24 15h4M7.5 6.5l3 3M21.5 20.5l3 3M24.5 6.5l-3 3M10.5 20.5l-3 3"/></svg>', name: "そだてるライト", copy: "ひかりが つよくなります" },
+  { key: "mist", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C12 10 9 13.4 9 18a7 7 0 0 0 14 0c0-4.6-3-8-7-14z"/><path d="M5 27h7M15 27h5M23 27h4"/></svg>', name: "ミスト", copy: "きりが こまかくなります" },
+  { key: "air", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="3"/><circle cx="16" cy="16" r="12"/><path d="M16 13c-1-6 1-9 4-8.2 3.1.8 2.6 5.3-1.5 9M18.6 17.5c5.7 2 7.3 5.3 5.1 7.4-2.2 2.2-5.9-.5-7.2-5M13.4 17.5c-4.7 3.9-8.4 3.3-9.2.3-.8-3 3.4-4.8 8.1-2.3"/></svg>', name: "かぜおくり", copy: "ファンが つよくなります" },
+  { key: "sensor", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="5" width="16" height="22" rx="4"/><circle cx="16" cy="19" r="3"/><path d="M12 11h8M12 14h5M5 10c-2 3.5-2 8.5 0 12M27 10c2 3.5 2 8.5 0 12"/></svg>', name: "みまもり", copy: "センサーが ふえます" },
 ];
 const FACILITY_BACKGROUNDS = {
   base: "assets/original-sand-factory-v2.png",
@@ -497,12 +497,15 @@ const equipmentDialog = document.querySelector("#equipmentDialog");
 function renderEquipment() {
   const grid = document.querySelector("#equipmentGrid");
   grid.innerHTML = "";
+  const total = equipmentTotal();
+  document.querySelector("#equipmentTotalText").textContent = total + " / 12";
+  document.querySelector("#equipmentMeterFill").style.width = ((total - 4) / 8 * 100) + "%";
   EQUIPMENT.forEach(function (item) {
     const level = state.equipment[item.key];
     const cost = level === 1 ? 100 : 300;
     const card = document.createElement("article");
-    card.className = "equipment-item";
-    card.innerHTML = '<div class="equipment-icon">' + item.icon + '</div><div class="equipment-title"><b>' + item.name + '</b><small>' + item.copy + '</small></div><div class="level-dots" aria-label="レベル ' + level + '"><i></i><i></i><i></i></div>';
+    card.className = "equipment-item" + (level >= 3 ? " completed" : "");
+    card.innerHTML = '<div class="equipment-icon">' + item.icon + '</div><span class="equipment-level-badge">LV.' + level + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + item.copy + '</small></div><div class="level-dots" aria-label="レベル ' + level + '"><i></i><i></i><i></i></div>';
     card.querySelectorAll(".level-dots i").forEach(function (dot, index) { if (index < level) dot.classList.add("on"); });
     const button = document.createElement("button");
     button.type = "button";
