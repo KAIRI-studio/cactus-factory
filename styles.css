@@ -116,3 +116,8 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @media (max-height:700px){.line-plate{top:32.3%}.actions{height:82px;bottom:9px;padding:6px}.actions button{grid-template-rows:26px 18px 12px}.actions span{width:25px;height:25px;font-size:16px}}
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
 @media (prefers-reduced-motion:reduce){.ambient-glow,.ambient-specks i,.line-plate i,.nursery-pot.ready::after,.zukan-hero::after,.rarity-reveal,.rarity-reveal::before{animation:none!important}.ambient-specks{display:none}.rarity-reveal{opacity:1}}
+
+/* Requested simplification and legend color */
+.topbar{justify-content:flex-end}
+.zukan-hero.rarity-legend{border-color:#b7463f;background:radial-gradient(circle at 23% 35%,#fff 0 5%,transparent 28%),linear-gradient(135deg,#fff0e8,#eaa49b);box-shadow:0 4px 0 #7f2e293d,0 0 18px #d85c5231,inset 0 1px #fff}
+.zukan-entry.rarity-legend{border-color:#b7463f;background:linear-gradient(150deg,#fff5ee,#f2b2aa);box-shadow:0 3px 0 #7f2e2938,0 0 11px #d85c5220,inset 0 1px #fff}

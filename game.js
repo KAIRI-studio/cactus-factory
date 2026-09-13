@@ -1,5 +1,5 @@
 const POT_COUNT = 24;
-const STORAGE = "cactus-line-v3";
+const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
   { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10 },
