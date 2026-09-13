@@ -1,6 +1,6 @@
 const POT_COUNT = 24;
 const STORAGE = "cactus-line-v3";
-const SOIL_SECONDS = 8;
+const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
   { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10 },
   { id: "rare", name: "おはなサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-rare-flower.png", reward: 20 },
@@ -128,7 +128,11 @@ Object.values(FACILITY_BACKGROUNDS).forEach(function (src) { const image = new I
 let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }
-function growthSeconds() { return Math.max(20, 70 - (equipmentTotal() - 4) * 4); }
+function growthSeconds() {
+  const BASE_GROWTH_SECONDS = 8 * 60 * 60;
+  const REDUCTION_PER_LEVEL_SECONDS = 45 * 60;
+  return BASE_GROWTH_SECONDS - (equipmentTotal() - 4) * REDUCTION_PER_LEVEL_SECONDS;
+}
 
 function rollSpecialSeed() {
   const roll = Math.random() * 100;
