@@ -118,6 +118,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @media (max-width:360px){.brand-lockup{padding-right:8px}.brand-lockup b{font-size:11px}.brand-lockup small{font-size:6px}.brand-mark{width:27px;height:27px}.coin-chip{min-width:88px}.collection-progress{right:14px}}
 @media (max-height:700px){.line-plate{top:32.3%}.actions{height:82px;bottom:9px;padding:6px}.actions button{grid-template-rows:26px 18px 12px}.actions span{width:25px;height:25px;font-size:16px}}
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
+.test-tools{display:none!important}.debug-mode .test-tools{display:grid!important}
 
 /* v123 launch experience and cohesive greenhouse interface */
 [hidden]{display:none!important}
@@ -174,3 +175,4 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @media (max-width:360px){.equipment-dialog-card{padding-right:14px;padding-left:14px}.equipment-item{grid-template-columns:43px 1fr;min-height:158px;padding:10px}.equipment-icon{width:43px;height:43px}.equipment-icon svg{width:26px;height:26px}}
 @media (max-height:700px){.actions{height:76px;bottom:9px;padding:5px}.actions button{grid-template-rows:25px 17px 12px}.actions span{width:25px;height:25px}.equipment-dialog-card{max-height:91dvh}.equipment-item{min-height:150px;grid-template-rows:43px auto 6px 33px;padding:9px}.equipment-icon{width:43px;height:43px}}
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
+.test-tools{display:none!important}.debug-mode .test-tools{display:grid!important}
