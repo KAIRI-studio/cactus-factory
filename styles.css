@@ -256,9 +256,10 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .actions.factory-console::before{
   content:"";position:absolute;inset:5px;border:2px solid #4d755f;border-radius:16px;pointer-events:none
 }
+.actions.factory-console,.actions.factory-console *{box-sizing:border-box}
 .actions.factory-console .console-button{
   position:relative;z-index:1;height:78px;display:grid;place-items:center;
-  grid-template-rows:42px 18px 12px;padding:3px 4px 4px;
+  grid-template-rows:38px 17px 10px;padding:3px 4px 4px;
   border:3px solid #172f28;border-radius:15px;background:#f7f0d9;color:#243c33;
   box-shadow:0 4px 0 #294b3e;transition:transform .1s ease,box-shadow .1s ease;
   backdrop-filter:none;
@@ -267,14 +268,14 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   transform:translateY(3px);box-shadow:0 1px 0 #294b3e;background:#eee4c8;filter:none
 }
 .actions.factory-console .math-control{
-  height:89px;grid-template-rows:53px 19px 12px;
+  height:89px;grid-template-rows:48px 18px 10px;
   background:#f2c657;box-shadow:0 5px 0 #8b6720;
 }
 .actions.factory-console .math-control:active{background:#e6b847;box-shadow:0 1px 0 #8b6720}
 .actions.factory-console .action-illustration{
-  display:block;width:50px;height:43px;border:0;border-radius:0;background:none;color:inherit
+  display:block;width:48px;height:38px;border:0;border-radius:0;background:none;color:inherit
 }
-.actions.factory-console .math-control .action-illustration{width:55px;height:53px}
+.actions.factory-console .math-control .action-illustration{width:52px;height:48px}
 .actions.factory-console .action-illustration svg{display:block;width:100%;height:100%;overflow:visible}
 .actions.factory-console .console-button b{
   position:relative;font-size:15px;line-height:1;font-weight:900;letter-spacing:.04em;color:#233a31
@@ -292,10 +293,10 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .actions.factory-console .zukan-control .console-light{background:#69a9bf}
 @media (max-height:700px){
   .actions.factory-console{height:87px;bottom:9px;padding:6px}
-  .actions.factory-console .console-button{height:67px;grid-template-rows:34px 17px 11px}
-  .actions.factory-console .math-control{height:76px;grid-template-rows:42px 18px 11px}
-  .actions.factory-console .action-illustration{width:42px;height:34px}
-  .actions.factory-console .math-control .action-illustration{width:47px;height:42px}
+  .actions.factory-console .console-button{height:67px;grid-template-rows:30px 14px 9px}
+  .actions.factory-console .math-control{height:76px;grid-template-rows:39px 15px 9px}
+  .actions.factory-console .action-illustration{width:40px;height:30px}
+  .actions.factory-console .math-control .action-illustration{width:44px;height:39px}
   .actions.factory-console .console-button b{font-size:13px}
   .actions.factory-console .console-button small{font-size:8px}
 }
