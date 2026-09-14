@@ -52,7 +52,7 @@ function loadState() {
             : { light: 1, mist: 1, air: 1, sensor: 1 };
       }
       ["light", "mist", "air", "sensor"].forEach(function (key) {
-        saved.equipment[key] = Math.max(1, Math.min(3, Number(saved.equipment[key]) || 1));
+        saved.equipment[key] = Math.max(0, Math.min(3, Number(saved.equipment[key]) || 0));
       });
       saved.pots.forEach(function (pot) {
         if (!Number.isInteger(pot.generation)) pot.generation = 0;
@@ -89,7 +89,7 @@ function loadState() {
 function createInitialState() {
   return {
     coins: 120,
-    equipment: { light: 1, mist: 1, air: 1, sensor: 1 },
+    equipment: { light: 0, mist: 0, air: 0, sensor: 0 },
     harvested: 0,
     visualVersion: 4,
     rarityVersion: 5,
@@ -179,7 +179,11 @@ Object.values(FACILITY_BACKGROUNDS).forEach(function (src) { const image = new I
 let harvestAnimationCount = 0;
 const potSignatures = Array(POT_COUNT).fill("");
 function equipmentTotal() { return Object.values(state.equipment).reduce(function (sum, level) { return sum + level; }, 0); }
-function equipmentUpgradeCost(level) { return level === 1 ? 200 : 500; }
+function equipmentUpgradeCost(level) {
+  if (level === 0) return 100;
+  if (level === 1) return 300;
+  return 700;
+}
 function renderSpecialNutrient() {
   const activeIndex = state.nutrientActivePot;
   const growingBatch = Number.isInteger(activeIndex);
@@ -188,9 +192,9 @@ function renderSpecialNutrient() {
   specialNutrient.hidden = !(state.specialSeedQueued || (growingBatch && !allPotsReady));
 }
 function growthSeconds() {
-  const BASE_GROWTH_SECONDS = 4 * 60 * 60;
+  const EMPTY_FACTORY_GROWTH_SECONDS = 5 * 60 * 60;
   const REDUCTION_PER_LEVEL_SECONDS = 15 * 60;
-  return BASE_GROWTH_SECONDS - (equipmentTotal() - 4) * REDUCTION_PER_LEVEL_SECONDS;
+  return EMPTY_FACTORY_GROWTH_SECONDS - equipmentTotal() * REDUCTION_PER_LEVEL_SECONDS;
 }
 
 function rollSpecialSeed() {
@@ -560,7 +564,7 @@ function renderEquipment() {
     const level = state.equipment[item.key];
     const cost = equipmentUpgradeCost(level);
     const card = document.createElement("article");
-    card.className = "equipment-item" + (level >= 3 ? " completed" : "");
+    card.className = "equipment-item" + (level === 0 ? " uninstalled" : "") + (level >= 3 ? " completed" : "");
     card.innerHTML = '<div class="equipment-icon">' + item.icon + '</div><span class="equipment-level-badge">LV.' + level + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + item.copy + '</small></div><div class="level-dots" aria-label="レベル ' + level + '"><i></i><i></i><i></i></div>';
     card.querySelectorAll(".level-dots i").forEach(function (dot, index) { if (index < level) dot.classList.add("on"); });
     const button = document.createElement("button");
@@ -568,7 +572,7 @@ function renderEquipment() {
     button.className = "equipment-upgrade";
     button.dataset.equipment = item.key;
     button.disabled = level >= 3 || state.coins < cost;
-    button.textContent = level >= 3 ? "かんせい" : cost + "コイン";
+    button.textContent = level >= 3 ? "かんせい" : level === 0 ? "せっち " + cost + "コイン" : cost + "コイン";
     card.append(button);
     grid.append(card);
   });
