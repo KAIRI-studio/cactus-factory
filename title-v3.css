@@ -69,49 +69,40 @@
 }
 
 .start-game{
-  width:min(65%,278px);
-  min-height:62px;
-  margin-top:-4px;
-  border:2px solid #f3d06a;
-  border-radius:18px;
-  background:linear-gradient(180deg,#4ca27b 0%,#2c785a 47%,#1b5a42 100%);
-  box-shadow:
-    0 0 0 3px #123d2f,
-    0 7px 0 #092d22,
-    0 15px 28px #06191285,
-    inset 0 2px 0 #ffffff5c,
-    inset 0 -9px 14px #0a3d2c45;
-  font-size:20px;
-  letter-spacing:.2em;
+  display:block;
+  width:min(76%,338px);
+  min-height:0;
+  margin-top:-12px;
+  padding:0;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  filter:drop-shadow(0 8px 2px #082a1f) drop-shadow(0 16px 18px #06181173);
+  animation:start-art-breathe 3.6s ease-in-out infinite;
 }
 
-.start-game::before{
-  content:"";
-  position:absolute;
-  top:5px;
-  right:5px;
-  bottom:5px;
-  left:5px;
-  border:1px solid #ffe99d4d;
-  border-radius:12px;
-  pointer-events:none;
+.start-game img{
+  display:block;
+  width:100%;
+  height:auto;
 }
 
-.start-game::after{
-  content:"";
-  position:absolute;
-  top:-35%;
-  left:-35%;
-  width:25%;
-  height:170%;
-  background:linear-gradient(90deg,transparent,#ffffff44,transparent);
-  rotate:18deg;
-  animation:start-button-shine 4.2s 1.5s ease-in-out infinite;
+.start-game::before,.start-game::after{
+  display:none;
 }
 
-.start-game span,.start-game i{
-  position:relative;
-  z-index:1;
+.start-game:active{
+  transform:translateY(5px) scale(.985);
+  box-shadow:none;
+  filter:drop-shadow(0 3px 1px #082a1f) drop-shadow(0 8px 10px #06181166) brightness(.97);
+}
+
+.start-game:disabled{
+  opacity:.55;
+  filter:drop-shadow(0 8px 2px #082a1f);
+  animation:none;
 }
 
 .title-cactus{
@@ -149,19 +140,18 @@
   to{transform:scale(1.035);filter:saturate(1.06) brightness(.96) contrast(1.01)}
 }
 
-@keyframes start-button-shine{
-  0%,68%{translate:0 0;opacity:0}
-  72%{opacity:1}
-  88%,100%{translate:610% 0;opacity:0}
+@keyframes start-art-breathe{
+  0%,100%{translate:0 0;filter:drop-shadow(0 8px 2px #082a1f) drop-shadow(0 16px 18px #06181173) brightness(1)}
+  50%{translate:0 -2px;filter:drop-shadow(0 9px 2px #082a1f) drop-shadow(0 18px 22px #06181173) brightness(1.055)}
 }
 
 @media (max-height:700px){
   .title-copy{top:max(2.5%,calc(env(safe-area-inset-top) + 4px))}
   .title-logo{width:min(84%,390px)}
-  .start-game{min-height:55px;margin-top:-8px}
+  .start-game{width:min(69%,310px);margin-top:-16px}
   .title-cactus-1,.title-cactus-2{bottom:25%}
 }
 
 @media (prefers-reduced-motion:reduce){
-  .title-greenhouse,.title-logo,.start-game::after{animation:none!important}
+  .title-greenhouse,.title-logo,.start-game{animation:none!important}
 }
