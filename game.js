@@ -237,6 +237,7 @@ function makePot(pot, index) {
   const type = cactusType(pot.cactusId);
   const button = document.createElement("button");
   button.className = "nursery-pot stage-" + pot.stage + (pot.ready ? " ready" : "") + " rarity-" + type.rarityKey;
+  button.classList.add("cactus-" + type.id);
   button.classList.add("motion-" + Math.floor(seededUnit(index, 3) * 5));
   button.type = "button";
   button.dataset.potIndex = index;
