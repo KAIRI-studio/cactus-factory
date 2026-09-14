@@ -36,7 +36,7 @@ function cactusType(id) {
   return CACTUS_TYPES.find(function (type) { return type.id === id; }) || CACTUS_TYPES[0];
 }
 
-const state = loadState();
+let state = loadState();
 
 function loadState() {
   try {
@@ -83,6 +83,10 @@ function loadState() {
       return saved;
     }
   } catch {}
+  return createInitialState();
+}
+
+function createInitialState() {
   return {
     coins: 120,
     equipment: { light: 1, mist: 1, air: 1, sensor: 1 },
@@ -617,7 +621,9 @@ const resetDialog = document.querySelector("#resetDialog");
 document.querySelector("#resetTestButton").addEventListener("click", function () { equipmentDialog.close(); resetDialog.showModal(); });
 document.querySelector("#resetCancelButton").addEventListener("click", function () { resetDialog.close(); });
 document.querySelector("#resetConfirmButton").addEventListener("click", function () {
-  localStorage.removeItem(STORAGE);
+  state = createInitialState();
+  localStorage.setItem(STORAGE, JSON.stringify(state));
+  resetDialog.close();
   location.reload();
 });
 
