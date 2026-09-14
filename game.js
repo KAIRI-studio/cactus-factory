@@ -152,7 +152,8 @@ const EQUIPMENT = [
 ];
 const FACILITY_BACKGROUNDS = {
   base: "assets/original-sand-factory-v2.png",
-  air: "assets/factory-air.png",
+  // Keep the wind system visually consistent with the completed large fan.
+  air: "assets/sand-factory-automatic.png?v=3",
   sensor: "assets/factory-sensor.png",
   complete: "assets/sand-factory-automatic.png?v=3",
 };
