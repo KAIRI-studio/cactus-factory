@@ -118,7 +118,8 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @media (max-width:360px){.brand-lockup{padding-right:8px}.brand-lockup b{font-size:11px}.brand-lockup small{font-size:6px}.brand-mark{width:27px;height:27px}.coin-chip{min-width:88px}.collection-progress{right:14px}}
 @media (max-height:700px){.line-plate{top:32.3%}.actions{height:82px;bottom:9px;padding:6px}.actions button{grid-template-rows:26px 18px 12px}.actions span{width:25px;height:25px;font-size:16px}}
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
-.test-tools{display:none!important}.debug-mode .test-tools{display:grid!important}
+/* Keep the requested test controls available during the current play-test phase. */
+.test-tools{display:grid!important}
 .title-greenhouse{filter:saturate(.96) brightness(.9)}
 .start-game{position:relative;width:min(76%,310px);min-height:64px;margin-top:23px;overflow:hidden;border:2px solid #e5c45e;border-radius:14px;background:linear-gradient(180deg,#347b60 0%,#1e5b45 52%,#164735 100%);box-shadow:0 0 0 2px #173c2f,0 7px 0 #0a2b20,0 14px 25px #03130d8f,inset 0 2px 0 #ffffff3d,inset 0 -8px 14px #082a1d66;color:#fffced;font-size:20px;letter-spacing:.17em;text-shadow:0 2px 1px #09271d;animation:start-button-glow 3.4s ease-in-out infinite}.start-game::before,.start-game::after{content:"";position:absolute;top:9px;width:6px;height:6px;border:1px solid #765612;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff0a0,#c28b21 56%,#72500d 100%);box-shadow:0 0 0 1px #ffdc6f4d,inset 0 1px #fff6b4}.start-game::before{left:10px}.start-game::after{right:10px}.start-game span{position:relative;z-index:1;padding-left:9px}.start-game i{position:relative;z-index:1;width:31px;height:31px;border:1px solid #80601a;background:linear-gradient(145deg,#fff2a4,#dca938);box-shadow:0 0 0 2px #f8d86e47,0 2px 0 #6e4c0d,inset 0 1px #fff8c5;color:#214d3b;font-size:10px}.start-game:active{transform:translateY(5px);box-shadow:0 0 0 2px #173c2f,0 2px 0 #0a2b20,0 7px 14px #03130d78,inset 0 2px 7px #061e1675;filter:brightness(.96)}
 
@@ -191,5 +192,5 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @media (max-width:360px){.equipment-dialog-card{padding-right:14px;padding-left:14px}.equipment-item{grid-template-columns:43px 1fr;min-height:158px;padding:10px}.equipment-icon{width:43px;height:43px}.equipment-icon svg{width:26px;height:26px}}
 @media (max-height:700px){.actions{height:76px;bottom:9px;padding:5px}.actions button{grid-template-rows:25px 17px 12px}.actions span{width:25px;height:25px}.equipment-dialog-card{max-height:91dvh}.equipment-item{min-height:150px;grid-template-rows:43px auto 6px 33px;padding:9px}.equipment-icon{width:43px;height:43px}}
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
-.test-tools{display:none!important}.debug-mode .test-tools{display:grid!important}
+.test-tools{display:grid!important}
 .title-greenhouse{filter:saturate(.96) brightness(.9)}
