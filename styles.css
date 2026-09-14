@@ -214,3 +214,22 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @keyframes hardware-install{0%{filter:brightness(2) drop-shadow(0 0 20px #fff2a8);transform:scale(.94)}55%{transform:scale(1.025)}100%{transform:scale(1)}}
 @media(max-height:700px){.facility-light{top:14.6%}.facility-air{top:19.9%}.facility-sensor{top:15.7%}.facility-mist{top:22.5%}.rarity-reveal-card{top:15%;transform:translateX(-50%) scale(.92)}}
 @media(prefers-reduced-motion:reduce){.facility-unit,.facility-stage{animation:none!important;transition:none!important}}
+
+
+/* v136: soften illustrated equipment linework to match the painted room */
+.facility-illustrations .facility-unit{
+  opacity:.95;
+  filter:saturate(.82) contrast(.94) drop-shadow(0 3px 2px #17362b38);
+}
+.facility-unit *{shape-rendering:geometricPrecision}
+.facility-unit [stroke="#24483c"]{stroke:#36594d!important}
+.facility-unit [stroke="#193d31"]{stroke:#2b4e41!important}
+.facility-unit [stroke-width="13"],.facility-unit [stroke-width="12"]{stroke-width:4.8px!important}
+.facility-unit [stroke-width="10"],.facility-unit [stroke-width="9"],.facility-unit [stroke-width="8"]{stroke-width:4px!important}
+.facility-unit [stroke-width="7"],.facility-unit [stroke-width="6"]{stroke-width:3.35px!important}
+.facility-unit [stroke-width="5"]{stroke-width:2.85px!important}
+.facility-unit [stroke-width="4"]{stroke-width:2.4px!important}
+.facility-unit [stroke-width="3"]{stroke-width:2px!important}
+.light-level-3 .facility-light,.air-level-3 .facility-air,.sensor-level-3 .facility-sensor,.mist-level-3 .facility-mist{
+  filter:saturate(.86) contrast(.95) drop-shadow(0 3px 2px #17362b3d);
+}
