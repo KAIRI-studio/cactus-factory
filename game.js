@@ -119,6 +119,7 @@ if (new URLSearchParams(window.location.search).get("debug") === "1") {
 
 function showTitleScreen() {
   brandSplash.hidden = true;
+  document.body.classList.remove("launching");
   titleScreen.hidden = false;
   requestAnimationFrame(function () {
     titleScreen.classList.add("is-visible");

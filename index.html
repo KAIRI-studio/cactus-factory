@@ -11,18 +11,20 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
   <link rel="preload" as="image" href="assets/kairi-studio-logo.png" fetchpriority="high" />
-  <style id="launch-critical">html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff}.game[aria-hidden="true"],#titleScreen[hidden]{display:none!important}#brandSplash{position:fixed;z-index:1000;inset:0;display:flex;align-items:center;justify-content:center;width:min(100vw,480px);height:100dvh;margin:auto;background:#fff}#brandSplash img{width:min(43%,210px);height:auto}</style>
-  <link rel="preload" as="image" type="image/webp" href="assets/title-home-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=128" />
-  <script src="game.js?v=128" defer></script>
+  <style id="launch-critical">html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff}.game[aria-hidden="true"],#titleScreen[hidden]{display:none!important}body.launching{background:#fff}#brandSplash{position:fixed;z-index:1000;inset:-2px;display:flex;align-items:center;justify-content:center;width:auto;max-width:none;height:auto;min-height:calc(100dvh + 4px);margin:0;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);background:#fff}#brandSplash img{width:min(43%,210px);height:auto}</style>
+  <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
+  <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
+  <link rel="stylesheet" href="styles.css?v=129" />
+  <link rel="stylesheet" href="title-v3.css?v=1" />
+  <script src="game.js?v=129" defer></script>
 </head>
-<body>
+<body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
     <span class="splash-glow" aria-hidden="true"></span>
     <img src="assets/kairi-studio-logo.png" alt="KAIRI studio" />
   </section>
   <section class="title-screen" id="titleScreen" aria-label="サボテン工場 タイトル画面" hidden>
-    <img class="title-greenhouse" src="assets/title-home-v2.webp" alt="" />
+    <img class="title-greenhouse" src="assets/title-hero-v3.webp" alt="" />
     <div class="title-light" aria-hidden="true"></div>
     <div class="title-dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="title-cactus-field" aria-hidden="true">
@@ -34,8 +36,8 @@
       <span class="title-cactus title-cactus-6"><img src="assets/cactus-normal.png" alt="" /></span>
     </div>
     <div class="title-copy">
-      <small>KAIRI studio presents</small>
-      <div class="title-plaque"><span>そだてて、あつめる</span><h1>サボテン工場</h1><b>CACTUS FACTORY</b></div>
+      <h1 class="sr-only">サボテン工場</h1>
+      <img class="title-logo" src="assets/title-logo-v3.webp" alt="サボテン工場 CACTUS FACTORY" />
       <button class="start-game" id="startGameButton" type="button" disabled><span>はじめる</span><i aria-hidden="true">▶</i></button>
     </div>
   </section>
