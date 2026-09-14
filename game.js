@@ -108,6 +108,44 @@ const equipmentLevelText = document.querySelector("#equipmentLevelText");
 const specialNutrient = document.querySelector("#specialNutrient");
 const game = document.querySelector(".game");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const brandSplash = document.querySelector("#brandSplash");
+const titleScreen = document.querySelector("#titleScreen");
+const startGameButton = document.querySelector("#startGameButton");
+const screenShutter = document.querySelector("#screenShutter");
+
+if (new URLSearchParams(window.location.search).get("debug") === "1") {
+  document.body.classList.add("debug-mode");
+}
+
+function showTitleScreen() {
+  brandSplash.classList.add("is-leaving");
+  window.setTimeout(function () {
+    brandSplash.hidden = true;
+    titleScreen.hidden = false;
+    requestAnimationFrame(function () {
+      titleScreen.classList.add("is-visible");
+      startGameButton.disabled = false;
+    });
+  }, reduceMotion.matches ? 0 : 420);
+}
+
+function enterFactory() {
+  if (startGameButton.disabled) return;
+  startGameButton.disabled = true;
+  screenShutter.classList.add("is-closing");
+  window.setTimeout(function () {
+    titleScreen.hidden = true;
+    game.setAttribute("aria-hidden", "false");
+    screenShutter.classList.remove("is-closing");
+    screenShutter.classList.add("is-opening");
+    window.setTimeout(function () {
+      screenShutter.classList.remove("is-opening");
+    }, reduceMotion.matches ? 0 : 250);
+  }, reduceMotion.matches ? 0 : 320);
+}
+
+startGameButton.addEventListener("click", enterFactory);
+window.setTimeout(showTitleScreen, reduceMotion.matches ? 120 : 1350);
 const EQUIPMENT = [
   { key: "light", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="15" r="6"/><path d="M16 3v4M16 23v4M4 15h4M24 15h4M7.5 6.5l3 3M21.5 20.5l3 3M24.5 6.5l-3 3M10.5 20.5l-3 3"/></svg>', name: "そだてるライト", copy: "ひかりが つよくなります" },
   { key: "mist", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C12 10 9 13.4 9 18a7 7 0 0 0 14 0c0-4.6-3-8-7-14z"/><path d="M5 27h7M15 27h5M23 27h4"/></svg>', name: "ミスト", copy: "きりが こまかくなります" },

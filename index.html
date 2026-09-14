@@ -10,11 +10,34 @@
   <title>サボテン育成ライン</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=122" />
-  <script src="game.js?v=122" defer></script>
+  <link rel="stylesheet" href="styles.css?v=123" />
+  <script src="game.js?v=123" defer></script>
 </head>
 <body>
-  <main class="game" aria-label="サボテン育成ゲーム">
+  <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
+    <span class="splash-glow" aria-hidden="true"></span>
+    <img src="assets/kairi-studio-logo.png" alt="KAIRI studio" />
+  </section>
+  <section class="title-screen" id="titleScreen" aria-label="サボテン工場 タイトル画面" hidden>
+    <img class="title-greenhouse" src="assets/original-sand-factory-v2.png" alt="" />
+    <div class="title-light" aria-hidden="true"></div>
+    <div class="title-dust" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="title-cactus-field" aria-hidden="true">
+      <span class="title-cactus title-cactus-1"><img src="assets/cactus-normal.png" alt="" /></span>
+      <span class="title-cactus title-cactus-2"><img src="assets/cactus-rare-flower.png" alt="" /></span>
+      <span class="title-cactus title-cactus-3"><img src="assets/cactus-super-bunny.png" alt="" /></span>
+      <span class="title-cactus title-cactus-4"><img src="assets/cactus-normal.png" alt="" /></span>
+      <span class="title-cactus title-cactus-5"><img src="assets/cactus-super-suit.png?v=2" alt="" /></span>
+      <span class="title-cactus title-cactus-6"><img src="assets/cactus-legend-sage.png?v=2" alt="" /></span>
+    </div>
+    <div class="title-copy">
+      <small>KAIRI studio presents</small>
+      <div class="title-plaque"><span>そだてて、あつめる</span><h1>サボテン工場</h1><b>CACTUS FACTORY</b></div>
+      <button class="start-game" id="startGameButton" type="button" disabled><span>はじめる</span><i aria-hidden="true">▶</i></button>
+    </div>
+  </section>
+  <div class="screen-shutter" id="screenShutter" aria-hidden="true"><i></i><i></i><span>CACTUS FACTORY</span></div>
+  <main class="game" aria-label="サボテン育成ゲーム" aria-hidden="true">
     <img class="greenhouse greenhouse-back" src="assets/original-sand-factory-v2.png" alt="" />
     <div class="light-effect" aria-hidden="true"></div>
     <div class="mist-effect" aria-hidden="true"></div>
