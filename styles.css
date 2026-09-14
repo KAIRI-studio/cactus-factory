@@ -243,3 +243,63 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 .facility-unit [stroke="#24483c"]{stroke:#24483c!important}
 .facility-unit [stroke="#193d31"]{stroke:#193d31!important}
+
+
+/* v144: illustrated factory control console */
+.actions.factory-console{
+  right:10px;bottom:12px;left:10px;height:103px;
+  display:grid;grid-template-columns:1fr 1.22fr 1fr;align-items:end;gap:6px;
+  padding:8px 8px 9px;border:3px solid #172f28;border-radius:23px;
+  background:#6f9a7c;box-shadow:0 7px 0 #102820,0 15px 25px #06181270,inset 0 2px #a9c5ad;
+  backdrop-filter:none;
+}
+.actions.factory-console::before{
+  content:"";position:absolute;inset:5px;border:2px solid #4d755f;border-radius:16px;pointer-events:none
+}
+.actions.factory-console .console-button{
+  position:relative;z-index:1;height:78px;display:grid;place-items:center;
+  grid-template-rows:42px 18px 12px;padding:3px 4px 4px;
+  border:3px solid #172f28;border-radius:15px;background:#f7f0d9;color:#243c33;
+  box-shadow:0 4px 0 #294b3e;transition:transform .1s ease,box-shadow .1s ease;
+  backdrop-filter:none;
+}
+.actions.factory-console .console-button:active{
+  transform:translateY(3px);box-shadow:0 1px 0 #294b3e;background:#eee4c8;filter:none
+}
+.actions.factory-console .math-control{
+  height:89px;grid-template-rows:53px 19px 12px;
+  background:#f2c657;box-shadow:0 5px 0 #8b6720;
+}
+.actions.factory-console .math-control:active{background:#e6b847;box-shadow:0 1px 0 #8b6720}
+.actions.factory-console .action-illustration{
+  display:block;width:50px;height:43px;border:0;border-radius:0;background:none;color:inherit
+}
+.actions.factory-console .math-control .action-illustration{width:55px;height:53px}
+.actions.factory-console .action-illustration svg{display:block;width:100%;height:100%;overflow:visible}
+.actions.factory-console .console-button b{
+  position:relative;font-size:15px;line-height:1;font-weight:900;letter-spacing:.04em;color:#233a31
+}
+.actions.factory-console .console-button small{
+  position:relative;font-size:9px;line-height:1;color:#607269;white-space:nowrap
+}
+.actions.factory-console .math-control small{color:#5e4b22}
+.actions.factory-console .console-light{
+  position:absolute;top:6px;right:7px;width:8px;height:8px;border:2px solid #172f28;border-radius:50%;
+  background:#c8d0c7;box-shadow:none
+}
+.actions.factory-console .math-control .console-light{background:#f06d58}
+.actions.factory-console .equipment-control .console-light{background:#70ba7d}
+.actions.factory-console .zukan-control .console-light{background:#69a9bf}
+@media (max-height:700px){
+  .actions.factory-console{height:87px;bottom:9px;padding:6px}
+  .actions.factory-console .console-button{height:67px;grid-template-rows:34px 17px 11px}
+  .actions.factory-console .math-control{height:76px;grid-template-rows:42px 18px 11px}
+  .actions.factory-console .action-illustration{width:42px;height:34px}
+  .actions.factory-console .math-control .action-illustration{width:47px;height:42px}
+  .actions.factory-console .console-button b{font-size:13px}
+  .actions.factory-console .console-button small{font-size:8px}
+}
+@supports (bottom:env(safe-area-inset-bottom)){
+  .actions.factory-console{bottom:max(12px,env(safe-area-inset-bottom))}
+  @media (max-height:700px){.actions.factory-console{bottom:max(9px,env(safe-area-inset-bottom))}}
+}
