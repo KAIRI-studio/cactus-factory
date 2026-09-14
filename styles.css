@@ -194,3 +194,186 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
 .test-tools{display:grid!important}
 .title-greenhouse{filter:saturate(.96) brightness(.9)}
+
+
+/* v134: visible three-stage facility progression and upper rarity reveal */
+.light-effect,.mist-effect,.air-effect,.sensor-effect{
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .65s ease,filter .65s ease;
+}
+.light-effect{
+  top:16.8%;
+  left:13%;
+  width:74%;
+  height:25%;
+  clip-path:polygon(4% 0,96% 0,100% 100%,0 100%);
+}
+.light-level-2 .light-effect{
+  opacity:.5;
+  background:
+    linear-gradient(103deg,transparent 4% 13%,#fff3ae1a 14%,#fff0a84f 23%,transparent 33%),
+    linear-gradient(90deg,transparent 34%,#fff5ba58 50%,transparent 66%),
+    linear-gradient(77deg,transparent 67%,#fff0a84f 77%,#fff3ae1a 86%,transparent 96%);
+  filter:drop-shadow(0 0 8px #ffe98a55);
+}
+.light-level-3 .light-effect{
+  opacity:.86;
+  background:
+    linear-gradient(108deg,transparent 0 5%,#fff2a24f 13%,transparent 23%),
+    linear-gradient(100deg,transparent 20%,#fff4ad5c 30%,transparent 40%),
+    linear-gradient(90deg,transparent 39%,#fff8c96b 50%,transparent 61%),
+    linear-gradient(80deg,transparent 60%,#fff4ad5c 70%,transparent 80%),
+    linear-gradient(72deg,transparent 77%,#fff2a24f 87%,transparent 96%);
+  filter:drop-shadow(0 0 13px #ffe5828c);
+  animation:facility-light-live 2.8s ease-in-out infinite alternate;
+}
+.light-effect::after{
+  content:"";
+  position:absolute;
+  inset:20% 5%;
+  opacity:0;
+  background:
+    radial-gradient(circle at 12% 18%,#fffbd5 0 2px,transparent 3px),
+    radial-gradient(circle at 35% 43%,#fff3a9 0 2px,transparent 3px),
+    radial-gradient(circle at 58% 20%,#fffbd5 0 2px,transparent 3px),
+    radial-gradient(circle at 79% 48%,#fff3a9 0 2px,transparent 3px),
+    radial-gradient(circle at 92% 15%,#fffbd5 0 2px,transparent 3px);
+}
+.light-level-3 .light-effect::after{opacity:1;animation:facility-light-specks 3.2s linear infinite}
+
+.mist-effect{
+  top:17.8%;
+  right:0;
+  width:28%;
+  height:29%;
+}
+.mist-level-2 .mist-effect{
+  opacity:.48;
+  background:
+    radial-gradient(ellipse at 82% 18%,#effffff2 0 6%,#dff8f57a 14%,transparent 34%),
+    radial-gradient(ellipse at 70% 53%,#effffff0 0 7%,#dff8f56b 17%,transparent 38%);
+  filter:blur(.15px) drop-shadow(0 0 7px #dbffff8c);
+}
+.mist-level-3 .mist-effect{
+  width:36%;
+  opacity:.86;
+  background:
+    radial-gradient(ellipse at 86% 12%,#f5fffff5 0 7%,#dffafa88 18%,transparent 38%),
+    radial-gradient(ellipse at 75% 43%,#f5ffffef 0 8%,#dffafa80 20%,transparent 42%),
+    radial-gradient(ellipse at 64% 76%,#f5ffffe6 0 9%,#dffafa73 22%,transparent 45%);
+  filter:blur(.25px) drop-shadow(0 0 10px #d9ffffa8);
+  animation:facility-mist-live 3s ease-in-out infinite alternate;
+}
+.mist-effect::after{
+  content:"";
+  position:absolute;
+  right:12%;
+  top:5%;
+  width:70%;
+  height:82%;
+  opacity:0;
+  background:
+    radial-gradient(circle at 30% 16%,#d9ffff 0 2px,transparent 3px),
+    radial-gradient(circle at 68% 35%,#e9ffff 0 2px,transparent 3px),
+    radial-gradient(circle at 40% 58%,#d9ffff 0 2px,transparent 3px),
+    radial-gradient(circle at 78% 77%,#e9ffff 0 2px,transparent 3px);
+}
+.mist-level-3 .mist-effect::after{opacity:.88;animation:facility-droplets 2.4s linear infinite}
+
+.air-effect{
+  top:22.2%;
+  left:15%;
+  width:58%;
+  height:9%;
+  overflow:hidden;
+  filter:drop-shadow(0 0 4px #e7ffff);
+}
+.air-effect i{
+  position:absolute;
+  left:-34%;
+  width:34%;
+  height:2px;
+  border-radius:99px;
+  background:linear-gradient(90deg,transparent,#eaffffcc 34% 76%,transparent);
+  transform:skewX(-16deg);
+  animation:facility-airflow 2.65s linear infinite;
+}
+.air-effect i:nth-child(1){top:10%;animation-delay:-.3s}
+.air-effect i:nth-child(2){top:37%;animation-delay:-1.55s;animation-duration:3.05s}
+.air-effect i:nth-child(3){top:64%;animation-delay:-2.2s;animation-duration:2.35s}
+.air-effect i:nth-child(4){top:88%;animation-delay:-.9s;animation-duration:2.85s}
+.air-level-2 .air-effect{opacity:.22}
+.air-level-2 .air-effect i:nth-child(n+3){display:none}
+.air-level-3 .air-effect{opacity:.82}
+.air-level-3 .air-effect i{height:3px;box-shadow:0 0 5px #eaffff8c}
+
+.sensor-effect{
+  top:17.2%;
+  right:2.8%;
+  width:15%;
+  height:13%;
+  border-radius:14px;
+}
+.sensor-effect i{
+  position:absolute;
+  right:18%;
+  width:7px;
+  height:7px;
+  border:1px solid #36594d;
+  border-radius:50%;
+  background:#77c891;
+  box-shadow:0 0 5px #7de7a0;
+}
+.sensor-effect i:nth-child(1){top:21%}
+.sensor-effect i:nth-child(2){top:45%;background:#f0c553;box-shadow:0 0 5px #ffe176}
+.sensor-effect i:nth-child(3){top:69%;background:#69b8d4;box-shadow:0 0 5px #8ddbf4}
+.sensor-level-2 .sensor-effect{opacity:.35}
+.sensor-level-3 .sensor-effect{
+  opacity:.95;
+  box-shadow:0 0 0 2px #b9f3d51f,0 0 15px #7ff0b36b;
+  animation:facility-sensor-panel 2s ease-in-out infinite;
+}
+.sensor-level-3 .sensor-effect i{animation:facility-sensor-led 1.35s ease-in-out infinite}
+.sensor-level-3 .sensor-effect i:nth-child(2){animation-delay:-.45s}
+.sensor-level-3 .sensor-effect i:nth-child(3){animation-delay:-.9s}
+
+.rarity-reveal{
+  inset:0;
+  display:block;
+  place-items:initial;
+}
+.rarity-reveal::before{
+  inset:7% 6% auto;
+  height:25%;
+  background:radial-gradient(ellipse at 50% 50%,#fff9cf99 0 8%,#f0bd4c30 35%,transparent 70%);
+}
+.rarity-reveal-card{
+  position:absolute;
+  top:17%;
+  left:50%;
+  min-width:220px;
+  max-width:86%;
+  transform:translateX(-50%);
+}
+.rarity-reveal.legend::before{
+  background:radial-gradient(ellipse at 50% 50%,#fff 0 4%,#ffe37baa 16%,#f0b82b42 42%,transparent 72%);
+}
+
+@keyframes facility-light-live{from{filter:drop-shadow(0 0 9px #ffe58270) brightness(.94)}to{filter:drop-shadow(0 0 16px #ffe582b8) brightness(1.12)}}
+@keyframes facility-light-specks{0%{transform:translateY(9px);opacity:.2}50%{opacity:1}100%{transform:translateY(-11px);opacity:.25}}
+@keyframes facility-mist-live{from{transform:translate(1px,-2px) scale(.97);opacity:.68}to{transform:translate(-8px,5px) scale(1.08);opacity:.96}}
+@keyframes facility-droplets{0%{transform:translateY(-7px);opacity:.15}35%{opacity:.9}100%{transform:translate(-7px,15px);opacity:.2}}
+@keyframes facility-airflow{0%{transform:translateX(0) skewX(-16deg);opacity:0}18%{opacity:.95}82%{opacity:.72}100%{transform:translateX(390%) skewX(-16deg);opacity:0}}
+@keyframes facility-sensor-panel{0%,100%{filter:brightness(.92)}50%{filter:brightness(1.18)}}
+@keyframes facility-sensor-led{0%,100%{opacity:.35;transform:scale(.82)}45%{opacity:1;transform:scale(1.18)}}
+
+@media (max-height:700px){
+  .rarity-reveal-card{top:15%;transform:translateX(-50%) scale(.92)}
+  .rarity-reveal::before{top:5%;height:27%}
+}
+@media (prefers-reduced-motion:reduce){
+  .light-effect,.mist-effect,.air-effect i,.sensor-effect,.sensor-effect i{animation:none!important}
+}
