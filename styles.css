@@ -120,6 +120,14 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
 .test-tools{display:none!important}.debug-mode .test-tools{display:grid!important}
 
+/* v125: match the quiet three-second Kanji Quest studio intro */
+#brandSplash{background:#fff;animation:brand-intro-out 3s ease forwards}
+#brandSplash::before,#brandSplash::after,#brandSplash .splash-glow{display:none}
+#brandSplash img{width:min(43%,210px);filter:drop-shadow(0 8px 18px #0000004d);animation:brand-logo-float 2.7s ease-in-out forwards}
+@keyframes brand-logo-float{0%{opacity:0;transform:translateY(18px) scale(.97)}20%{opacity:1;transform:translateY(0) scale(1)}68%{opacity:1;transform:translateY(-4px) scale(1)}100%{opacity:0;transform:translateY(-14px) scale(1.02)}}
+@keyframes brand-intro-out{0%,72%{opacity:1}100%{opacity:0}}
+@media(prefers-reduced-motion:reduce){#brandSplash,#brandSplash img{animation:none!important}}
+
 /* v123 launch experience and cohesive greenhouse interface */
 [hidden]{display:none!important}
 .game[aria-hidden="true"]{visibility:hidden}

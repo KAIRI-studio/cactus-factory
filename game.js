@@ -118,15 +118,12 @@ if (new URLSearchParams(window.location.search).get("debug") === "1") {
 }
 
 function showTitleScreen() {
-  brandSplash.classList.add("is-leaving");
-  window.setTimeout(function () {
-    brandSplash.hidden = true;
-    titleScreen.hidden = false;
-    requestAnimationFrame(function () {
-      titleScreen.classList.add("is-visible");
-      startGameButton.disabled = false;
-    });
-  }, reduceMotion.matches ? 0 : 420);
+  brandSplash.hidden = true;
+  titleScreen.hidden = false;
+  requestAnimationFrame(function () {
+    titleScreen.classList.add("is-visible");
+    startGameButton.disabled = false;
+  });
 }
 
 function enterFactory() {
@@ -145,7 +142,7 @@ function enterFactory() {
 }
 
 startGameButton.addEventListener("click", enterFactory);
-window.setTimeout(showTitleScreen, reduceMotion.matches ? 120 : 1350);
+window.setTimeout(showTitleScreen, reduceMotion.matches ? 120 : 3000);
 const EQUIPMENT = [
   { key: "light", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="15" r="6"/><path d="M16 3v4M16 23v4M4 15h4M24 15h4M7.5 6.5l3 3M21.5 20.5l3 3M24.5 6.5l-3 3M10.5 20.5l-3 3"/></svg>', name: "そだてるライト", copy: "ひかりが つよくなります" },
   { key: "mist", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C12 10 9 13.4 9 18a7 7 0 0 0 14 0c0-4.6-3-8-7-14z"/><path d="M5 27h7M15 27h5M23 27h4"/></svg>', name: "ミスト", copy: "きりが こまかくなります" },
