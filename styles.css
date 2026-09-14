@@ -233,3 +233,13 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .light-level-3 .facility-light,.air-level-3 .facility-air,.sensor-level-3 .facility-sensor,.mist-level-3 .facility-mist{
   filter:saturate(.86) contrast(.95) drop-shadow(0 3px 2px #17362b3d);
 }
+
+
+/* v137: keep the thinner drawing, restore solid ink and full-color paint */
+.facility-illustrations .facility-unit,
+.light-level-3 .facility-light,.air-level-3 .facility-air,.sensor-level-3 .facility-sensor,.mist-level-3 .facility-mist{
+  opacity:1;
+  filter:saturate(1) contrast(1.04) drop-shadow(0 3px 2px #17362b55);
+}
+.facility-unit [stroke="#24483c"]{stroke:#24483c!important}
+.facility-unit [stroke="#193d31"]{stroke:#193d31!important}
