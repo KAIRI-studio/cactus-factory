@@ -145,10 +145,10 @@ function enterFactory() {
 startGameButton.addEventListener("click", enterFactory);
 window.setTimeout(showTitleScreen, reduceMotion.matches ? 120 : 3000);
 const EQUIPMENT = [
-  { key: "light", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="15" r="6"/><path d="M16 3v4M16 23v4M4 15h4M24 15h4M7.5 6.5l3 3M21.5 20.5l3 3M24.5 6.5l-3 3M10.5 20.5l-3 3"/></svg>', name: "そだてるライト", copy: "ひかりが つよくなります" },
-  { key: "mist", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C12 10 9 13.4 9 18a7 7 0 0 0 14 0c0-4.6-3-8-7-14z"/><path d="M5 27h7M15 27h5M23 27h4"/></svg>', name: "ミスト", copy: "きりが こまかくなります" },
-  { key: "air", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="3"/><circle cx="16" cy="16" r="12"/><path d="M16 13c-1-6 1-9 4-8.2 3.1.8 2.6 5.3-1.5 9M18.6 17.5c5.7 2 7.3 5.3 5.1 7.4-2.2 2.2-5.9-.5-7.2-5M13.4 17.5c-4.7 3.9-8.4 3.3-9.2.3-.8-3 3.4-4.8 8.1-2.3"/></svg>', name: "かぜおくり", copy: "ファンが つよくなります" },
-  { key: "sensor", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="5" width="16" height="22" rx="4"/><circle cx="16" cy="19" r="3"/><path d="M12 11h8M12 14h5M5 10c-2 3.5-2 8.5 0 12M27 10c2 3.5 2 8.5 0 12"/></svg>', name: "みまもり", copy: "センサーが ふえます" },
+  { key: "light", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="15" r="6"/><path d="M16 3v4M16 23v4M4 15h4M24 15h4M7.5 6.5l3 3M21.5 20.5l3 3M24.5 6.5l-3 3M10.5 20.5l-3 3"/></svg>', name: "そだてるライト", copy: "ランプが 1とう → 3とう → 5とう" },
+  { key: "mist", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C12 10 9 13.4 9 18a7 7 0 0 0 14 0c0-4.6-3-8-7-14z"/><path d="M5 27h7M15 27h5M23 27h4"/></svg>', name: "ミスト", copy: "ノズルが 1こ → 2こ → 3こ" },
+  { key: "air", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="3"/><circle cx="16" cy="16" r="12"/><path d="M16 13c-1-6 1-9 4-8.2 3.1.8 2.6 5.3-1.5 9M18.6 17.5c5.7 2 7.3 5.3 5.1 7.4-2.2 2.2-5.9-.5-7.2-5M13.4 17.5c-4.7 3.9-8.4 3.3-9.2.3-.8-3 3.4-4.8 8.1-2.3"/></svg>', name: "かぜおくり", copy: "こがた → おおがた → ターボ" },
+  { key: "sensor", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="5" width="16" height="22" rx="4"/><circle cx="16" cy="19" r="3"/><path d="M12 11h8M12 14h5M5 10c-2 3.5-2 8.5 0 12M27 10c2 3.5 2 8.5 0 12"/></svg>', name: "みまもり", copy: "おんどけい → パネル → かんせい盤" },
 ];
 const FACILITY_BACKGROUNDS = {
   base: "assets/original-sand-factory-v2.png",
@@ -280,15 +280,7 @@ function render() {
   coinCount.textContent = state.coins;
   equipmentLevelText.textContent = equipmentTotal() + " / 12";
   renderSpecialNutrient();
-  const hasAir = state.equipment.air >= 2;
-  const hasSensor = state.equipment.sensor >= 2;
-  document.querySelector(".greenhouse-back").src = hasAir && hasSensor
-    ? FACILITY_BACKGROUNDS.complete
-    : hasAir
-      ? FACILITY_BACKGROUNDS.air
-      : hasSensor
-        ? FACILITY_BACKGROUNDS.sensor
-        : FACILITY_BACKGROUNDS.base;
+  // Level-specific equipment is rendered as illustrated hardware above the base room.\n  document.querySelector(".greenhouse-back").src = FACILITY_BACKGROUNDS.base;
   game.className = game.className.replace(/\b(light|mist|air|sensor)-level-\d+\b/g, "").trim();
   Object.keys(state.equipment).forEach(function (key) { game.classList.add(key + "-level-" + state.equipment[key]); });
   save();

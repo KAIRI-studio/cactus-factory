@@ -194,3 +194,23 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
 .test-tools{display:grid!important}
 .title-greenhouse{filter:saturate(.96) brightness(.9)}
+
+
+/* v135: illustrated equipment that physically changes at every level */
+.light-effect,.mist-effect{display:none}
+.facility-illustrations{position:absolute;z-index:1;inset:0;overflow:hidden;pointer-events:none}
+.facility-unit{position:absolute;height:auto;overflow:visible;filter:drop-shadow(0 5px 4px #17362b59)}
+.facility-stage{opacity:0;transform:scale(.9);transform-origin:center;transition:opacity .45s ease,transform .45s cubic-bezier(.2,.8,.25,1)}
+.light-level-1 .facility-light .stage-1,.light-level-2 .facility-light .stage-2,.light-level-3 .facility-light .stage-3,
+.air-level-1 .facility-air .stage-1,.air-level-2 .facility-air .stage-2,.air-level-3 .facility-air .stage-3,
+.sensor-level-1 .facility-sensor .stage-1,.sensor-level-2 .facility-sensor .stage-2,.sensor-level-3 .facility-sensor .stage-3,
+.mist-level-1 .facility-mist .stage-1,.mist-level-2 .facility-mist .stage-2,.mist-level-3 .facility-mist .stage-3{opacity:1;transform:scale(1)}
+.facility-light{top:15.1%;left:18%;width:61%}.facility-air{top:20.4%;left:1.5%;width:20.5%}.facility-sensor{top:16.1%;right:3%;width:15.5%}.facility-mist{top:23%;right:-1.2%;width:17%}
+.light-level-3 .facility-light{filter:drop-shadow(0 5px 4px #17362b59) drop-shadow(0 0 9px #ffd35d8c)}
+.air-level-3 .facility-air,.sensor-level-3 .facility-sensor{filter:drop-shadow(0 5px 4px #17362b59) drop-shadow(0 0 7px #7ad5aa70)}
+.mist-level-3 .facility-mist{filter:drop-shadow(0 5px 4px #17362b59) drop-shadow(0 0 8px #a5ebe480)}
+.rarity-reveal{inset:0;display:block;place-items:initial}.rarity-reveal::before{inset:7% 6% auto;height:25%;background:radial-gradient(ellipse at 50% 50%,#fff9cf99 0 8%,#f0bd4c30 35%,transparent 70%)}.rarity-reveal-card{position:absolute;top:17%;left:50%;min-width:220px;max-width:86%;transform:translateX(-50%)}.rarity-reveal.legend::before{background:radial-gradient(ellipse at 50% 50%,#fff 0 4%,#ffe37baa 16%,#f0b82b42 42%,transparent 72%)}
+.game.facility-installing .facility-unit{animation:hardware-install .85s cubic-bezier(.2,.8,.25,1)}
+@keyframes hardware-install{0%{filter:brightness(2) drop-shadow(0 0 20px #fff2a8);transform:scale(.94)}55%{transform:scale(1.025)}100%{transform:scale(1)}}
+@media(max-height:700px){.facility-light{top:14.6%}.facility-air{top:19.9%}.facility-sensor{top:15.7%}.facility-mist{top:22.5%}.rarity-reveal-card{top:15%;transform:translateX(-50%) scale(.92)}}
+@media(prefers-reduced-motion:reduce){.facility-unit,.facility-stage{animation:none!important;transition:none!important}}
