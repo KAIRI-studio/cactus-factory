@@ -10,7 +10,7 @@ const CACTUS_TYPES = [
   { id: "superRed", name: "あかサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-red.png", reward: 50, description: "あつい きもちを かくさない まっすぐな せいかく。" },
   { id: "superBlue", name: "あおサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-blue.png", reward: 50, description: "いつでも おちついている クールな サボテン。" },
   { id: "superYellow", name: "きいろサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-yellow.png", reward: 50, description: "まわりを あかるくする こうじょうの ムードメーカー。" },
-  { id: "legendSage", name: "せんにんサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-legend-sage-v5.webp", reward: 150, description: "ながい ときを いきる サボテンたちの せんにん。" },
+  { id: "legendSage", name: "せんにんサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-legend-sage-v6.png", reward: 150, description: "ながい ときを いきる サボテンたちの せんにん。" },
 ];
 
 const RARE_CACTUS_IDS = ["rare", "super", "legend"];

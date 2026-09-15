@@ -881,3 +881,13 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .zukan-entry{height:138px;min-height:138px}
   .zukan-entry.rarity-legend:last-child{height:114px;min-height:114px}
 }
+
+/* v157: the v6 sage artwork is centered inside its own transparent canvas */
+.zukan-hero-stage img[src*="cactus-legend-sage"]{
+  transform:scale(1.08);
+}
+@keyframes zukan-legend-pop{
+  0%{transform:translateY(7px) scale(.92)}
+  65%{transform:translateY(-6px) scale(1.14)}
+  100%{transform:translateY(0) scale(1.08)}
+}
