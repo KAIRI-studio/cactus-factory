@@ -539,8 +539,9 @@ function answerQuestion(correct, button, correctValue) {
   mathCard.classList.add(correct ? "answer-correct" : "answer-wrong");
   answerCelebration.hidden = false;
   answerCelebration.className = "answer-celebration " + (correct ? "is-correct" : "is-wrong");
-  answerSymbol.textContent = correct ? "○" : "×";
+  answerSymbol.textContent = "";
   answerCelebrationText.textContent = correct ? "せいかい！" : "ちがうよ";
+  answerCelebration.setAttribute("aria-label", correct ? "せいかい！" : "ちがうよ");
   if (correct) {
     challenge.correct += 1;
     button.classList.add("correct");

@@ -426,3 +426,46 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 /* v151: shake the inner console without moving the dialog viewport */
 .math-card.answer-wrong{animation:none}
 .math-card.answer-wrong .problem,.math-card.answer-wrong .answers{animation:math-wrong-shake .42s ease}
+
+
+/* v152: optically centered custom result marks */
+.answer-celebration{
+  grid-template-columns:1fr;
+  grid-template-rows:62px auto;
+  justify-items:center;
+  gap:4px;
+  width:206px;
+  min-height:120px;
+  padding:11px 14px 12px;
+  text-align:center;
+}
+.answer-celebration .answer-symbol{
+  position:relative;
+  width:58px;height:58px;
+  padding:0;
+  font-size:0;
+}
+.answer-celebration .answer-symbol::before,
+.answer-celebration .answer-symbol::after{
+  content:"";position:absolute;left:50%;top:50%;box-sizing:border-box;
+}
+.answer-celebration.is-correct .answer-symbol::before{
+  width:31px;height:31px;border:6px solid #258553;border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+.answer-celebration.is-correct .answer-symbol::after{
+  width:8px;height:8px;border-radius:50%;background:#8fd66f;
+  transform:translate(10px,-20px);
+}
+.answer-celebration.is-wrong .answer-symbol::before,
+.answer-celebration.is-wrong .answer-symbol::after{
+  width:34px;height:7px;border-radius:99px;background:#d34e3e;
+}
+.answer-celebration.is-wrong .answer-symbol::before{transform:translate(-50%,-50%) rotate(45deg)}
+.answer-celebration.is-wrong .answer-symbol::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.answer-celebration b{width:100%;text-align:center}
+.answer-celebration img{display:none}
+@media(max-width:360px){
+  .answer-celebration{width:194px;grid-template-columns:1fr;grid-template-rows:58px auto}
+  .answer-celebration .answer-symbol{width:54px;height:54px}
+}
