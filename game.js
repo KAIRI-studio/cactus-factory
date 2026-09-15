@@ -61,6 +61,9 @@ function loadState() {
       if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
       saved.rarityVersion = 5;
       saved.specialSeedQueued = Boolean(saved.specialSeedQueued);
+      if (!["harvest", "math", "equipment", "done"].includes(saved.tutorialStep)) {
+        saved.tutorialStep = (Number(saved.harvested) || 0) > 0 ? "done" : "harvest";
+      }
       if (saved.nutrientTrackingVersion !== 1) {
         saved.nutrientTrackingVersion = 1;
         saved.nutrientActivePot = null;
@@ -91,6 +94,7 @@ function createInitialState() {
     coins: 120,
     equipment: { light: 0, mist: 0, air: 0, sensor: 0 },
     harvested: 0,
+    tutorialStep: "harvest",
     visualVersion: 4,
     rarityVersion: 5,
     collections: { normal: 0, rare: 0, super: 0, legend: 0 },
@@ -116,6 +120,53 @@ const brandSplash = document.querySelector("#brandSplash");
 const titleScreen = document.querySelector("#titleScreen");
 const startGameButton = document.querySelector("#startGameButton");
 const screenShutter = document.querySelector("#screenShutter");
+const onboardingTip = document.querySelector("#onboardingTip");
+const onboardingStep = document.querySelector("#onboardingStep");
+const onboardingText = document.querySelector("#onboardingText");
+const onboardingSkip = document.querySelector("#onboardingSkip");
+let tutorialTimer;
+
+const TUTORIAL_COPY = {
+  harvest: { number: "1 / 3", text: "サボテンを タップして しゅうかく！", target: ".nursery-pot.ready" },
+  math: { number: "2 / 3", text: "けいさんで はやく そだつよ！", target: "#mathButton" },
+  equipment: { number: "3 / 3", text: "コインで せつびを つよくしよう！", target: "#equipmentButton" },
+};
+
+function clearTutorialFocus() {
+  document.querySelectorAll(".tutorial-focus").forEach(function (element) { element.classList.remove("tutorial-focus"); });
+}
+
+function hideTutorial() {
+  window.clearTimeout(tutorialTimer);
+  clearTutorialFocus();
+  onboardingTip.hidden = true;
+}
+
+function showTutorial() {
+  hideTutorial();
+  const step = state.tutorialStep;
+  const copy = TUTORIAL_COPY[step];
+  if (!copy || game.getAttribute("aria-hidden") === "true" || document.querySelector("dialog[open]")) return;
+  onboardingStep.textContent = copy.number;
+  onboardingText.textContent = copy.text;
+  onboardingTip.className = "onboarding-tip stage-" + step;
+  onboardingTip.hidden = false;
+  const target = document.querySelector(copy.target);
+  if (target) target.classList.add("tutorial-focus");
+}
+
+function scheduleTutorial(delay) {
+  window.clearTimeout(tutorialTimer);
+  tutorialTimer = window.setTimeout(showTutorial, delay || 0);
+}
+
+function finishTutorial() {
+  state.tutorialStep = "done";
+  hideTutorial();
+  save();
+}
+
+onboardingSkip.addEventListener("click", finishTutorial);
 
 if (new URLSearchParams(window.location.search).get("debug") === "1") {
   document.body.classList.add("debug-mode");
@@ -142,6 +193,7 @@ function enterFactory() {
     screenShutter.classList.add("is-opening");
     window.setTimeout(function () {
       screenShutter.classList.remove("is-opening");
+      scheduleTutorial(reduceMotion.matches ? 40 : 240);
     }, reduceMotion.matches ? 0 : 250);
   }, reduceMotion.matches ? 0 : 320);
 }
@@ -405,6 +457,11 @@ function harvest(indexes) {
     pot.ready = false; pot.stage = -1; pot.startedAt = Date.now(); pot.generation = (pot.generation || 0) + 1;
   });
   if (!harvestedItems.length) return;
+  const finishedHarvestGuide = state.tutorialStep === "harvest";
+  if (finishedHarvestGuide) {
+    state.tutorialStep = "math";
+    hideTutorial();
+  }
   renderSpecialNutrient();
   harvestAnimationCount += harvestedItems.length;
   harvestedItems.forEach(playHarvestAnimation);
@@ -422,6 +479,7 @@ function harvest(indexes) {
     coinChip.classList.remove("coin-bump");
     void coinChip.offsetWidth;
     coinChip.classList.add("coin-bump");
+    if (finishedHarvestGuide) scheduleTutorial(reduceMotion.matches ? 80 : 220);
   }, animationTime);
 }
 
@@ -581,10 +639,18 @@ function finishChallenge() {
 }
 
 document.querySelector("#mathButton").addEventListener("click", function () {
+  if (state.tutorialStep === "math") {
+    state.tutorialStep = "equipment";
+    hideTutorial();
+    save();
+  }
   challenge = { answered: 0, correct: 0 }; showQuestion(); mathDialog.showModal();
 });
 document.querySelector("#mathClose").addEventListener("click", function () { mathDialog.close(); });
-document.querySelector("#resultClose").addEventListener("click", function () { document.querySelector("#resultDialog").close(); });
+document.querySelector("#resultClose").addEventListener("click", function () {
+  document.querySelector("#resultDialog").close();
+  if (state.tutorialStep === "equipment") scheduleTutorial(180);
+});
 
 const equipmentDialog = document.querySelector("#equipmentDialog");
 function renderEquipment() {
@@ -620,7 +686,11 @@ function renderEquipment() {
   }
   document.querySelector("#equipmentFeedback").textContent = complete ? "せつび かんせい！ コインで レア栄養剤が つかえます" : "";
 }
-document.querySelector("#equipmentButton").addEventListener("click", function () { renderEquipment(); equipmentDialog.showModal(); });
+document.querySelector("#equipmentButton").addEventListener("click", function () {
+  if (state.tutorialStep === "equipment") finishTutorial();
+  renderEquipment();
+  equipmentDialog.showModal();
+});
 document.querySelector("#equipmentClose").addEventListener("click", function () { equipmentDialog.close(); });
 document.querySelector("#equipmentGrid").addEventListener("click", function (event) {
   const button = event.target.closest(".equipment-upgrade");
@@ -729,7 +799,10 @@ document.querySelector("#zukanClose").addEventListener("click", function () { zu
 [mathDialog, equipmentDialog, zukanDialog, resetDialog].forEach(function (dialog) {
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
 });
-mathDialog.addEventListener("close", function () { clearTimeout(nextTimer); });
+mathDialog.addEventListener("close", function () {
+  clearTimeout(nextTimer);
+  if (state.tutorialStep === "equipment") scheduleTutorial(180);
+});
 render();
 setInterval(function () { if (!harvestAnimationCount) render(); }, 1000);
 
