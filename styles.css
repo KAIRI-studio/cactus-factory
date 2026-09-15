@@ -999,3 +999,29 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   0%,100%{background:#fff3cb}
   45%{background:#fffbdc}
 }
+
+
+/* First-play guide */
+.onboarding-tip{position:absolute;z-index:30;display:grid;grid-template-columns:48px minmax(0,1fr) auto;align-items:center;gap:8px;width:min(330px,calc(100% - 28px));min-height:76px;padding:9px 9px 9px 8px;border:3px solid #183a30;border-radius:19px;background:linear-gradient(155deg,#fffbed,#f3ead0);box-shadow:0 7px 0 #16372d,0 15px 28px #061a146b,inset 0 1px #fff;color:#203a31;pointer-events:none}
+.onboarding-tip[hidden]{display:none!important}
+.onboarding-tip::after{content:"";position:absolute;width:18px;height:18px;border-right:3px solid #183a30;border-bottom:3px solid #183a30;background:#f3ead0;transform:rotate(45deg)}
+.onboarding-tip.stage-harvest{top:25.4%;left:50%;transform:translateX(-50%)}
+.onboarding-tip.stage-harvest::after{left:27%;bottom:-12px}
+.onboarding-tip.stage-math,.onboarding-tip.stage-equipment{bottom:112px}
+.onboarding-tip.stage-math{left:50%;transform:translateX(-50%)}
+.onboarding-tip.stage-math::after{right:48%;bottom:-12px}
+.onboarding-tip.stage-equipment{left:14px}
+.onboarding-tip.stage-equipment::after{left:14%;bottom:-12px}
+.onboarding-mascot{display:grid;place-items:center;width:46px;height:46px;border:2px solid #79a58e;border-radius:14px;background:#dcebdd;overflow:hidden}
+.onboarding-mascot img{width:38px;height:42px;object-fit:contain;filter:drop-shadow(0 2px 0 #244d3d42)}
+.onboarding-copy{display:flex;min-width:0;flex-direction:column;gap:2px}
+.onboarding-copy small{align-self:flex-start;padding:2px 8px;border-radius:999px;background:#e5b943;color:#263c33;font-size:10px;font-weight:900;letter-spacing:.08em}
+.onboarding-copy b{font-size:14px;line-height:1.35;letter-spacing:.025em}
+.onboarding-skip{align-self:start;padding:5px 7px;border:1px solid #9db5a9;border-radius:9px;background:#fffdf3;color:#60736b;font:700 10px/1 "Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;pointer-events:auto}
+.console-button.tutorial-focus{z-index:2;outline:4px solid #ffe171;outline-offset:-2px;animation:tutorial-console-pulse 1.25s ease-in-out infinite}
+.nursery-pot.tutorial-focus{z-index:999!important}
+.nursery-pot.tutorial-focus .sprite-crop{filter:drop-shadow(0 0 4px #fff6bd) drop-shadow(0 0 9px #ffd64f);animation:tutorial-cactus-pulse 1.2s ease-in-out infinite}
+@keyframes tutorial-console-pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.13)}}
+@keyframes tutorial-cactus-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+@media (max-height:700px){.onboarding-tip{min-height:68px;grid-template-columns:42px minmax(0,1fr) auto}.onboarding-mascot{width:40px;height:40px}.onboarding-mascot img{width:34px;height:37px}.onboarding-tip.stage-harvest{top:24.5%}.onboarding-tip.stage-math,.onboarding-tip.stage-equipment{bottom:98px}}
+@media (prefers-reduced-motion:reduce){.console-button.tutorial-focus,.nursery-pot.tutorial-focus .sprite-crop{animation:none!important}}
