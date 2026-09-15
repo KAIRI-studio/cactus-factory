@@ -496,3 +496,32 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   }
   .answer-celebration img{width:39px;height:46px}
 }
+
+
+/* v154: make the legendary cactus the strongest visual in the collection */
+.zukan-entry.rarity-legend:last-child{
+  min-height:92px;
+  padding-top:8px;
+  padding-bottom:8px;
+}
+.zukan-entry.rarity-legend:last-child .zukan-picture{
+  position:relative;
+  z-index:1;
+  flex-basis:86px;
+  height:76px;
+  overflow:visible;
+}
+.zukan-entry.rarity-legend:last-child .zukan-picture img{
+  max-width:78px;
+  max-height:78px;
+  transform:scale(1.18);
+  transform-origin:center;
+  filter:drop-shadow(0 3px 0 #512b2740);
+}
+.zukan-entry.rarity-legend:last-child .zukan-info b{font-size:16px}
+.zukan-hero img[src*="cactus-legend-sage"]{
+  width:104px;
+  height:104px;
+  transform:scale(1.12);
+  transform-origin:center;
+}
