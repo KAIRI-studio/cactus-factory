@@ -2,15 +2,15 @@ const POT_COUNT = 24;
 const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
-  { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10 },
-  { id: "rare", name: "おはなサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-rare-flower.png", reward: 20 },
-  { id: "super", name: "うさみみサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-super-bunny.png", reward: 20 },
-  { id: "legend", name: "ほしのサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-star-v3.webp", reward: 20 },
-  { id: "superSuit", name: "エリートサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-suit.png?v=2", reward: 50 },
-  { id: "superRed", name: "あかサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-red.png", reward: 50 },
-  { id: "superBlue", name: "あおサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-blue.png", reward: 50 },
-  { id: "superYellow", name: "きいろサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-yellow.png", reward: 50 },
-  { id: "legendSage", name: "せんにんサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-legend-sage-v5.webp", reward: 150 },
+  { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10, description: "げんきで まじめな サボテンこうじょうの きほんけい。" },
+  { id: "rare", name: "おはなサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-rare-flower.png", reward: 20, description: "あたまに さいた おはなが じまんの おしゃれもの。" },
+  { id: "super", name: "うさみみサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-super-bunny.png", reward: 20, description: "おおきな みみで こうじょうの かぜを かんじとる。" },
+  { id: "legend", name: "ほしのサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-star-v3.webp", reward: 20, description: "ほしの ひかりを あつめて きらきら そだつ。" },
+  { id: "superSuit", name: "エリートサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-suit.png?v=2", reward: 50, description: "けいさんも しごとも スマートに こなす エリート。" },
+  { id: "superRed", name: "あかサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-red.png", reward: 50, description: "あつい きもちを かくさない まっすぐな せいかく。" },
+  { id: "superBlue", name: "あおサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-blue.png", reward: 50, description: "いつでも おちついている クールな サボテン。" },
+  { id: "superYellow", name: "きいろサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-yellow.png", reward: 50, description: "まわりを あかるくする こうじょうの ムードメーカー。" },
+  { id: "legendSage", name: "せんにんサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-legend-sage-v5.webp", reward: 150, description: "ながい ときを いきる サボテンたちの せんにん。" },
 ];
 
 const RARE_CACTUS_IDS = ["rare", "super", "legend"];
@@ -667,24 +667,53 @@ document.querySelector("#resetConfirmButton").addEventListener("click", function
 });
 
 const zukanDialog = document.querySelector("#zukanDialog");
+function zukanGroup(type) {
+  if (type.rarityKey === "legend") return { key: "legend", name: "レジェンド", english: "LEGEND ARCHIVE" };
+  if (type.rarityKey === "super") return { key: "super", name: "スーパーレア", english: "SPECIAL SPECIMENS" };
+  return { key: "standard", name: "ノーマル・レア", english: "STANDARD COLLECTION" };
+}
+
+function showZukanHero(type, count, entry) {
+  const hero = document.querySelector(".zukan-hero");
+  hero.className = "zukan-hero rarity-" + type.rarityKey + (count ? "" : " not-found");
+  document.querySelector("#zukanHeroImage").src = type.sprite;
+  document.querySelector("#zukanHeroImage").alt = count ? type.name : "";
+  document.querySelector("#zukanHeroRarity").textContent = type.rarity;
+  document.querySelector("#zukanHeroName").textContent = count ? type.name : "？？？";
+  document.querySelector("#zukanHeroDescription").textContent = count ? type.description : "まだ はっけんされていない サボテンです。";
+  document.querySelector("#zukanHeroCount").textContent = count + "たい しゅうかく";
+  document.querySelectorAll(".zukan-entry").forEach(function (item) {
+    const selected = item === entry;
+    item.classList.toggle("selected", selected);
+    item.setAttribute("aria-pressed", String(selected));
+  });
+  hero.classList.remove("is-switching");
+  requestAnimationFrame(function () { hero.classList.add("is-switching"); });
+}
+
 function renderZukan() {
   const grid = document.querySelector("#zukanGrid");
   grid.replaceChildren();
   const foundCount = CACTUS_TYPES.filter(function (type) { return (state.collections[type.id] || 0) > 0; }).length;
   document.querySelector("#zukanDialog .collection-progress").textContent = foundCount + " / " + CACTUS_TYPES.length;
+  let currentGroup = "";
   CACTUS_TYPES.forEach(function (type) {
     const count = state.collections[type.id] || 0;
+    const group = zukanGroup(type);
+    if (group.key !== currentGroup) {
+      currentGroup = group.key;
+      const heading = document.createElement("div");
+      heading.className = "zukan-section-title group-" + group.key;
+      heading.innerHTML = "<b>" + group.name + "</b><small>" + group.english + "</small>";
+      grid.append(heading);
+    }
     const entry = document.createElement("button");
     entry.className = "zukan-entry rarity-" + type.rarityKey + (count ? " found" : " not-found");
     entry.type = "button";
+    entry.dataset.cactusId = type.id;
+    entry.setAttribute("aria-pressed", "false");
     entry.innerHTML = '<span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい</em></span>';
-    entry.addEventListener("click", function () {
-      const hero = document.querySelector(".zukan-hero");
-      hero.className = "zukan-hero rarity-" + type.rarityKey + (count ? "" : " not-found");
-      document.querySelector("#zukanHeroImage").src = type.sprite;
-      document.querySelector("#zukanHeroRarity").textContent = type.rarity;
-      document.querySelector("#zukanHeroName").textContent = count ? type.name : "？？？";
-    });
+    entry.addEventListener("click", function () { showZukanHero(type, count, entry); });
     grid.append(entry);
   });
 }
@@ -692,10 +721,8 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   renderZukan();
   const firstFound = CACTUS_TYPES.find(function (type) { return (state.collections[type.id] || 0) > 0; }) || CACTUS_TYPES[0];
   const firstFoundCount = state.collections[firstFound.id] || 0;
-  document.querySelector(".zukan-hero").className = "zukan-hero rarity-" + firstFound.rarityKey + (firstFoundCount ? "" : " not-found");
-  document.querySelector("#zukanHeroImage").src = firstFound.sprite;
-  document.querySelector("#zukanHeroRarity").textContent = firstFound.rarity;
-  document.querySelector("#zukanHeroName").textContent = firstFoundCount ? firstFound.name : "？？？";
+  const firstEntry = document.querySelector('.zukan-entry[data-cactus-id="' + firstFound.id + '"]');
+  showZukanHero(firstFound, firstFoundCount, firstEntry);
   zukanDialog.showModal();
 });
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
