@@ -149,6 +149,8 @@ function showTutorial() {
   if (!copy || game.getAttribute("aria-hidden") === "true" || document.querySelector("dialog[open]")) return;
   onboardingStep.textContent = copy.number;
   onboardingText.textContent = copy.text;
+  onboardingSkip.textContent = step === "equipment" ? "とじる" : "つぎへ";
+  onboardingSkip.setAttribute("aria-label", step === "equipment" ? "はじめてガイドを閉じる" : "つぎのガイドを見る");
   onboardingTip.className = "onboarding-tip stage-" + step;
   onboardingTip.hidden = false;
   const target = document.querySelector(copy.target);
@@ -166,7 +168,19 @@ function finishTutorial() {
   save();
 }
 
-onboardingSkip.addEventListener("click", hideTutorial);
+function showNextTutorialTip() {
+  const nextStep = { harvest: "math", math: "equipment", equipment: "done" }[state.tutorialStep];
+  if (!nextStep || nextStep === "done") {
+    finishTutorial();
+    return;
+  }
+  state.tutorialStep = nextStep;
+  hideTutorial();
+  save();
+  scheduleTutorial(140);
+}
+
+onboardingSkip.addEventListener("click", showNextTutorialTip);
 
 if (new URLSearchParams(window.location.search).get("debug") === "1") {
   document.body.classList.add("debug-mode");
