@@ -806,3 +806,78 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @media(prefers-reduced-motion:reduce){
   .zukan-hero.is-switching .zukan-hero-stage img{animation:none!important}
 }
+
+
+/* v156: collection legibility and per-art optical sizing */
+.zukan-hero{
+  flex-basis:176px;
+  min-height:176px;
+  padding-bottom:13px;
+}
+.zukan-hero-copy{align-content:center}
+.zukan-hero-copy em{
+  display:inline-block;
+  margin-top:2px;
+  padding:4px 10px;
+  color:#42594f;
+  font-size:11px;
+  line-height:1.35;
+  white-space:nowrap;
+}
+.zukan-entry{
+  height:142px;
+  min-height:142px;
+  grid-template-rows:74px 1fr;
+  align-items:stretch;
+  overflow:hidden;
+}
+.zukan-entry .zukan-info{
+  align-content:start;
+  min-height:48px;
+}
+.zukan-entry .zukan-info em{
+  display:block;
+  margin-top:2px;
+  color:#52685e;
+  font-size:10px;
+  font-weight:900;
+  line-height:1.3;
+}
+.zukan-entry .zukan-picture img[src*="cactus-super-red"],
+.zukan-entry .zukan-picture img[src*="cactus-super-yellow"]{
+  transform:scale(.82);
+  transform-origin:center;
+}
+.zukan-hero-stage img[src*="cactus-super-red"],
+.zukan-hero-stage img[src*="cactus-super-yellow"]{
+  transform:scale(.84);
+  transform-origin:center;
+}
+.zukan-hero-stage img[src*="cactus-legend-sage"]{
+  transform:translateX(-12px) scale(1.08);
+  transform-origin:center;
+}
+.zukan-hero.is-switching .zukan-hero-stage img[src*="cactus-super-red"],
+.zukan-hero.is-switching .zukan-hero-stage img[src*="cactus-super-yellow"]{
+  animation-name:zukan-color-pop;
+}
+@keyframes zukan-color-pop{
+  0%{transform:translateY(7px) scale(.72)}
+  65%{transform:translateY(-5px) scale(.88)}
+  100%{transform:translateY(0) scale(.84)}
+}
+@keyframes zukan-legend-pop{
+  0%{transform:translateX(-12px) translateY(7px) scale(.92)}
+  65%{transform:translateX(-12px) translateY(-6px) scale(1.14)}
+  100%{transform:translateX(-12px) translateY(0) scale(1.08)}
+}
+.zukan-entry.rarity-legend:last-child{
+  height:118px;
+  min-height:118px;
+  overflow:visible;
+}
+@media(max-width:360px){
+  .zukan-hero{flex-basis:168px;min-height:168px;padding-bottom:11px}
+  .zukan-entry{height:138px;min-height:138px}
+  .zukan-entry.rarity-legend:last-child{height:114px;min-height:114px}
+}
