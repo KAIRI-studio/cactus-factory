@@ -422,3 +422,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .answer-celebration .answer-symbol{width:49px;height:49px;font-size:38px}
   .answer-celebration b{font-size:21px}.answer-celebration img{width:43px;height:56px}
 }
+
+/* v151: shake the inner console without moving the dialog viewport */
+.math-card.answer-wrong{animation:none}
+.math-card.answer-wrong .problem,.math-card.answer-wrong .answers{animation:math-wrong-shake .42s ease}
