@@ -1035,3 +1035,203 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .sound-setting button{min-width:51px;padding:7px 10px;border:2px solid #28654f;border-radius:999px;background:#378262;color:#fffdf0;font-weight:900;font-size:11px;box-shadow:0 2px 0 #173f31}
 .sound-setting button.is-off{border-color:#81958c;background:#e0e6e1;color:#687a72;box-shadow:0 2px 0 #899b92}
 .sound-setting button:active{transform:translateY(2px);box-shadow:none}
+
+
+/* v164: equipment uses the same illustrations as the greenhouse */
+.equipment-grid{gap:12px}
+.equipment-item{
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:92px auto 7px 38px;
+  min-height:218px;
+  gap:7px 8px;
+  padding:10px;
+}
+.equipment-visual{
+  position:relative;
+  grid-column:1/-1;
+  display:grid;
+  place-items:center;
+  width:100%;
+  height:92px;
+  overflow:hidden;
+  border:2px solid #274d40;
+  border-radius:12px;
+  background:linear-gradient(180deg,#f4efcf 0 48%,#d9e5d8 49% 100%);
+  box-shadow:inset 0 0 0 2px #ffffffa3,0 3px 0 #82998d;
+}
+.equipment-visual::after{
+  content:"";
+  position:absolute;
+  right:8px;
+  bottom:7px;
+  left:8px;
+  height:2px;
+  border-radius:99px;
+  background:#75958480;
+}
+.equipment-actual-art{
+  position:relative;
+  z-index:1;
+  display:block;
+  width:94%;
+  height:86px;
+  overflow:visible;
+}
+.equipment-visual.is-blueprint{
+  background:repeating-linear-gradient(0deg,#e4e8df 0 17px,#d3ddd4 18px 19px);
+}
+.equipment-visual.is-blueprint .equipment-actual-art{filter:grayscale(1);opacity:.24}
+.equipment-visual.is-blueprint::before{
+  content:"まだ せつびが ありません";
+  position:absolute;
+  z-index:2;
+  padding:4px 7px;
+  border:1px dashed #657b70;
+  border-radius:7px;
+  background:#f3f3e9db;
+  color:#52655b;
+  font-size:8px;
+  font-weight:900;
+}
+.equipment-level-badge{align-self:start;position:absolute;top:17px;right:17px;z-index:3}
+.equipment-title{grid-column:1/-1;min-height:35px}
+.equipment-title b{font-size:14px}
+.equipment-title small{font-size:9px}
+.equipment-item.completed .equipment-visual{border-color:#9d7418;background:linear-gradient(180deg,#fff2b9 0 48%,#e8ddba 49% 100%)}
+.equipment-item.completed .equipment-visual::after{background:#a97f245e}
+@media(max-width:360px){
+  .equipment-item{grid-template-rows:84px auto 7px 36px;min-height:205px;padding:8px}
+  .equipment-visual{height:84px}
+  .equipment-actual-art{height:78px}
+}
+
+/* v164: field-guide book */
+#zukanDialog{border:0;border-radius:18px;background:#274b3d;box-shadow:0 12px 0 #132e25,0 28px 70px #06130fba}
+.zukan-card{
+  position:relative;
+  padding:22px 16px 17px 25px;
+  border:5px solid #315c49;
+  border-radius:16px;
+  background:
+    repeating-linear-gradient(0deg,transparent 0 27px,#9b8d6921 28px 29px),
+    linear-gradient(90deg,#e4d7b4 0 9px,#f8f1d9 10px 100%);
+  box-shadow:inset 5px 0 0 #b7a77c,inset 8px 0 0 #fdf6df,inset 0 0 24px #846e3930;
+  text-align:left;
+}
+.zukan-card::before{
+  content:"";
+  position:absolute;
+  z-index:0;
+  top:0;
+  bottom:0;
+  left:16px;
+  width:2px;
+  background:#b34d4280;
+  box-shadow:4px 0 0 #b34d4224;
+}
+.zukan-card>*{position:relative;z-index:1}
+.zukan-book-title{display:grid;justify-items:start;gap:1px;min-height:67px;padding:3px 80px 7px 8px;border-bottom:3px double #345c49}
+.zukan-book-title small{color:#8a6b34;font-size:8px;font-weight:900;letter-spacing:.16em}
+.zukan-book-title h2{margin:1px 0!important;color:#183b30;font-size:24px;letter-spacing:.06em}
+.zukan-book-title span{color:#728076;font-size:9px;font-weight:900;letter-spacing:.08em}
+.zukan-card>.close{top:10px;right:10px;border:3px solid #173c31;background:#f5e9c8;box-shadow:0 4px 0 #927b4f;color:#173c31}
+.collection-progress{top:65px;right:17px;border:2px solid #907748;background:#fff8df;box-shadow:0 3px 0 #b8a377;color:#3b554a}
+.zukan-hero{
+  flex-basis:184px;
+  min-height:184px;
+  margin:10px 2px 14px;
+  padding:10px 12px 10px 7px;
+  border:3px double #496c5d!important;
+  border-radius:5px;
+  background:#f9f2d9!important;
+  box-shadow:3px 4px 0 #a8996f!important;
+}
+.zukan-hero::before{
+  left:7px;
+  top:6px;
+  width:118px;
+  height:154px;
+  background:radial-gradient(ellipse,#7a9a8560,transparent 64%);
+  clip-path:none;
+}
+.zukan-hero::after{
+  content:"OBSERVATION RECORD";
+  inset:auto 10px 8px auto;
+  width:auto;
+  padding:2px 5px;
+  background:none;
+  color:#9c8a60;
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:.13em;
+  transform:none;
+  animation:none;
+}
+.zukan-hero-stage::after{border-width:2px;border-color:#496c5d;background:#c0c8a9;box-shadow:0 4px 0 #7e896f}
+.zukan-hero-copy{grid-template-columns:auto 1fr;align-content:center;column-gap:6px}
+.zukan-hero-number{grid-column:1/-1;color:#9a7441;font-size:10px;font-weight:900;letter-spacing:.1em}
+.zukan-hero-copy small{grid-column:1/2;border-radius:4px;background:#385f4e!important}
+.zukan-hero-copy b{grid-column:1/-1;color:#173b30}
+.zukan-hero-copy p,.zukan-hero-copy em{grid-column:1/-1}
+.zukan-hero-copy p{color:#51655b}
+.zukan-hero-copy em{border-color:#9e8d62;background:#fff8e1}
+.zukan-grid{gap:11px 9px;padding:0 2px 22px}
+.zukan-section-title{
+  min-height:32px;
+  margin-top:4px;
+  padding:7px 8px 4px;
+  border-bottom:3px double #58786a;
+  background:#f3ead0cc;
+}
+.zukan-section-title b{font-size:14px}
+.zukan-section-title small{color:#8e7b53}
+.zukan-entry{
+  position:relative;
+  height:150px;
+  min-height:150px;
+  grid-template-rows:78px 1fr;
+  padding:16px 7px 8px;
+  border:2px solid #7c8e80;
+  border-radius:5px;
+  background:#fbf4dd;
+  box-shadow:3px 4px 0 #b6a77d;
+}
+.zukan-entry-number{
+  position:absolute;
+  top:5px;
+  left:7px;
+  color:#93784b;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.08em;
+}
+.zukan-entry .zukan-picture{
+  height:78px;
+  border:0;
+  border-bottom:1px solid #b3a67e;
+  border-radius:0;
+  background:radial-gradient(ellipse,#b6c8b285,transparent 67%);
+  box-shadow:none;
+}
+.zukan-entry .zukan-info small{border-radius:3px}
+.zukan-entry .zukan-info b{font-size:12px}
+.zukan-entry .zukan-info em{font-size:8px}
+.zukan-entry.selected{transform:translateY(-2px);box-shadow:3px 5px 0 #526e60,0 0 0 3px #e5bd45}
+.zukan-entry.rarity-super{background:#fff3cd}
+.zukan-entry.rarity-legend:last-child{
+  min-height:126px;
+  height:126px;
+  padding-top:16px;
+  border-color:#a73d33;
+  background:#f4d2c8;
+  box-shadow:3px 4px 0 #a66e60;
+}
+.zukan-entry.rarity-legend:last-child .zukan-picture{background:radial-gradient(ellipse,#d8aa9f82,transparent 68%)}
+.zukan-entry.rarity-legend:last-child .zukan-info small{background:#a8322b}
+@media(max-width:360px){
+  .zukan-card{padding-left:22px}
+  .zukan-book-title{padding-right:72px}
+  .zukan-hero{flex-basis:176px;min-height:176px}
+  .zukan-entry{height:146px;min-height:146px}
+  .zukan-entry.rarity-legend:last-child{height:122px;min-height:122px}
+}
