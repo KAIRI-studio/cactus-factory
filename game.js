@@ -61,6 +61,7 @@ function loadState() {
       if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
       saved.rarityVersion = 5;
       saved.specialSeedQueued = Boolean(saved.specialSeedQueued);
+      if (typeof saved.soundEnabled !== "boolean") saved.soundEnabled = true;
       if (!["harvest", "math", "equipment", "done"].includes(saved.tutorialStep)) {
         saved.tutorialStep = (Number(saved.harvested) || 0) > 0 ? "done" : "harvest";
       }
@@ -95,6 +96,7 @@ function createInitialState() {
     equipment: { light: 0, mist: 0, air: 0, sensor: 0 },
     harvested: 0,
     tutorialStep: "harvest",
+    soundEnabled: true,
     visualVersion: 4,
     rarityVersion: 5,
     collections: { normal: 0, rare: 0, super: 0, legend: 0 },
@@ -120,11 +122,79 @@ const brandSplash = document.querySelector("#brandSplash");
 const titleScreen = document.querySelector("#titleScreen");
 const startGameButton = document.querySelector("#startGameButton");
 const screenShutter = document.querySelector("#screenShutter");
+const soundToggle = document.querySelector("#soundToggle");
 const onboardingTip = document.querySelector("#onboardingTip");
 const onboardingStep = document.querySelector("#onboardingStep");
 const onboardingText = document.querySelector("#onboardingText");
 const onboardingSkip = document.querySelector("#onboardingSkip");
 let tutorialTimer;
+let audioContext;
+
+function getAudioContext() {
+  if (!state.soundEnabled) return null;
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return null;
+  if (!audioContext) audioContext = new AudioContextClass();
+  if (audioContext.state === "suspended") audioContext.resume().catch(function () {});
+  return audioContext;
+}
+
+function soundTone(frequency, delay, duration, volume, type, endFrequency) {
+  const context = getAudioContext();
+  if (!context) return;
+  const start = context.currentTime + (delay || 0);
+  const oscillator = context.createOscillator();
+  const gain = context.createGain();
+  oscillator.type = type || "sine";
+  oscillator.frequency.setValueAtTime(frequency, start);
+  if (endFrequency) oscillator.frequency.exponentialRampToValueAtTime(endFrequency, start + duration);
+  gain.gain.setValueAtTime(.0001, start);
+  gain.gain.exponentialRampToValueAtTime(volume || .035, start + .012);
+  gain.gain.exponentialRampToValueAtTime(.0001, start + duration);
+  oscillator.connect(gain);
+  gain.connect(context.destination);
+  oscillator.start(start);
+  oscillator.stop(start + duration + .02);
+}
+
+function playSound(name, detail) {
+  if (!state.soundEnabled) return;
+  if (name === "start") {
+    soundTone(330, 0, .16, .025, "sine", 440);
+    soundTone(495, .11, .23, .025, "sine", 660);
+  } else if (name === "harvest") {
+    soundTone(360, 0, .12, .03, "triangle", 620);
+    soundTone(760, .055, .10, .018, "sine", 940);
+  } else if (name === "correct") {
+    [523, 659, 784].forEach(function (note, index) { soundTone(note, index * .065, .16, .027, "sine"); });
+  } else if (name === "wrong") {
+    soundTone(230, 0, .18, .025, "triangle", 185);
+    soundTone(174, .13, .20, .021, "sine");
+  } else if (name === "upgrade") {
+    soundTone(150, 0, .10, .027, "square", 110);
+    soundTone(440, .09, .18, .022, "sine", 660);
+    soundTone(880, .20, .22, .018, "sine");
+  } else if (name === "result") {
+    [392, 523, 659, 784].forEach(function (note, index) { soundTone(note, index * .075, .22, .024, "sine"); });
+  } else if (name === "rare") {
+    const notes = detail === "legend" ? [392, 523, 659, 784, 1047] : detail === "super" ? [440, 554, 659, 880] : [440, 659, 880];
+    notes.forEach(function (note, index) { soundTone(note, index * .075, .24, detail === "legend" ? .028 : .022, "sine"); });
+  }
+}
+
+function renderSoundSetting() {
+  if (!soundToggle) return;
+  soundToggle.textContent = state.soundEnabled ? "ON" : "OFF";
+  soundToggle.classList.toggle("is-off", !state.soundEnabled);
+  soundToggle.setAttribute("aria-pressed", String(state.soundEnabled));
+}
+
+soundToggle.addEventListener("click", function () {
+  state.soundEnabled = !state.soundEnabled;
+  renderSoundSetting();
+  save();
+  if (state.soundEnabled) playSound("correct");
+});
 
 const TUTORIAL_COPY = {
   harvest: { number: "1 / 3", text: "サボテンを タップして しゅうかく！", target: ".nursery-pot.ready" },
@@ -212,7 +282,10 @@ function enterFactory() {
   }, reduceMotion.matches ? 0 : 320);
 }
 
-startGameButton.addEventListener("click", enterFactory);
+startGameButton.addEventListener("click", function () {
+  playSound("start");
+  enterFactory();
+});
 window.setTimeout(showTitleScreen, reduceMotion.matches ? 120 : 3000);
 const EQUIPMENT = [
   { key: "light", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="15" r="6"/><path d="M16 3v4M16 23v4M4 15h4M24 15h4M7.5 6.5l3 3M21.5 20.5l3 3M24.5 6.5l-3 3M10.5 20.5l-3 3"/></svg>', name: "そだてるライト", copy: "ランプが 1とう → 3とう → 5とう" },
@@ -441,6 +514,7 @@ function playNextRarityReveal() {
   rarityRevealActive = true;
   const item = rarityRevealQueue.shift();
   const type = cactusType(item.cactusId);
+  playSound("rare", type.rarityKey);
   const reveal = document.createElement("div");
   reveal.className = "rarity-reveal " + type.rarityKey;
   reveal.setAttribute("aria-hidden", "true");
@@ -471,6 +545,7 @@ function harvest(indexes) {
     pot.ready = false; pot.stage = -1; pot.startedAt = Date.now(); pot.generation = (pot.generation || 0) + 1;
   });
   if (!harvestedItems.length) return;
+  playSound("harvest");
   const finishedHarvestGuide = state.tutorialStep === "harvest";
   if (finishedHarvestGuide) {
     state.tutorialStep = "math";
@@ -614,6 +689,7 @@ function answerQuestion(correct, button, correctValue) {
   answerSymbol.textContent = "";
   answerCelebrationText.textContent = correct ? "せいかい！" : "ちがうよ";
   answerCelebration.setAttribute("aria-label", correct ? "せいかい！" : "ちがうよ");
+  playSound(correct ? "correct" : "wrong");
   if (correct) {
     challenge.correct += 1;
     button.classList.add("correct");
@@ -649,6 +725,7 @@ function finishChallenge() {
   render();
   document.querySelector("#resultTitle").textContent = "10もんちゅう " + challenge.correct + "もんせいかい";
   document.querySelector("#grownCount").textContent = Math.min(target, candidates.length) + "こ";
+  playSound("result");
   document.querySelector("#resultDialog").showModal();
 }
 
@@ -671,6 +748,7 @@ function renderEquipment() {
   const grid = document.querySelector("#equipmentGrid");
   grid.innerHTML = "";
   const total = equipmentTotal();
+  renderSoundSetting();
   document.querySelector("#equipmentTotalText").textContent = total + " / 12";
   document.querySelector("#equipmentMeterFill").style.width = (total / 12 * 100) + "%";
   EQUIPMENT.forEach(function (item) {
@@ -714,6 +792,7 @@ document.querySelector("#equipmentGrid").addEventListener("click", function (eve
   const cost = equipmentUpgradeCost(level);
   if (level >= 3 || state.coins < cost) return;
   state.coins -= cost; state.equipment[key] += 1;
+  playSound("upgrade");
   game.classList.remove("facility-installing");
   void game.offsetWidth;
   game.classList.add("facility-installing");
@@ -724,6 +803,7 @@ document.querySelector("#specialSeedButton").addEventListener("click", function 
   if (equipmentTotal() < 12 || nutrientIsInUse() || state.coins < 300) return;
   state.specialSeedQueued = true;
   state.coins -= 300;
+  playSound("upgrade");
   render();
   renderEquipment();
 });
