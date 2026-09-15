@@ -2,7 +2,7 @@ const POT_COUNT = 24;
 const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
-  { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10, description: "げんきで まじめな サボテンこうじょうの きほんけい。" },
+  { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10, description: "いつも げんきで にこにこ。みんなの なかま。" },
   { id: "rare", name: "おはなサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-rare-flower.png", reward: 20, description: "あたまに さいた おはなが じまんの おしゃれもの。" },
   { id: "super", name: "うさみみサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-super-bunny.png", reward: 20, description: "おおきな みみで こうじょうの かぜを かんじとる。" },
   { id: "legend", name: "ほしのサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-star-v3.webp", reward: 20, description: "ほしの ひかりを あつめて きらきら そだつ。" },
