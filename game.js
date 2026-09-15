@@ -756,7 +756,20 @@ function renderEquipment() {
     const cost = equipmentUpgradeCost(level);
     const card = document.createElement("article");
     card.className = "equipment-item" + (level === 0 ? " uninstalled" : "") + (level >= 3 ? " completed" : "");
-    card.innerHTML = '<div class="equipment-icon">' + item.icon + '</div><span class="equipment-level-badge">LV.' + level + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + item.copy + '</small></div><div class="level-dots" aria-label="レベル ' + level + '"><i></i><i></i><i></i></div>';
+    card.innerHTML = '<div class="equipment-visual' + (level === 0 ? ' is-blueprint' : '') + '"></div><span class="equipment-level-badge">' + (level === 0 ? 'みせっち' : 'LV.' + level) + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + item.copy + '</small></div><div class="level-dots" aria-label="レベル ' + level + '"><i></i><i></i><i></i></div>';
+    const visual = card.querySelector(".equipment-visual");
+    const sourceArt = document.querySelector(".facility-" + item.key);
+    if (sourceArt) {
+      const actualArt = sourceArt.cloneNode(true);
+      actualArt.setAttribute("class", "equipment-actual-art equipment-art-" + item.key);
+      actualArt.removeAttribute("style");
+      actualArt.querySelectorAll(".facility-stage").forEach(function (stage) {
+        stage.style.display = stage.classList.contains("stage-" + Math.max(1, level)) ? "inline" : "none";
+      });
+      visual.append(actualArt);
+    } else {
+      visual.innerHTML = '<span class="equipment-icon">' + item.icon + '</span>';
+    }
     card.querySelectorAll(".level-dots i").forEach(function (dot, index) { if (index < level) dot.classList.add("on"); });
     const button = document.createElement("button");
     button.type = "button";
@@ -842,6 +855,7 @@ function showZukanHero(type, count, entry) {
   hero.className = "zukan-hero rarity-" + type.rarityKey + (count ? "" : " not-found");
   document.querySelector("#zukanHeroImage").src = type.sprite;
   document.querySelector("#zukanHeroImage").alt = count ? type.name : "";
+  document.querySelector("#zukanHeroNumber").textContent = "No." + String(CACTUS_TYPES.indexOf(type) + 1).padStart(2, "0");
   document.querySelector("#zukanHeroRarity").textContent = type.rarity;
   document.querySelector("#zukanHeroName").textContent = count ? type.name : "？？？";
   document.querySelector("#zukanHeroDescription").textContent = count ? type.description : "まだ はっけんされていない サボテンです。";
@@ -861,7 +875,7 @@ function renderZukan() {
   const foundCount = CACTUS_TYPES.filter(function (type) { return (state.collections[type.id] || 0) > 0; }).length;
   document.querySelector("#zukanDialog .collection-progress").textContent = foundCount + " / " + CACTUS_TYPES.length;
   let currentGroup = "";
-  CACTUS_TYPES.forEach(function (type) {
+  CACTUS_TYPES.forEach(function (type, typeIndex) {
     const count = state.collections[type.id] || 0;
     const group = zukanGroup(type);
     if (group.key !== currentGroup) {
@@ -876,7 +890,7 @@ function renderZukan() {
     entry.type = "button";
     entry.dataset.cactusId = type.id;
     entry.setAttribute("aria-pressed", "false");
-    entry.innerHTML = '<span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい</em></span>';
+    entry.innerHTML = '<span class="zukan-entry-number">No.' + String(typeIndex + 1).padStart(2, "0") + '</span><span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい しゅうかく</em></span>';
     entry.addEventListener("click", function () { showZukanHero(type, count, entry); });
     grid.append(entry);
   });
