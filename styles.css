@@ -374,3 +374,6 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .math-card{padding:18px 16px 20px}.math-machine-icon{flex-basis:47px;height:47px}.math-machine-title h2{font-size:18px}
   .equipment-item{min-height:162px;padding:9px}.equipment-title b{font-size:13px}
 }
+
+/* v148: keep factory dialogs inside the mobile viewport */
+.math-card{width:100%;max-width:100%;overflow:hidden;box-sizing:border-box}
