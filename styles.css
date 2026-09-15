@@ -469,3 +469,30 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .answer-celebration{width:194px;grid-template-columns:1fr;grid-template-rows:58px auto}
   .answer-celebration .answer-symbol{width:54px;height:54px}
 }
+
+
+/* v153: keep the result mark centered and bring back the cactus below it */
+.answer-celebration{
+  grid-template-rows:58px auto 50px;
+  gap:3px;
+  width:206px;
+  min-height:171px;
+  padding:10px 14px 9px;
+}
+.answer-celebration img{
+  display:block;
+  grid-column:1;
+  width:42px;
+  height:50px;
+  margin-top:1px;
+  object-fit:contain;
+  filter:drop-shadow(0 3px 0 #19382c44);
+}
+@media(max-width:360px){
+  .answer-celebration{
+    width:194px;
+    grid-template-rows:54px auto 46px;
+    min-height:160px;
+  }
+  .answer-celebration img{width:39px;height:46px}
+}
