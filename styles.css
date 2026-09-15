@@ -891,3 +891,12 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   65%{transform:translateY(-6px) scale(1.14)}
   100%{transform:translateY(0) scale(1.08)}
 }
+
+
+/* v158: unrevealed specimens must never show their colors or details */
+.zukan-entry.not-found .zukan-picture img,
+.zukan-entry.rarity-legend.not-found:last-child .zukan-picture img,
+.zukan-hero.not-found .zukan-hero-stage img{
+  filter:brightness(0) saturate(0)!important;
+  opacity:.48!important;
+}
