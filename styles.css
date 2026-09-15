@@ -900,3 +900,102 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   filter:brightness(0) saturate(0)!important;
   opacity:.48!important;
 }
+
+
+/* v159: factory production coin counter */
+.coin-chip{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:7px;
+  min-width:118px;
+  height:50px;
+  padding:5px 7px 5px 8px;
+  overflow:hidden;
+  border:3px solid #183a30;
+  border-radius:13px;
+  background:#71937f;
+  box-shadow:0 5px 0 #102d25,0 9px 18px #071b1552,inset 0 2px #b8d1c0,inset 0 -2px #486c59;
+}
+.coin-chip::before,
+.coin-chip::after{
+  content:"";
+  position:absolute;
+  z-index:2;
+  top:4px;
+  width:4px;
+  height:4px;
+  border:1px solid #183a30;
+  border-radius:50%;
+  background:#d3bd75;
+  box-shadow:0 34px 0 #d3bd75;
+}
+.coin-chip::before{left:4px}
+.coin-chip::after{right:4px}
+.coin-chip .coin{
+  position:relative;
+  z-index:1;
+  display:grid;
+  place-items:center;
+  flex:0 0 34px;
+  width:34px;
+  height:34px;
+  border:3px solid #60491a;
+  border-radius:50%;
+  background:#e2b647;
+  box-shadow:inset 0 2px #ffe490,inset 0 -3px #aa7c24,0 2px 0 #28483a;
+}
+.coin-chip .coin svg{
+  width:24px;
+  height:24px;
+  overflow:visible;
+  fill:none;
+  stroke:#344c30;
+  stroke-width:2.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.coin-chip>span:last-child{
+  position:relative;
+  z-index:1;
+  display:grid;
+  flex:1;
+  align-content:center;
+  min-width:62px;
+  height:36px;
+  padding:3px 9px 3px;
+  border:2px solid #294b3f;
+  border-radius:7px;
+  background:#fff3cb;
+  box-shadow:inset 0 2px #fffdf0,inset 0 -2px #cbbd8f;
+  line-height:1;
+  text-align:right;
+}
+.coin-chip small{
+  color:#65736a;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.09em;
+}
+.coin-chip b{
+  color:#20342c;
+  font-size:18px;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:.04em;
+}
+.coin-chip.coin-bump{animation:coin-counter-click .34s cubic-bezier(.2,.8,.25,1)}
+.coin-chip.coin-bump .coin{animation:coin-token-flash .34s ease}
+.coin-chip.coin-bump>span:last-child{animation:coin-screen-flash .34s ease}
+@keyframes coin-counter-click{
+  0%,100%{transform:translateY(0)}
+  45%{transform:translateY(2px)}
+}
+@keyframes coin-token-flash{
+  0%,100%{filter:brightness(1)}
+  45%{filter:brightness(1.28);box-shadow:inset 0 2px #fff6b7,inset 0 -3px #bd8c2c,0 0 10px #ffd867}
+}
+@keyframes coin-screen-flash{
+  0%,100%{background:#fff3cb}
+  45%{background:#fffbdc}
+}
