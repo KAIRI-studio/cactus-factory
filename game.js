@@ -166,7 +166,7 @@ function finishTutorial() {
   save();
 }
 
-onboardingSkip.addEventListener("click", finishTutorial);
+onboardingSkip.addEventListener("click", hideTutorial);
 
 if (new URLSearchParams(window.location.search).get("debug") === "1") {
   document.body.classList.add("debug-mode");
