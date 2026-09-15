@@ -377,3 +377,6 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 
 /* v148: keep factory dialogs inside the mobile viewport */
 .math-card{width:100%;max-width:100%;overflow:hidden;box-sizing:border-box}
+
+/* v149: reserve the calculation status strip for the close control */
+.math-card .challenge-head{margin-right:42px}
