@@ -504,6 +504,10 @@ const mathDialog = document.querySelector("#mathDialog");
 const mathProblem = document.querySelector("#mathProblem");
 const answerGrid = document.querySelector("#answerGrid");
 const mathFeedback = document.querySelector("#mathFeedback");
+const mathCard = document.querySelector("#mathDialog .math-card");
+const answerCelebration = document.querySelector("#answerCelebration");
+const answerCelebrationText = document.querySelector("#answerCelebrationText");
+const answerSymbol = document.querySelector("#answerSymbol");
 const questionNumber = document.querySelector("#questionNumber");
 const score = document.querySelector("#score");
 let challenge = { answered: 0, correct: 0 };
@@ -515,25 +519,43 @@ function showQuestion() {
   score.textContent = "せいかい " + challenge.correct;
   mathProblem.textContent = q.text;
   mathFeedback.textContent = "";
+  mathCard.classList.remove("answer-correct", "answer-wrong");
+  answerCelebration.hidden = true;
+  answerCelebration.className = "answer-celebration";
   answerGrid.replaceChildren();
   q.choices.forEach(function (choice) {
     const button = document.createElement("button");
     button.textContent = choice;
-    button.addEventListener("click", function () { answerQuestion(choice === q.correct, button); });
+    button.addEventListener("click", function () { answerQuestion(choice === q.correct, button, q.correct); });
     answerGrid.append(button);
   });
 }
 
-function answerQuestion(correct, button) {
+function answerQuestion(correct, button, correctValue) {
   answerGrid.querySelectorAll("button").forEach(function (item) { item.disabled = true; });
   challenge.answered += 1;
+  mathCard.classList.remove("answer-correct", "answer-wrong");
+  void mathCard.offsetWidth;
+  mathCard.classList.add(correct ? "answer-correct" : "answer-wrong");
+  answerCelebration.hidden = false;
+  answerCelebration.className = "answer-celebration " + (correct ? "is-correct" : "is-wrong");
+  answerSymbol.textContent = correct ? "○" : "×";
+  answerCelebrationText.textContent = correct ? "せいかい！" : "ちがうよ";
   if (correct) {
-    challenge.correct += 1; button.classList.add("correct"); mathFeedback.textContent = "せいかい！";
+    challenge.correct += 1;
+    button.classList.add("correct");
+    mathFeedback.textContent = "そのちょうし！";
+    if (navigator.vibrate) navigator.vibrate(35);
   } else {
-    button.classList.add("wrong"); mathFeedback.textContent = "おしい！ つぎの もんだいへ";
+    button.classList.add("wrong");
+    answerGrid.querySelectorAll("button").forEach(function (item) {
+      if (Number(item.textContent) === correctValue) item.classList.add("correct-answer");
+    });
+    mathFeedback.textContent = "こたえは " + correctValue;
+    if (navigator.vibrate) navigator.vibrate([35, 45, 35]);
   }
   score.textContent = "せいかい " + challenge.correct;
-  nextTimer = setTimeout(challenge.answered >= 10 ? finishChallenge : showQuestion, 520);
+  nextTimer = setTimeout(challenge.answered >= 10 ? finishChallenge : showQuestion, 1150);
 }
 
 function grownForScore(value) {

@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=145" />
+  <link rel="stylesheet" href="styles.css?v=146" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=143" defer></script>
+  <script src="game.js?v=144" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -139,7 +139,12 @@
         <div><small>CALCULATION UNIT</small><h2>けいさんチャレンジ</h2></div>
       </div>
       <p class="problem" id="mathProblem"></p>
-      <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback"></p>
+      <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback" aria-live="polite"></p>
+      <div class="answer-celebration" id="answerCelebration" role="status" aria-live="assertive" hidden>
+        <span class="answer-symbol" id="answerSymbol"></span>
+        <b id="answerCelebrationText"></b>
+        <img src="assets/cactus-normal.png" alt="" />
+      </div>
     </section></dialog>
     <dialog id="resultDialog"><section class="dialog-card result-card">
       <small>チャレンジけっか</small><h2 id="resultTitle">10もんちゅう 0もんせいかい</h2>
