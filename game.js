@@ -68,7 +68,7 @@ function loadState() {
           const growingRare = saved.pots.findIndex(function (pot) { return !pot.ready && cactusType(pot.cactusId).rarityKey !== "normal"; });
           if (growingRare >= 0) saved.nutrientActivePot = growingRare;
         }
-      } else if (!Number.isInteger(saved.nutrientActivePot)) saved.nutrientActivePot = null;
+      } else if (!Number.isInteger(saved.nutrientActivePot) || saved.nutrientActivePot < 0 || saved.nutrientActivePot >= POT_COUNT) saved.nutrientActivePot = null;
       if (saved.visualVersion !== 4) {
         saved.visualVersion = 4;
         saved.pots.forEach(function (pot) {
@@ -184,12 +184,22 @@ function equipmentUpgradeCost(level) {
   if (level === 1) return 300;
   return 700;
 }
+function nutrientIsInUse() {
+  return state.specialSeedQueued || Number.isInteger(state.nutrientActivePot);
+}
+
 function renderSpecialNutrient() {
-  const activeIndex = state.nutrientActivePot;
-  const growingBatch = Number.isInteger(activeIndex);
+  const growingBatch = Number.isInteger(state.nutrientActivePot);
   const allPotsReady = state.pots.every(function (pot) { return pot.ready; });
-  if (growingBatch && allPotsReady) state.nutrientActivePot = null;
-  specialNutrient.hidden = !(state.specialSeedQueued || (growingBatch && !allPotsReady));
+  if (!state.specialSeedQueued && growingBatch && allPotsReady) {
+    state.nutrientActivePot = null;
+  }
+  const inUse = nutrientIsInUse();
+  specialNutrient.hidden = !inUse;
+  specialNutrient.dataset.phase = state.specialSeedQueued ? "queued" : "growing";
+  specialNutrient.setAttribute("aria-label", state.specialSeedQueued
+    ? "レア栄養剤 待機中。つぎに収穫した場所へ使います"
+    : "レア栄養剤 使用中。すべてのサボテンが生えたら終了します");
 }
 function growthSeconds() {
   const EMPTY_FACTORY_GROWTH_SECONDS = 5 * 60 * 60;
@@ -581,8 +591,9 @@ function renderEquipment() {
   specialShop.hidden = !complete;
   if (complete) {
     const specialButton = document.querySelector("#specialSeedButton");
-    specialButton.disabled = state.specialSeedQueued || state.coins < 300;
-    specialButton.textContent = state.specialSeedQueued ? "よやくずみ" : "300コイン";
+    const nutrientInUse = nutrientIsInUse();
+    specialButton.disabled = nutrientInUse || state.coins < 300;
+    specialButton.textContent = nutrientInUse ? "しようちゅう" : "300コイン";
   }
   document.querySelector("#equipmentFeedback").textContent = complete ? "せつび かんせい！ コインで レア栄養剤が つかえます" : "";
 }
@@ -603,7 +614,7 @@ document.querySelector("#equipmentGrid").addEventListener("click", function (eve
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
 });
 document.querySelector("#specialSeedButton").addEventListener("click", function () {
-  if (equipmentTotal() < 12 || state.specialSeedQueued || state.coins < 300) return;
+  if (equipmentTotal() < 12 || nutrientIsInUse() || state.coins < 300) return;
   state.specialSeedQueued = true;
   state.coins -= 300;
   render();

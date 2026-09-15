@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=142" />
+  <link rel="stylesheet" href="styles.css?v=143" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=142" defer></script>
+  <script src="game.js?v=143" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -132,7 +132,13 @@
     <dialog id="mathDialog"><section class="dialog-card math-card">
       <button class="close" id="mathClose" aria-label="閉じる">×</button>
       <div class="challenge-head"><span id="questionNumber">1 / 10</span><b id="score">せいかい 0</b></div>
-      <h2>けいさんチャレンジ</h2><p class="problem" id="mathProblem"></p>
+      <div class="math-machine-title">
+        <span class="math-machine-icon" aria-hidden="true">
+          <svg viewBox="0 0 64 64"><rect x="9" y="6" width="46" height="52" rx="10"/><rect x="17" y="14" width="30" height="12" rx="3"/><circle cx="20" cy="36" r="3"/><circle cx="32" cy="36" r="3"/><circle cx="44" cy="36" r="3"/><circle cx="20" cy="47" r="3"/><path d="M29 47h6M41 47h6"/></svg>
+        </span>
+        <div><small>CALCULATION UNIT</small><h2>けいさんチャレンジ</h2></div>
+      </div>
+      <p class="problem" id="mathProblem"></p>
       <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback"></p>
     </section></dialog>
     <dialog id="resultDialog"><section class="dialog-card result-card">
