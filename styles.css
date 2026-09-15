@@ -1025,3 +1025,13 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @keyframes tutorial-cactus-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
 @media (max-height:700px){.onboarding-tip{min-height:68px;grid-template-columns:42px minmax(0,1fr) auto}.onboarding-mascot{width:40px;height:40px}.onboarding-mascot img{width:34px;height:37px}.onboarding-tip.stage-harvest{top:24.5%}.onboarding-tip.stage-math,.onboarding-tip.stage-equipment{bottom:98px}}
 @media (prefers-reduced-motion:reduce){.console-button.tutorial-focus,.nursery-pot.tutorial-focus .sprite-crop{animation:none!important}}
+
+
+/* Factory sound control */
+.sound-setting{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:9px;margin:10px 0 12px;padding:8px 10px;border:1px solid #afc7ba;border-radius:13px;background:#edf4ede8;color:#355247}
+.sound-setting>span{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:#d4e6d7;color:#3e765f}
+.sound-setting svg{width:21px;height:21px;fill:#f3c455;stroke:#24483b;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+.sound-setting>b{font-size:12px;letter-spacing:.04em}
+.sound-setting button{min-width:51px;padding:7px 10px;border:2px solid #28654f;border-radius:999px;background:#378262;color:#fffdf0;font-weight:900;font-size:11px;box-shadow:0 2px 0 #173f31}
+.sound-setting button.is-off{border-color:#81958c;background:#e0e6e1;color:#687a72;box-shadow:0 2px 0 #899b92}
+.sound-setting button:active{transform:translateY(2px);box-shadow:none}
