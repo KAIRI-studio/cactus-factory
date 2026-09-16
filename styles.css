@@ -1454,3 +1454,20 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   min-width:50px;
   min-height:50px;
 }
+ 
+/* v169: geometric close mark with exact optical centering */
+.close::before,
+.close::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  display:block;
+  width:23px;
+  height:4px;
+  border-radius:999px;
+  background:currentColor;
+  transform-origin:center;
+}
+.close::before{transform:translate(-50%,-50%) rotate(45deg)}
+.close::after{transform:translate(-50%,-50%) rotate(-45deg)}
