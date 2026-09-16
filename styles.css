@@ -1942,7 +1942,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   border:0;
   border-radius:0;
   background-color:transparent;
-  background-image:url("assets/equipment-buttons-v1.webp");
+  background-image:url("assets/equipment-buttons-v2.webp");
   background-repeat:no-repeat;
   background-size:200% 200%;
   color:#173e32;
@@ -2183,7 +2183,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 
 /* v178: keep the selected illustration visible */
 .equipment-hotspot.selected{
-  background-image:url("assets/equipment-buttons-v1.webp")!important;
+  background-image:url("assets/equipment-buttons-v2.webp")!important;
   background-repeat:no-repeat!important;
   background-size:200% 200%!important;
 }
