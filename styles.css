@@ -1388,3 +1388,69 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .equipment-item.uninstalled .equipment-visual.next-level-preview{filter:none;opacity:1}
 .equipment-item.uninstalled .equipment-actual-art{filter:none;opacity:1}
 .equipment-level-badge{max-width:86px;text-align:center}
+
+/* v167: keep the collection count clear of the mobile title */
+.zukan-book-title{
+  grid-template-columns:64px minmax(0,1fr);
+  grid-template-rows:auto auto;
+  align-items:center;
+  min-height:103px;
+  padding:7px 52px 9px 2px;
+}
+.zukan-title-mascot{
+  grid-column:1;
+  grid-row:1 / 3;
+}
+.zukan-title-copy{
+  grid-column:2;
+  grid-row:1;
+}
+.zukan-book-title>.collection-progress{
+  grid-column:2;
+  grid-row:2;
+  align-self:start;
+  justify-self:start;
+  margin:4px 0 0;
+}
+@media(max-width:360px){
+  .zukan-book-title{
+    grid-template-columns:55px minmax(0,1fr);
+    grid-template-rows:auto auto;
+    gap:3px 6px;
+    padding-right:49px;
+  }
+  .zukan-title-copy h2{font-size:19px}
+}
+
+/* v168: reliable, visually centered close controls */
+.close{
+  display:grid;
+  place-items:center;
+  width:48px;
+  height:48px;
+  min-width:48px;
+  min-height:48px;
+  padding:0;
+  overflow:visible;
+  font-size:0;
+  line-height:1;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-tap-highlight-color:transparent;
+  z-index:30;
+}
+.close::before{
+  content:"×";
+  display:block;
+  font-family:Arial,"Helvetica Neue",sans-serif;
+  font-size:30px;
+  font-weight:500;
+  line-height:1;
+  transform:translateY(-1px);
+}
+.zukan-card>.close{
+  width:50px;
+  height:50px;
+  min-width:50px;
+  min-height:50px;
+}
