@@ -2075,3 +2075,107 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .equipment-hotspot{width:124px;height:83px}
   .equipment-detail>.equipment-upgrade{width:72px!important;min-width:72px!important;height:59px!important}
 }
+
+/* v177: simple illustration-first equipment menu */
+.equipment-room-shell{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  gap:9px;
+  width:100%;
+  min-height:510px;
+  aspect-ratio:auto;
+  padding:12px;
+  overflow:hidden;
+  border:4px solid #173e32;
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 10% 12%,#f3cb4e 0 3px,transparent 4px),
+    radial-gradient(circle at 91% 16%,#77bf86 0 4px,transparent 5px),
+    radial-gradient(circle at 8% 88%,#75c7c4 0 3px,transparent 4px),
+    #fff8df;
+  box-shadow:0 7px 0 #5d7b6d;
+}
+.equipment-room-art{display:none!important}
+.equipment-room-level{
+  position:static;
+  grid-column:1;
+  grid-row:1;
+  width:auto;
+  min-width:0;
+  transform:none;
+}
+.equipment-room-shell>.sound-setting{
+  position:static;
+  grid-column:2;
+  grid-row:1;
+  align-self:start;
+  transform:none;
+}
+.equipment-room-shell>.equipment-grid{
+  position:static;
+  grid-column:1/-1;
+  grid-row:2;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(2,minmax(0,1fr));
+  align-items:center;
+  justify-items:center;
+  gap:2px 5px;
+  min-height:310px;
+  padding:0;
+  pointer-events:auto;
+}
+.equipment-hotspot,
+.equipment-hotspot-light,
+.equipment-hotspot-mist,
+.equipment-hotspot-air,
+.equipment-hotspot-sensor{
+  position:relative;
+  inset:auto;
+  left:auto;
+  top:auto;
+  width:150px;
+  height:100px;
+  margin:0;
+  transform:none;
+}
+.equipment-hotspot b{
+  right:29px;
+  bottom:10px;
+  left:23px;
+  font-size:11px;
+}
+.equipment-hotspot span{
+  right:14px;
+  bottom:8px;
+  font-size:7px;
+}
+.equipment-hotspot.selected{
+  transform:scale(1.07);
+  animation:equipment-simple-choice 1.55s ease-in-out infinite;
+}
+.equipment-hotspot:active{transform:scale(.96)}
+.equipment-detail{
+  position:static;
+  grid-column:1/-1;
+  grid-row:3;
+  width:100%;
+  min-height:96px;
+  transform:none;
+}
+@keyframes equipment-simple-choice{
+  0%,100%{transform:scale(1.04)}
+  50%{transform:translateY(-4px) scale(1.08)}
+}
+@media(max-width:360px){
+  .equipment-room-shell{min-height:470px;padding:9px}
+  .equipment-room-shell>.equipment-grid{min-height:285px;gap:0 2px}
+  .equipment-hotspot,
+  .equipment-hotspot-light,
+  .equipment-hotspot-mist,
+  .equipment-hotspot-air,
+  .equipment-hotspot-sensor{width:132px;height:88px}
+  .equipment-hotspot b{right:25px;bottom:9px;left:20px;font-size:9px}
+}
+@media(prefers-reduced-motion:reduce){.equipment-hotspot.selected{animation:none!important}}
