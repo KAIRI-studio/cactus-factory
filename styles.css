@@ -2368,3 +2368,46 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   box-shadow:inset 0 0 0 8px #173e32!important;
   pointer-events:none;
 }
+
+/* v187: title-family artwork and one-screen equipment controls */
+.close,.close:focus,.close:focus-visible{outline:none!important}
+.close:focus-visible{box-shadow:inset 0 0 0 3px #80b59a!important}
+#equipmentDialog{width:min(94vw,440px);height:90dvh;max-height:900px;overflow:hidden}
+.equipment-dialog-card{
+  height:100%;max-height:100%;aspect-ratio:auto;
+  padding:48px 14px 15px!important;
+  border:5px solid #173e32!important;
+  background:#fff8e8!important;
+  box-shadow:inset 0 0 0 3px #95baa0,0 8px 0 #123a2e!important;
+}
+.equipment-dialog-card::before,.equipment-dialog-card::after{display:none!important}
+.equipment-dialog-card>.close{
+  position:absolute!important;top:8px!important;right:10px!important;
+  width:40px!important;height:40px!important;min-width:40px;min-height:40px;
+  border:3px solid #173e32!important;background:#fff6da!important;color:#173e32!important;
+}
+.equipment-illustrated-heading{flex:none;margin:0 0 8px;line-height:0}
+.equipment-illustrated-heading img{display:block;width:100%;height:auto}
+.equipment-scroll-area{position:relative;flex:1;min-height:0;padding:0 3px;overflow-y:auto;container-type:size}
+.equipment-room-shell{height:100cqh;min-height:0!important;grid-template-rows:48px minmax(0,1fr) 76px;gap:8px}
+.equipment-room-shell>.equipment-grid{min-height:0!important;gap:4px;overflow:visible}
+.equipment-hotspot,.equipment-hotspot-light,.equipment-hotspot-mist,.equipment-hotspot-air,.equipment-hotspot-sensor{
+  width:min(100%,170px);height:auto;aspect-ratio:3/2;max-height:100%;
+}
+.equipment-room-level{padding:5px 7px;gap:2px 5px}
+.equipment-room-level b{font-size:16px}
+.equipment-room-shell>.sound-setting{padding:3px 5px;gap:3px}
+.equipment-detail{min-height:0!important;height:72px;grid-template-columns:minmax(0,1fr) 102px!important;gap:6px!important;padding:6px!important}
+.equipment-detail-choice b{font-size:16px!important}
+.equipment-scroll-area:has(.special-shop:not([hidden])) .equipment-room-shell{height:calc(100cqh - 104px)}
+.equipment-scroll-area>.special-shop{height:94px;min-height:0;margin:6px 0 0;padding:7px!important}
+.equipment-scroll-area>.special-shop button{min-height:30px;margin-top:4px}
+.equipment-scroll-area>.feedback{display:none}
+.equipment-scroll-area>.test-tools{margin:14px 0 0;padding:10px 0 8px}
+@media(max-height:680px){
+  .equipment-dialog-card{padding-top:44px!important}
+  .equipment-illustrated-heading img{max-height:90px;object-fit:contain}
+  .equipment-room-shell{grid-template-rows:44px minmax(0,1fr) 68px;gap:4px}
+  .equipment-detail{height:65px}
+  .equipment-hotspot{max-width:135px}
+}
