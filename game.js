@@ -764,7 +764,10 @@ function renderEquipment() {
       actualArt.setAttribute("class", "equipment-actual-art equipment-art-" + item.key);
       actualArt.removeAttribute("style");
       actualArt.querySelectorAll(".facility-stage").forEach(function (stage) {
-        stage.style.display = stage.classList.contains("stage-" + Math.max(1, level)) ? "inline" : "none";
+        const visible = stage.classList.contains("stage-" + Math.max(1, level));
+        stage.style.display = visible ? "inline" : "none";
+        stage.style.opacity = visible ? "1" : "0";
+        stage.style.transform = visible ? "none" : "scale(.9)";
       });
       visual.append(actualArt);
     } else {
