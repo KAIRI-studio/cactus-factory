@@ -1928,3 +1928,6 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .equipment-detail>.equipment-upgrade{min-width:78px;font-size:8px}
 }
 @media(prefers-reduced-motion:reduce){.equipment-hotspot.selected{animation:none!important}}
+
+/* v174: position the wind equipment hotspot */
+.equipment-hotspot-air{left:28%;top:69%}
