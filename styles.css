@@ -2578,3 +2578,67 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .equipment-detail>.equipment-upgrade{height:54px!important}
 }
 @media(prefers-reduced-motion:reduce){.equipment-hotspot.selected{animation:none!important}}
+
+/* v189: readable equipment controls with content-driven spacing. */
+#equipmentDialog .equipment-dialog-card{padding:48px 12px 16px!important}
+#equipmentDialog .equipment-illustrated-heading{height:auto;min-height:0;margin:0 0 20px}
+#equipmentDialog .equipment-illustrated-heading img{height:auto;max-height:none;object-fit:contain}
+#equipmentDialog .equipment-scroll-area{container-type:normal;padding:6px 4px 12px;scroll-padding-block:14px}
+#equipmentDialog .equipment-room-shell{
+  height:auto!important;min-height:0!important;grid-template-rows:auto auto auto!important;
+  gap:24px 10px!important;padding:12px 4px 6px!important;
+  border:0!important;background:transparent!important;box-shadow:none!important;overflow:visible;
+}
+#equipmentDialog .equipment-room-level{min-height:52px;padding:8px 10px!important}
+#equipmentDialog .equipment-room-level span{font-size:10px}
+#equipmentDialog .equipment-room-shell>.sound-setting{min-height:50px;padding:7px 6px!important;align-items:center}
+#equipmentDialog .equipment-room-shell>.equipment-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,auto)!important;
+  gap:26px 18px!important;padding:9px 5px!important;
+}
+#equipmentDialog .equipment-hotspot{
+  width:100%!important;max-width:none!important;min-width:0!important;
+  height:auto!important;aspect-ratio:3/2;transform:none!important;
+}
+#equipmentDialog .equipment-hotspot.selected{
+  transform:none!important;animation:none!important;
+  box-shadow:0 0 0 3px #efc34b,0 4px 0 #bc932f!important;
+  filter:drop-shadow(0 3px 2px #173e3233)!important;
+}
+#equipmentDialog .equipment-hotspot:active{transform:translateY(2px)!important}
+#equipmentDialog .equipment-hotspot em{display:none!important}
+#equipmentDialog .equipment-hotspot span{top:-10px!important;right:5px!important;font-size:9px!important;padding:4px 6px!important}
+#equipmentDialog .equipment-detail{
+  width:100%;height:auto!important;min-height:144px!important;
+  grid-template-columns:minmax(0,1fr) 28%!important;grid-template-rows:auto!important;
+  gap:8%!important;align-items:center!important;
+  padding:32px 7% 34px 12%!important;
+  isolation:isolate;
+}
+#equipmentDialog .equipment-detail-choice{
+  grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:flex-start;
+  position:static;min-width:0;padding:0!important;gap:6px!important;
+}
+#equipmentDialog .equipment-detail-choice small{
+  display:block;position:static;margin:0;padding:0;border:0;background:none;box-shadow:none;
+  font-size:10px!important;font-weight:800;line-height:1.3!important;letter-spacing:0;
+}
+#equipmentDialog .equipment-detail-choice b{
+  display:block;position:static;margin:0;padding:0;white-space:normal;overflow:visible;
+  font-size:clamp(14px,3.8vw,17px)!important;font-weight:900;line-height:1.4!important;
+  overflow-wrap:anywhere;text-shadow:0 1px #fff;
+}
+#equipmentDialog .equipment-detail-choice span{
+  display:block;position:static;margin:0;padding:0;border:0;background:none;box-shadow:none;
+  font-size:11px!important;font-weight:800;line-height:1.3!important;white-space:nowrap;
+}
+#equipmentDialog .equipment-detail>.equipment-upgrade{
+  grid-column:2!important;grid-row:1!important;align-self:center!important;
+  height:auto!important;min-height:48px!important;padding:5px 0!important;display:flex!important;
+  flex-direction:column;justify-content:center;align-items:center;gap:5px;
+  white-space:nowrap;line-height:1.3!important;
+}
+#equipmentDialog .equipment-detail>.equipment-upgrade b{font-size:15px;line-height:1.3}
+#equipmentDialog .equipment-detail>.equipment-upgrade small{font-size:10px;line-height:1.3}
+#equipmentDialog .equipment-scroll-area>.test-tools{margin-top:max(88px,14dvh);padding-top:24px;padding-bottom:20px}
+#equipmentDialog .equipment-scroll-area>.special-shop{margin-top:24px;height:auto;min-height:94px}
