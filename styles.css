@@ -2304,3 +2304,37 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 /* v182: clear the illustrated header and remove sprite seam artifacts */
 .equipment-dialog-card{padding-top:190px!important}
 @media(max-width:360px){.equipment-dialog-card{padding-top:170px!important}}
+
+/* v183: keep the illustrated frame proportional and all scrolling inside it */
+#equipmentDialog{
+  width:min(94vw,44.16dvh,420px);
+  max-height:none;
+  overflow:visible;
+}
+.equipment-dialog-card{
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  aspect-ratio:12/25;
+  max-height:none;
+  padding:190px 24px 58px!important;
+  overflow:hidden!important;
+  background:#fff8e8 url("assets/equipment-card-frame-v2.webp") center/100% 100% no-repeat!important;
+}
+.equipment-scroll-area{
+  flex:1 1 auto;
+  min-height:0;
+  padding:0 2px 9px;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:none;
+}
+.equipment-scroll-area::-webkit-scrollbar{display:none}
+.equipment-scroll-area>.special-shop,
+.equipment-scroll-area>.feedback,
+.equipment-scroll-area>.test-tools{margin-right:3px;margin-left:3px}
+@media(max-width:360px){
+  #equipmentDialog{width:min(96vw,45.12dvh)}
+  .equipment-dialog-card{padding:168px 18px 51px!important}
+}
