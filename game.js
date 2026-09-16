@@ -772,13 +772,13 @@ function renderEquipment() {
   const cost = equipmentUpgradeCost(level);
   const previewLevel = level >= 3 ? 3 : level + 1;
   detail.className = "equipment-detail equipment-detail-" + item.key;
-  detail.innerHTML = '<div class="equipment-detail-choice"><small>えらんでいる せつび</small><b>' + item.name + '</b><span>いま LV.' + level + (level >= 3 ? "・かんせい！" : "　つぎは LV." + previewLevel) + '</span></div>';
+  detail.innerHTML = '<div class="equipment-detail-choice"><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
   const upgrade = document.createElement("button");
   upgrade.type = "button";
   upgrade.className = "equipment-upgrade";
   upgrade.dataset.equipment = item.key;
   upgrade.disabled = level >= 3 || state.coins < cost;
-  upgrade.textContent = level >= 3 ? "かんせい" : level === 0 ? "せっち " + cost + "コイン" : cost + "コインで きょうか";
+  upgrade.innerHTML = level >= 3 ? "<b>かんせい</b>" : '<b>' + (level === 0 ? "せっち" : "きょうか") + '</b><small>' + cost + "コイン</small>";
   detail.append(upgrade);
 
   const complete = total >= 12;

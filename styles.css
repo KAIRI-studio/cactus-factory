@@ -1942,7 +1942,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   border:0;
   border-radius:0;
   background-color:transparent;
-  background-image:url("assets/equipment-buttons-v3.webp");
+  background-image:url("assets/equipment-buttons-v4.webp");
   background-repeat:no-repeat;
   background-size:200% 200%;
   color:#173e32;
@@ -2183,7 +2183,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 
 /* v178: keep the selected illustration visible */
 .equipment-hotspot.selected{
-  background-image:url("assets/equipment-buttons-v3.webp")!important;
+  background-image:url("assets/equipment-buttons-v4.webp")!important;
   background-repeat:no-repeat!important;
   background-size:200% 200%!important;
 }
@@ -2249,4 +2249,53 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .equipment-detail{grid-template-columns:minmax(0,1fr) 98px!important}
   .equipment-detail-choice b{font-size:15px}
   .equipment-detail>.equipment-upgrade{font-size:9px!important}
+}
+
+
+/* v181: illustrated equipment-card frame and quieter upgrade control */
+.equipment-dialog-card{
+  position:relative;
+  padding:154px 24px 24px!important;
+  border:0!important;
+  border-radius:30px!important;
+  background:#fff8e8 url("assets/equipment-card-frame-v1.webp") center/100% 100% no-repeat!important;
+  box-shadow:0 13px 0 #123a2e,0 24px 42px #061a1480!important;
+}
+.equipment-dialog-card>small,.equipment-dialog-card>h2{display:none!important}
+.equipment-dialog-card>.close{
+  top:7px!important;
+  right:7px!important;
+  width:76px!important;
+  height:76px!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:transparent!important;
+  opacity:1!important;
+}
+.equipment-room-shell{
+  min-height:505px;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+.equipment-detail{min-height:76px!important;padding:8px 10px!important}
+.equipment-detail-choice{gap:1px!important;padding-left:7px!important}
+.equipment-detail-choice b{font-size:18px!important}
+.equipment-detail-choice span{font-size:10px!important}
+.equipment-detail>.equipment-upgrade{
+  display:grid!important;
+  place-content:center!important;
+  gap:2px!important;
+  min-height:52px!important;
+}
+.equipment-detail>.equipment-upgrade b{font-size:14px;line-height:1}
+.equipment-detail>.equipment-upgrade small{font-size:8px;font-weight:900;line-height:1}
+@media(max-width:360px){
+  .equipment-dialog-card{padding:138px 18px 20px!important}
+  .equipment-dialog-card>.close{width:68px!important;height:68px!important}
+  .equipment-room-shell{min-height:470px}
+  .equipment-detail-choice b{font-size:16px!important}
 }
