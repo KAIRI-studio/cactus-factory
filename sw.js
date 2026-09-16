@@ -1,10 +1,10 @@
-const CACHE_NAME = "cactus-factory-2026-09-16-86";
+const CACHE_NAME = "cactus-factory-2026-09-16-87";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=165",
+  "./styles.css?v=166",
   "./title-v3.css?v=2",
-  "./game.js?v=156",
+  "./game.js?v=157",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -13,6 +13,7 @@ const APP_FILES = [
   "./assets/title-hero-v3.webp",
   "./assets/title-logo-v3.webp",
   "./assets/title-start-v2.webp",
+  "./assets/equipment-room-v2.webp",
   "./assets/original-sand-factory-v2.png",
   "./assets/factory-air.png",
   "./assets/factory-sensor.png",

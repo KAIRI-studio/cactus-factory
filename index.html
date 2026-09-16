@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=165" />
+  <link rel="stylesheet" href="styles.css?v=166" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=156" defer></script>
+  <script src="game.js?v=157" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -158,10 +158,14 @@
     </section></dialog>
     <dialog id="equipmentDialog"><section class="dialog-card equipment-dialog-card">
       <button class="close" id="equipmentClose" aria-label="閉じる">×</button>
-      <small>おんしつの せつび</small><h2>せつびを つよくする</h2>
-      <div class="equipment-summary"><div class="equipment-summary-mascot" aria-hidden="true"><span class="equipment-speech">もっと そだてよう！</span><img src="assets/cactus-normal.png" alt="" /></div><div class="equipment-summary-panel"><div><span>ぜんたいレベル</span><b id="equipmentTotalText">0 / 12</b></div><div class="equipment-meter"><i id="equipmentMeterFill"></i></div><div class="equipment-lamps" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div></div>
-      <div class="sound-setting"><span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 13h6l7-6v18l-7-6H6z"/><path d="M23 12c2 2 2 6 0 8M26 9c4 4 4 10 0 14"/></svg></span><b>こうじょうの おと</b><button id="soundToggle" type="button" aria-pressed="true">ON</button></div>
-      <div class="equipment-grid" id="equipmentGrid"></div>
+      <small>サボテンたちの せつびしつ</small><h2>せつびを そだてよう</h2>
+      <div class="equipment-room-shell">
+        <img class="equipment-room-art" src="assets/equipment-room-v2.webp" alt="サボテンたちが ライト・ミスト・かぜおくり・みまもりを つかっている せつびしつ" />
+        <div class="equipment-room-level"><span>ぜんたいレベル</span><b id="equipmentTotalText">0 / 12</b><div class="equipment-meter"><i id="equipmentMeterFill"></i></div></div>
+        <div class="sound-setting"><span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 13h6l7-6v18l-7-6H6z"/><path d="M23 12c2 2 2 6 0 8M26 9c4 4 4 10 0 14"/></svg></span><b>おと</b><button id="soundToggle" type="button" aria-pressed="true">ON</button></div>
+        <div class="equipment-grid" id="equipmentGrid"></div>
+        <div class="equipment-detail" id="equipmentDetail"></div>
+      </div>
       <section class="special-shop" id="specialShop" hidden>
         <div><span>★</span><p><b>レア栄養剤</b><small>つぎにそだつ 1たいが レアいじょう</small></p></div>
         <button id="specialSeedButton" type="button">300コイン</button>
@@ -184,6 +188,6 @@
       <div class="zukan-grid" id="zukanGrid"></div>
     </section></dialog>
   </main>
-  <!-- release-v171 -->
+  <!-- release-v172 -->
 </body>
 </html>

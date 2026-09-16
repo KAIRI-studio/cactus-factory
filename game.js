@@ -744,52 +744,57 @@ document.querySelector("#resultClose").addEventListener("click", function () {
 });
 
 const equipmentDialog = document.querySelector("#equipmentDialog");
+let selectedEquipmentKey = "light";
 function renderEquipment() {
   const grid = document.querySelector("#equipmentGrid");
-  grid.innerHTML = "";
+  const detail = document.querySelector("#equipmentDetail");
+  grid.replaceChildren();
+  detail.replaceChildren();
   const total = equipmentTotal();
   renderSoundSetting();
   document.querySelector("#equipmentTotalText").textContent = total + " / 12";
   document.querySelector("#equipmentMeterFill").style.width = (total / 12 * 100) + "%";
+
   EQUIPMENT.forEach(function (item) {
     const level = state.equipment[item.key];
-    const cost = equipmentUpgradeCost(level);
-    const card = document.createElement("article");
-    card.className = "equipment-item equipment-" + item.key + (level === 0 ? " uninstalled" : "") + (level >= 3 ? " completed" : "");
-    const previewLevel = level >= 3 ? 3 : level + 1;
-    card.innerHTML = '<div class="equipment-visual next-level-preview"></div><span class="equipment-level-badge">' + (level >= 3 ? 'かんせい LV.3' : 'つぎ LV.' + previewLevel) + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + (level >= 3 ? 'さいしゅうけいたい' : 'レベルアップごの すがた') + '</small></div><div class="level-dots" aria-label="いまのレベル ' + level + '"><i></i><i></i><i></i></div>';
-    const visual = card.querySelector(".equipment-visual");
-    const sourceArt = document.querySelector(".facility-" + item.key);
-    if (sourceArt) {
-      const actualArt = sourceArt.cloneNode(true);
-      actualArt.setAttribute("class", "equipment-actual-art equipment-art-" + item.key);
-      actualArt.removeAttribute("style");
-      actualArt.querySelectorAll(".facility-stage").forEach(function (stage) {
-        const visible = stage.classList.contains("stage-" + previewLevel);
-        stage.style.display = visible ? "inline" : "none";
-        stage.style.opacity = visible ? "1" : "0";
-        stage.style.transform = visible ? "none" : "scale(.9)";
-      });
-      visual.append(actualArt);
-      const mascot = document.createElement("img");
-      mascot.className = "equipment-card-cactus";
-      mascot.src = "assets/cactus-normal.png";
-      mascot.alt = "";
-      visual.append(mascot);
-    } else {
-      visual.innerHTML = '<span class="equipment-icon">' + item.icon + '</span>';
-    }
-    card.querySelectorAll(".level-dots i").forEach(function (dot, index) { if (index < level) dot.classList.add("on"); });
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "equipment-upgrade";
-    button.dataset.equipment = item.key;
-    button.disabled = level >= 3 || state.coins < cost;
-    button.textContent = level >= 3 ? "かんせい" : level === 0 ? "せっち " + cost + "コイン" : cost + "コイン";
-    card.append(button);
-    grid.append(card);
+    const hotspot = document.createElement("button");
+    hotspot.type = "button";
+    hotspot.className = "equipment-hotspot equipment-hotspot-" + item.key + (selectedEquipmentKey === item.key ? " selected" : "") + " level-" + level;
+    hotspot.dataset.equipmentSelect = item.key;
+    hotspot.setAttribute("aria-pressed", String(selectedEquipmentKey === item.key));
+    hotspot.innerHTML = "<b>" + item.name + "</b><span>LV." + level + "</span>";
+    grid.append(hotspot);
   });
-  const complete = equipmentTotal() >= 12;
+
+  const item = EQUIPMENT.find(function (entry) { return entry.key === selectedEquipmentKey; }) || EQUIPMENT[0];
+  const level = state.equipment[item.key];
+  const cost = equipmentUpgradeCost(level);
+  const previewLevel = level >= 3 ? 3 : level + 1;
+  detail.className = "equipment-detail equipment-detail-" + item.key;
+  detail.innerHTML = '<div class="equipment-detail-preview"></div><div class="equipment-detail-copy"><small>' + (level >= 3 ? "かんせい！" : "つぎの すがた") + '</small><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "" : " → LV." + previewLevel) + '</span></div>';
+  const preview = detail.querySelector(".equipment-detail-preview");
+  const sourceArt = document.querySelector(".facility-" + item.key);
+  if (sourceArt) {
+    const actualArt = sourceArt.cloneNode(true);
+    actualArt.setAttribute("class", "equipment-detail-art equipment-art-" + item.key);
+    actualArt.removeAttribute("style");
+    actualArt.querySelectorAll(".facility-stage").forEach(function (stage) {
+      const visible = stage.classList.contains("stage-" + previewLevel);
+      stage.style.display = visible ? "inline" : "none";
+      stage.style.opacity = visible ? "1" : "0";
+      stage.style.transform = visible ? "none" : "scale(.9)";
+    });
+    preview.append(actualArt);
+  }
+  const upgrade = document.createElement("button");
+  upgrade.type = "button";
+  upgrade.className = "equipment-upgrade";
+  upgrade.dataset.equipment = item.key;
+  upgrade.disabled = level >= 3 || state.coins < cost;
+  upgrade.textContent = level >= 3 ? "かんせい" : level === 0 ? "せっち " + cost + "コイン" : cost + "コインで きょうか";
+  detail.append(upgrade);
+
+  const complete = total >= 12;
   const specialShop = document.querySelector("#specialShop");
   specialShop.hidden = !complete;
   if (complete) {
@@ -806,7 +811,13 @@ document.querySelector("#equipmentButton").addEventListener("click", function ()
   equipmentDialog.showModal();
 });
 document.querySelector("#equipmentClose").addEventListener("click", function () { equipmentDialog.close(); });
-document.querySelector("#equipmentGrid").addEventListener("click", function (event) {
+document.querySelector("#equipmentDialog").addEventListener("click", function (event) {
+  const select = event.target.closest(".equipment-hotspot");
+  if (select) {
+    selectedEquipmentKey = select.dataset.equipmentSelect;
+    renderEquipment();
+    return;
+  }
   const button = event.target.closest(".equipment-upgrade");
   if (!button) return;
   const key = button.dataset.equipment;
