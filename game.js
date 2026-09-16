@@ -756,7 +756,8 @@ function renderEquipment() {
     const cost = equipmentUpgradeCost(level);
     const card = document.createElement("article");
     card.className = "equipment-item" + (level === 0 ? " uninstalled" : "") + (level >= 3 ? " completed" : "");
-    card.innerHTML = '<div class="equipment-visual' + (level === 0 ? ' is-blueprint' : '') + '"></div><span class="equipment-level-badge">' + (level === 0 ? 'みせっち' : 'LV.' + level) + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + item.copy + '</small></div><div class="level-dots" aria-label="レベル ' + level + '"><i></i><i></i><i></i></div>';
+    const previewLevel = level >= 3 ? 3 : level + 1;
+    card.innerHTML = '<div class="equipment-visual next-level-preview"></div><span class="equipment-level-badge">' + (level >= 3 ? 'かんせい LV.3' : 'つぎ LV.' + previewLevel) + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + (level >= 3 ? 'さいしゅうけいたい' : 'レベルアップごの すがた') + '</small></div><div class="level-dots" aria-label="いまのレベル ' + level + '"><i></i><i></i><i></i></div>';
     const visual = card.querySelector(".equipment-visual");
     const sourceArt = document.querySelector(".facility-" + item.key);
     if (sourceArt) {
@@ -764,7 +765,7 @@ function renderEquipment() {
       actualArt.setAttribute("class", "equipment-actual-art equipment-art-" + item.key);
       actualArt.removeAttribute("style");
       actualArt.querySelectorAll(".facility-stage").forEach(function (stage) {
-        const visible = stage.classList.contains("stage-" + Math.max(1, level));
+        const visible = stage.classList.contains("stage-" + previewLevel);
         stage.style.display = visible ? "inline" : "none";
         stage.style.opacity = visible ? "1" : "0";
         stage.style.transform = visible ? "none" : "scale(.9)";
