@@ -762,7 +762,8 @@ function renderEquipment() {
     hotspot.className = "equipment-hotspot equipment-hotspot-" + item.key + (selectedEquipmentKey === item.key ? " selected" : "") + " level-" + level;
     hotspot.dataset.equipmentSelect = item.key;
     hotspot.setAttribute("aria-pressed", String(selectedEquipmentKey === item.key));
-    hotspot.innerHTML = "<b>" + item.name + "</b><span>LV." + level + "</span>";
+    hotspot.setAttribute("aria-label", item.name + " LV." + level);
+    hotspot.innerHTML = "<span>LV." + level + "</span>";
     grid.append(hotspot);
   });
 
@@ -771,21 +772,7 @@ function renderEquipment() {
   const cost = equipmentUpgradeCost(level);
   const previewLevel = level >= 3 ? 3 : level + 1;
   detail.className = "equipment-detail equipment-detail-" + item.key;
-  detail.innerHTML = '<div class="equipment-detail-preview"></div><div class="equipment-detail-copy"><small>' + (level >= 3 ? "かんせい！" : "つぎの すがた") + '</small><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "" : " → LV." + previewLevel) + '</span></div>';
-  const preview = detail.querySelector(".equipment-detail-preview");
-  const sourceArt = document.querySelector(".facility-" + item.key);
-  if (sourceArt) {
-    const actualArt = sourceArt.cloneNode(true);
-    actualArt.setAttribute("class", "equipment-detail-art equipment-art-" + item.key);
-    actualArt.removeAttribute("style");
-    actualArt.querySelectorAll(".facility-stage").forEach(function (stage) {
-      const visible = stage.classList.contains("stage-" + previewLevel);
-      stage.style.display = visible ? "inline" : "none";
-      stage.style.opacity = visible ? "1" : "0";
-      stage.style.transform = visible ? "none" : "scale(.9)";
-    });
-    preview.append(actualArt);
-  }
+  detail.innerHTML = '<div class="equipment-detail-choice"><small>えらんでいる せつび</small><b>' + item.name + '</b><span>いま LV.' + level + (level >= 3 ? "・かんせい！" : "　つぎは LV." + previewLevel) + '</span></div>';
   const upgrade = document.createElement("button");
   upgrade.type = "button";
   upgrade.className = "equipment-upgrade";
