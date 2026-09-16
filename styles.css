@@ -1518,3 +1518,57 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   border-color:#9b423a;
   background:#fff0eb;
 }
+
+/* v171: the entire featured card follows the selected rarity */
+.zukan-hero.rarity-normal{
+  border-color:#285b45;
+  background:#d7ebc6!important;
+  box-shadow:0 5px 0 #65876f,inset 0 1px #f7fff1;
+}
+.zukan-hero.rarity-normal::before{background:#c3dfa9}
+.zukan-hero.rarity-normal .zukan-hero-stage::after{
+  border-color:#285b45;
+  background:#94c887;
+  box-shadow:0 5px 0 #53745f;
+}
+
+.zukan-hero.rarity-rare{
+  border-color:#267f82;
+  background:#c8ebe5!important;
+  box-shadow:0 5px 0 #4e8f87,inset 0 1px #f0fffc;
+}
+.zukan-hero.rarity-rare::before{background:#ade0d7}
+.zukan-hero.rarity-rare .zukan-hero-copy small{
+  border-color:#1c5d60;
+  background:#318e88!important;
+  color:#effffb;
+}
+.zukan-hero.rarity-rare .zukan-hero-stage::after{
+  border-color:#1c5d60;
+  background:#73c9bc;
+  box-shadow:0 5px 0 #3d817a;
+}
+
+.zukan-hero.rarity-super{
+  border-color:#9b6900;
+  background:#ffe29a!important;
+  box-shadow:0 5px 0 #a87912,inset 0 1px #fff8dc;
+}
+.zukan-hero.rarity-super::before{background:#ffd66d}
+.zukan-hero.rarity-super .zukan-hero-stage::after{
+  border-color:#704b00;
+  background:#efba24;
+  box-shadow:0 5px 0 #8f6712;
+}
+
+.zukan-hero.rarity-legend{
+  border-color:#862b25;
+  background:#f3a195!important;
+  box-shadow:0 5px 0 #7b2b25,inset 0 1px #ffe8e3;
+}
+.zukan-hero.rarity-legend::before{background:#ed8175}
+.zukan-hero.rarity-legend .zukan-hero-stage::after{
+  border-color:#641f1b;
+  background:#d9574d;
+  box-shadow:0 5px 0 #762923;
+}
