@@ -755,7 +755,7 @@ function renderEquipment() {
     const level = state.equipment[item.key];
     const cost = equipmentUpgradeCost(level);
     const card = document.createElement("article");
-    card.className = "equipment-item" + (level === 0 ? " uninstalled" : "") + (level >= 3 ? " completed" : "");
+    card.className = "equipment-item equipment-" + item.key + (level === 0 ? " uninstalled" : "") + (level >= 3 ? " completed" : "");
     const previewLevel = level >= 3 ? 3 : level + 1;
     card.innerHTML = '<div class="equipment-visual next-level-preview"></div><span class="equipment-level-badge">' + (level >= 3 ? 'かんせい LV.3' : 'つぎ LV.' + previewLevel) + '</span><div class="equipment-title"><b>' + item.name + '</b><small>' + (level >= 3 ? 'さいしゅうけいたい' : 'レベルアップごの すがた') + '</small></div><div class="level-dots" aria-label="いまのレベル ' + level + '"><i></i><i></i><i></i></div>';
     const visual = card.querySelector(".equipment-visual");
@@ -771,6 +771,11 @@ function renderEquipment() {
         stage.style.transform = visible ? "none" : "scale(.9)";
       });
       visual.append(actualArt);
+      const mascot = document.createElement("img");
+      mascot.className = "equipment-card-cactus";
+      mascot.src = "assets/cactus-normal.png";
+      mascot.alt = "";
+      visual.append(mascot);
     } else {
       visual.innerHTML = '<span class="equipment-icon">' + item.icon + '</span>';
     }
