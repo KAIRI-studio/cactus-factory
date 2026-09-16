@@ -1,8 +1,8 @@
-const CACHE_NAME = "cactus-factory-2026-09-16-97";
+const CACHE_NAME = "cactus-factory-2026-09-16-98";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=176",
+  "./styles.css?v=177",
   "./title-v3.css?v=2",
   "./game.js?v=159",
   "./manifest.webmanifest",

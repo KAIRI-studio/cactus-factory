@@ -2338,3 +2338,23 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog{width:min(96vw,45.12dvh)}
   .equipment-dialog-card{padding:168px 18px 51px!important}
 }
+
+/* v184: hide the generated image's rough transparent fringe */
+.equipment-dialog-card{
+  isolation:isolate;
+  background:#fff8e8!important;
+}
+.equipment-dialog-card::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  width:auto!important;
+  height:auto!important;
+  border-radius:inherit!important;
+  clip-path:inset(10px round 22px);
+  background:transparent url("assets/equipment-card-frame-v2.webp") center/100% 100% no-repeat!important;
+  pointer-events:none;
+}
+.equipment-dialog-card>.close,
+.equipment-scroll-area{position:relative;z-index:1}
