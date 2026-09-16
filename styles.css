@@ -2342,7 +2342,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 /* v184: hide the generated image's rough transparent fringe */
 .equipment-dialog-card{
   isolation:isolate;
-  background:#fff8e8!important;
+  background:#173e32!important;
 }
 .equipment-dialog-card::before{
   content:""!important;
@@ -2352,7 +2352,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   width:auto!important;
   height:auto!important;
   border-radius:inherit!important;
-  clip-path:inset(10px round 22px);
+  clip-path:inset(8px round 24px);
   background:transparent url("assets/equipment-card-frame-v2.webp") center/100% 100% no-repeat!important;
   pointer-events:none;
 }
