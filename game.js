@@ -763,7 +763,7 @@ function renderEquipment() {
     hotspot.dataset.equipmentSelect = item.key;
     hotspot.setAttribute("aria-pressed", String(selectedEquipmentKey === item.key));
     hotspot.setAttribute("aria-label", item.name + " LV." + level);
-    hotspot.innerHTML = "<span>LV." + level + "</span>";
+    hotspot.innerHTML = "<span>LV." + level + "</span><em>えらんだ</em>";
     grid.append(hotspot);
   });
 
@@ -772,7 +772,7 @@ function renderEquipment() {
   const cost = equipmentUpgradeCost(level);
   const previewLevel = level >= 3 ? 3 : level + 1;
   detail.className = "equipment-detail equipment-detail-" + item.key;
-  detail.innerHTML = '<div class="equipment-detail-choice"><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
+  detail.innerHTML = '<div class="equipment-detail-choice"><small>えらんだ せつび</small><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
   const upgrade = document.createElement("button");
   upgrade.type = "button";
   upgrade.className = "equipment-upgrade";
