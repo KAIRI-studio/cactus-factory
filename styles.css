@@ -1931,3 +1931,117 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 
 /* v174: position the wind equipment hotspot */
 .equipment-hotspot-air{left:28%;top:69%}
+
+/* v175: the controls themselves are illustrated game assets */
+.equipment-hotspot{
+  width:132px;
+  height:88px;
+  min-width:0;
+  padding:0;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background-color:transparent;
+  background-image:url("assets/equipment-buttons-v1.webp");
+  background-repeat:no-repeat;
+  background-size:200% 200%;
+  color:#173e32;
+  box-shadow:none;
+  filter:drop-shadow(0 4px 1px #173e3266);
+}
+.equipment-hotspot-light{left:28%;top:34%;background-position:0 0}
+.equipment-hotspot-mist{left:73%;top:34%;background-position:100% 0}
+.equipment-hotspot-air{left:28%;top:67%;background-position:0 100%}
+.equipment-hotspot-sensor{left:73%;top:67%;background-position:100% 100%}
+.equipment-hotspot b{
+  position:absolute;
+  right:25px;
+  bottom:9px;
+  left:20px;
+  overflow:hidden;
+  color:#244d3d;
+  font-size:9px;
+  font-weight:900;
+  line-height:1;
+  text-align:center;
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  text-shadow:0 1px #fff;
+}
+.equipment-hotspot span{
+  position:absolute;
+  right:13px;
+  bottom:7px;
+  padding:2px 4px;
+  border:2px solid #244d3d;
+  border-radius:999px;
+  background:#fff8dc;
+  color:#244d3d;
+  font-size:7px;
+  line-height:1;
+  box-shadow:none;
+}
+.equipment-hotspot.selected{
+  background-color:transparent;
+  box-shadow:none;
+  filter:drop-shadow(0 0 7px #ffe15c) drop-shadow(0 5px 1px #173e3270);
+  animation:equipment-illustrated-button 1.45s ease-in-out infinite;
+}
+.equipment-hotspot:active{transform:translate(-50%,-46%) scale(.94)}
+.equipment-detail{
+  grid-template-columns:61px minmax(0,1fr) 92px;
+  min-height:92px;
+  padding:12px 16px 10px 18px;
+  overflow:visible;
+  border:0;
+  border-radius:0;
+  background:transparent url("assets/equipment-upgrade-board-v1.webp") center/100% 100% no-repeat;
+  box-shadow:none;
+  backdrop-filter:none;
+}
+.equipment-detail-preview{
+  width:54px;
+  height:54px;
+  border:0;
+  border-radius:0;
+  background:transparent;
+}
+.equipment-detail-copy{padding:0 3px}
+.equipment-detail-copy small{color:#8b6419;font-size:8px}
+.equipment-detail-copy b{font-size:12px}
+.equipment-detail-copy span{font-size:8px}
+.equipment-detail>.equipment-upgrade{
+  width:82px;
+  min-width:82px;
+  height:66px;
+  margin:0;
+  padding:7px;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:#24452f;
+  box-shadow:none;
+  font-size:8px;
+  font-weight:900;
+  line-height:1.25;
+  text-shadow:0 1px #fff2a0;
+}
+.equipment-detail>.equipment-upgrade:disabled{
+  border:0;
+  background:transparent;
+  color:#6e745d;
+  box-shadow:none;
+  filter:grayscale(.65);
+}
+@keyframes equipment-illustrated-button{
+  0%,100%{transform:translate(-50%,-50%) scale(1)}
+  50%{transform:translate(-50%,-54%) scale(1.045)}
+}
+@media(max-width:360px){
+  .equipment-hotspot{width:118px;height:79px}
+  .equipment-hotspot b{right:22px;bottom:8px;left:18px;font-size:8px}
+  .equipment-hotspot span{right:11px;bottom:6px;font-size:6px}
+  .equipment-detail{grid-template-columns:53px minmax(0,1fr) 78px;padding-right:13px;padding-left:15px}
+  .equipment-detail>.equipment-upgrade{width:72px;min-width:72px;height:59px;font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){.equipment-hotspot.selected{animation:none!important}}
