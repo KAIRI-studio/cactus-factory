@@ -1471,3 +1471,50 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 .close::before{transform:translate(-50%,-50%) rotate(45deg)}
 .close::after{transform:translate(-50%,-50%) rotate(-45deg)}
+
+/* v170: rarity-linked featured specimen card and pedestal */
+.zukan-hero.rarity-super{
+  border-color:#a8780d;
+  background:linear-gradient(145deg,#fff8d7 0%,#ffe89b 100%);
+  box-shadow:0 5px 0 #9a711b,inset 0 1px #fff9dc;
+}
+.zukan-hero.rarity-super::before{
+  background:linear-gradient(105deg,#fff7ca 0 22%,transparent 22%);
+}
+.zukan-hero.rarity-super .zukan-hero-copy small{
+  border-color:#664808;
+  background:#c48b0d!important;
+  color:#fff9df;
+}
+.zukan-hero.rarity-super .zukan-hero-stage::after{
+  border-color:#6f500c;
+  background:#f0c53e;
+  box-shadow:0 5px 0 #9a711b;
+}
+.zukan-hero.rarity-super .zukan-hero-copy em{
+  border-color:#a8780d;
+  background:#fff9df;
+}
+
+.zukan-hero.rarity-legend{
+  border-color:#8f2f28;
+  background:linear-gradient(145deg,#ffe3dc 0%,#f29a8c 100%);
+  box-shadow:0 5px 0 #7c2b25,inset 0 1px #fff0eb;
+}
+.zukan-hero.rarity-legend::before{
+  background:linear-gradient(105deg,#ffd6ce 0 22%,transparent 22%);
+}
+.zukan-hero.rarity-legend .zukan-hero-copy small{
+  border-color:#67211d;
+  background:#b9362e!important;
+  color:#fff4f0;
+}
+.zukan-hero.rarity-legend .zukan-hero-stage::after{
+  border-color:#67211d;
+  background:#dc685c;
+  box-shadow:0 5px 0 #7c2b25;
+}
+.zukan-hero.rarity-legend .zukan-hero-copy em{
+  border-color:#9b423a;
+  background:#fff0eb;
+}
