@@ -763,7 +763,7 @@ function renderEquipment() {
     hotspot.dataset.equipmentSelect = item.key;
     hotspot.setAttribute("aria-pressed", String(selectedEquipmentKey === item.key));
     hotspot.setAttribute("aria-label", item.name + " LV." + level);
-    hotspot.innerHTML = "<span>LV." + level + "</span><em>えらんだ</em>";
+    hotspot.innerHTML = "<span>LV." + level + "</span>";
     grid.append(hotspot);
   });
 
@@ -772,15 +772,22 @@ function renderEquipment() {
   const cost = equipmentUpgradeCost(level);
   const previewLevel = level >= 3 ? 3 : level + 1;
   detail.className = "equipment-detail equipment-detail-" + item.key;
-  detail.innerHTML = '<div class="equipment-detail-choice"><small>えらんだ せつび</small><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
+  detail.innerHTML = '<div class="equipment-detail-choice"><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
   const upgrade = document.createElement("button");
   upgrade.type = "button";
   upgrade.className = "equipment-upgrade";
   upgrade.dataset.equipment = item.key;
   upgrade.disabled = level >= 3 || state.coins < cost;
-  upgrade.innerHTML = level >= 3
-    ? '<span class="equipment-switch-light" aria-hidden="true"></span><b>かんせい</b>'
-    : '<span class="equipment-switch-light" aria-hidden="true"></span><b>' + (level === 0 ? "せっち" : "きょうか") + '</b><small><i class="equipment-coin" aria-hidden="true"></i>' + cost + '</small>';
+  const actionImage = level >= 3
+    ? "assets/equipment-action-complete.webp"
+    : level === 0
+      ? "assets/equipment-action-install-100.webp"
+      : level === 1
+        ? "assets/equipment-action-upgrade-300.webp"
+        : "assets/equipment-action-upgrade-700.webp";
+  const actionLabel = level >= 3 ? "かんせい" : (level === 0 ? "せっち 100コイン" : "かいぞう " + cost + "コイン");
+  upgrade.setAttribute("aria-label", actionLabel);
+  upgrade.innerHTML = '<img src="' + actionImage + '" alt="" aria-hidden="true">';
   detail.append(upgrade);
 
   const complete = total >= 12;
