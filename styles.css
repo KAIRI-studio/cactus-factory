@@ -3032,8 +3032,8 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 #equipmentDialog .equipment-hotspot.selected{
   transform:translateY(-1px)!important;
-  background-image:url("assets/equipment-buttons-v5.webp"),radial-gradient(ellipse at center,#fff1a6a8 0%,#f4cc5668 46%,#e9b92f00 76%)!important;
-  background-size:200% 200%,82% 82%!important;
+  background-image:url("assets/equipment-buttons-v5.webp"),radial-gradient(ellipse at center,#fff1a6d1 0%,#f4cc567a 48%,#e9b92f00 78%)!important;
+  background-size:200% 200%,90% 88%!important;
   background-repeat:no-repeat!important;
   filter:drop-shadow(0 3px 2px #173e3238)!important;
 }
