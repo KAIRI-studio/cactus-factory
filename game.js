@@ -772,7 +772,7 @@ function renderEquipment() {
   const cost = equipmentUpgradeCost(level);
   const previewLevel = level >= 3 ? 3 : level + 1;
   detail.className = "equipment-detail equipment-detail-" + item.key;
-  detail.innerHTML = '<div class="equipment-detail-choice"><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
+  detail.innerHTML = '<span class="equipment-detail-mini equipment-detail-mini-' + item.key + '" aria-hidden="true"></span><div class="equipment-detail-choice"><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
   const upgrade = document.createElement("button");
   upgrade.type = "button";
   upgrade.className = "equipment-upgrade";
