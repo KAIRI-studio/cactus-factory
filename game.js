@@ -778,16 +778,9 @@ function renderEquipment() {
   upgrade.className = "equipment-upgrade";
   upgrade.dataset.equipment = item.key;
   upgrade.disabled = level >= 3 || state.coins < cost;
-  const actionImage = level >= 3
-    ? "assets/equipment-action-complete.webp"
-    : level === 0
-      ? "assets/equipment-action-install-100.webp"
-      : level === 1
-        ? "assets/equipment-action-upgrade-300.webp"
-        : "assets/equipment-action-upgrade-700.webp";
-  const actionLabel = level >= 3 ? "かんせい" : (level === 0 ? "せっち 100コイン" : "かいぞう " + cost + "コイン");
+  detail.classList.add(level >= 3 ? "equipment-detail-complete" : "equipment-detail-cost-" + cost);
+  const actionLabel = level >= 3 ? "かんせい" : "かいぞう " + cost + "コイン";
   upgrade.setAttribute("aria-label", actionLabel);
-  upgrade.innerHTML = '<img src="' + actionImage + '" alt="" aria-hidden="true">';
   detail.append(upgrade);
 
   const complete = total >= 12;
