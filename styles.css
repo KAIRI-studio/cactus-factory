@@ -2906,3 +2906,62 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog .equipment-room-shell>.equipment-grid{gap:12px 9px!important;padding-top:8px!important;padding-bottom:7px!important}
   #equipmentDialog .equipment-detail{min-height:108px!important;padding-top:21px!important;padding-bottom:23px!important}
 }
+
+/* v194: final reference-matched composition; keep this block last. */
+#equipmentDialog .equipment-illustrated-heading{margin:0 -2px 10px!important;overflow:visible}
+#equipmentDialog .equipment-illustrated-heading img{width:106%!important;max-width:none!important;margin-left:-3%}
+#equipmentDialog .equipment-scroll-area{padding:2px 8px 14px!important}
+#equipmentDialog .equipment-room-shell{
+  padding:11px 9px 9px!important;border:2px solid #6d907e!important;border-radius:20px!important;
+  background:linear-gradient(180deg,#eef3e5d9 0%,#dfe9dfc7 66%,#e9ead9b8 100%)!important;
+  box-shadow:inset 0 0 0 2px #fbf8df99,0 4px 0 #294f4166!important;backdrop-filter:blur(1.5px)
+}
+#equipmentDialog .equipment-room-level{min-height:48px!important}
+#equipmentDialog .equipment-room-shell>.sound-setting{min-height:46px!important}
+#equipmentDialog .equipment-room-shell>.equipment-grid{gap:17px 8px!important;padding:17px 0 15px!important}
+#equipmentDialog .equipment-hotspot{width:103%!important;justify-self:center!important}
+#equipmentDialog .equipment-hotspot.selected{transform:translateY(-2px) scale(1.025)!important}
+#equipmentDialog .equipment-hotspot.selected::before{
+  inset:9% 6% 3%!important;opacity:.8!important;
+  background:radial-gradient(ellipse at center,#fff4b58c 0%,#f4d36650 54%,transparent 78%)!important;
+  filter:blur(4px)!important
+}
+#equipmentDialog .equipment-detail{
+  min-height:119px!important;grid-template-columns:46px minmax(94px,1fr) 36%!important;
+  gap:3px!important;padding:25px 5% 27px 6%!important
+}
+#equipmentDialog .equipment-detail-mini{
+  grid-column:1;grid-row:1;align-self:center;justify-self:center;display:block;width:46px;height:32px;
+  background:url("assets/equipment-buttons-v5.webp") 0 0/200% 200% no-repeat;
+  filter:drop-shadow(0 2px 1px #173e3240)
+}
+#equipmentDialog .equipment-detail-mini-mist{background-position:100% 0}
+#equipmentDialog .equipment-detail-mini-air{background-position:0 100%}
+#equipmentDialog .equipment-detail-mini-sensor{background-position:100% 100%}
+#equipmentDialog .equipment-detail-choice{
+  grid-column:2!important;grid-row:1!important;align-self:center!important;min-width:94px!important;
+  padding:0 0 0 7px!important;gap:6px!important
+}
+#equipmentDialog .equipment-detail-choice b{
+  font-size:14px!important;line-height:1.15!important;white-space:nowrap!important;
+  overflow:visible!important;text-overflow:clip!important
+}
+#equipmentDialog .equipment-detail-choice span{font-size:10px!important}
+#equipmentDialog .equipment-detail>.equipment-upgrade{
+  grid-column:3!important;grid-row:1!important;align-self:center!important;min-width:0!important
+}
+@media(max-width:360px){
+  #equipmentDialog .equipment-room-shell{padding-right:7px!important;padding-left:7px!important}
+  #equipmentDialog .equipment-detail{grid-template-columns:41px minmax(84px,1fr) 35%!important;padding-right:4%!important;padding-left:5%!important}
+  #equipmentDialog .equipment-detail-mini{width:42px;height:29px}
+  #equipmentDialog .equipment-detail-choice{min-width:84px!important;padding-left:5px!important}
+  #equipmentDialog .equipment-detail-choice b{font-size:12px!important}
+}
+@media(max-height:700px){
+  #equipmentDialog .equipment-illustrated-heading img{width:102%!important;margin-left:-1%}
+  #equipmentDialog .equipment-room-shell>.equipment-grid{gap:9px 7px!important;padding-top:8px!important;padding-bottom:8px!important}
+  #equipmentDialog .equipment-detail{min-height:101px!important;grid-template-columns:40px minmax(82px,1fr) 35%!important;padding-top:20px!important;padding-bottom:21px!important}
+  #equipmentDialog .equipment-detail-mini{width:41px;height:28px}
+  #equipmentDialog .equipment-detail-choice{min-width:82px!important;padding-left:4px!important}
+  #equipmentDialog .equipment-detail-choice b{font-size:12px!important}
+}
