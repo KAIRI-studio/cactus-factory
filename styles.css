@@ -2965,3 +2965,11 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog .equipment-detail-choice{min-width:82px!important;padding-left:4px!important}
   #equipmentDialog .equipment-detail-choice b{font-size:12px!important}
 }
+
+/* v195: keep the compact level panel on one line. */
+#equipmentDialog .equipment-room-level span{white-space:nowrap!important}
+@media(max-height:700px){
+  #equipmentDialog .equipment-room-level span{font-size:8px!important;letter-spacing:-.02em}
+  #equipmentDialog .equipment-room-level{column-gap:5px!important;padding-right:7px!important;padding-left:7px!important}
+  #equipmentDialog .equipment-room-level b{font-size:14px!important}
+}
