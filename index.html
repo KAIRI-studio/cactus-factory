@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=202" />
+  <link rel="stylesheet" href="styles.css?v=203" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=202" defer></script>
+  <script src="game.js?v=203" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -163,13 +163,10 @@
         <div class="equipment-room-shell">
           <div class="equipment-room-level"><span>ぜんたいレベル</span><b id="equipmentTotalText">0 / 12</b><div class="equipment-meter"><i id="equipmentMeterFill"></i></div></div>
           <div class="sound-setting"><span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 13h6l7-6v18l-7-6H6z"/><path d="M23 12c2 2 2 6 0 8M26 9c4 4 4 10 0 14"/></svg></span><b>おと</b><button id="soundToggle" type="button" aria-pressed="true">ON</button></div>
+          <div class="equipment-coin-meter" id="equipmentCoinMeter" aria-label="しょじコイン 120"><b id="equipmentCoinCount">120</b></div>
           <div class="equipment-grid" id="equipmentGrid"></div>
           <div class="equipment-detail" id="equipmentDetail"></div>
         </div>
-        <section class="special-shop" id="specialShop" hidden>
-          <div><span>★</span><p><b>レア栄養剤</b><small>つぎにそだつ 1たいが レアいじょう</small></p></div>
-          <button id="specialSeedButton" type="button">300コイン</button>
-        </section>
         <p class="feedback" id="equipmentFeedback"></p>
         <section class="test-tools"><small>テスト用</small><div><button id="fillTestButton" type="button">まんたんにする</button><button class="danger" id="resetTestButton" type="button">データをリセット</button></div></section>
       </div>
@@ -189,6 +186,6 @@
       <div class="zukan-grid" id="zukanGrid"></div>
     </section></dialog>
   </main>
-  <!-- release-v202 -->
+  <!-- release-v203 -->
 </body>
 </html>

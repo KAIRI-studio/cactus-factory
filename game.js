@@ -114,6 +114,8 @@ function createInitialState() {
 function save() { localStorage.setItem(STORAGE, JSON.stringify(state)); }
 const nursery = document.querySelector("#nursery");
 const coinCount = document.querySelector("#coinCount");
+const equipmentCoinCount = document.querySelector("#equipmentCoinCount");
+const equipmentCoinMeter = document.querySelector("#equipmentCoinMeter");
 const equipmentLevelText = document.querySelector("#equipmentLevelText");
 const specialNutrient = document.querySelector("#specialNutrient");
 const game = document.querySelector(".game");
@@ -436,6 +438,8 @@ function render() {
     }
   });
   coinCount.textContent = state.coins;
+  equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
+  equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
   equipmentLevelText.textContent = equipmentTotal() + " / 12";
   renderSpecialNutrient();
   // Level-specific equipment is rendered as illustrated hardware above the base room.\n  document.querySelector(".greenhouse-back").src = FACILITY_BACKGROUNDS.base;
@@ -754,6 +758,8 @@ function renderEquipment() {
   renderSoundSetting();
   document.querySelector("#equipmentTotalText").textContent = total + " / 12";
   document.querySelector("#equipmentMeterFill").style.width = (total / 12 * 100) + "%";
+  equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
+  equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
 
   EQUIPMENT.forEach(function (item) {
     const level = state.equipment[item.key];
@@ -766,6 +772,25 @@ function renderEquipment() {
     hotspot.innerHTML = "<span>LV." + level + "</span>";
     grid.append(hotspot);
   });
+
+  const complete = total >= 12;
+  if (complete) {
+    const nutrientInUse = nutrientIsInUse();
+    const nutrientUnavailable = nutrientInUse || state.coins < 300;
+    detail.className = "equipment-detail equipment-detail-nutrient" + (nutrientInUse ? " is-active" : "") + (nutrientUnavailable ? " is-disabled" : "");
+    detail.style.setProperty("--equipment-detail-art", nutrientInUse
+      ? 'url("assets/nutrient-purchase-panel-active.webp")'
+      : 'url("assets/nutrient-purchase-panel.webp")');
+    const nutrientButton = document.createElement("button");
+    nutrientButton.id = "specialSeedButton";
+    nutrientButton.type = "button";
+    nutrientButton.className = "nutrient-purchase";
+    nutrientButton.disabled = nutrientUnavailable;
+    nutrientButton.setAttribute("aria-label", nutrientInUse ? "レア栄養剤 しようちゅう" : "レア栄養剤を 300コインで こうにゅう");
+    detail.append(nutrientButton);
+    document.querySelector("#equipmentFeedback").textContent = nutrientInUse ? "レア栄養剤を しようちゅう" : "";
+    return;
+  }
 
   const item = EQUIPMENT.find(function (entry) { return entry.key === selectedEquipmentKey; }) || EQUIPMENT[0];
   const level = state.equipment[item.key];
@@ -782,16 +807,7 @@ function renderEquipment() {
   upgrade.setAttribute("aria-label", actionLabel);
   detail.append(upgrade);
 
-  const complete = total >= 12;
-  const specialShop = document.querySelector("#specialShop");
-  specialShop.hidden = !complete;
-  if (complete) {
-    const specialButton = document.querySelector("#specialSeedButton");
-    const nutrientInUse = nutrientIsInUse();
-    specialButton.disabled = nutrientInUse || state.coins < 300;
-    specialButton.textContent = nutrientInUse ? "しようちゅう" : "300コイン";
-  }
-  document.querySelector("#equipmentFeedback").textContent = complete ? "せつび かんせい！ コインで レア栄養剤が つかえます" : "";
+  document.querySelector("#equipmentFeedback").textContent = "";
 }
 document.querySelector("#equipmentButton").addEventListener("click", function () {
   if (state.tutorialStep === "equipment") finishTutorial();
@@ -803,6 +819,16 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   const select = event.target.closest(".equipment-hotspot");
   if (select) {
     selectedEquipmentKey = select.dataset.equipmentSelect;
+    renderEquipment();
+    return;
+  }
+  const nutrientButton = event.target.closest(".nutrient-purchase");
+  if (nutrientButton) {
+    if (equipmentTotal() < 12 || nutrientIsInUse() || state.coins < 300) return;
+    state.specialSeedQueued = true;
+    state.coins -= 300;
+    playSound("upgrade");
+    render();
     renderEquipment();
     return;
   }
@@ -820,14 +846,6 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   render();
   equipmentDialog.close();
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
-});
-document.querySelector("#specialSeedButton").addEventListener("click", function () {
-  if (equipmentTotal() < 12 || nutrientIsInUse() || state.coins < 300) return;
-  state.specialSeedQueued = true;
-  state.coins -= 300;
-  playSound("upgrade");
-  render();
-  renderEquipment();
 });
 
 document.querySelector("#fillTestButton").addEventListener("click", function () {
