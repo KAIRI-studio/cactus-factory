@@ -817,7 +817,8 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   game.classList.remove("facility-installing");
   void game.offsetWidth;
   game.classList.add("facility-installing");
-  render(); renderEquipment();
+  render();
+  equipmentDialog.close();
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
 });
 document.querySelector("#specialSeedButton").addEventListener("click", function () {
