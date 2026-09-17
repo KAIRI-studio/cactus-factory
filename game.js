@@ -772,13 +772,12 @@ function renderEquipment() {
   const cost = equipmentUpgradeCost(level);
   const previewLevel = level >= 3 ? 3 : level + 1;
   detail.className = "equipment-detail equipment-detail-" + item.key;
-  detail.innerHTML = '<span class="equipment-detail-mini equipment-detail-mini-' + item.key + '" aria-hidden="true"></span><div class="equipment-detail-choice"><b>' + item.name + '</b><span>LV.' + level + (level >= 3 ? "・かんせい！" : " → LV." + previewLevel) + '</span></div>';
+  detail.style.setProperty("--equipment-detail-art", 'url("assets/equipment-detail-' + item.key + '-lv' + level + '.webp")');
   const upgrade = document.createElement("button");
   upgrade.type = "button";
   upgrade.className = "equipment-upgrade";
   upgrade.dataset.equipment = item.key;
   upgrade.disabled = level >= 3 || state.coins < cost;
-  detail.classList.add(level >= 3 ? "equipment-detail-complete" : "equipment-detail-cost-" + cost);
   const actionLabel = level >= 3 ? "かんせい" : "かいぞう " + cost + "コイン";
   upgrade.setAttribute("aria-label", actionLabel);
   detail.append(upgrade);
