@@ -3109,6 +3109,12 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   column-gap:5px!important;
 }
 #equipmentDialog .equipment-room-level{grid-column:1!important;grid-row:1!important}
+#equipmentDialog .equipment-room-level{
+  grid-template-columns:minmax(0,1fr) auto!important;
+  column-gap:4px!important;
+}
+#equipmentDialog .equipment-room-level span{font-size:8px!important;letter-spacing:-.02em!important}
+#equipmentDialog .equipment-room-level b{font-size:13px!important;line-height:1!important;white-space:nowrap!important}
 #equipmentDialog .equipment-room-shell>.sound-setting{
   grid-column:2!important;grid-row:1!important;gap:3px!important;
   padding-right:4px!important;padding-left:4px!important;
