@@ -129,8 +129,34 @@ const onboardingTip = document.querySelector("#onboardingTip");
 const onboardingStep = document.querySelector("#onboardingStep");
 const onboardingText = document.querySelector("#onboardingText");
 const onboardingSkip = document.querySelector("#onboardingSkip");
+const upgradeCelebration = document.querySelector("#upgradeCelebration");
+const upgradeCelebrationClose = document.querySelector("#upgradeCelebrationClose");
+const upgradeCelebrationEquipment = document.querySelector("#upgradeCelebrationEquipment");
+const upgradeCelebrationName = document.querySelector("#upgradeCelebrationName");
+const upgradeCelebrationLevel = document.querySelector("#upgradeCelebrationLevel");
 let tutorialTimer;
+let upgradeCelebrationTimer;
 let audioContext;
+
+function hideUpgradeCelebration() {
+  window.clearTimeout(upgradeCelebrationTimer);
+  upgradeCelebration.classList.remove("show");
+  upgradeCelebration.hidden = true;
+}
+
+function showUpgradeCelebration(item, fromLevel, toLevel) {
+  window.clearTimeout(upgradeCelebrationTimer);
+  upgradeCelebrationName.textContent = item.name;
+  upgradeCelebrationLevel.textContent = "LV." + fromLevel + " → LV." + toLevel;
+  upgradeCelebrationEquipment.className = "upgrade-celebration-equipment upgrade-celebration-equipment-" + item.key;
+  upgradeCelebration.hidden = false;
+  upgradeCelebration.classList.remove("show");
+  void upgradeCelebration.offsetWidth;
+  upgradeCelebration.classList.add("show");
+  upgradeCelebrationTimer = window.setTimeout(hideUpgradeCelebration, 3600);
+}
+
+upgradeCelebrationClose.addEventListener("click", hideUpgradeCelebration);
 
 function getAudioContext() {
   if (!state.soundEnabled) return null;
@@ -839,12 +865,14 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   const cost = equipmentUpgradeCost(level);
   if (level >= 3 || state.coins < cost) return;
   state.coins -= cost; state.equipment[key] += 1;
+  const upgradedItem = EQUIPMENT.find(function (item) { return item.key === key; });
   playSound("upgrade");
   game.classList.remove("facility-installing");
   void game.offsetWidth;
   game.classList.add("facility-installing");
   render();
   equipmentDialog.close();
+  if (upgradedItem) window.setTimeout(function () { showUpgradeCelebration(upgradedItem, level, level + 1); }, 100);
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
 });
 
