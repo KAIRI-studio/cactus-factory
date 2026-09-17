@@ -2642,3 +2642,97 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 #equipmentDialog .equipment-detail>.equipment-upgrade small{font-size:10px;line-height:1.3}
 #equipmentDialog .equipment-scroll-area>.test-tools{margin-top:max(88px,14dvh);padding-top:24px;padding-bottom:20px}
 #equipmentDialog .equipment-scroll-area>.special-shop{margin-top:24px;height:auto;min-height:94px}
+
+/* v190: quiet factory-room backdrop, illustration-led selection, mechanical upgrade switch. */
+#equipmentDialog .equipment-room-shell{
+  position:relative;
+  isolation:isolate;
+  padding:14px 7px 9px!important;
+  border:3px solid #345f50!important;
+  border-radius:22px!important;
+  background:
+    radial-gradient(circle at 18px 18px,#d3aa3c 0 3px,#6f5a23 3.5px 5px,transparent 5.5px),
+    radial-gradient(circle at calc(100% - 18px) 18px,#d3aa3c 0 3px,#6f5a23 3.5px 5px,transparent 5.5px),
+    repeating-linear-gradient(90deg,transparent 0 31%,#31574912 31.2% 31.7%,transparent 31.9% 64%),
+    linear-gradient(180deg,#e8efe5 0%,#d9e5da 52%,#cfddd1 100%)!important;
+  box-shadow:inset 0 0 0 2px #f7fbf3,0 5px 0 #274d40!important;
+}
+#equipmentDialog .equipment-room-shell::before{
+  content:"";position:absolute;z-index:-1;inset:68px 10px 105px;border-radius:15px;
+  background:
+    linear-gradient(90deg,transparent 49.4%,#365e4f20 49.7% 50.3%,transparent 50.6%),
+    linear-gradient(180deg,transparent 49.2%,#365e4f20 49.6% 50.4%,transparent 50.8%);
+  box-shadow:inset 0 0 0 1px #76948745;
+  pointer-events:none;
+}
+#equipmentDialog .equipment-room-level,
+#equipmentDialog .equipment-room-shell>.sound-setting{
+  border-color:#345d4e!important;background:#f4f1dccc!important;
+  box-shadow:0 3px 0 #789083!important;backdrop-filter:blur(3px);
+}
+#equipmentDialog .equipment-room-shell>.equipment-grid{gap:22px 12px!important;padding:13px 7px 11px!important}
+#equipmentDialog .equipment-hotspot{
+  position:relative!important;z-index:0;border:0!important;border-radius:20px!important;
+  background-color:transparent!important;box-shadow:none!important;filter:drop-shadow(0 3px 1px #173e3240)!important;
+  overflow:visible!important;transition:transform .15s ease,filter .15s ease!important;
+}
+#equipmentDialog .equipment-hotspot::before{
+  content:"";position:absolute;z-index:-1;inset:8% 7% 5%;border-radius:34% 34% 27% 27%;
+  background:radial-gradient(ellipse at center,#f8d86600 30%,#f8d86600 72%);
+  transform:scale(.88);opacity:0;transition:opacity .18s ease,transform .18s ease;pointer-events:none;
+}
+#equipmentDialog .equipment-hotspot::after{
+  content:"";position:absolute;z-index:-1;left:20%;right:20%;bottom:-7px;height:10px;border-radius:50%;
+  background:#284f4166;filter:blur(3px);opacity:.35;transition:.18s ease;pointer-events:none;
+}
+#equipmentDialog .equipment-hotspot.selected{
+  transform:translateY(-3px)!important;background-color:transparent!important;box-shadow:none!important;
+  filter:drop-shadow(0 5px 2px #173e3242) drop-shadow(0 0 6px #f5d760b8)!important;
+}
+#equipmentDialog .equipment-hotspot.selected::before{
+  opacity:1;transform:scale(1);background:radial-gradient(ellipse at center,#fff7b8b8 0%,#f4d35675 54%,#f0c73900 76%);
+}
+#equipmentDialog .equipment-hotspot.selected::after{bottom:-9px;background:#d5a92e;opacity:.75;filter:blur(1px)}
+#equipmentDialog .equipment-hotspot.selected em{
+  display:block!important;top:auto!important;left:50%!important;bottom:-13px!important;transform:translateX(-50%);
+  padding:3px 9px;border:2px solid #254d3f;border-radius:999px;background:#315f4f;color:#fff9d9;
+  box-shadow:0 2px 0 #173e32;font-size:7px;letter-spacing:.08em;white-space:nowrap;
+}
+#equipmentDialog .equipment-hotspot span{
+  top:-7px!important;right:4px!important;border-color:#355e50!important;background:#f5f2df!important;color:#315347!important;
+  box-shadow:0 2px 0 #829489!important;
+}
+#equipmentDialog .equipment-hotspot:active{transform:translateY(0) scale(.97)!important}
+#equipmentDialog .equipment-detail{
+  min-height:132px!important;padding:27px 7% 29px 11%!important;
+  filter:drop-shadow(0 4px 1px #173e3240);
+}
+#equipmentDialog .equipment-detail-choice small{color:#70867a!important;letter-spacing:.08em}
+#equipmentDialog .equipment-detail-choice b{color:#183e32!important;text-shadow:0 1px #fff}
+#equipmentDialog .equipment-detail-choice span{color:#4e6d5f!important}
+#equipmentDialog .equipment-detail>.equipment-upgrade{
+  position:relative!important;height:62px!important;min-height:62px!important;padding:9px 4px 6px!important;gap:2px!important;
+  border:2px solid #8a6816!important;border-radius:999px!important;
+  background:linear-gradient(180deg,#ffe871 0%,#efbb30 66%,#d79c20 100%)!important;
+  box-shadow:inset 0 3px #fff3a2,inset 0 -3px #ba7f16,0 4px 0 #214b3d!important;
+  color:#173e32!important;text-shadow:0 1px #fff4a2!important;
+}
+#equipmentDialog .equipment-detail>.equipment-upgrade::after{
+  content:"";position:absolute;inset:4px;border:1px solid #fff2a775;border-radius:inherit;pointer-events:none;
+}
+#equipmentDialog .equipment-detail>.equipment-upgrade .equipment-switch-light{
+  position:absolute;top:7px;right:9px;width:7px;height:7px;border:1px solid #173e32;border-radius:50%;
+  background:#7fd472;box-shadow:0 0 5px #7fe269;
+}
+#equipmentDialog .equipment-detail>.equipment-upgrade b{font-size:14px!important;font-weight:1000;letter-spacing:.07em}
+#equipmentDialog .equipment-detail>.equipment-upgrade small{display:flex!important;align-items:center;justify-content:center;gap:3px;font-size:11px!important}
+.equipment-coin{display:inline-block;width:12px;height:12px;border:2px solid #6d5113;border-radius:50%;background:#f8cb43;box-shadow:inset 0 0 0 2px #ffe989}
+#equipmentDialog .equipment-detail>.equipment-upgrade:disabled{
+  border-color:#788b80!important;background:linear-gradient(#dce4dc,#bfcac1)!important;
+  box-shadow:inset 0 3px #f4f7f2,inset 0 -3px #98a69d,0 3px 0 #527064!important;filter:none!important;
+}
+#equipmentDialog .equipment-detail>.equipment-upgrade:disabled .equipment-switch-light{background:#aeb7b0;box-shadow:none}
+@media(max-height:700px){
+  #equipmentDialog .equipment-room-shell>.equipment-grid{gap:14px 10px!important;padding-top:9px!important;padding-bottom:8px!important}
+  #equipmentDialog .equipment-detail{min-height:118px!important;padding-top:23px!important;padding-bottom:25px!important}
+}
