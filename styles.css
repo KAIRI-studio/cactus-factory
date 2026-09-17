@@ -2977,6 +2977,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 /* v196: reference-sized full-screen factory and one-piece illustrated upgrade console. */
 #equipmentDialog{
   width:min(100vw,460px)!important;
+  max-width:none!important;
   height:100dvh!important;
   max-height:none!important;
   margin:auto!important;
@@ -3013,11 +3014,13 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   border-radius:18px!important;
 }
 #equipmentDialog .equipment-room-shell>.equipment-grid{
+  min-height:330px!important;
   gap:12px 8px!important;
   padding:12px 0 10px!important;
 }
 #equipmentDialog .equipment-hotspot{
   width:98%!important;
+  align-self:center!important;
 }
 #equipmentDialog .equipment-hotspot.selected{
   transform:translateY(-1px)!important;
@@ -3082,9 +3085,12 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   box-shadow:none!important;
   opacity:.72;
 }
+#equipmentDialog .equipment-scroll-area>.test-tools{
+  margin-top:38dvh!important;
+}
 @media(max-height:700px){
   #equipmentDialog .equipment-dialog-card{padding-top:max(38px,calc(env(safe-area-inset-top) + 14px))!important}
   #equipmentDialog .equipment-illustrated-heading{margin-bottom:2px!important}
-  #equipmentDialog .equipment-room-shell>.equipment-grid{gap:7px 7px!important;padding:6px 0!important}
+  #equipmentDialog .equipment-room-shell>.equipment-grid{min-height:250px!important;gap:7px 7px!important;padding:6px 0!important}
   #equipmentDialog .equipment-detail{min-height:0!important;padding-top:11%!important;padding-bottom:10%!important}
 }
