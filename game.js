@@ -778,7 +778,9 @@ function renderEquipment() {
   upgrade.className = "equipment-upgrade";
   upgrade.dataset.equipment = item.key;
   upgrade.disabled = level >= 3 || state.coins < cost;
-  upgrade.innerHTML = level >= 3 ? "<b>かんせい</b>" : '<b>' + (level === 0 ? "せっち" : "きょうか") + '</b><small>' + cost + "コイン</small>";
+  upgrade.innerHTML = level >= 3
+    ? '<span class="equipment-switch-light" aria-hidden="true"></span><b>かんせい</b>'
+    : '<span class="equipment-switch-light" aria-hidden="true"></span><b>' + (level === 0 ? "せっち" : "きょうか") + '</b><small><i class="equipment-coin" aria-hidden="true"></i>' + cost + '</small>';
   detail.append(upgrade);
 
   const complete = total >= 12;
