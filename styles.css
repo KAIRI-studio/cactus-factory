@@ -3725,3 +3725,26 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   transform:translateY(3px) scale(.96)!important;
   box-shadow:0 1px 0 #789386,inset 0 0 0 3px #b8d4c2!important;
 }
+
+/* v221: the zukan close button is the single shared standard. */
+#mathDialog .math-card>.close,
+#equipmentDialog .equipment-dialog-card>.close,
+#zukanDialog .zukan-card>.close{
+  width:50px!important;height:50px!important;min-width:50px!important;min-height:50px!important;
+  padding:0!important;border:3px solid #173c31!important;border-radius:50%!important;
+  background:#fff3c9!important;
+  box-shadow:0 4px 0 #d7a934,0 0 0 5px #ffe37b!important;
+  color:#173c31!important;font-size:0!important;line-height:1!important;text-shadow:none!important;
+  opacity:1!important;touch-action:manipulation!important;
+}
+#mathDialog .math-card>.close,
+#zukanDialog .zukan-card>.close{top:10px!important;right:10px!important}
+#equipmentDialog .equipment-dialog-card>.close{
+  top:max(10px,env(safe-area-inset-top))!important;right:10px!important;
+}
+#mathDialog .math-card>.close:active,
+#equipmentDialog .equipment-dialog-card>.close:active,
+#zukanDialog .zukan-card>.close:active{
+  transform:translateY(3px) scale(.96)!important;
+  box-shadow:0 1px 0 #d7a934,0 0 0 5px #ffe37b!important;
+}
