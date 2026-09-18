@@ -4265,9 +4265,11 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 #zukanDialog .station-glass{
   position:relative!important;
   z-index:1!important;
-  flex:1 1 auto!important;
+  flex:0 1 552px!important;
   width:calc(100% - 6px)!important;
+  height:552px!important;
   min-height:0!important;
+  max-height:calc(100% - 139px)!important;
   margin:0 3px!important;
   box-sizing:border-box!important;
   border:2px solid #fffce2e8!important;
