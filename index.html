@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=209" />
+  <link rel="stylesheet" href="styles.css?v=210" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=209" defer></script>
+  <script src="game.js?v=210" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -142,19 +142,18 @@
     </nav>
     <dialog id="mathDialog"><section class="dialog-card math-card">
       <button class="close" id="mathClose" aria-label="閉じる">×</button>
-      <div class="challenge-head"><span id="questionNumber">1 / 10</span><b id="score">せいかい 0</b></div>
-      <div class="math-machine-title">
-        <span class="math-machine-icon" aria-hidden="true">
-          <svg viewBox="0 0 64 64"><rect x="9" y="6" width="46" height="52" rx="10"/><rect x="17" y="14" width="30" height="12" rx="3"/><circle cx="20" cy="36" r="3"/><circle cx="32" cy="36" r="3"/><circle cx="44" cy="36" r="3"/><circle cx="20" cy="47" r="3"/><path d="M29 47h6M41 47h6"/></svg>
-        </span>
-        <div><small>CALCULATION UNIT</small><h2>けいさんチャレンジ</h2></div>
+      <header class="math-illustrated-heading"><img src="assets/math-heading-v1.webp" alt="けいさんチャレンジ" /></header>
+      <div class="challenge-head">
+        <span class="math-counter"><small>もんだい</small><b id="questionNumber">1 / 10</b></span>
+        <span class="math-counter"><small>せいかい</small><b id="score">0</b></span>
+        <span class="math-progress" id="mathProgress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
       </div>
       <p class="problem" id="mathProblem"></p>
       <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback" aria-live="polite"></p>
       <div class="answer-celebration" id="answerCelebration" role="status" aria-live="assertive" hidden>
         <span class="answer-symbol" id="answerSymbol"></span>
+        <img class="answer-title-art" src="assets/math-correct-v1.webp" alt="" />
         <b id="answerCelebrationText"></b>
-        <img src="assets/cactus-normal.png" alt="" />
       </div>
     </section></dialog>
     <dialog id="resultDialog"><section class="dialog-card result-card">
@@ -192,6 +191,6 @@
       <div class="zukan-grid" id="zukanGrid"></div>
     </section></dialog>
   </main>
-  <!-- release-v209 -->
+  <!-- release-v210 -->
 </body>
 </html>

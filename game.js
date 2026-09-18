@@ -698,14 +698,21 @@ const answerCelebrationText = document.querySelector("#answerCelebrationText");
 const answerSymbol = document.querySelector("#answerSymbol");
 const questionNumber = document.querySelector("#questionNumber");
 const score = document.querySelector("#score");
+const mathProgress = document.querySelector("#mathProgress");
 let challenge = { answered: 0, correct: 0 };
 let nextTimer;
 
 function showQuestion() {
   const q = makeQuestion(challenge.answered + 1);
   questionNumber.textContent = (challenge.answered + 1) + " / 10";
-  score.textContent = "せいかい " + challenge.correct;
+  score.textContent = challenge.correct;
   mathProblem.textContent = q.text;
+  mathProblem.classList.remove("is-updating");
+  void mathProblem.offsetWidth;
+  mathProblem.classList.add("is-updating");
+  Array.from(mathProgress.children).forEach(function (lamp, index) {
+    lamp.className = index < challenge.answered ? "done" : index === challenge.answered ? "current" : "";
+  });
   mathFeedback.textContent = "";
   mathCard.classList.remove("answer-correct", "answer-wrong");
   answerCelebration.hidden = true;
@@ -744,7 +751,7 @@ function answerQuestion(correct, button, correctValue) {
     mathFeedback.textContent = "こたえは " + correctValue;
     if (navigator.vibrate) navigator.vibrate([35, 45, 35]);
   }
-  score.textContent = "せいかい " + challenge.correct;
+  score.textContent = challenge.correct;
   nextTimer = setTimeout(challenge.answered >= 10 ? finishChallenge : showQuestion, 1150);
 }
 

@@ -417,6 +417,102 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @media(prefers-reduced-motion:reduce){
   .answer-celebration,.answer-celebration img,.math-card.answer-correct,.math-card.answer-wrong{animation:none!important}
 }
+
+/* v210: cactus factory calculation unit */
+#mathDialog{width:min(94vw,410px)}
+#mathDialog::backdrop{background:#0b241bcf;backdrop-filter:blur(5px) saturate(.75)}
+.math-card{
+  width:100%;padding:13px 17px 20px;border:4px solid #123d30;border-radius:25px;
+  background:
+    radial-gradient(circle at 10px 10px,#f5bd38 0 3px,#65450c 3.5px 5px,transparent 5.5px),
+    radial-gradient(circle at calc(100% - 10px) 10px,#f5bd38 0 3px,#65450c 3.5px 5px,transparent 5.5px),
+    linear-gradient(90deg,#2a7158 0 9px,#92c8ad 9px 12px,#f5f0d9 12px calc(100% - 12px),#92c8ad calc(100% - 12px) calc(100% - 9px),#2a7158 calc(100% - 9px));
+  box-shadow:0 8px 0 #082b21,0 28px 70px #03140fcf,inset 0 0 0 2px #8ec0a7;
+  overflow:visible;text-align:center;
+}
+.math-card::before{
+  content:"CALCULATION UNIT  01";position:absolute;z-index:2;top:8px;left:50%;width:auto;height:auto;
+  padding:3px 14px;border:1px solid #163f31;border-radius:99px;transform:translateX(-50%);
+  background:#d9e8d6;color:#3d6655;font-size:7px;font-weight:1000;letter-spacing:.16em;white-space:nowrap;
+  box-shadow:0 2px 0 #7d9d8c;
+}
+.math-card::after{inset:10px;border:1px solid #436f5d66;border-radius:15px}
+.math-card .close{
+  z-index:5;top:10px;right:10px;width:45px;height:45px;border:3px solid #123d30;border-radius:50%;
+  background:linear-gradient(#fff9dd,#e8ddb9);box-shadow:0 4px 0 #789386,inset 0 0 0 3px #b8d4c2;
+  color:#143a2f;font-size:27px;text-shadow:0 1px #fff;
+}
+.math-card .close:active{transform:translateY(3px) scale(.96);box-shadow:0 1px 0 #789386}
+.math-illustrated-heading{height:111px;margin:7px 35px 0 3px;display:grid;place-items:center}
+.math-illustrated-heading img{display:block;width:100%;max-width:335px;height:auto;filter:drop-shadow(0 4px 2px #09291f4a)}
+.math-card .challenge-head{
+  display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 3px 12px;padding:9px 9px 8px;
+  border:3px solid #102f26;border-radius:15px;background:linear-gradient(155deg,#286047,#153e31);
+  box-shadow:inset 0 0 0 2px #4f8a70,inset 0 5px 9px #071b15,0 4px 0 #8b9d91;color:#eff7e8;
+}
+.math-counter{
+  display:grid;grid-template-columns:auto 1fr;align-items:center;gap:7px;min-height:39px;padding:5px 9px;
+  border:2px solid #0b2b21;border-radius:9px;background:#eaf0dd;box-shadow:inset 0 2px 4px #79928266,0 2px 0 #08261e;
+  color:#173e32;text-align:left;
+}
+.math-counter small{font-size:9px;font-weight:1000;letter-spacing:.08em;color:#5d7669;white-space:nowrap}
+.math-counter b{justify-self:end;color:#173e32!important;font-size:18px;line-height:1;font-variant-numeric:tabular-nums;text-shadow:0 1px #fff}
+.math-progress{grid-column:1/-1;display:grid;grid-template-columns:repeat(10,1fr);gap:4px;padding:2px 3px 0}
+.math-progress i{height:7px;border:1px solid #09291f;border-radius:99px;background:#71857a;box-shadow:inset 0 1px 2px #071b15}
+.math-progress i.current{background:#ffd052;box-shadow:0 0 8px #ffe48c,inset 0 1px #fff3b9}
+.math-progress i.done{background:#73c775;box-shadow:0 0 5px #8ddd83,inset 0 1px #d8ffd3}
+.math-card .problem{
+  min-height:112px;display:grid;place-items:center;margin:0 4px 17px;padding:15px 34px;
+  border:5px solid #102f26;border-radius:16px;background:
+    linear-gradient(#073226e8,#073226e8),repeating-linear-gradient(0deg,transparent 0 4px,#7fe1aa12 4px 5px);
+  box-shadow:inset 0 0 0 3px #34765c,inset 0 9px 18px #031812,0 5px 0 #83968b,0 0 15px #79d49b24;
+  color:#fff3c4;font-size:clamp(34px,10.5vw,46px);font-weight:900;letter-spacing:.03em;text-shadow:0 3px #021811;
+}
+.math-card .problem::before,.math-card .problem::after{top:8px;width:7px;height:7px;background:#f2c64d;border:2px solid #09271e;box-shadow:0 0 5px #ffd75c}
+.math-card .problem.is-updating{animation:math-monitor-update .23s ease-out}
+.math-card .answers{gap:11px;margin:0 4px}
+.math-card .answers button{
+  position:relative;height:72px;border:4px solid #123d30;border-radius:15px;
+  background:linear-gradient(155deg,#fff0b4 0 55%,#e8c763 100%);box-shadow:0 7px 0 #8c651b,inset 0 0 0 2px #fff7d2;
+  color:#173a30;font-size:29px;font-weight:1000;text-shadow:0 2px #fff7d5;
+  transition:transform .09s ease,box-shadow .09s ease,filter .15s ease;
+}
+.math-card .answers button::after{content:"";position:absolute;inset:5px;border:1px solid #b58c34;border-radius:8px;pointer-events:none}
+.math-card .answers button:active{transform:translateY(5px) scale(.97);box-shadow:0 2px 0 #8c651b,inset 0 0 0 2px #fff7d2}
+.math-card .answers button.correct{animation:math-key-correct .5s ease;background:linear-gradient(#d9f5a9,#8fcf70);box-shadow:0 7px 0 #3d7439,0 0 17px #a9f08e}
+.math-card .answers button.wrong{animation:math-key-wrong .38s ease;background:linear-gradient(#f5c8aa,#d98d73);box-shadow:0 7px 0 #8d4b39}
+.math-card .feedback{min-height:21px;margin:10px 0 0;color:#315949;font-size:12px;font-weight:900}
+.math-card.answer-wrong .problem,.math-card.answer-wrong .answers{animation:none}
+.answer-celebration{
+  top:56%;display:grid;grid-template-columns:1fr;grid-template-rows:1fr;place-items:center;gap:0;width:285px;min-height:140px;padding:0;border:0;border-radius:0;
+  background:transparent!important;box-shadow:none;transform:translate(-50%,-50%);overflow:visible;
+}
+.answer-celebration .answer-symbol{display:none}
+.answer-celebration .answer-title-art{display:none;width:280px;height:auto;object-fit:contain;filter:drop-shadow(0 8px 5px #061b1566)}
+.answer-celebration.is-correct .answer-title-art{display:block;animation:math-success-pop .46s cubic-bezier(.18,1.35,.36,1)}
+.answer-celebration.is-correct b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.answer-celebration.is-wrong b{
+  display:grid;place-items:center;width:190px;min-height:84px;border:4px solid #153e31;border-radius:18px;
+  background:linear-gradient(#fff7df,#eddfba);box-shadow:0 7px 0 #7c8e82,0 15px 30px #0617106b;
+  color:#345c4d;font-size:27px;text-shadow:0 2px #fff;
+}
+.answer-celebration.is-wrong .answer-title-art{display:none}
+@keyframes math-monitor-update{0%{opacity:.4;transform:scaleY(.9);filter:brightness(1.35)}100%{opacity:1;transform:none;filter:none}}
+@keyframes math-key-correct{0%,100%{transform:none}45%{transform:translateY(3px) scale(.96);filter:brightness(1.18)}}
+@keyframes math-key-wrong{0%,100%{transform:translateX(0)}22%{transform:translateX(-6px)}45%{transform:translateX(6px)}68%{transform:translateX(-3px)}}
+@keyframes math-success-pop{0%{opacity:0;transform:scale(.55) translateY(12px)}72%{opacity:1;transform:scale(1.05) translateY(-3px)}100%{transform:none}}
+@media(max-width:360px){
+  .math-card{padding:12px 14px 17px}.math-illustrated-heading{height:101px;margin-right:36px}
+  .math-card .problem{min-height:101px}.math-card .answers button{height:66px;font-size:26px}
+}
+@media(max-height:700px){
+  .math-illustrated-heading{height:88px}.math-card .challenge-head{margin-bottom:9px;padding-top:7px;padding-bottom:6px}
+  .math-counter{min-height:34px}.math-card .problem{min-height:86px;margin-bottom:12px;font-size:32px}
+  .math-card .answers button{height:59px}.math-card .feedback{margin-top:7px}
+}
+@media(prefers-reduced-motion:reduce){
+  .math-card .problem.is-updating,.math-card .answers button.correct,.math-card .answers button.wrong,.answer-celebration.is-correct .answer-title-art{animation:none!important}
+}
 @media(max-width:360px){
   .answer-celebration{width:248px;grid-template-columns:52px 1fr 43px}
   .answer-celebration .answer-symbol{width:49px;height:49px;font-size:38px}
