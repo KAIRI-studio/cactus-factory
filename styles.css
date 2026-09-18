@@ -3949,6 +3949,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .zukan-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;padding:0 2px 7px!important}
 .zukan-entry,.zukan-entry.rarity-legend:last-child{
   display:grid!important;grid-template-columns:1fr!important;grid-template-rows:58px auto!important;
+  grid-column:auto!important;
   justify-items:center!important;align-items:initial!important;
   height:119px!important;min-height:119px!important;gap:2px!important;
   padding:13px 3px 4px!important;border-width:2px!important;border-radius:11px!important;text-align:center!important;
