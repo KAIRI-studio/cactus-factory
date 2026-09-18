@@ -951,7 +951,9 @@ function renderZukan() {
   const collectionProgress = document.querySelector("#collectionProgress");
   document.querySelector("#collectionProgressCount").textContent = foundCount + " / " + CACTUS_TYPES.length;
   collectionProgress.setAttribute("aria-label", "しゅうしゅう " + foundCount + " / " + CACTUS_TYPES.length);
-  document.querySelector("#collectionTrack").style.setProperty("--collection-progress", (foundCount / CACTUS_TYPES.length * 100) + "%");
+  Array.from(document.querySelector("#collectionTrack").children).forEach(function (lamp, index) {
+    lamp.classList.toggle("filled", index < foundCount);
+  });
   let currentGroup = "";
   CACTUS_TYPES.forEach(function (type, typeIndex) {
     const count = state.collections[type.id] || 0;
