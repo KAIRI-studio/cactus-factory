@@ -4146,3 +4146,30 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
     max-height:120px!important;
   }
 }
+
+/* v230: optically and geometrically match every title to the equipment header. */
+#equipmentDialog .equipment-illustrated-heading,
+#mathDialog .math-illustrated-heading,
+#zukanDialog .zukan-book-title{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:132px!important;
+  align-items:center!important;
+  justify-items:center!important;
+}
+#mathDialog .math-illustrated-heading,
+#zukanDialog .zukan-book-title{
+  margin-right:5px!important;
+  margin-left:5px!important;
+}
+@media(max-width:360px){
+  #equipmentDialog .equipment-illustrated-heading,
+  #mathDialog .math-illustrated-heading,
+  #zukanDialog .zukan-book-title{
+    grid-template-rows:120px!important;
+  }
+  #mathDialog .math-illustrated-heading,
+  #zukanDialog .zukan-book-title{
+    margin-right:7px!important;
+    margin-left:7px!important;
+  }
+}
