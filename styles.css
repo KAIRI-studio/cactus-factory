@@ -3607,3 +3607,106 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .zukan-title-meta{grid-template-columns:1fr!important;gap:4px!important}
   .zukan-book-title .collection-progress{justify-self:start!important;min-width:184px!important}
 }
+
+/* v219: one factory, three purpose-built stations. Equipment remains the visual benchmark. */
+#mathDialog::backdrop,
+#resultDialog::backdrop,
+#zukanDialog::backdrop{
+  background:
+    radial-gradient(ellipse at 50% 19%,#a9d2b52b 0 8%,transparent 42%),
+    linear-gradient(90deg,transparent 0 7%,#2a624a24 7% 9%,transparent 9% 91%,#2a624a24 91% 93%,transparent 93%),
+    linear-gradient(180deg,#17392ddc 0 12%,#0a251cef 48%,#061b15f7 100%)!important;
+  backdrop-filter:blur(5px) saturate(.72)!important;
+}
+
+/* Calculation station: a compact control console, not a cream modal. */
+#mathDialog{
+  border-radius:30px!important;background:#0b2b21!important;
+  box-shadow:0 10px 0 #061b15,0 30px 72px #020d09df,0 0 0 2px #6f9c84!important;
+}
+.math-card{
+  border:7px solid #0f3b2d!important;border-radius:29px!important;
+  background:
+    radial-gradient(circle at 12px 12px,#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    radial-gradient(circle at calc(100% - 12px) 12px,#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    radial-gradient(circle at 12px calc(100% - 12px),#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    linear-gradient(180deg,#23644c 0 12px,#83b89c 12px 15px,transparent 15px calc(100% - 15px),#83b89c calc(100% - 15px) calc(100% - 12px),#23644c calc(100% - 12px)),
+    linear-gradient(90deg,#23644c 0 12px,#83b89c 12px 16px,#f3efd8 16px calc(100% - 16px),#83b89c calc(100% - 16px) calc(100% - 12px),#23644c calc(100% - 12px))!important;
+  box-shadow:0 8px 0 #071f18,0 27px 64px #03140fcf,inset 0 0 0 2px #a0c7b2!important;
+}
+.math-illustrated-heading{
+  margin:5px 38px 12px 4px!important;border:3px solid #315f4c;border-radius:17px!important;
+  background:
+    radial-gradient(ellipse at 50% 0,#fff9c97a 0 11%,transparent 55%),
+    linear-gradient(180deg,#dbe8d7,#eef0d8)!important;
+  box-shadow:0 5px 0 #769281,inset 0 0 0 2px #f8f5df,inset 0 9px 15px #ffffff69!important;
+}
+.math-card .challenge-head{
+  border-color:#0a2b21!important;background:linear-gradient(155deg,#286047,#10382b)!important;
+  box-shadow:inset 0 0 0 2px #559176,inset 0 6px 11px #061b15,0 5px 0 #657f70!important;
+}
+.math-card .problem{
+  border-color:#092b21!important;box-shadow:inset 0 0 0 3px #397d61,inset 0 10px 20px #031812,0 6px 0 #6e8879,0 0 15px #79d49b24!important;
+}
+.math-card .answers button{
+  border-color:#0f3b2d!important;box-shadow:0 7px 0 #8c651b,inset 0 0 0 2px #fff7d2,0 0 0 2px #78a28b2e!important;
+}
+
+/* Result panel belongs to the same calculation terminal. */
+.result-card{
+  border:6px solid #0f3b2d!important;border-radius:28px!important;
+  background:
+    linear-gradient(180deg,transparent 0 10px,#79ad91 10px 13px,transparent 13px calc(100% - 13px),#79ad91 calc(100% - 13px) calc(100% - 10px),transparent calc(100% - 10px)),
+    linear-gradient(90deg,#24634b 0 11px,#91bda5 11px 14px,#fff9df 14px calc(100% - 14px),#91bda5 calc(100% - 14px) calc(100% - 11px),#24634b calc(100% - 11px))!important;
+  box-shadow:0 8px 0 #071f18,0 27px 64px #03140fd9,inset 0 0 0 2px #9fc7b1!important;
+}
+
+/* Collection station: a softly lit research cabinet with a restrained archive grid. */
+#zukanDialog{
+  border-radius:30px!important;background:#0b2b21!important;
+  box-shadow:0 10px 0 #061b15,0 30px 72px #020d09e3,0 0 0 2px #719b84!important;
+}
+.zukan-card{
+  border:7px solid #0f3b2d!important;border-radius:29px!important;
+  background:
+    radial-gradient(circle at 12px 12px,#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    radial-gradient(circle at calc(100% - 12px) 12px,#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    radial-gradient(circle at 12px calc(100% - 12px),#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),#f3c34b 0 3px,#694b0c 3.5px 6px,transparent 6.5px),
+    linear-gradient(180deg,#27634d 0 12px,#8ab79f 12px 15px,transparent 15px calc(100% - 15px),#8ab79f calc(100% - 15px) calc(100% - 12px),#27634d calc(100% - 12px)),
+    repeating-linear-gradient(0deg,transparent 0 58px,#7891801c 58px 60px),
+    linear-gradient(90deg,#27634d 0 12px,#8ab79f 12px 16px,#f4efd7 16px calc(100% - 16px),#8ab79f calc(100% - 16px) calc(100% - 12px),#27634d calc(100% - 12px))!important;
+  box-shadow:0 8px 0 #071f18,0 27px 64px #03140fcf,inset 0 0 0 2px #a1c6b2!important;
+}
+.zukan-card::before{
+  inset:11px!important;border:1px solid #335e4c61!important;border-radius:17px!important;
+  box-shadow:inset 0 1px #fff9dbb8,inset 0 0 22px #244d3b20!important;
+}
+.zukan-book-title{
+  margin:2px 2px 0!important;min-height:151px!important;padding:5px 46px 9px 7px!important;
+  border:3px solid #315f4c!important;border-radius:17px!important;
+  background:
+    radial-gradient(ellipse at 50% 0,#fff8c66b 0 10%,transparent 51%),
+    repeating-linear-gradient(90deg,transparent 0 52px,#6d8c7820 52px 54px),
+    linear-gradient(180deg,#dce9d6,#f2efd5)!important;
+  box-shadow:0 6px 0 #718c7c,inset 0 0 0 2px #faf6df,inset 0 9px 16px #ffffff66!important;
+}
+.zukan-title-meta{border-top:2px solid #7e9a885e!important}
+.zukan-book-title .collection-progress{
+  border-color:#0d3529!important;background:linear-gradient(180deg,#2a654d,#123b2d)!important;
+  box-shadow:0 4px 0 #08251c,inset 0 0 0 2px #579077,inset 0 1px #a0cdb4!important;
+}
+.zukan-hero{
+  border-color:#0f3b2d!important;box-shadow:0 7px 0 #557563,inset 0 0 0 2px #91b69d,inset 0 10px 18px #ffffff52!important;
+}
+.zukan-section-title{
+  border-color:#174432!important;box-shadow:0 5px 0 #456b57,inset 0 1px #eefbdc!important;
+}
+
+@media(max-width:360px){
+  .math-card{border-width:6px!important;padding-right:13px!important;padding-left:13px!important}
+  .math-illustrated-heading{margin-right:37px!important}
+  .zukan-card{border-width:6px!important;padding-right:11px!important;padding-left:13px!important}
+  .zukan-book-title{margin-right:1px!important;margin-left:1px!important;padding-right:42px!important}
+}
