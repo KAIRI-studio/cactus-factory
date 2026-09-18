@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=210" />
+  <link rel="stylesheet" href="styles.css?v=212" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=210" defer></script>
+  <script src="game.js?v=212" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -148,13 +148,16 @@
         <span class="math-counter"><small>せいかい</small><b id="score">0</b></span>
         <span class="math-progress" id="mathProgress" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
       </div>
-      <p class="problem" id="mathProblem"></p>
-      <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback" aria-live="polite"></p>
-      <div class="answer-celebration" id="answerCelebration" role="status" aria-live="assertive" hidden>
-        <span class="answer-symbol" id="answerSymbol"></span>
-        <img class="answer-title-art" src="assets/math-correct-v1.webp" alt="" />
-        <b id="answerCelebrationText"></b>
+      <div class="problem-stage">
+        <p class="problem" id="mathProblem"></p>
+        <div class="answer-celebration" id="answerCelebration" role="status" aria-live="assertive" hidden>
+          <span class="answer-symbol" id="answerSymbol"></span>
+          <img class="answer-title-art answer-title-correct" src="assets/math-correct-v1.webp" alt="" />
+          <img class="answer-title-art answer-title-wrong" src="assets/math-wrong-v2.webp" alt="" />
+          <b id="answerCelebrationText"></b>
+        </div>
       </div>
+      <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback" aria-live="polite"></p>
     </section></dialog>
     <dialog id="resultDialog"><section class="dialog-card result-card">
       <small>チャレンジけっか</small><h2 id="resultTitle">10もんちゅう 0もんせいかい</h2>
@@ -191,6 +194,6 @@
       <div class="zukan-grid" id="zukanGrid"></div>
     </section></dialog>
   </main>
-  <!-- release-v210 -->
+  <!-- release-v212 -->
 </body>
 </html>

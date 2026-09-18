@@ -431,10 +431,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   overflow:visible;text-align:center;
 }
 .math-card::before{
-  content:"CALCULATION UNIT  01";position:absolute;z-index:2;top:8px;left:50%;width:auto;height:auto;
-  padding:3px 14px;border:1px solid #163f31;border-radius:99px;transform:translateX(-50%);
-  background:#d9e8d6;color:#3d6655;font-size:7px;font-weight:1000;letter-spacing:.16em;white-space:nowrap;
-  box-shadow:0 2px 0 #7d9d8c;
+  content:none;display:none;
 }
 .math-card::after{inset:10px;border:1px solid #436f5d66;border-radius:15px}
 .math-card .close{
@@ -461,8 +458,9 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .math-progress i{height:7px;border:1px solid #09291f;border-radius:99px;background:#71857a;box-shadow:inset 0 1px 2px #071b15}
 .math-progress i.current{background:#ffd052;box-shadow:0 0 8px #ffe48c,inset 0 1px #fff3b9}
 .math-progress i.done{background:#73c775;box-shadow:0 0 5px #8ddd83,inset 0 1px #d8ffd3}
+.problem-stage{position:relative;margin:0 4px 17px}
 .math-card .problem{
-  min-height:112px;display:grid;place-items:center;margin:0 4px 17px;padding:15px 34px;
+  min-height:112px;display:grid;place-items:center;margin:0;padding:15px 34px;
   border:5px solid #102f26;border-radius:16px;background:
     linear-gradient(#073226e8,#073226e8),repeating-linear-gradient(0deg,transparent 0 4px,#7fe1aa12 4px 5px);
   box-shadow:inset 0 0 0 3px #34765c,inset 0 9px 18px #031812,0 5px 0 #83968b,0 0 15px #79d49b24;
@@ -484,19 +482,13 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .math-card .feedback{min-height:21px;margin:10px 0 0;color:#315949;font-size:12px;font-weight:900}
 .math-card.answer-wrong .problem,.math-card.answer-wrong .answers{animation:none}
 .answer-celebration{
-  top:56%;display:grid;grid-template-columns:1fr;grid-template-rows:1fr;place-items:center;gap:0;width:285px;min-height:140px;padding:0;border:0;border-radius:0;
-  background:transparent!important;box-shadow:none;transform:translate(-50%,-50%);overflow:visible;
+  position:absolute;inset:0;z-index:4;display:grid;place-items:center;width:100%;height:100%;min-height:0;padding:0;border:0;border-radius:0;
+  background:transparent!important;box-shadow:none;transform:none;overflow:visible;pointer-events:none;
 }
 .answer-celebration .answer-symbol{display:none}
-.answer-celebration .answer-title-art{display:none;width:280px;height:auto;object-fit:contain;filter:drop-shadow(0 8px 5px #061b1566)}
-.answer-celebration.is-correct .answer-title-art{display:block;animation:math-success-pop .46s cubic-bezier(.18,1.35,.36,1)}
-.answer-celebration.is-correct b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
-.answer-celebration.is-wrong b{
-  display:grid;place-items:center;width:190px;min-height:84px;border:4px solid #153e31;border-radius:18px;
-  background:linear-gradient(#fff7df,#eddfba);box-shadow:0 7px 0 #7c8e82,0 15px 30px #0617106b;
-  color:#345c4d;font-size:27px;text-shadow:0 2px #fff;
-}
-.answer-celebration.is-wrong .answer-title-art{display:none}
+.answer-celebration .answer-title-art{display:none;width:min(94%,280px);height:auto;object-fit:contain;filter:drop-shadow(0 8px 5px #061b1566)}
+.answer-celebration.is-correct .answer-title-correct,.answer-celebration.is-wrong .answer-title-wrong{display:block;animation:math-success-pop .46s cubic-bezier(.18,1.35,.36,1)}
+.answer-celebration b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 @keyframes math-monitor-update{0%{opacity:.4;transform:scaleY(.9);filter:brightness(1.35)}100%{opacity:1;transform:none;filter:none}}
 @keyframes math-key-correct{0%,100%{transform:none}45%{transform:translateY(3px) scale(.96);filter:brightness(1.18)}}
 @keyframes math-key-wrong{0%,100%{transform:translateX(0)}22%{transform:translateX(-6px)}45%{transform:translateX(6px)}68%{transform:translateX(-3px)}}
@@ -507,16 +499,14 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 @media(max-height:700px){
   .math-illustrated-heading{height:88px}.math-card .challenge-head{margin-bottom:9px;padding-top:7px;padding-bottom:6px}
-  .math-counter{min-height:34px}.math-card .problem{min-height:86px;margin-bottom:12px;font-size:32px}
+  .math-counter{min-height:34px}.problem-stage{margin-bottom:12px}.math-card .problem{min-height:86px;font-size:32px}
   .math-card .answers button{height:59px}.math-card .feedback{margin-top:7px}
 }
 @media(prefers-reduced-motion:reduce){
-  .math-card .problem.is-updating,.math-card .answers button.correct,.math-card .answers button.wrong,.answer-celebration.is-correct .answer-title-art{animation:none!important}
+  .math-card .problem.is-updating,.math-card .answers button.correct,.math-card .answers button.wrong,.answer-celebration .answer-title-art{animation:none!important}
 }
 @media(max-width:360px){
-  .answer-celebration{width:248px;grid-template-columns:52px 1fr 43px}
-  .answer-celebration .answer-symbol{width:49px;height:49px;font-size:38px}
-  .answer-celebration b{font-size:21px}.answer-celebration img{width:43px;height:56px}
+  .answer-celebration .answer-title-art{width:min(94%,248px)}
 }
 
 /* v151: shake the inner console without moving the dialog viewport */
@@ -3316,3 +3306,21 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .upgrade-celebration.hiding .upgrade-celebration-card{animation:none;opacity:0}
   .upgrade-celebration.show .upgrade-spark{animation:none}
 }
+
+/* v211: center illustrated answer feedback inside the calculation monitor. */
+.problem-stage{position:relative;margin:0 4px 17px}
+.math-card .problem{margin:0!important}
+.problem-stage .answer-celebration{
+  position:absolute;inset:0;z-index:20;display:grid;place-items:center;
+  width:100%;height:100%;min-height:0;padding:0;border:0;border-radius:0;
+  background:transparent!important;box-shadow:none;transform:none;text-align:center;pointer-events:none;
+}
+.problem-stage .answer-celebration[hidden]{display:none}
+.problem-stage .answer-celebration .answer-symbol{display:none}
+.problem-stage .answer-celebration .answer-title-art{display:none;width:min(94%,280px);height:auto;margin:0;object-fit:contain;filter:drop-shadow(0 8px 5px #061b1566)}
+.problem-stage .answer-celebration.is-correct .answer-title-correct,
+.problem-stage .answer-celebration.is-wrong .answer-title-wrong{display:block;animation:math-success-pop .46s cubic-bezier(.18,1.35,.36,1)}
+.problem-stage .answer-celebration b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:360px){.problem-stage .answer-celebration .answer-title-art{width:min(94%,248px)}}
+@media(max-height:700px){.problem-stage{margin-bottom:12px}}
+@media(prefers-reduced-motion:reduce){.problem-stage .answer-celebration .answer-title-art{animation:none!important}}
