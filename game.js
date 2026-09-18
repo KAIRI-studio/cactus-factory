@@ -988,7 +988,7 @@ function renderZukan() {
   Array.from(document.querySelector("#collectionTrack").children).forEach(function (lamp, index) {
     lamp.classList.toggle("filled", index < foundCount);
   });
-  document.querySelector("#zukanListTotal").textContent = "ぜんぶ " + CACTUS_TYPES.length + "たい";
+  document.querySelector("#zukanListTotal").textContent = foundCount + " / " + CACTUS_TYPES.length;
   renderZukanPage();
 }
 document.querySelector("#zukanButton").addEventListener("click", function () {

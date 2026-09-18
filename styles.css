@@ -3984,3 +3984,28 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .zukan-entry .zukan-picture,.zukan-entry.rarity-legend:last-child .zukan-picture{height:54px!important}
   .zukan-entry .zukan-picture img,.zukan-entry.rarity-legend:last-child .zukan-picture img{max-width:51px!important;max-height:51px!important}
 }
+
+/* v226: let the field-guide logo own the header; show progress with the collection list. */
+.zukan-card>.zukan-book-title{
+  display:block!important;
+  min-height:105px!important;
+  padding:5px 47px 5px 7px!important;
+}
+.zukan-heading-art{
+  width:min(100%,340px)!important;
+  height:94px!important;
+  max-height:94px!important;
+  object-position:left center!important;
+}
+.zukan-title-meta{display:none!important}
+.zukan-list-head span{
+  color:#173e32!important;
+  font-size:12px!important;
+  font-weight:1000!important;
+  letter-spacing:.03em!important;
+  font-variant-numeric:tabular-nums;
+}
+@media(max-width:360px){
+  .zukan-card>.zukan-book-title{min-height:99px!important;padding-right:44px!important}
+  .zukan-heading-art{height:88px!important;max-height:88px!important}
+}
