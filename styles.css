@@ -3918,3 +3918,68 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .zukan-entry{height:121px!important;min-height:121px!important}
   .zukan-entry .zukan-picture{height:58px!important}
 }
+
+/* v224: simple count header and a four-column paged collection surface. */
+.zukan-card>.zukan-book-title{
+  min-height:105px!important;grid-template-rows:68px 29px!important;
+  padding:2px 47px 4px 5px!important;
+}
+.zukan-heading-art{width:min(100%,300px)!important;height:68px!important;max-height:68px!important}
+.zukan-title-meta{grid-template-columns:minmax(0,1fr) auto!important;min-height:29px!important;padding-left:6px!important}
+.zukan-subtitle{font-size:8px!important}
+.zukan-book-title .collection-progress{
+  min-width:0!important;margin:0 3px 0 0!important;padding:0!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;color:#173c31!important;
+}
+.zukan-book-title .collection-progress .collection-label,
+.zukan-book-title .collection-progress .collection-track{display:none!important}
+.zukan-book-title .collection-progress b{
+  color:#173c31!important;font-size:17px!important;line-height:1!important;
+  text-shadow:0 1px #fff!important;
+}
+.zukan-list-head{
+  display:flex;align-items:center;justify-content:space-between;
+  min-height:31px;margin:5px 2px 6px;padding:5px 9px 4px;
+  border:2px solid #174432;border-radius:10px 10px 4px 4px;
+  background:#b8dca9;color:#173e32;
+  box-shadow:0 3px 0 #315d4a,inset 0 1px #eefbdc;
+}
+.zukan-list-head b{font-size:12px}.zukan-list-head span{font-size:7px;font-weight:900;letter-spacing:.08em}
+.zukan-grid{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:6px!important;padding:0 2px 7px!important}
+.zukan-entry,.zukan-entry.rarity-legend:last-child{
+  display:grid!important;grid-template-columns:1fr!important;grid-template-rows:58px auto!important;
+  justify-items:center!important;align-items:initial!important;
+  height:119px!important;min-height:119px!important;gap:2px!important;
+  padding:13px 3px 4px!important;border-width:2px!important;border-radius:11px!important;text-align:center!important;
+}
+.zukan-entry .zukan-picture,.zukan-entry.rarity-legend:last-child .zukan-picture{
+  width:100%!important;height:58px!important;overflow:hidden!important;border-radius:8px!important;
+  background:#dceccf!important;box-shadow:inset 0 0 0 2px #aac49f!important;
+}
+.zukan-entry .zukan-picture img,.zukan-entry.rarity-legend:last-child .zukan-picture img{
+  max-width:55px!important;max-height:55px!important;transform:none!important;
+}
+.zukan-entry .zukan-info,.zukan-entry.rarity-legend:last-child .zukan-info{
+  justify-items:center!important;width:100%!important;gap:1px!important;text-align:center!important;
+}
+.zukan-entry .zukan-info small,.zukan-entry.rarity-legend:last-child .zukan-info small{padding:0 4px!important;font-size:6px!important;line-height:1.25!important}
+.zukan-entry .zukan-info b,.zukan-entry.rarity-legend:last-child .zukan-info b{
+  overflow:hidden!important;display:block!important;width:100%!important;min-height:0!important;
+  font-size:7px!important;line-height:1.2!important;white-space:nowrap!important;text-overflow:ellipsis!important;
+}
+.zukan-entry .zukan-info em,.zukan-entry.rarity-legend:last-child .zukan-info em{font-size:6px!important;line-height:1.15!important}
+.zukan-entry-number{top:4px!important;left:5px!important;font-size:6px!important}
+.zukan-entry::after{top:5px!important;right:5px!important;width:5px!important;height:5px!important;box-shadow:-7px 3px 0 #75b76d!important}
+.zukan-pagination{display:flex;justify-content:center;align-items:center;gap:7px;min-height:20px;padding:1px 0 7px}
+.zukan-pagination[hidden]{display:none!important}
+.zukan-page-dot{width:9px;height:9px;padding:0;border:2px solid #315d4a;border-radius:50%;background:#b5cabd;box-shadow:none}
+.zukan-page-dot.active{width:20px;border-radius:999px;background:#f1c84e}
+@media(max-width:360px){
+  .zukan-card>.zukan-book-title{min-height:99px!important;grid-template-rows:63px 28px!important}
+  .zukan-heading-art{height:63px!important;max-height:63px!important}
+  .zukan-grid{gap:4px!important}
+  .zukan-entry,.zukan-entry.rarity-legend:last-child{height:112px!important;min-height:112px!important;grid-template-rows:54px auto!important;padding-right:2px!important;padding-left:2px!important}
+  .zukan-entry .zukan-picture,.zukan-entry.rarity-legend:last-child .zukan-picture{height:54px!important}
+  .zukan-entry .zukan-picture img,.zukan-entry.rarity-legend:last-child .zukan-picture img{max-width:51px!important;max-height:51px!important}
+}

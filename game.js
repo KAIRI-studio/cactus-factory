@@ -944,9 +944,43 @@ function showZukanHero(type, count, entry) {
   requestAnimationFrame(function () { hero.classList.add("is-switching"); });
 }
 
-function renderZukan() {
+const ZUKAN_PAGE_SIZE = 12;
+let zukanPage = 0;
+
+function renderZukanPage() {
   const grid = document.querySelector("#zukanGrid");
   grid.replaceChildren();
+  const pageCount = Math.max(1, Math.ceil(CACTUS_TYPES.length / ZUKAN_PAGE_SIZE));
+  zukanPage = Math.min(zukanPage, pageCount - 1);
+  const pageTypes = CACTUS_TYPES.slice(zukanPage * ZUKAN_PAGE_SIZE, (zukanPage + 1) * ZUKAN_PAGE_SIZE);
+  pageTypes.forEach(function (type) {
+    const typeIndex = CACTUS_TYPES.indexOf(type);
+    const count = state.collections[type.id] || 0;
+    const entry = document.createElement("button");
+    entry.className = "zukan-entry rarity-" + type.rarityKey + (count ? " found" : " not-found");
+    entry.type = "button";
+    entry.dataset.cactusId = type.id;
+    entry.setAttribute("aria-pressed", "false");
+    entry.innerHTML = '<span class="zukan-entry-number">No.' + String(typeIndex + 1).padStart(2, "0") + '</span><span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい</em></span>';
+    entry.addEventListener("click", function () { showZukanHero(type, count, entry); });
+    grid.append(entry);
+  });
+
+  const pagination = document.querySelector("#zukanPagination");
+  pagination.replaceChildren();
+  pagination.hidden = pageCount <= 1;
+  for (let pageIndex = 0; pageIndex < pageCount; pageIndex += 1) {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "zukan-page-dot" + (pageIndex === zukanPage ? " active" : "");
+    dot.setAttribute("aria-label", String(pageIndex + 1) + "ページめ");
+    dot.setAttribute("aria-current", pageIndex === zukanPage ? "page" : "false");
+    dot.addEventListener("click", function () { zukanPage = pageIndex; renderZukanPage(); });
+    pagination.append(dot);
+  }
+}
+
+function renderZukan() {
   const foundCount = CACTUS_TYPES.filter(function (type) { return (state.collections[type.id] || 0) > 0; }).length;
   const collectionProgress = document.querySelector("#collectionProgress");
   document.querySelector("#collectionProgressCount").textContent = foundCount + " / " + CACTUS_TYPES.length;
@@ -954,31 +988,11 @@ function renderZukan() {
   Array.from(document.querySelector("#collectionTrack").children).forEach(function (lamp, index) {
     lamp.classList.toggle("filled", index < foundCount);
   });
-  let currentGroup = "";
-  CACTUS_TYPES.forEach(function (type, typeIndex) {
-    const count = state.collections[type.id] || 0;
-    const group = zukanGroup(type);
-    if (group.key !== currentGroup) {
-      currentGroup = group.key;
-      const heading = document.createElement("div");
-      heading.className = "zukan-section-title group-" + group.key;
-      heading.innerHTML = "<b>" + group.name + "</b><small>" + group.english + "</small>";
-      grid.append(heading);
-    }
-    const entry = document.createElement("button");
-    entry.className = "zukan-entry rarity-" + type.rarityKey + (count ? " found" : " not-found");
-    entry.type = "button";
-    entry.dataset.cactusId = type.id;
-    entry.setAttribute("aria-pressed", "false");
-    entry.innerHTML = '<span class="zukan-entry-number">No.' + String(typeIndex + 1).padStart(2, "0") + '</span><span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい しゅうかく</em></span>';
-    entry.addEventListener("click", function () {
-      showZukanHero(type, count, entry);
-      document.querySelector(".zukan-hero").scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-    grid.append(entry);
-  });
+  document.querySelector("#zukanListTotal").textContent = "ぜんぶ " + CACTUS_TYPES.length + "たい";
+  renderZukanPage();
 }
 document.querySelector("#zukanButton").addEventListener("click", function () {
+  zukanPage = 0;
   renderZukan();
   const firstFound = CACTUS_TYPES.find(function (type) { return (state.collections[type.id] || 0) > 0; }) || CACTUS_TYPES[0];
   const firstFoundCount = state.collections[firstFound.id] || 0;
