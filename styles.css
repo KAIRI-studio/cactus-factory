@@ -4049,3 +4049,52 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #mathDialog .math-card,
   #zukanDialog .zukan-card{padding-right:15px!important;padding-left:15px!important}
 }
+
+/* v228: station headers are centered logos floating directly in the greenhouse. */
+#mathDialog .math-illustrated-heading{
+  display:grid!important;
+  place-items:center!important;
+  width:auto!important;
+  height:118px!important;
+  margin:0 36px 8px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+#mathDialog .math-illustrated-heading img{
+  display:block!important;
+  width:100%!important;
+  max-width:370px!important;
+  height:auto!important;
+  filter:drop-shadow(0 5px 2px #071b146b)!important;
+}
+#zukanDialog .zukan-book-title{
+  display:grid!important;
+  place-items:center!important;
+  width:auto!important;
+  min-height:112px!important;
+  margin:0 36px 8px!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+#zukanDialog .zukan-heading-art{
+  display:block!important;
+  width:100%!important;
+  max-width:350px!important;
+  height:auto!important;
+  max-height:106px!important;
+  object-position:center!important;
+  filter:drop-shadow(0 5px 2px #071b146b)!important;
+}
+@media(max-width:360px){
+  #mathDialog .math-illustrated-heading{height:108px!important;margin-right:32px!important;margin-left:32px!important}
+  #zukanDialog .zukan-book-title{min-height:104px!important;margin-right:32px!important;margin-left:32px!important}
+  #zukanDialog .zukan-heading-art{max-height:98px!important}
+}
