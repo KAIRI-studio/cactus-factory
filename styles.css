@@ -4293,13 +4293,31 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   overflow:hidden!important;
 }
 #zukanDialog .station-glass-zukan{
+  display:flex!important;
+  flex-direction:column!important;
   padding:6px 0 8px!important;
+  overflow-x:hidden!important;
+  overflow-y:hidden!important;
+  overscroll-behavior:contain!important;
+}
+#zukanDialog .station-glass-zukan>.zukan-hero,
+#zukanDialog .station-glass-zukan>.zukan-list-head{
+  flex:none!important;
+}
+#zukanDialog .station-glass-zukan .zukan-hero::before{
+  top:50%!important;
+  transform:translateY(-50%)!important;
+}
+#zukanDialog .zukan-list-scroll{
+  flex:1 1 auto!important;
+  min-height:0!important;
   overflow-x:hidden!important;
   overflow-y:auto!important;
   overscroll-behavior:contain!important;
+  -webkit-overflow-scrolling:touch!important;
   scrollbar-width:none!important;
 }
-#zukanDialog .station-glass-zukan::-webkit-scrollbar{display:none!important}
+#zukanDialog .zukan-list-scroll::-webkit-scrollbar{display:none!important}
 
 @media(max-width:360px){
   #mathDialog .station-glass,
