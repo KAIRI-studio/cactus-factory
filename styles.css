@@ -3748,3 +3748,83 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   transform:translateY(3px) scale(.96)!important;
   box-shadow:0 1px 0 #d7a934,0 0 0 5px #ffe37b!important;
 }
+
+/* v222: compact field-guide hierarchy; the collection list is the main view. */
+.zukan-card{
+  display:flex!important;flex-direction:column!important;
+  max-height:min(91dvh,790px)!important;overflow-x:hidden!important;overflow-y:auto!important;
+  overscroll-behavior:contain!important;-webkit-overflow-scrolling:touch!important;scrollbar-width:none!important;
+}
+.zukan-card::-webkit-scrollbar{display:none}
+.zukan-card>.zukan-book-title{
+  flex:0 0 auto!important;min-height:122px!important;
+  grid-template-rows:72px 39px!important;gap:2px!important;
+  margin:2px 2px 0!important;padding:4px 47px 7px 7px!important;
+}
+.zukan-heading-art{
+  width:min(100%,300px)!important;height:72px!important;max-height:72px!important;
+  object-fit:contain!important;object-position:left center!important;
+}
+.zukan-title-meta{
+  grid-template-columns:minmax(0,1fr) auto!important;gap:7px!important;
+  min-height:39px!important;margin:0!important;padding:2px 2px 0 5px!important;
+}
+.zukan-subtitle{font-size:8px!important;letter-spacing:.09em!important}
+.zukan-book-title .collection-progress{
+  align-self:center!important;justify-self:end!important;min-width:158px!important;
+  padding:4px 7px 5px!important;border-width:2px!important;border-radius:10px!important;
+  box-shadow:0 3px 0 #08251c,inset 0 0 0 2px #579077,inset 0 1px #a0cdb4!important;
+}
+.collection-label{font-size:8px!important}.collection-label small{font-size:5px!important}
+.collection-progress b{font-size:15px!important}
+.collection-track{height:8px!important;gap:3px!important}
+.zukan-card>.zukan-hero{
+  flex:0 0 auto!important;grid-template-columns:108px minmax(0,1fr)!important;
+  min-height:146px!important;height:146px!important;gap:7px!important;
+  margin:10px 2px 11px!important;padding:7px 10px 8px 5px!important;
+  scroll-margin-top:8px;
+}
+.zukan-hero::before{left:7px!important;top:4px!important;width:98px!important;height:119px!important}
+.zukan-hero-stage{width:104px!important;height:120px!important}
+.zukan-hero-stage img{width:98px!important;height:100px!important}
+.zukan-hero-stage::after{left:10px!important;right:10px!important;bottom:3px!important;height:18px!important}
+.zukan-hero-copy{gap:3px!important}
+.zukan-hero-number{font-size:9px!important}
+.zukan-hero-copy small{padding:2px 7px!important;font-size:9px!important}
+.zukan-hero-copy b{font-size:17px!important;line-height:1.12!important}
+.zukan-hero-copy p{margin:0!important;font-size:10px!important;line-height:1.35!important}
+.zukan-hero-copy em{margin:0!important;padding:3px 8px!important;font-size:9px!important;line-height:1.2!important}
+.zukan-hero::after{
+  top:8px!important;right:9px!important;width:24px!important;height:24px!important;font-size:14px!important;
+}
+.zukan-grid{
+  flex:0 0 auto!important;min-height:auto!important;overflow:visible!important;
+  overscroll-behavior:auto!important;touch-action:auto!important;padding-bottom:22px!important;
+}
+@media(max-width:360px){
+  .zukan-card>.zukan-book-title{
+    min-height:116px!important;grid-template-rows:66px 37px!important;padding-right:43px!important;
+  }
+  .zukan-heading-art{height:66px!important;max-height:66px!important}
+  .zukan-title-meta{grid-template-columns:minmax(0,1fr) auto!important;gap:5px!important}
+  .zukan-subtitle{padding-left:0!important;font-size:7px!important}
+  .zukan-book-title .collection-progress{justify-self:end!important;min-width:145px!important;padding-right:6px!important;padding-left:6px!important}
+  .zukan-card>.zukan-hero{grid-template-columns:96px minmax(0,1fr)!important;min-height:138px!important;height:138px!important;padding-right:8px!important}
+  .zukan-hero::before{width:88px!important;height:111px!important}
+  .zukan-hero-stage{width:93px!important;height:112px!important}
+  .zukan-hero-stage img{width:90px!important;height:94px!important}
+  .zukan-hero-copy b{font-size:16px!important}
+  .zukan-hero-copy p{font-size:9px!important}
+}
+
+/* v222: keep the equipment close control above its decorative title artwork. */
+#equipmentDialog .equipment-dialog-card > .close {
+  position:absolute!important;
+  z-index:80!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+}
+#equipmentDialog .equipment-illustrated-heading,
+#equipmentDialog .equipment-illustrated-heading img {
+  pointer-events:none!important;
+}

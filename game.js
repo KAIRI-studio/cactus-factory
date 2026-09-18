@@ -971,7 +971,10 @@ function renderZukan() {
     entry.dataset.cactusId = type.id;
     entry.setAttribute("aria-pressed", "false");
     entry.innerHTML = '<span class="zukan-entry-number">No.' + String(typeIndex + 1).padStart(2, "0") + '</span><span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい しゅうかく</em></span>';
-    entry.addEventListener("click", function () { showZukanHero(type, count, entry); });
+    entry.addEventListener("click", function () {
+      showZukanHero(type, count, entry);
+      document.querySelector(".zukan-hero").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
     grid.append(entry);
   });
 }
@@ -982,6 +985,7 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   const firstEntry = document.querySelector('.zukan-entry[data-cactus-id="' + firstFound.id + '"]');
   showZukanHero(firstFound, firstFoundCount, firstEntry);
   zukanDialog.showModal();
+  document.querySelector(".zukan-card").scrollTop = 0;
 });
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
 [mathDialog, equipmentDialog, zukanDialog, resetDialog].forEach(function (dialog) {
