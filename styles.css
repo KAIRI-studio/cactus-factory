@@ -3475,7 +3475,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
     radial-gradient(circle at calc(100% - 12px) 12px,#f2c445 0 3px,#6d5015 3.5px 6px,transparent 6.5px),
     radial-gradient(circle at 12px calc(100% - 12px),#f2c445 0 3px,#6d5015 3.5px 6px,transparent 6.5px),
     radial-gradient(circle at calc(100% - 12px) calc(100% - 12px),#f2c445 0 3px,#6d5015 3.5px 6px,transparent 6.5px),
-    linear-gradient(#f7f0d5e8,#e5edd8ed),url("assets/zukan-room-bg-v1.webp") center/cover no-repeat!important;
+    linear-gradient(#f7f0d5,#e5edd8)!important;
   box-shadow:inset 0 0 0 3px #79a88e,inset 0 0 28px #0b34267a,0 8px 0 #071f18,0 0 0 2px #b18a2d!important;
 }
 .zukan-card::before{
@@ -3526,6 +3526,83 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .zukan-section-title{box-shadow:0 4px 0 #315d4a,inset 0 1px #eefbdc}
 @media(max-width:360px){
   .zukan-book-title{min-height:184px!important}
+  .zukan-title-meta{grid-template-columns:1fr!important;gap:4px!important}
+  .zukan-book-title .collection-progress{justify-self:start!important;min-width:184px!important}
+}
+
+/* v217: inherit the established cactus-factory UI language; the backdrop stays a quiet support layer. */
+#zukanDialog{
+  border:0!important;border-radius:27px!important;background:#0d2d23!important;
+  box-shadow:0 9px 0 #071f18,0 30px 72px #020d09d9,0 0 0 2px #6d947f!important;
+}
+#zukanDialog::backdrop{
+  background:
+    radial-gradient(ellipse at 50% 24%,#315a4554 0 18%,transparent 58%),
+    linear-gradient(180deg,#0b281ed9,#061912ed)!important;
+  backdrop-filter:blur(5px) saturate(.72)!important;
+}
+.zukan-card{
+  padding:14px 16px 17px 18px!important;border:5px solid #123d30!important;border-radius:25px!important;
+  background:
+    radial-gradient(circle at 11px 11px,#f5bd38 0 3px,#65450c 3.5px 5px,transparent 5.5px),
+    radial-gradient(circle at calc(100% - 11px) 11px,#f5bd38 0 3px,#65450c 3.5px 5px,transparent 5.5px),
+    radial-gradient(circle at 11px calc(100% - 11px),#f5bd38 0 3px,#65450c 3.5px 5px,transparent 5.5px),
+    radial-gradient(circle at calc(100% - 11px) calc(100% - 11px),#f5bd38 0 3px,#65450c 3.5px 5px,transparent 5.5px),
+    linear-gradient(90deg,#2a7158 0 9px,#92c8ad 9px 12px,#f7f1da 12px calc(100% - 12px),#92c8ad calc(100% - 12px) calc(100% - 9px),#2a7158 calc(100% - 9px))!important;
+  box-shadow:0 8px 0 #082b21,0 28px 70px #03140fcf,inset 0 0 0 2px #8ec0a7!important;
+}
+.zukan-card::before{
+  content:""!important;position:absolute!important;z-index:0!important;inset:10px!important;width:auto!important;
+  border:1px solid #315b4a45!important;border-radius:17px!important;background:transparent!important;
+  box-shadow:inset 0 1px #fff9dbb8!important;pointer-events:none;
+}
+.zukan-book-title{
+  min-height:151px!important;padding:5px 48px 9px 5px!important;border:0!important;border-bottom:4px solid #173c31!important;border-radius:0!important;
+  background:linear-gradient(180deg,#fff9e09c,#eef0d68f)!important;
+  box-shadow:0 2px 0 #83a08f!important;
+}
+.zukan-heading-art{
+  width:min(100%,330px)!important;max-height:93px!important;
+  filter:drop-shadow(0 4px 2px #09291f4a)!important;
+}
+.zukan-title-meta{
+  min-height:43px!important;padding:3px 3px 0 6px!important;border-top:1px solid #6f8b7a52!important;
+}
+.zukan-subtitle{
+  color:#4d6b5e!important;text-shadow:none!important;font-size:9px!important;letter-spacing:.11em!important;
+}
+.zukan-book-title .collection-progress{
+  min-width:184px!important;padding:6px 8px 7px!important;border:3px solid #123d30!important;border-radius:12px!important;
+  background:linear-gradient(180deg,#285f49,#174333)!important;
+  box-shadow:0 4px 0 #0b2b21,inset 0 0 0 2px #4f8068,inset 0 1px #8bb99e!important;
+}
+.collection-label{color:#fff5c8!important;text-shadow:0 1px #071d16!important}
+.collection-label small{color:#f3c957!important}
+.collection-progress b{color:#fff9d8!important;text-shadow:0 2px #061d16!important}
+.collection-track i{
+  border:1px solid #769084!important;border-radius:3px!important;background:#193b30!important;
+  box-shadow:inset 0 2px 2px #061b15!important;
+}
+.collection-track i.filled{
+  border-color:#e3b63a!important;background:linear-gradient(#bcec83,#62bb6b)!important;
+  box-shadow:0 0 6px #83d06c,inset 0 1px #efffd8!important;
+}
+.zukan-card>.close{
+  background:#fff3c9!important;box-shadow:0 4px 0 #d7a934,0 0 0 4px #ffe37b!important;
+}
+.zukan-hero{
+  margin-top:12px!important;border:4px solid #123d30!important;border-radius:18px!important;
+  background:linear-gradient(145deg,#deedcf,#f7edc7)!important;
+  box-shadow:0 6px 0 #6f8e74,inset 0 0 0 2px #8caf96,inset 0 1px #fff!important;
+}
+.zukan-hero::after{
+  border:2px solid #8f6a17!important;background:#f5cd54!important;
+  box-shadow:0 3px 0 #8d681a,inset 0 1px #fff2a4!important;
+}
+.zukan-section-title{box-shadow:0 4px 0 #315d4a,inset 0 1px #eefbdc!important}
+@media(max-width:360px){
+  .zukan-card{padding-right:13px!important;padding-left:15px!important}
+  .zukan-book-title{min-height:181px!important;padding-right:44px!important}
   .zukan-title-meta{grid-template-columns:1fr!important;gap:4px!important}
   .zukan-book-title .collection-progress{justify-self:start!important;min-width:184px!important}
 }
