@@ -3710,3 +3710,18 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .zukan-card{border-width:6px!important;padding-right:11px!important;padding-left:13px!important}
   .zukan-book-title{margin-right:1px!important;margin-left:1px!important;padding-right:42px!important}
 }
+
+/* v220: use the same close control across all three factory stations. */
+#equipmentDialog .equipment-dialog-card>.close{
+  top:max(10px,env(safe-area-inset-top))!important;right:10px!important;
+  width:45px!important;height:45px!important;min-width:45px!important;min-height:45px!important;
+  border:3px solid #123d30!important;border-radius:50%!important;
+  background:linear-gradient(#fff9dd,#e8ddb9)!important;
+  box-shadow:0 4px 0 #789386,inset 0 0 0 3px #b8d4c2!important;
+  color:#143a2f!important;font-size:27px!important;line-height:1!important;text-shadow:0 1px #fff!important;
+  opacity:1!important;
+}
+#equipmentDialog .equipment-dialog-card>.close:active{
+  transform:translateY(3px) scale(.96)!important;
+  box-shadow:0 1px 0 #789386,inset 0 0 0 3px #b8d4c2!important;
+}
