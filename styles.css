@@ -4009,3 +4009,43 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .zukan-card>.zukan-book-title{min-height:99px!important;padding-right:44px!important}
   .zukan-heading-art{height:88px!important;max-height:88px!important}
 }
+
+/* v227: all stations share the equipment room's illustrated factory shell. */
+#mathDialog,
+#zukanDialog{
+  width:min(100vw,460px)!important;
+  max-width:none!important;
+  height:100dvh!important;
+  max-height:none!important;
+  margin:auto!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+#mathDialog .math-card,
+#zukanDialog .zukan-card{
+  width:100%!important;
+  height:100%!important;
+  max-height:none!important;
+  padding:max(42px,calc(env(safe-area-inset-top) + 18px)) 18px max(14px,env(safe-area-inset-bottom))!important;
+  border:0!important;
+  border-radius:clamp(0px,2.6vw,18px)!important;
+  background:#dce8d8 url("assets/equipment-factory-frame-v4.webp") center/100% 100% no-repeat!important;
+  box-shadow:none!important;
+}
+#mathDialog .math-card::before,
+#mathDialog .math-card::after,
+#zukanDialog .zukan-card::before,
+#zukanDialog .zukan-card::after{display:none!important}
+#mathDialog .math-card>.close,
+#zukanDialog .zukan-card>.close{
+  top:max(9px,env(safe-area-inset-top))!important;
+  right:12px!important;
+  z-index:80!important;
+}
+@media(max-width:360px){
+  #mathDialog .math-card,
+  #zukanDialog .zukan-card{padding-right:15px!important;padding-left:15px!important}
+}
