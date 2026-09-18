@@ -3194,7 +3194,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .upgrade-celebration.hiding .upgrade-spark{animation:none!important}
 .upgrade-celebration-body{
   display:grid;grid-template-columns:32% minmax(0,1fr);align-items:center;gap:5%;
-  width:86%;min-height:0;justify-self:center;transform:translate(1.5%,-8%);
+  width:86%;min-height:0;justify-self:center;transform:translate(1.5%,-42%);
 }
 .upgrade-celebration-equipment{
   display:block;width:108%;aspect-ratio:1.5/1;align-self:center;justify-self:center;transform:translateY(2%);
