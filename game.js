@@ -999,7 +999,6 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   const firstEntry = document.querySelector('.zukan-entry[data-cactus-id="' + firstFound.id + '"]');
   showZukanHero(firstFound, firstFoundCount, firstEntry);
   zukanDialog.showModal();
-  document.querySelector(".zukan-card").scrollTop = 0;
 });
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
 [mathDialog, equipmentDialog, zukanDialog, resetDialog].forEach(function (dialog) {
