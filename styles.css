@@ -4173,6 +4173,19 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   box-shadow:inset 0 0 0 2px #fbf8df9c,0 3px 0 #294f4166!important;
   pointer-events:none!important;
 }
+
+/* v234: make the shared glass surface clearly visible against the pale factory wall. */
+#mathDialog .math-card::before,
+#zukanDialog .zukan-card::before{
+  background:
+    linear-gradient(90deg,transparent 49.55%,#4167571c 49.8% 50.2%,transparent 50.45%),
+    repeating-linear-gradient(0deg,transparent 0 108px,#41675717 109px 111px,transparent 112px),
+    radial-gradient(ellipse at 3% 67%,#5a89631c 0 8%,transparent 22%),
+    radial-gradient(ellipse at 97% 55%,#5a896318 0 7%,transparent 20%),
+    linear-gradient(180deg,#f8fbe9df 0%,#e7f0dfd2 62%,#dce9d5c4 100%)!important;
+  -webkit-backdrop-filter:blur(1.5px) saturate(.9)!important;
+  backdrop-filter:blur(1.5px) saturate(.9)!important;
+}
 #mathDialog .math-card > :not(.close),
 #zukanDialog .zukan-card > :not(.close){
   position:relative;
