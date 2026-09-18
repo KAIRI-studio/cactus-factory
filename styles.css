@@ -3828,3 +3828,93 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 #equipmentDialog .equipment-illustrated-heading img {
   pointer-events:none!important;
 }
+
+/* v223: denser field-guide balance based on the approved compact reference. */
+.zukan-card>.zukan-book-title{
+  min-height:96px!important;
+  grid-template-rows:57px 31px!important;
+  gap:0!important;
+  margin-top:0!important;
+  padding:2px 47px 4px 5px!important;
+}
+.zukan-heading-art{
+  width:min(100%,270px)!important;
+  height:57px!important;
+  max-height:57px!important;
+}
+.zukan-title-meta{
+  min-height:31px!important;
+  gap:5px!important;
+  padding:0 0 0 4px!important;
+}
+.zukan-subtitle{font-size:7px!important;letter-spacing:.06em!important}
+.zukan-book-title .collection-progress{
+  min-width:142px!important;
+  padding:3px 6px 4px!important;
+  border-radius:9px!important;
+}
+.collection-label{font-size:7px!important}.collection-label small{font-size:5px!important}
+.collection-progress b{font-size:13px!important}
+.collection-track{height:7px!important;gap:2px!important}
+
+.zukan-card>.zukan-hero{
+  grid-template-columns:82px minmax(0,1fr)!important;
+  min-height:112px!important;
+  height:112px!important;
+  gap:6px!important;
+  margin:7px 2px 7px!important;
+  padding:5px 8px 6px 4px!important;
+  border-radius:16px!important;
+}
+.zukan-hero::before{left:6px!important;top:4px!important;width:74px!important;height:88px!important}
+.zukan-hero-stage{width:79px!important;height:91px!important}
+.zukan-hero-stage img{width:74px!important;height:77px!important}
+.zukan-hero-stage::after{left:8px!important;right:8px!important;bottom:2px!important;height:14px!important;border-width:2px!important;box-shadow:0 3px 0 #567664!important}
+.zukan-hero-copy{gap:2px!important}
+.zukan-hero-number{font-size:8px!important}
+.zukan-hero-copy small{padding:1px 6px!important;border-width:1px!important;border-radius:6px!important;font-size:8px!important}
+.zukan-hero-copy b{font-size:15px!important;line-height:1.05!important}
+.zukan-hero-copy p{font-size:8px!important;line-height:1.25!important}
+.zukan-hero-copy em{padding:2px 7px!important;border-width:1px!important;border-radius:7px!important;font-size:8px!important}
+.zukan-hero::after{top:6px!important;right:7px!important;width:20px!important;height:20px!important;font-size:12px!important}
+
+.zukan-grid{gap:7px 7px!important;padding:0 2px 18px!important}
+.zukan-section-title{
+  min-height:31px!important;
+  margin-top:5px!important;
+  padding:5px 8px 4px!important;
+  border-width:2px!important;
+  border-radius:10px 10px 4px 4px!important;
+  font-size:13px!important;
+}
+.zukan-section-title small{font-size:6px!important}
+.zukan-entry{
+  height:126px!important;
+  min-height:126px!important;
+  padding:14px 6px 6px!important;
+  border-width:2px!important;
+  border-radius:13px!important;
+  box-shadow:0 4px 0 #73907c!important;
+}
+.zukan-entry-number{top:5px!important;left:7px!important;font-size:7px!important}
+.zukan-entry::after{top:6px!important;right:7px!important;width:6px!important;height:6px!important;box-shadow:-9px 4px 0 #75b76d!important}
+.zukan-entry .zukan-picture{height:62px!important;border-radius:10px!important}
+.zukan-entry .zukan-picture img{max-width:60px!important;max-height:59px!important}
+.zukan-entry .zukan-info{gap:1px!important}
+.zukan-entry .zukan-info small{padding:0 6px!important;font-size:8px!important}
+.zukan-entry .zukan-info b{font-size:10px!important;line-height:1.15!important}
+.zukan-entry .zukan-info em{font-size:7px!important;line-height:1.15!important}
+.zukan-entry.selected{box-shadow:0 4px 0 #526e60,0 0 0 3px #ffd85b!important}
+
+@media(max-width:360px){
+  .zukan-card>.zukan-book-title{min-height:91px!important;grid-template-rows:53px 30px!important}
+  .zukan-heading-art{height:53px!important;max-height:53px!important}
+  .zukan-book-title .collection-progress{min-width:134px!important}
+  .zukan-card>.zukan-hero{grid-template-columns:76px minmax(0,1fr)!important;min-height:106px!important;height:106px!important}
+  .zukan-hero::before{width:68px!important;height:83px!important}
+  .zukan-hero-stage{width:73px!important;height:85px!important}
+  .zukan-hero-stage img{width:68px!important;height:71px!important}
+  .zukan-hero-copy b{font-size:14px!important}
+  .zukan-entry{height:121px!important;min-height:121px!important}
+  .zukan-entry .zukan-picture{height:58px!important}
+}
