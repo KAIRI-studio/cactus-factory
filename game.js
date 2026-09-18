@@ -141,7 +141,17 @@ let audioContext;
 function hideUpgradeCelebration() {
   window.clearTimeout(upgradeCelebrationTimer);
   upgradeCelebration.classList.remove("show");
-  upgradeCelebration.hidden = true;
+  if (upgradeCelebration.hidden) return;
+  if (reduceMotion.matches) {
+    upgradeCelebration.classList.remove("hiding");
+    upgradeCelebration.hidden = true;
+    return;
+  }
+  upgradeCelebration.classList.add("hiding");
+  upgradeCelebrationTimer = window.setTimeout(function () {
+    upgradeCelebration.classList.remove("hiding");
+    upgradeCelebration.hidden = true;
+  }, 280);
 }
 
 function showUpgradeCelebration(item, fromLevel, toLevel) {
@@ -151,7 +161,7 @@ function showUpgradeCelebration(item, fromLevel, toLevel) {
   upgradeCelebrationClose.setAttribute("aria-label", "強化完了！ " + item.name + " LV." + fromLevel + "からLV." + toLevel + "。タップで閉じる");
   upgradeCelebrationEquipment.className = "upgrade-celebration-equipment upgrade-celebration-equipment-" + item.key;
   upgradeCelebration.hidden = false;
-  upgradeCelebration.classList.remove("show");
+  upgradeCelebration.classList.remove("show", "hiding");
   void upgradeCelebration.offsetWidth;
   upgradeCelebration.classList.add("show");
   upgradeCelebrationTimer = window.setTimeout(hideUpgradeCelebration, 3600);

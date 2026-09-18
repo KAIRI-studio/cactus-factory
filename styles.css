@@ -3189,26 +3189,34 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   transform:scale(.72) translateY(-12px);opacity:0;
 }
 .upgrade-celebration.show .upgrade-celebration-card{animation:upgrade-plate-pop .42s cubic-bezier(.2,1.38,.48,1) forwards}
-.upgrade-celebration-body{display:grid;grid-template-columns:36% minmax(0,1fr);align-items:center;gap:4%;min-height:0}
+.upgrade-celebration.hiding{pointer-events:none}
+.upgrade-celebration.hiding .upgrade-celebration-card{animation:upgrade-plate-away .28s cubic-bezier(.4,0,.55,1) forwards}
+.upgrade-celebration.hiding .upgrade-spark{animation:none!important}
+.upgrade-celebration-body{
+  display:grid;grid-template-columns:32% minmax(0,1fr);align-items:center;gap:5%;
+  width:86%;min-height:0;justify-self:center;transform:translate(1.5%,-8%);
+}
 .upgrade-celebration-equipment{
-  display:block;width:100%;aspect-ratio:1.5/1;align-self:center;
+  display:block;width:108%;aspect-ratio:1.5/1;align-self:center;justify-self:center;transform:translateY(2%);
   background:url("assets/equipment-buttons-v5.webp") 0 0/200% 200% no-repeat;
   filter:drop-shadow(0 3px 2px #173e3245);
 }
 .upgrade-celebration-equipment-mist{background-position:100% 0}
 .upgrade-celebration-equipment-air{background-position:0 100%}
 .upgrade-celebration-equipment-sensor{background-position:100% 100%}
-.upgrade-celebration-copy{display:grid;align-content:center;gap:9px;min-width:0;text-align:left}
+.upgrade-celebration-copy{display:grid;align-content:center;justify-items:center;gap:7px;min-width:0;text-align:center;transform:translateY(-1%)}
 .upgrade-celebration-copy b{font-size:clamp(17px,4.8vw,22px);font-weight:1000;line-height:1.12;white-space:nowrap}
 .upgrade-celebration-copy span{color:#526e60;font-size:clamp(14px,4.1vw,18px);font-weight:1000;letter-spacing:.03em}
 .upgrade-spark{position:absolute;width:10px;height:10px;opacity:0;transform:rotate(45deg);background:#ffd45b;box-shadow:0 0 9px #fff1a8}
 .upgrade-spark-one{top:18%;left:10%}.upgrade-spark-two{top:10%;right:16%;width:7px;height:7px}.upgrade-spark-three{right:10%;bottom:18%;width:6px;height:6px}
 .upgrade-celebration.show .upgrade-spark{animation:upgrade-sparkle 1.25s .2s ease-in-out 2}
 @keyframes upgrade-plate-pop{0%{opacity:0;transform:scale(.72) translateY(-12px)}72%{opacity:1;transform:scale(1.035) translateY(0)}100%{opacity:1;transform:scale(1) translateY(0)}}
+@keyframes upgrade-plate-away{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.92) translateY(-13px)}}
 @keyframes upgrade-sparkle{0%,100%{opacity:0;transform:rotate(45deg) scale(.25)}42%{opacity:1;transform:rotate(45deg) scale(1)}}
 @media(max-height:700px){.upgrade-celebration{top:max(18dvh,108px);width:min(88vw,350px)}}
 @media(prefers-reduced-motion:reduce){
   #equipmentDialog .equipment-hotspot{transition:none!important}
   .upgrade-celebration.show .upgrade-celebration-card{animation:none;opacity:1;transform:none}
+  .upgrade-celebration.hiding .upgrade-celebration-card{animation:none;opacity:0}
   .upgrade-celebration.show .upgrade-spark{animation:none}
 }
