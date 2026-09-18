@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=213" />
+  <link rel="stylesheet" href="styles.css?v=214" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=213" defer></script>
+  <script src="game.js?v=214" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -193,14 +193,20 @@
     <dialog id="zukanDialog"><section class="dialog-card zukan-card">
       <button class="close" id="zukanClose" aria-label="閉じる">×</button>
       <header class="zukan-book-title">
-        <span class="zukan-title-mascot" aria-hidden="true"><svg viewBox="0 0 88 72"><path d="M7 31c13-5 25-3 37 5 12-8 24-10 37-5v32c-13-4-25-2-37 5-12-7-24-9-37-5z" fill="#fff3c9" stroke="#173c31" stroke-width="4" stroke-linejoin="round"/><path d="M44 36v32" fill="none" stroke="#173c31" stroke-width="4"/><path d="M31 42V22c0-8 5-13 12-13s12 5 12 13v8h4v-4c0-5 3-8 7-8s7 3 7 8v12c0 7-5 11-12 11h-6" fill="#70b85f" stroke="#173c31" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="39" cy="26" r="2.2" fill="#172c25"/><circle cx="49" cy="26" r="2.2" fill="#172c25"/><path d="M40 32c2 2 6 2 8 0" fill="none" stroke="#172c25" stroke-width="2.5" stroke-linecap="round"/><path d="M13 19l2-5 2 5 5 2-5 2-2 5-2-5-5-2z" fill="#f2c84f" stroke="#173c31" stroke-width="2.5"/></svg></span>
-        <span class="zukan-title-copy"><small>CACTUS GUIDE</small><h2>サボテンずかん</h2><span>こうじょうの なかまたち</span></span>
-        <span class="collection-progress" id="collectionProgress">0 / 9</span>
+        <img class="zukan-heading-art" src="assets/zukan-heading-v1.webp" alt="サボテンずかん" />
+        <div class="zukan-title-meta">
+          <span class="zukan-subtitle">こうじょうの なかまたち</span>
+          <span class="collection-progress" id="collectionProgress" aria-label="しゅうしゅう 0 / 9">
+            <span class="collection-label">しゅうしゅう</span>
+            <b id="collectionProgressCount">0 / 9</b>
+            <span class="collection-track" id="collectionTrack" aria-hidden="true"></span>
+          </span>
+        </div>
       </header>
       <div class="zukan-hero" aria-live="polite"><span class="zukan-hero-stage"><img id="zukanHeroImage" src="assets/cactus-normal.png" alt="" /></span><div class="zukan-hero-copy"><span class="zukan-hero-number" id="zukanHeroNumber">No.01</span><small id="zukanHeroRarity">ノーマル</small><b id="zukanHeroName">みどりサボテン</b><p id="zukanHeroDescription">いつも げんきで にこにこ。みんなの なかま。</p><em id="zukanHeroCount">0たい しゅうかく</em></div></div>
       <div class="zukan-grid" id="zukanGrid"></div>
     </section></dialog>
   </main>
-  <!-- release-v213 -->
+  <!-- release-v214 -->
 </body>
 </html>

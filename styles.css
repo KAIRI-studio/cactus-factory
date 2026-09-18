@@ -3387,3 +3387,56 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .result-card .confirm:active{transform:translateY(4px);box-shadow:0 2px 0 #123d30}
 @keyframes result-rays{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.result-rays{animation:none}}
+
+/* v214: game-series field guide title and collection progress. */
+.zukan-book-title{
+  display:grid!important;grid-template-columns:1fr!important;grid-template-rows:auto auto!important;
+  gap:3px!important;min-height:0!important;padding:0 48px 9px 0!important;
+  border:0!important;border-bottom:4px solid #1c4b3b!important;
+}
+.zukan-heading-art{
+  display:block;width:100%;max-width:365px;height:auto;margin:0;
+  filter:drop-shadow(0 4px 2px #09291f4a);
+}
+.zukan-title-meta{
+  display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;
+  min-height:34px;padding-left:7px;
+}
+.zukan-subtitle{
+  color:#567468;font-size:9px;font-weight:1000;letter-spacing:.12em;white-space:nowrap;
+}
+.zukan-book-title>.collection-progress{
+  position:relative!important;display:grid!important;grid-template-columns:auto auto!important;grid-template-rows:auto auto!important;
+  align-items:center!important;justify-self:end!important;gap:2px 7px!important;
+  min-width:139px!important;margin:0!important;padding:5px 8px 6px!important;
+  border:3px solid #173c31!important;border-radius:11px!important;
+  background:linear-gradient(145deg,#fff8d5,#f2d772)!important;
+  box-shadow:0 4px 0 #96701d,inset 0 1px #fff!important;color:#173c31!important;
+}
+.collection-progress::before{
+  content:"";position:absolute;top:-7px;right:9px;width:13px;height:17px;
+  border:2px solid #173c31;border-radius:2px 2px 6px 6px;background:#e86e52;
+  box-shadow:inset 0 2px #ffac78;
+}
+.collection-label{font-size:8px;font-weight:1000;letter-spacing:.08em;color:#715719}
+.collection-progress b{justify-self:end;font-size:15px;line-height:1;font-weight:1000;font-variant-numeric:tabular-nums}
+.collection-track{
+  grid-column:1/-1;display:grid;grid-template-columns:repeat(9,1fr);gap:3px;height:8px;
+}
+.collection-track::before{
+  content:"";grid-column:1/-1;grid-row:1;display:block;border:1px solid #173c31;border-radius:99px;
+  background:repeating-linear-gradient(90deg,#c2b577 0 calc(11.111% - 3px),#173c31 calc(11.111% - 3px) 11.111%);
+  box-shadow:inset 0 1px 2px #705d27;
+}
+.collection-track::after{
+  content:"";grid-column:1/-1;grid-row:1;display:block;width:var(--collection-progress,0%);
+  max-width:100%;border:1px solid #173c31;border-radius:99px;
+  background:linear-gradient(90deg,#55ae67,#8bd36e);box-shadow:0 0 6px #7dcf6c99,inset 0 1px #d6ffc8;
+  transition:width .35s ease;
+}
+@media(max-width:360px){
+  .zukan-book-title{padding-right:44px!important}
+  .zukan-title-meta{grid-template-columns:1fr;gap:3px;padding-left:3px}
+  .zukan-book-title>.collection-progress{justify-self:start!important;min-width:145px!important}
+  .zukan-subtitle{padding-left:5px}
+}

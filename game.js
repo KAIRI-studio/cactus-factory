@@ -948,7 +948,10 @@ function renderZukan() {
   const grid = document.querySelector("#zukanGrid");
   grid.replaceChildren();
   const foundCount = CACTUS_TYPES.filter(function (type) { return (state.collections[type.id] || 0) > 0; }).length;
-  document.querySelector("#zukanDialog .collection-progress").textContent = foundCount + " / " + CACTUS_TYPES.length;
+  const collectionProgress = document.querySelector("#collectionProgress");
+  document.querySelector("#collectionProgressCount").textContent = foundCount + " / " + CACTUS_TYPES.length;
+  collectionProgress.setAttribute("aria-label", "しゅうしゅう " + foundCount + " / " + CACTUS_TYPES.length);
+  document.querySelector("#collectionTrack").style.setProperty("--collection-progress", (foundCount / CACTUS_TYPES.length * 100) + "%");
   let currentGroup = "";
   CACTUS_TYPES.forEach(function (type, typeIndex) {
     const count = state.collections[type.id] || 0;
