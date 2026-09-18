@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=212" />
+  <link rel="stylesheet" href="styles.css?v=213" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=212" defer></script>
+  <script src="game.js?v=213" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -160,8 +160,15 @@
       <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback" aria-live="polite"></p>
     </section></dialog>
     <dialog id="resultDialog"><section class="dialog-card result-card">
-      <small>チャレンジけっか</small><h2 id="resultTitle">10もんちゅう 0もんせいかい</h2>
-      <div class="result-growth"><b id="grownCount">0こ</b><span>しゅうかく できるようになりました</span></div>
+      <div class="result-badge">チャレンジけっか</div>
+      <div class="result-hero">
+        <span class="result-rays" aria-hidden="true"></span>
+        <img src="assets/cactus-normal.png" alt="" />
+        <div class="result-score"><b id="resultScore">0</b><span>/ 10</span></div>
+      </div>
+      <h2 id="resultTitle">よくできました！</h2>
+      <p id="resultMessage">10もんちゅう 0もん せいかい</p>
+      <div class="result-growth"><span class="result-sprout" aria-hidden="true">🌱</span><b id="grownCount">0こ</b><span>サボテンが しゅうかくできるよ！</span></div>
       <button class="confirm" id="resultClose">おんしつに もどる</button>
     </section></dialog>
     <dialog id="equipmentDialog"><section class="dialog-card equipment-dialog-card">
@@ -194,6 +201,6 @@
       <div class="zukan-grid" id="zukanGrid"></div>
     </section></dialog>
   </main>
-  <!-- release-v212 -->
+  <!-- release-v213 -->
 </body>
 </html>

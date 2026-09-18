@@ -685,7 +685,7 @@ function makeQuestion(questionIndex) {
     const candidate = correct + randomInt(-range, range);
     if (candidate >= 0) choices.add(candidate);
   }
-  return { text: a + " " + symbol + " " + b + " ＝ ？", correct: correct, choices: Array.from(choices).sort(function () { return Math.random() - .5; }) };
+  return { text: a + symbol + b + "＝？", correct: correct, choices: Array.from(choices).sort(function () { return Math.random() - .5; }) };
 }
 
 const mathDialog = document.querySelector("#mathDialog");
@@ -771,7 +771,9 @@ function finishChallenge() {
   const candidates = state.pots.map(function (pot, index) { return { pot: pot, index: index }; }).filter(function (item) { return !item.pot.ready; });
   candidates.sort(function () { return Math.random() - .5; }).slice(0, target).forEach(function (item) { item.pot.stage = 2; item.pot.ready = true; });
   render();
-  document.querySelector("#resultTitle").textContent = "10もんちゅう " + challenge.correct + "もんせいかい";
+  document.querySelector("#resultScore").textContent = challenge.correct;
+  document.querySelector("#resultTitle").textContent = challenge.correct === 10 ? "パーフェクト！" : challenge.correct >= 7 ? "すごい！" : challenge.correct >= 4 ? "よくできました！" : "つぎも がんばろう！";
+  document.querySelector("#resultMessage").textContent = "10もんちゅう " + challenge.correct + "もん せいかい";
   document.querySelector("#grownCount").textContent = Math.min(target, candidates.length) + "こ";
   playSound("result");
   document.querySelector("#resultDialog").showModal();
