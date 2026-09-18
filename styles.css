@@ -3164,17 +3164,17 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog .equipment-room-shell>.sound-setting b{display:none}
 }
 
-/* v206: clearer equipment selection and an illustrated upgrade-complete plate. */
+/* v207: stronger selection contrast and a fully illustrated upgrade-complete plate. */
 #equipmentDialog .equipment-hotspot{
-  opacity:.84!important;
-  filter:saturate(.78) grayscale(.08) contrast(.96)!important;
-  transform:scale(.965)!important;
+  opacity:.76!important;
+  filter:saturate(.66) grayscale(.14) contrast(.94)!important;
+  transform:scale(.925)!important;
   transition:transform .2s ease,filter .2s ease,opacity .2s ease!important;
 }
 #equipmentDialog .equipment-hotspot.selected{
   opacity:1!important;
-  filter:saturate(1.04) contrast(1.02) drop-shadow(0 4px 3px #173e3240)!important;
-  transform:translateY(-2px) scale(1.035)!important;
+  filter:saturate(1.06) contrast(1.03) drop-shadow(0 5px 4px #173e3248)!important;
+  transform:translateY(-2px) scale(1.04)!important;
 }
 #equipmentDialog .equipment-hotspot:active{transform:scale(.94)!important}
 .upgrade-celebration{
@@ -3183,18 +3183,13 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 .upgrade-celebration[hidden]{display:none!important}
 .upgrade-celebration-card{
-  position:relative;display:grid;width:100%;aspect-ratio:12/7;padding:16.5% 16% 13%;overflow:visible;
-  border:0;background:transparent url("assets/upgrade-complete-panel-v1.svg") center/100% 100% no-repeat;
+  position:relative;display:grid;width:100%;aspect-ratio:1643/957;padding:34% 15% 11%;overflow:visible;
+  border:0;background:transparent url("assets/upgrade-complete-panel-v2.webp") center/100% 100% no-repeat;
   filter:drop-shadow(0 10px 10px #092b2250);color:#173e32;text-align:center;pointer-events:auto;cursor:pointer;
   transform:scale(.72) translateY(-12px);opacity:0;
 }
 .upgrade-celebration.show .upgrade-celebration-card{animation:upgrade-plate-pop .42s cubic-bezier(.2,1.38,.48,1) forwards}
-.upgrade-celebration-title{
-  align-self:center;color:#f8edbd;font-size:clamp(19px,5.8vw,27px);font-weight:1000;line-height:1;
-  letter-spacing:.08em;text-shadow:0 3px #173e32,2px 0 #173e32,-2px 0 #173e32,0 -2px #173e32;
-  transform:translateY(-31%);
-}
-.upgrade-celebration-body{display:grid;grid-template-columns:37% minmax(0,1fr);align-items:center;gap:3%;min-height:0}
+.upgrade-celebration-body{display:grid;grid-template-columns:36% minmax(0,1fr);align-items:center;gap:4%;min-height:0}
 .upgrade-celebration-equipment{
   display:block;width:100%;aspect-ratio:1.5/1;align-self:center;
   background:url("assets/equipment-buttons-v5.webp") 0 0/200% 200% no-repeat;
@@ -3203,9 +3198,9 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .upgrade-celebration-equipment-mist{background-position:100% 0}
 .upgrade-celebration-equipment-air{background-position:0 100%}
 .upgrade-celebration-equipment-sensor{background-position:100% 100%}
-.upgrade-celebration-copy{display:grid;align-content:center;gap:8px;min-width:0;text-align:left}
-.upgrade-celebration-copy b{font-size:clamp(17px,4.7vw,22px);font-weight:1000;line-height:1.15;white-space:nowrap}
-.upgrade-celebration-copy span{color:#526e60;font-size:clamp(14px,4vw,18px);font-weight:1000;letter-spacing:.03em}
+.upgrade-celebration-copy{display:grid;align-content:center;gap:9px;min-width:0;text-align:left}
+.upgrade-celebration-copy b{font-size:clamp(17px,4.8vw,22px);font-weight:1000;line-height:1.12;white-space:nowrap}
+.upgrade-celebration-copy span{color:#526e60;font-size:clamp(14px,4.1vw,18px);font-weight:1000;letter-spacing:.03em}
 .upgrade-spark{position:absolute;width:10px;height:10px;opacity:0;transform:rotate(45deg);background:#ffd45b;box-shadow:0 0 9px #fff1a8}
 .upgrade-spark-one{top:18%;left:10%}.upgrade-spark-two{top:10%;right:16%;width:7px;height:7px}.upgrade-spark-three{right:10%;bottom:18%;width:6px;height:6px}
 .upgrade-celebration.show .upgrade-spark{animation:upgrade-sparkle 1.25s .2s ease-in-out 2}

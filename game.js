@@ -148,6 +148,7 @@ function showUpgradeCelebration(item, fromLevel, toLevel) {
   window.clearTimeout(upgradeCelebrationTimer);
   upgradeCelebrationName.textContent = item.name;
   upgradeCelebrationLevel.textContent = "LV." + fromLevel + " → LV." + toLevel;
+  upgradeCelebrationClose.setAttribute("aria-label", "強化完了！ " + item.name + " LV." + fromLevel + "からLV." + toLevel + "。タップで閉じる");
   upgradeCelebrationEquipment.className = "upgrade-celebration-equipment upgrade-celebration-equipment-" + item.key;
   upgradeCelebration.hidden = false;
   upgradeCelebration.classList.remove("show");
