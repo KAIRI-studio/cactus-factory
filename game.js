@@ -118,6 +118,9 @@ function createInitialState() {
 function save() { localStorage.setItem(STORAGE, JSON.stringify(state)); }
 const nursery = document.querySelector("#nursery");
 const coinCount = document.querySelector("#coinCount");
+const factoryProgressButton = document.querySelector("#factoryProgressButton");
+const factoryProgressDialog = document.querySelector("#factoryProgressDialog");
+const factoryProgressClose = document.querySelector("#factoryProgressClose");
 const equipmentCoinCount = document.querySelector("#equipmentCoinCount");
 const equipmentCoinMeter = document.querySelector("#equipmentCoinMeter");
 const equipmentLevelText = document.querySelector("#equipmentLevelText");
@@ -379,6 +382,38 @@ function collectionFoundCount() {
   return CACTUS_TYPES.filter(function (type) { return (state.collections[type.id] || 0) > 0; }).length;
 }
 
+function renderFactoryProgress() {
+  const found = collectionFoundCount();
+  const equipment = equipmentTotal();
+  const maximum = CACTUS_TYPES.length + 12;
+  const total = found + equipment;
+  const percent = Math.round(total / maximum * 100);
+  let rank = "こうじょう かどうちゅう";
+  if (total >= maximum) rank = "サボテンマスター";
+  else if (total >= 16) rank = "ベテランこうじょう";
+  else if (total >= 10) rank = "ぐんぐん せいちょうちゅう";
+  else if (total >= 5) rank = "なかまが ふえてきた";
+
+  let nextGoal = "まずは サボテンを みつけよう！";
+  if (total >= maximum) nextGoal = "サボテンこうじょう かんせい！";
+  else if (found < CACTUS_TYPES.length) nextGoal = "あと " + (CACTUS_TYPES.length - found) + "しゅるいで ずかんかんせい";
+  else nextGoal = "あと " + (12 - equipment) + "レベルで せつびかんせい";
+
+  document.querySelector("#factoryProgressCount").textContent = total + " / " + maximum;
+  document.querySelector("#factoryProgressFill").style.width = percent + "%";
+  factoryProgressButton.classList.toggle("is-complete", total >= maximum);
+  factoryProgressButton.setAttribute("aria-label", "こうじょうの たっせいど " + total + " / " + maximum + "。" + nextGoal);
+  document.querySelector("#factoryRankLabel").textContent = rank;
+  document.querySelector("#factoryRankPercent").textContent = percent + "%";
+  document.querySelector("#factoryNextGoal").textContent = nextGoal;
+  document.querySelector("#factoryCollectionCount").textContent = found + " / " + CACTUS_TYPES.length;
+  document.querySelector("#factoryCollectionFill").style.width = (found / CACTUS_TYPES.length * 100) + "%";
+  document.querySelector("#factoryEquipmentCount").textContent = equipment + " / 12";
+  document.querySelector("#factoryEquipmentFill").style.width = (equipment / 12 * 100) + "%";
+  document.querySelector("#factoryCompleteStamp").hidden = total < maximum;
+  factoryProgressDialog.classList.toggle("is-complete", total >= maximum);
+}
+
 function affordableEquipmentUpgrade() {
   return Object.keys(state.equipment).find(function (key) {
     const level = state.equipment[key];
@@ -550,6 +585,7 @@ function render() {
   equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
   equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
   equipmentLevelText.textContent = equipmentTotal() + " / 12";
+  renderFactoryProgress();
   renderSpecialNutrient();
   renderFactoryGuide();
   // Level-specific equipment is rendered as illustrated hardware above the base room.\n  document.querySelector(".greenhouse-back").src = FACILITY_BACKGROUNDS.base;
@@ -926,6 +962,21 @@ document.querySelector("#resultClose").addEventListener("click", function () {
 
 const equipmentDialog = document.querySelector("#equipmentDialog");
 let selectedEquipmentKey = "light";
+
+factoryProgressButton.addEventListener("click", function () {
+  renderFactoryProgress();
+  factoryProgressDialog.showModal();
+});
+factoryProgressClose.addEventListener("click", function () { factoryProgressDialog.close(); });
+document.querySelector("#factoryProgressZukan").addEventListener("click", function () {
+  factoryProgressDialog.close();
+  document.querySelector("#zukanButton").click();
+});
+document.querySelector("#factoryProgressEquipment").addEventListener("click", function () {
+  factoryProgressDialog.close();
+  document.querySelector("#equipmentButton").click();
+});
+
 function renderEquipment() {
   const grid = document.querySelector("#equipmentGrid");
   const detail = document.querySelector("#equipmentDetail");
@@ -1141,7 +1192,7 @@ zukanDialog.addEventListener("close", function () {
     else schedulePostDiscoveryTutorial();
   }, 140);
 });
-[mathDialog, equipmentDialog, zukanDialog, resetDialog].forEach(function (dialog) {
+[mathDialog, equipmentDialog, zukanDialog, resetDialog, factoryProgressDialog].forEach(function (dialog) {
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
 });
 mathDialog.addEventListener("close", function () {

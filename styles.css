@@ -482,6 +482,72 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #brandSplash{min-height:calc(100lvh + 4px)!important}
 }
 
+/* v244: compact factory achievement meter and record panel */
+.topbar{justify-content:space-between!important}
+.factory-progress-chip{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  width:126px;
+  height:50px;
+  padding:5px 7px;
+  overflow:hidden;
+  border:3px solid #183a30;
+  border-radius:13px;
+  background:#71937f;
+  color:#20342c;
+  box-shadow:0 5px 0 #102d25,0 9px 18px #071b1552,inset 0 2px #b8d1c0,inset 0 -2px #486c59;
+  font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  text-shadow:none;
+}
+.factory-progress-chip::before,.factory-progress-chip::after{
+  content:"";position:absolute;z-index:2;top:4px;width:4px;height:4px;border:1px solid #183a30;border-radius:50%;background:#d3bd75;box-shadow:0 34px 0 #d3bd75
+}
+.factory-progress-chip::before{left:4px}.factory-progress-chip::after{right:4px}
+.factory-progress-chip:active{transform:translateY(3px);box-shadow:0 2px 0 #102d25,0 5px 10px #071b1545,inset 0 2px #b8d1c0}
+.factory-progress-gear{
+  position:relative;z-index:1;display:grid;place-items:center;flex:0 0 32px;width:32px;height:32px;border:2px solid #294b3f;border-radius:10px;background:#e0bd51;box-shadow:inset 0 2px #ffe996,inset 0 -2px #a97d26
+}
+.factory-progress-gear svg{width:24px;height:24px;overflow:visible;fill:#eff5d9;stroke:#344c30;stroke-width:2.4;stroke-linejoin:round}
+.factory-progress-gear svg circle{fill:#6ea07b}
+.factory-progress-screen{
+  position:relative;z-index:1;display:grid;flex:1;grid-template-columns:1fr auto;align-items:center;gap:0 4px;min-width:0;height:36px;padding:3px 7px 4px;border:2px solid #294b3f;border-radius:7px;background:#fff3cb;box-shadow:inset 0 2px #fffdf0,inset 0 -2px #cbbd8f;line-height:1;text-align:left
+}
+.factory-progress-screen small{color:#65736a;font-size:7px;font-weight:900;letter-spacing:.06em;white-space:nowrap}
+.factory-progress-screen b{color:#20342c;font-size:12px;font-weight:1000;font-variant-numeric:tabular-nums;white-space:nowrap}
+.factory-progress-screen>i{grid-column:1/-1;display:block;height:4px;overflow:hidden;border:1px solid #49665a;border-radius:99px;background:#73877e;box-shadow:inset 0 1px 1px #213c32}
+.factory-progress-screen>i>em{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7ccd8d,#f2cf55);box-shadow:0 0 6px #f7d86d;transition:width .35s ease}
+.factory-progress-chip.is-complete .factory-progress-gear{background:#f3cc4d;box-shadow:inset 0 2px #fff3aa,inset 0 -2px #ae7920,0 0 9px #ffe06d}
+
+#factoryProgressDialog{width:min(90vw,380px);overflow:visible}
+.factory-progress-card{
+  padding:25px 17px 18px;border:3px solid #173b30;border-radius:24px;background:linear-gradient(90deg,transparent 0 6px,#cdd8c8 6px 8px,transparent 8px calc(100% - 8px),#cdd8c8 calc(100% - 8px) calc(100% - 6px),transparent calc(100% - 6px)),linear-gradient(160deg,#fffaf0,#eef2e8);box-shadow:0 7px 0 #0c2a21,0 28px 70px #06130fc7,inset 0 0 0 1px #fff;text-align:left
+}
+.factory-progress-card::after{content:"";position:absolute;z-index:-1;inset:9px;border:1px solid #78978755;border-radius:17px;pointer-events:none}
+.factory-progress-card>.close{top:11px;right:11px;width:45px;height:45px;border:3px solid #173c31;background:#fff3c9;box-shadow:0 4px 0 #d7a934,0 0 0 4px #ffe37b;color:#173c31;font-size:29px;font-weight:1000;line-height:1}
+.factory-progress-card>.factory-record-label{padding:4px 9px;border:1px solid #9ab5a5;border-radius:99px;background:#dceade;color:#375f4e;font-size:9px;font-weight:900;letter-spacing:.12em}
+.factory-progress-card h2{margin:7px 58px 13px 3px;color:#19382e;font-size:21px;line-height:1.2}
+.factory-rank-panel{display:grid;grid-template-columns:70px minmax(0,1fr);align-items:center;gap:12px;padding:11px 13px;border:3px solid #153a2f;border-radius:17px;background:linear-gradient(155deg,#275f4b,#173f32);box-shadow:0 5px 0 #102f25,inset 0 1px #72a18b;color:#fff8dc}
+.factory-rank-medal{display:grid;place-items:center;width:62px;height:62px;border:3px solid #684d18;border-radius:50%;background:linear-gradient(145deg,#ffe277,#dca72d);box-shadow:inset 0 3px #fff0a8,inset 0 -4px #a97821,0 3px 0 #0e2d23}
+.factory-rank-medal svg{width:40px;height:40px;fill:#f7f1ce;stroke:#173b30;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.factory-rank-copy{display:grid;grid-template-columns:1fr auto;align-items:end;gap:3px 8px;min-width:0}
+.factory-rank-copy small{color:#c7dfd2;font-size:9px;font-weight:900;letter-spacing:.04em}
+.factory-rank-copy b{color:#ffe477;font-size:27px;font-weight:1000;line-height:1;font-variant-numeric:tabular-nums}
+.factory-rank-copy em{grid-column:1/-1;color:#fff9e4;font-size:11px;font-style:normal;font-weight:900;line-height:1.35}
+.factory-progress-details{display:grid;gap:9px;margin-top:12px}
+.factory-progress-details button{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:5px 10px;min-height:66px;padding:9px 12px;border:2px solid #24483b;border-radius:13px;background:#f4f0dd;color:#203a31;box-shadow:0 4px 0 #829889,inset 0 1px #fff;text-align:left;font-family:inherit}
+.factory-progress-details button:active{transform:translateY(3px);box-shadow:0 1px 0 #829889}
+.factory-progress-details span{display:grid;gap:2px}.factory-progress-details small{color:#8c6b21;font-size:7px;font-weight:1000;letter-spacing:.11em}.factory-progress-details b{font-size:14px}.factory-progress-details strong{font-size:17px;font-variant-numeric:tabular-nums}
+.factory-progress-details button>i{grid-column:1/-1;display:block;height:7px;overflow:hidden;border:1px solid #506f61;border-radius:99px;background:#bdc9c1;box-shadow:inset 0 1px 2px #5d7167}
+.factory-progress-details button>i>em{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#63b783,#f1cb4e);box-shadow:0 0 7px #9fd986;transition:width .35s ease}
+.factory-complete-stamp{display:grid;gap:2px;margin-top:12px;padding:9px;border:2px solid #9e7417;border-radius:12px;background:#fff0ad;color:#5f481b;text-align:center;box-shadow:inset 0 1px #fff7d0}
+.factory-complete-stamp[hidden]{display:none!important}.factory-complete-stamp b{font-size:15px}.factory-complete-stamp span{font-size:9px;font-weight:800}
+.factory-progress-card.is-complete .factory-rank-panel{border-color:#8f6816;background:linear-gradient(155deg,#5f5d25,#2e4a2d);box-shadow:0 5px 0 #342d12,inset 0 1px #b3ae58}
+@media(max-width:360px){
+  .factory-progress-chip{width:118px}.factory-progress-screen{padding-right:5px;padding-left:5px}.factory-progress-screen small{font-size:6.5px}.factory-progress-screen b{font-size:11px}
+}
+
 /* v148: keep factory dialogs inside the mobile viewport */
 .math-card{width:100%;max-width:100%;overflow:hidden;box-sizing:border-box}
 
