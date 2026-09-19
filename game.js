@@ -769,12 +769,15 @@ function finishChallenge() {
   mathDialog.close();
   const target = grownForScore(challenge.correct);
   const candidates = state.pots.map(function (pot, index) { return { pot: pot, index: index }; }).filter(function (item) { return !item.pot.ready; });
-  candidates.sort(function () { return Math.random() - .5; }).slice(0, target).forEach(function (item) { item.pot.stage = 2; item.pot.ready = true; });
+  const grownCount = Math.min(target, candidates.length);
+  candidates.sort(function () { return Math.random() - .5; }).slice(0, grownCount).forEach(function (item) { item.pot.stage = 2; item.pot.ready = true; });
   render();
   document.querySelector("#resultScore").textContent = challenge.correct;
   document.querySelector("#resultTitle").textContent = challenge.correct === 10 ? "パーフェクト！" : challenge.correct >= 7 ? "すごい！" : challenge.correct >= 4 ? "よくできました！" : "つぎも がんばろう！";
   document.querySelector("#resultMessage").textContent = "10もんちゅう " + challenge.correct + "もん せいかい";
-  document.querySelector("#grownCount").textContent = Math.min(target, candidates.length) + "こ";
+  document.querySelector("#grownCount").textContent = grownCount + "たい";
+  document.querySelector("#resultRewardRule").textContent = challenge.correct + "もんせいかい の ごほうび";
+  document.querySelector("#resultRewardText").textContent = grownCount > 0 ? "すぐに そだった！" : candidates.length === 0 ? "みんな そだっているよ！" : "つぎは そだてよう！";
   playSound("result");
   document.querySelector("#resultDialog").showModal();
 }

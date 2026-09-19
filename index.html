@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=239" />
+  <link rel="stylesheet" href="styles.css?v=240" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=239" defer></script>
+  <script src="game.js?v=240" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -159,6 +159,9 @@
         </div>
       </div>
       <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback" aria-live="polite"></p>
+      <div class="math-reward-hint" aria-label="けいさんのごほうび。10もんせいかいで、さいだい24たいのサボテンがすぐにそだちます">
+        <span aria-hidden="true">🌱</span><div><small>けいさんの ごほうび</small><b>10もんせいかいで さいだい24たい すぐそだつ！</b></div>
+      </div>
       </div>
     </section></dialog>
     <dialog id="resultDialog"><section class="dialog-card result-card">
@@ -170,7 +173,10 @@
       </div>
       <h2 id="resultTitle">よくできました！</h2>
       <p id="resultMessage">10もんちゅう 0もん せいかい</p>
-      <div class="result-growth"><span class="result-sprout" aria-hidden="true">🌱</span><b id="grownCount">0こ</b><span>サボテンが しゅうかくできるよ！</span></div>
+      <div class="result-growth">
+        <span class="result-sprout" aria-hidden="true">🌱</span>
+        <div class="result-growth-copy"><small>けいさんの ごほうび</small><p><b id="grownCount">0たい</b><span id="resultRewardText">すぐに そだった！</span></p><em id="resultRewardRule">0もんせいかい の ごほうび</em></div>
+      </div>
       <button class="confirm" id="resultClose">おんしつに もどる</button>
     </section></dialog>
     <dialog id="equipmentDialog"><section class="dialog-card equipment-dialog-card">
@@ -215,6 +221,6 @@
       </div>
     </section></dialog>
   </main>
-  <!-- release-v239 -->
+  <!-- release-v240 -->
 </body>
 </html>
