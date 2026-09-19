@@ -545,7 +545,7 @@ function playHarvestAnimation(item, order) {
 const rarityRevealQueue = [];
 let rarityRevealActive = false;
 function showRarityReveal(item) {
-  if (cactusType(item.cactusId).rarityKey === "normal") return;
+  if (item.isNew || cactusType(item.cactusId).rarityKey === "normal") return;
   rarityRevealQueue.push(item);
   playNextRarityReveal();
 }
@@ -568,13 +568,63 @@ function playNextRarityReveal() {
   }, 1650);
 }
 
+const discoveryDialog = document.querySelector("#discoveryDialog");
+const discoveryCard = document.querySelector("#discoveryDialog .discovery-card");
+const discoveryQueue = [];
+let activeDiscovery = null;
+
+function schedulePostDiscoveryTutorial() {
+  if (state.tutorialStep === "math") scheduleTutorial(180);
+}
+
+function playNextDiscovery() {
+  if (activeDiscovery || !discoveryQueue.length || document.querySelector("dialog[open]")) return;
+  activeDiscovery = discoveryQueue.shift();
+  const type = cactusType(activeDiscovery.cactusId);
+  discoveryCard.className = "dialog-card discovery-card rarity-" + type.rarityKey;
+  document.querySelector("#discoveryImage").src = type.sprite;
+  document.querySelector("#discoveryImage").alt = type.name;
+  document.querySelector("#discoveryRarity").textContent = type.rarity;
+  document.querySelector("#discoveryName").textContent = type.name;
+  document.querySelector("#discoveryDescription").textContent = type.description;
+  discoveryDialog.setAttribute("aria-label", "あたらしいサボテンをはっけん。" + type.name + "。ずかんにとうろくしました");
+  playSound("rare", type.rarityKey);
+  discoveryDialog.showModal();
+}
+
+function finishDiscovery(openZukan) {
+  const item = activeDiscovery;
+  if (!item) return;
+  discoveryDialog.close();
+  activeDiscovery = null;
+  if (openZukan) {
+    const typeIndex = CACTUS_TYPES.findIndex(function (type) { return type.id === item.cactusId; });
+    zukanPage = Math.max(0, Math.floor(typeIndex / ZUKAN_PAGE_SIZE));
+    renderZukan();
+    const type = cactusType(item.cactusId);
+    const entry = document.querySelector('.zukan-entry[data-cactus-id="' + type.id + '"]');
+    showZukanHero(type, state.collections[type.id] || 0, entry);
+    zukanDialog.showModal();
+    return;
+  }
+  window.setTimeout(function () {
+    if (discoveryQueue.length) playNextDiscovery();
+    else schedulePostDiscoveryTutorial();
+  }, 140);
+}
+
+document.querySelector("#discoveryContinue").addEventListener("click", function () { finishDiscovery(false); });
+document.querySelector("#discoveryZukan").addEventListener("click", function () { finishDiscovery(true); });
+discoveryDialog.addEventListener("cancel", function (event) { event.preventDefault(); finishDiscovery(false); });
+
 function harvest(indexes) {
   const harvestedItems = [];
   indexes.forEach(function (index) {
     const pot = state.pots[index];
     if (!pot.ready) return;
     const type = cactusType(pot.cactusId);
-    harvestedItems.push({ index: index, cactusId: type.id, reward: type.reward });
+    const isNew = (state.collections[type.id] || 0) === 0;
+    harvestedItems.push({ index: index, cactusId: type.id, reward: type.reward, isNew: isNew });
     state.collections[type.id] = (state.collections[type.id] || 0) + 1;
     if (state.specialSeedQueued) {
       pot.cactusId = rollSpecialSeed();
@@ -596,6 +646,7 @@ function harvest(indexes) {
   harvestAnimationCount += harvestedItems.length;
   harvestedItems.forEach(playHarvestAnimation);
   harvestedItems.forEach(showRarityReveal);
+  harvestedItems.filter(function (item) { return item.isNew; }).forEach(function (item) { discoveryQueue.push(item); });
   state.coins += harvestedItems.reduce(function (sum, item) { return sum + item.reward; }, 0);
   state.harvested += harvestedItems.length;
   coinCount.textContent = state.coins;
@@ -609,7 +660,8 @@ function harvest(indexes) {
     coinChip.classList.remove("coin-bump");
     void coinChip.offsetWidth;
     coinChip.classList.add("coin-bump");
-    if (finishedHarvestGuide) scheduleTutorial(reduceMotion.matches ? 80 : 220);
+    if (discoveryQueue.length) playNextDiscovery();
+    else if (finishedHarvestGuide) scheduleTutorial(reduceMotion.matches ? 80 : 220);
   }, animationTime);
 }
 
@@ -1004,6 +1056,12 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   zukanDialog.showModal();
 });
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
+zukanDialog.addEventListener("close", function () {
+  window.setTimeout(function () {
+    if (discoveryQueue.length) playNextDiscovery();
+    else schedulePostDiscoveryTutorial();
+  }, 140);
+});
 [mathDialog, equipmentDialog, zukanDialog, resetDialog].forEach(function (dialog) {
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
 });

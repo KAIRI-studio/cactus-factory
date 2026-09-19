@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=240" />
+  <link rel="stylesheet" href="styles.css?v=241" />
   <link rel="stylesheet" href="title-v3.css?v=2" />
-  <script src="game.js?v=240" defer></script>
+  <script src="game.js?v=241" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -179,6 +179,15 @@
       </div>
       <button class="confirm" id="resultClose">おんしつに もどる</button>
     </section></dialog>
+    <dialog id="discoveryDialog"><section class="dialog-card discovery-card rarity-normal">
+      <span class="discovery-new">NEW!</span>
+      <small>ずかんに とうろく！</small>
+      <div class="discovery-stage"><span class="discovery-rays" aria-hidden="true"></span><img id="discoveryImage" src="assets/cactus-normal.png" alt="" /></div>
+      <em id="discoveryRarity">ノーマル</em>
+      <h2 id="discoveryName">みどりサボテン</h2>
+      <p id="discoveryDescription">あたらしい サボテンを はっけん！</p>
+      <div class="discovery-actions"><button id="discoveryContinue" type="button">つづける</button><button id="discoveryZukan" type="button">ずかんで みる</button></div>
+    </section></dialog>
     <dialog id="equipmentDialog"><section class="dialog-card equipment-dialog-card">
       <button class="close" id="equipmentClose" aria-label="閉じる">×</button>
       <header class="equipment-illustrated-heading"><img src="assets/equipment-heading-v3.webp" alt="せつびを そだてよう" /></header>
@@ -221,6 +230,6 @@
       </div>
     </section></dialog>
   </main>
-  <!-- release-v240 -->
+  <!-- release-v241 -->
 </body>
 </html>

@@ -4362,6 +4362,119 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .math-reward-hint{padding-top:5px;padding-bottom:5px}
 }
 
+/* v241: first-discovery celebration for the collection loop. */
+#discoveryDialog{width:min(90vw,350px);overflow:visible}
+#discoveryDialog::backdrop{background:#071c16dc;backdrop-filter:blur(7px) saturate(.75)}
+.discovery-card{
+  --discovery-accent:#66b96d;
+  --discovery-dark:#285c3d;
+  --discovery-soft:#dff0c7;
+  overflow:visible;
+  padding:21px 18px 17px;
+  border:4px solid #123d30;
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 50% 32%,#fffbd7 0 13%,transparent 43%),
+    linear-gradient(180deg,#fff9df,#f1e9c9);
+  box-shadow:0 8px 0 #082b21,0 28px 70px #03140fe8,inset 0 0 0 2px #8ec0a7;
+  text-align:center;
+}
+.discovery-card.rarity-rare{--discovery-accent:#52c8bf;--discovery-dark:#23716d;--discovery-soft:#c9eeeb}
+.discovery-card.rarity-super{--discovery-accent:#f2c84c;--discovery-dark:#8b6517;--discovery-soft:#ffefac}
+.discovery-card.rarity-legend{--discovery-accent:#ed735f;--discovery-dark:#8b352c;--discovery-soft:#ffd0bd}
+.discovery-new{
+  position:absolute;
+  z-index:5;
+  top:-17px;
+  left:50%;
+  transform:translateX(-50%) rotate(-2deg);
+  padding:6px 23px 5px;
+  border:3px solid #123d30;
+  border-radius:999px;
+  background:linear-gradient(#ffe26e,#edb72f);
+  box-shadow:0 4px 0 #8b6517;
+  color:#173e32;
+  font-size:17px;
+  font-weight:1000;
+  letter-spacing:.08em;
+  text-shadow:0 1px #fff4ae;
+}
+.discovery-card>small{
+  display:inline-block;
+  margin-top:5px;
+  padding:5px 13px;
+  border-radius:999px;
+  background:#245d46;
+  color:#fff7cf;
+  font-size:10px;
+  font-weight:1000;
+  letter-spacing:.08em;
+}
+.discovery-stage{position:relative;display:grid;place-items:center;width:190px;height:177px;margin:3px auto -2px}
+.discovery-rays{
+  position:absolute;
+  inset:7px;
+  border-radius:50%;
+  background:repeating-conic-gradient(from 0deg,var(--discovery-accent) 0 10deg,transparent 10deg 22deg);
+  opacity:.35;
+  animation:discovery-rays 14s linear infinite;
+}
+.discovery-stage::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  right:30px;
+  bottom:16px;
+  left:30px;
+  height:23px;
+  border:3px solid var(--discovery-dark);
+  border-radius:50%;
+  background:var(--discovery-soft);
+  box-shadow:0 5px 0 color-mix(in srgb,var(--discovery-dark) 72%,#173e32);
+}
+.discovery-stage img{
+  position:relative;
+  z-index:2;
+  width:145px;
+  height:145px;
+  object-fit:contain;
+  filter:drop-shadow(0 7px 2px #17382d4f);
+  animation:discovery-pop .58s cubic-bezier(.18,1.35,.36,1);
+}
+.discovery-card>em{
+  display:inline-block;
+  padding:3px 14px;
+  border:2px solid var(--discovery-dark);
+  border-radius:999px;
+  background:var(--discovery-accent);
+  color:#17382e;
+  font-size:11px;
+  font-style:normal;
+  font-weight:1000;
+}
+.discovery-card>h2{margin:5px 0 4px!important;color:#173e32;font-size:24px!important;line-height:1.15}
+.discovery-card>p{min-height:34px;margin:0 auto 12px;max-width:275px;color:#526d5f;font-size:11px;font-weight:900;line-height:1.45}
+.discovery-actions{display:grid;grid-template-columns:1fr 1.25fr;gap:8px}
+.discovery-actions button{
+  min-height:48px;
+  border:3px solid #123d30;
+  border-radius:13px;
+  font-size:12px;
+  font-weight:1000;
+}
+#discoveryContinue{background:#fff4cf;box-shadow:0 5px 0 #a9832c;color:#294a3e}
+#discoveryZukan{background:linear-gradient(#49a36e,#267451);box-shadow:0 5px 0 #123d30;color:#fffdf0;text-shadow:0 2px #174b36}
+.discovery-actions button:active{transform:translateY(4px);box-shadow:0 1px 0 #123d30!important}
+@keyframes discovery-rays{to{transform:rotate(360deg)}}
+@keyframes discovery-pop{0%{opacity:0;transform:translateY(20px) scale(.45) rotate(-5deg)}72%{opacity:1;transform:translateY(-4px) scale(1.06) rotate(1deg)}100%{transform:none}}
+@media(prefers-reduced-motion:reduce){.discovery-rays,.discovery-stage img{animation:none!important}}
+@media(max-height:700px){
+  .discovery-card{padding-top:17px;padding-bottom:14px}
+  .discovery-stage{height:145px}
+  .discovery-stage img{width:120px;height:120px}
+  .discovery-card>p{margin-bottom:8px}
+}
+
 @media(max-width:360px){
   #mathDialog .station-glass,
   #zukanDialog .station-glass{
