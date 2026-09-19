@@ -16,7 +16,7 @@
   width:auto;
   max-width:none;
   height:auto;
-  min-height:calc(100dvh + 4px);
+  min-height:calc(100lvh + 4px);
   margin:0;
   padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
   background:#fff;

@@ -407,12 +407,15 @@ function renderFactoryGuide() {
     return;
   }
   const recommendation = factoryGuideRecommendation();
-  factoryGuide.className = "factory-guide guide-" + recommendation.type;
+  const passive = recommendation.type === "harvest";
+  factoryGuide.className = "factory-guide guide-" + recommendation.type + (passive ? " is-passive" : "");
   factoryGuide.dataset.action = recommendation.type;
   factoryGuideKicker.textContent = recommendation.kicker;
   factoryGuideText.textContent = recommendation.text;
   factoryGuideAction.textContent = recommendation.action;
-  factoryGuideButton.setAttribute("aria-label", recommendation.text + " " + recommendation.action);
+  factoryGuideAction.hidden = passive;
+  factoryGuideButton.disabled = passive;
+  factoryGuideButton.setAttribute("aria-label", passive ? recommendation.text : recommendation.text + " " + recommendation.action);
   factoryGuide.hidden = false;
 }
 
@@ -430,13 +433,6 @@ factoryGuideButton.addEventListener("click", function () {
     document.querySelector("#mathButton").click();
     return;
   }
-  const readyPot = nursery.querySelector(".nursery-pot.ready");
-  if (!readyPot) return;
-  readyPot.classList.remove("factory-guide-focus");
-  void readyPot.offsetWidth;
-  readyPot.classList.add("factory-guide-focus");
-  readyPot.focus({ preventScroll: true });
-  window.setTimeout(function () { readyPot.classList.remove("factory-guide-focus"); }, 1800);
 });
 function nutrientIsInUse() {
   return state.specialSeedQueued || Number.isInteger(state.nutrientActivePot);
