@@ -548,6 +548,53 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .factory-progress-chip{width:118px}.factory-progress-screen{padding-right:5px;padding-left:5px}.factory-progress-screen small{font-size:6.5px}.factory-progress-screen b{font-size:11px}
 }
 
+/* v245: keep the achievement meter self-contained and dock it above the guide */
+.topbar{justify-content:flex-end!important}
+.factory-progress-chip{
+  position:absolute;
+  z-index:6;
+  left:18px;
+  bottom:202px;
+  width:132px;
+  min-width:0;
+  box-sizing:border-box;
+}
+.factory-progress-chip *{box-sizing:border-box}
+.factory-progress-screen{
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:8px 14px 5px;
+  align-content:center;
+  gap:0;
+  min-width:0;
+  padding:2px 6px 3px;
+  overflow:hidden;
+  text-align:center;
+}
+.factory-progress-screen small{
+  display:block;
+  min-width:0;
+  overflow:hidden;
+  font-size:7px;
+  line-height:8px;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.factory-progress-screen b{
+  display:block;
+  min-width:0;
+  overflow:hidden;
+  font-size:12px;
+  line-height:14px;
+  text-overflow:clip;
+  white-space:nowrap;
+}
+.factory-progress-screen>i{grid-column:auto;width:100%;min-width:0}
+@media(max-height:700px){.factory-progress-chip{left:14px;bottom:170px;height:46px}}
+@supports(bottom:env(safe-area-inset-bottom)){
+  .factory-progress-chip{bottom:max(202px,calc(env(safe-area-inset-bottom) + 190px))}
+  @media(max-height:700px){.factory-progress-chip{bottom:max(170px,calc(env(safe-area-inset-bottom) + 159px))}}
+}
+
 /* v148: keep factory dialogs inside the mobile viewport */
 .math-card{width:100%;max-width:100%;overflow:hidden;box-sizing:border-box}
 
