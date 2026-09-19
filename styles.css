@@ -375,6 +375,97 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .equipment-item{min-height:162px;padding:9px}.equipment-title b{font-size:13px}
 }
 
+/* v242: one clear next-action prompt, built as a factory status plate */
+.factory-guide{
+  position:absolute;
+  z-index:6;
+  right:18px;
+  bottom:132px;
+  left:18px;
+  height:58px;
+  pointer-events:none;
+}
+.factory-guide[hidden]{display:none!important}
+.factory-guide-button{
+  position:relative;
+  width:100%;
+  height:100%;
+  display:grid;
+  grid-template-columns:43px minmax(0,1fr) auto;
+  align-items:center;
+  gap:9px;
+  padding:6px 12px 6px 7px;
+  overflow:hidden;
+  border:3px solid #153a2f;
+  border-radius:17px;
+  background:linear-gradient(160deg,#fff9df 0%,#efe6c8 100%);
+  color:#203b31;
+  box-shadow:0 5px 0 #173a2f,0 12px 22px #061a1457,inset 0 1px #fff;
+  font-family:"Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;
+  pointer-events:auto;
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+.factory-guide-button::before,
+.factory-guide-button::after{
+  content:"";
+  position:absolute;
+  top:7px;
+  width:7px;
+  height:7px;
+  border:2px solid #795d1e;
+  border-radius:50%;
+  background:#f1c34c;
+  box-shadow:inset 0 1px #fff2a1;
+}
+.factory-guide-button::before{left:7px}.factory-guide-button::after{right:7px}
+.factory-guide-button:active{transform:translateY(4px);box-shadow:0 1px 0 #173a2f,0 6px 13px #061a144a}
+.factory-guide-emblem{
+  position:relative;
+  z-index:1;
+  display:grid;
+  place-items:center;
+  width:41px;
+  height:41px;
+  border:2px solid #173d31;
+  border-radius:12px;
+  background:linear-gradient(145deg,#8ec29a,#4d8b6c);
+  box-shadow:inset 0 1px #d9f1dc,0 2px 0 #b68a29;
+}
+.factory-guide-emblem svg{width:31px;height:31px;fill:#f7edc8;stroke:#18392f;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.factory-guide-copy{display:flex;min-width:0;flex-direction:column;align-items:flex-start;gap:2px;text-align:left}
+.factory-guide-copy small{color:#98701e;font-size:8px;font-weight:1000;line-height:1;letter-spacing:.11em}
+.factory-guide-copy b{max-width:100%;overflow:hidden;color:#223c33;font-size:12px;font-weight:1000;line-height:1.25;text-overflow:ellipsis;white-space:nowrap}
+.factory-guide-action{position:relative;z-index:1;padding:7px 10px;border:2px solid #173d31;border-radius:999px;background:#347d60;color:#fffbea;font-size:9px;font-weight:1000;line-height:1;white-space:nowrap;box-shadow:0 2px 0 #173d31}
+.factory-guide-lamp{position:absolute;top:6px;right:7px;width:8px;height:8px;border:2px solid #17382e;border-radius:50%;background:#70c481;box-shadow:0 0 8px #70c481}
+.factory-guide.guide-zukan .factory-guide-emblem{background:linear-gradient(145deg,#77bdc0,#3b858b)}
+.factory-guide.guide-zukan .factory-guide-lamp{background:#67c7c7;box-shadow:0 0 9px #67c7c7}
+.factory-guide.guide-zukan .factory-guide-action{background:#347f85}
+.factory-guide.guide-equipment .factory-guide-emblem{background:linear-gradient(145deg,#f3cf60,#be8a27)}
+.factory-guide.guide-equipment .factory-guide-lamp{background:#f3c54e;box-shadow:0 0 9px #f3c54e}
+.factory-guide.guide-equipment .factory-guide-action{background:#a97922}
+.factory-guide.guide-math .factory-guide-emblem{background:linear-gradient(145deg,#edc75b,#c28e2c)}
+.factory-guide.guide-math .factory-guide-lamp{background:#efb94a;box-shadow:0 0 9px #efb94a}
+.factory-guide.guide-math .factory-guide-action{background:#a97422}
+.nursery-pot.factory-guide-focus{z-index:999!important}
+.nursery-pot.factory-guide-focus .sprite-crop{filter:drop-shadow(0 0 5px #fff7bf) drop-shadow(0 0 13px #ffd44f);animation:factory-guide-cactus 1.05s ease-in-out 2}
+@keyframes factory-guide-cactus{0%,100%{transform:scale(1)}50%{transform:scale(1.14) translateY(-3px)}}
+@media(max-width:360px){
+  .factory-guide{right:13px;left:13px}
+  .factory-guide-copy b{font-size:10.5px}
+  .factory-guide-action{padding-right:8px;padding-left:8px}
+}
+@media(max-height:700px){
+  .factory-guide{right:14px;bottom:108px;left:14px;height:52px}
+  .factory-guide-button{grid-template-columns:37px minmax(0,1fr) auto;gap:7px;padding-top:5px;padding-bottom:5px}
+  .factory-guide-emblem{width:35px;height:35px}.factory-guide-emblem svg{width:27px;height:27px}
+  .factory-guide-copy b{font-size:10.5px}
+}
+@supports(bottom:env(safe-area-inset-bottom)){
+  .factory-guide{bottom:max(132px,calc(env(safe-area-inset-bottom) + 120px))}
+  @media(max-height:700px){.factory-guide{bottom:max(108px,calc(env(safe-area-inset-bottom) + 97px))}}
+}
+@media(prefers-reduced-motion:reduce){.nursery-pot.factory-guide-focus .sprite-crop{animation:none!important}}
+
 /* v148: keep factory dialogs inside the mobile viewport */
 .math-card{width:100%;max-width:100%;overflow:hidden;box-sizing:border-box}
 

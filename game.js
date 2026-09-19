@@ -59,6 +59,9 @@ function loadState() {
         if (!pot.cactusId) pot.cactusId = "normal";
       });
       if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
+      if (!Number.isInteger(saved.lastViewedCollectionCount)) {
+        saved.lastViewedCollectionCount = CACTUS_TYPES.filter(function (type) { return (saved.collections[type.id] || 0) > 0; }).length;
+      }
       saved.rarityVersion = 5;
       saved.specialSeedQueued = Boolean(saved.specialSeedQueued);
       if (typeof saved.soundEnabled !== "boolean") saved.soundEnabled = true;
@@ -100,6 +103,7 @@ function createInitialState() {
     visualVersion: 4,
     rarityVersion: 5,
     collections: { normal: 0, rare: 0, super: 0, legend: 0 },
+    lastViewedCollectionCount: 0,
     specialSeedQueued: false,
     nutrientActivePot: null,
     nutrientTrackingVersion: 1,
@@ -129,6 +133,11 @@ const onboardingTip = document.querySelector("#onboardingTip");
 const onboardingStep = document.querySelector("#onboardingStep");
 const onboardingText = document.querySelector("#onboardingText");
 const onboardingSkip = document.querySelector("#onboardingSkip");
+const factoryGuide = document.querySelector("#factoryGuide");
+const factoryGuideButton = document.querySelector("#factoryGuideButton");
+const factoryGuideKicker = document.querySelector("#factoryGuideKicker");
+const factoryGuideText = document.querySelector("#factoryGuideText");
+const factoryGuideAction = document.querySelector("#factoryGuideAction");
 const upgradeCelebration = document.querySelector("#upgradeCelebration");
 const upgradeCelebrationClose = document.querySelector("#upgradeCelebrationClose");
 const upgradeCelebrationEquipment = document.querySelector("#upgradeCelebrationEquipment");
@@ -256,6 +265,7 @@ function showTutorial() {
   const step = state.tutorialStep;
   const copy = TUTORIAL_COPY[step];
   if (!copy || game.getAttribute("aria-hidden") === "true" || document.querySelector("dialog[open]")) return;
+  factoryGuide.hidden = true;
   onboardingStep.textContent = copy.number;
   onboardingText.textContent = copy.text;
   onboardingSkip.textContent = step === "equipment" ? "とじる" : "つぎへ";
@@ -275,6 +285,7 @@ function finishTutorial() {
   state.tutorialStep = "done";
   hideTutorial();
   save();
+  renderFactoryGuide();
 }
 
 function showNextTutorialTip() {
@@ -312,6 +323,7 @@ function enterFactory() {
   window.setTimeout(function () {
     titleScreen.hidden = true;
     game.setAttribute("aria-hidden", "false");
+    renderFactoryGuide();
     screenShutter.classList.remove("is-closing");
     screenShutter.classList.add("is-opening");
     window.setTimeout(function () {
@@ -362,6 +374,70 @@ function equipmentUpgradeCost(level) {
   if (level === 1) return 300;
   return 700;
 }
+
+function collectionFoundCount() {
+  return CACTUS_TYPES.filter(function (type) { return (state.collections[type.id] || 0) > 0; }).length;
+}
+
+function affordableEquipmentUpgrade() {
+  return Object.keys(state.equipment).find(function (key) {
+    const level = state.equipment[key];
+    return level < 3 && state.coins >= equipmentUpgradeCost(level);
+  });
+}
+
+function factoryGuideRecommendation() {
+  const foundCount = collectionFoundCount();
+  if (foundCount > state.lastViewedCollectionCount) {
+    return { type: "zukan", kicker: "NEW COLLECTION", text: "あたらしい なかまを ずかんでみよう！", action: "ずかんへ" };
+  }
+  const readyCount = state.pots.filter(function (pot) { return pot.ready; }).length;
+  if (readyCount > 0) {
+    return { type: "harvest", kicker: "しゅうかく OK", text: readyCount + "たいの サボテンが まってるよ！", action: "みつける" };
+  }
+  if (affordableEquipmentUpgrade()) {
+    return { type: "equipment", kicker: "かいぞう OK", text: "コインで せつびを つよくできるよ！", action: "せつびへ" };
+  }
+  return { type: "math", kicker: "GROWTH BOOST", text: "けいさんで はやく そだてよう！", action: "ちょうせん" };
+}
+
+function renderFactoryGuide() {
+  if (!factoryGuide || state.tutorialStep !== "done" || game.getAttribute("aria-hidden") === "true") {
+    if (factoryGuide) factoryGuide.hidden = true;
+    return;
+  }
+  const recommendation = factoryGuideRecommendation();
+  factoryGuide.className = "factory-guide guide-" + recommendation.type;
+  factoryGuide.dataset.action = recommendation.type;
+  factoryGuideKicker.textContent = recommendation.kicker;
+  factoryGuideText.textContent = recommendation.text;
+  factoryGuideAction.textContent = recommendation.action;
+  factoryGuideButton.setAttribute("aria-label", recommendation.text + " " + recommendation.action);
+  factoryGuide.hidden = false;
+}
+
+factoryGuideButton.addEventListener("click", function () {
+  const action = factoryGuide.dataset.action;
+  if (action === "zukan") {
+    document.querySelector("#zukanButton").click();
+    return;
+  }
+  if (action === "equipment") {
+    document.querySelector("#equipmentButton").click();
+    return;
+  }
+  if (action === "math") {
+    document.querySelector("#mathButton").click();
+    return;
+  }
+  const readyPot = nursery.querySelector(".nursery-pot.ready");
+  if (!readyPot) return;
+  readyPot.classList.remove("factory-guide-focus");
+  void readyPot.offsetWidth;
+  readyPot.classList.add("factory-guide-focus");
+  readyPot.focus({ preventScroll: true });
+  window.setTimeout(function () { readyPot.classList.remove("factory-guide-focus"); }, 1800);
+});
 function nutrientIsInUse() {
   return state.specialSeedQueued || Number.isInteger(state.nutrientActivePot);
 }
@@ -479,6 +555,7 @@ function render() {
   equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
   equipmentLevelText.textContent = equipmentTotal() + " / 12";
   renderSpecialNutrient();
+  renderFactoryGuide();
   // Level-specific equipment is rendered as illustrated hardware above the base room.\n  document.querySelector(".greenhouse-back").src = FACILITY_BACKGROUNDS.base;
   game.className = game.className.replace(/\b(light|mist|air|sensor)-level-\d+\b/g, "").trim();
   Object.keys(state.equipment).forEach(function (key) { game.classList.add(key + "-level-" + state.equipment[key]); });
@@ -598,6 +675,8 @@ function finishDiscovery(openZukan) {
   discoveryDialog.close();
   activeDiscovery = null;
   if (openZukan) {
+    state.lastViewedCollectionCount = collectionFoundCount();
+    save();
     const typeIndex = CACTUS_TYPES.findIndex(function (type) { return type.id === item.cactusId; });
     zukanPage = Math.max(0, Math.floor(typeIndex / ZUKAN_PAGE_SIZE));
     renderZukan();
@@ -607,6 +686,7 @@ function finishDiscovery(openZukan) {
     zukanDialog.showModal();
     return;
   }
+  renderFactoryGuide();
   window.setTimeout(function () {
     if (discoveryQueue.length) playNextDiscovery();
     else schedulePostDiscoveryTutorial();
@@ -1047,6 +1127,8 @@ function renderZukan() {
   renderZukanPage();
 }
 document.querySelector("#zukanButton").addEventListener("click", function () {
+  state.lastViewedCollectionCount = collectionFoundCount();
+  save();
   zukanPage = 0;
   renderZukan();
   const firstFound = CACTUS_TYPES.find(function (type) { return (state.collections[type.id] || 0) > 0; }) || CACTUS_TYPES[0];
@@ -1057,6 +1139,7 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
 });
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
 zukanDialog.addEventListener("close", function () {
+  renderFactoryGuide();
   window.setTimeout(function () {
     if (discoveryQueue.length) playNextDiscovery();
     else schedulePostDiscoveryTutorial();
