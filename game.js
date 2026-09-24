@@ -1,4 +1,6 @@
 const POT_COUNT = 24;
+// Visual-only preview. The saved pot, rarity, collection, and roll remain unchanged.
+const KING_PREVIEW_POT_INDEX = 19;
 const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
@@ -536,6 +538,7 @@ function makePot(pot, index) {
   const type = cactusType(pot.cactusId);
   const button = document.createElement("button");
   button.className = "nursery-pot stage-" + pot.stage + (pot.ready ? " ready" : "") + " rarity-" + type.rarityKey;
+  if (index === KING_PREVIEW_POT_INDEX) button.classList.add("king-preview-slot");
   button.classList.add("cactus-" + type.id);
   button.classList.add("motion-" + Math.floor(seededUnit(index, 3) * 5));
   button.type = "button";
@@ -554,11 +557,13 @@ function makePot(pot, index) {
   button.style.setProperty("--stretch-x", (.89 + seededUnit(index, 7) * .055).toFixed(3));
   button.style.setProperty("--stretch-y", (1.08 + seededUnit(index, 8) * .07).toFixed(3));
   button.setAttribute("aria-label", pot.ready ? (index + 1) + "ばんの サボテンを とる" : (index + 1) + "ばんの サボテンを そだてています");
-  const plantImage = pot.stage === -1
-    ? ''
-    : pot.ready
-      ? '<img class="default-cactus-sprite" src="' + type.sprite + '" alt="" />'
-      : '<img class="tiny-sprout-sprite" src="assets/simple-bold-sprout.png" alt="" />';
+  const plantImage = index === KING_PREVIEW_POT_INDEX
+    ? '<img class="default-cactus-sprite" src="assets/cactus-king-preview.png" alt="" />'
+    : pot.stage === -1
+      ? ''
+      : pot.ready
+        ? '<img class="default-cactus-sprite" src="' + type.sprite + '" alt="" />'
+        : '<img class="tiny-sprout-sprite" src="assets/simple-bold-sprout.png" alt="" />';
   button.innerHTML = '<span class="sprite-crop">' + plantImage + '</span>';
   button.addEventListener("click", function () { if (pot.ready) harvest([index]); });
   return button;
@@ -567,7 +572,7 @@ function makePot(pot, index) {
 function render() {
   refreshNaturalGrowth();
   state.pots.forEach(function (pot, index) {
-    const nextSignature = pot.stage + ":" + Number(pot.ready) + ":" + (pot.generation || 0) + ":" + (pot.cactusId || "normal");
+    const nextSignature = pot.stage + ":" + Number(pot.ready) + ":" + (pot.generation || 0) + ":" + (pot.cactusId || "normal") + (index === KING_PREVIEW_POT_INDEX ? ":king-preview" : "");
     const currentButton = nursery.querySelector('[data-pot-index="' + index + '"]');
     if (!currentButton || potSignatures[index] !== nextSignature) {
       const newButton = makePot(pot, index);

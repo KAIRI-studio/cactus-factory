@@ -4703,3 +4703,16 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
     margin-left:2px!important;
   }
 }
+
+/* Temporary king specimen: same pot baseline, about twice the normal height. */
+.nursery-pot.king-preview-slot .default-cactus-sprite{
+  bottom:-7%;
+  width:205%;
+  max-width:none;
+  transform:translateX(-50%);
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 3px 2px #14231d55);
+  -webkit-mask-image:none;
+  mask-image:none;
+  animation:none;
+}
