@@ -4707,7 +4707,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 /* Temporary king specimen: 85% of its initial preview size, same pot baseline. */
 .nursery-pot.king-preview-slot .default-cactus-sprite{
   bottom:-7%;
-  width:156.825%;
+  width:141.1425%;
   max-width:none;
   transform:translateX(-50%);
   transform-origin:50% 100%;
@@ -4720,7 +4720,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 /* Temporary withered specimen: optically matched to the king, grounded by its lower edge. */
 .nursery-pot.withered-preview-slot .default-cactus-sprite{
   bottom:-8%;
-  width:165.6%;
+  width:149.04%;
   max-width:none;
   transform:translateX(-50%);
   transform-origin:50% 100%;
