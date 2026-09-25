@@ -4704,10 +4704,10 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   }
 }
 
-/* Temporary king specimen: 85% of its initial preview size, same pot baseline. */
+/* Temporary king specimen: supplied design, optically scaled to 90% of v251. */
 .nursery-pot.king-preview-slot .default-cactus-sprite{
-  bottom:-7%;
-  width:141.1425%;
+  bottom:-8%;
+  width:122.9%;
   max-width:none;
   transform:translateX(-50%);
   transform-origin:50% 100%;
@@ -4717,10 +4717,10 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   animation:none;
 }
 
-/* Temporary withered specimen: optically matched to the king, grounded by its lower edge. */
+/* Temporary withered specimen: supplied design, optically scaled to 90% of v251. */
 .nursery-pot.withered-preview-slot .default-cactus-sprite{
-  bottom:-8%;
-  width:149.04%;
+  bottom:-7%;
+  width:123.2%;
   max-width:none;
   transform:translateX(-50%);
   transform-origin:50% 100%;
@@ -4729,3 +4729,19 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   mask-image:none;
   animation:none;
 }
+
+/* The three additional specimens use the same lower-edge anchoring. */
+.nursery-pot.punk-preview-slot .default-cactus-sprite,
+.nursery-pot.robot-preview-slot .default-cactus-sprite,
+.nursery-pot.idol-preview-slot .default-cactus-sprite{
+  max-width:none;
+  transform:translateX(-50%);
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 3px 2px #14231d55);
+  -webkit-mask-image:none;
+  mask-image:none;
+  animation:none;
+}
+.nursery-pot.punk-preview-slot .default-cactus-sprite{bottom:-18%;width:136.2%}
+.nursery-pot.robot-preview-slot .default-cactus-sprite{bottom:-8%;width:123.3%}
+.nursery-pot.idol-preview-slot .default-cactus-sprite{bottom:-8%;width:123.8%}

@@ -2,6 +2,9 @@ const POT_COUNT = 24;
 // Visual-only preview. The saved pot, rarity, collection, and roll remain unchanged.
 const KING_PREVIEW_POT_INDEX = 19;
 const WITHERED_PREVIEW_POT_INDEX = 21;
+const PUNK_PREVIEW_POT_INDEX = 16;
+const ROBOT_PREVIEW_POT_INDEX = 11;
+const IDOL_PREVIEW_POT_INDEX = 23;
 const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
@@ -541,6 +544,9 @@ function makePot(pot, index) {
   button.className = "nursery-pot stage-" + pot.stage + (pot.ready ? " ready" : "") + " rarity-" + type.rarityKey;
   if (index === KING_PREVIEW_POT_INDEX) button.classList.add("king-preview-slot");
   if (index === WITHERED_PREVIEW_POT_INDEX) button.classList.add("withered-preview-slot");
+  if (index === PUNK_PREVIEW_POT_INDEX) button.classList.add("punk-preview-slot");
+  if (index === ROBOT_PREVIEW_POT_INDEX) button.classList.add("robot-preview-slot");
+  if (index === IDOL_PREVIEW_POT_INDEX) button.classList.add("idol-preview-slot");
   button.classList.add("cactus-" + type.id);
   button.classList.add("motion-" + Math.floor(seededUnit(index, 3) * 5));
   button.type = "button";
@@ -560,9 +566,15 @@ function makePot(pot, index) {
   button.style.setProperty("--stretch-y", (1.08 + seededUnit(index, 8) * .07).toFixed(3));
   button.setAttribute("aria-label", pot.ready ? (index + 1) + "ばんの サボテンを とる" : (index + 1) + "ばんの サボテンを そだてています");
   const plantImage = index === KING_PREVIEW_POT_INDEX
-    ? '<img class="default-cactus-sprite" src="assets/cactus-king-preview.png" alt="" />'
+    ? '<img class="default-cactus-sprite" src="assets/cactus-king-design-preview.png" alt="" />'
     : index === WITHERED_PREVIEW_POT_INDEX
-      ? '<img class="default-cactus-sprite" src="assets/cactus-withered-preview.png" alt="" />'
+      ? '<img class="default-cactus-sprite" src="assets/cactus-withered-design-preview.png" alt="" />'
+    : index === PUNK_PREVIEW_POT_INDEX
+      ? '<img class="default-cactus-sprite" src="assets/cactus-punk-preview.png" alt="" />'
+    : index === ROBOT_PREVIEW_POT_INDEX
+      ? '<img class="default-cactus-sprite" src="assets/cactus-robot-preview.png" alt="" />'
+    : index === IDOL_PREVIEW_POT_INDEX
+      ? '<img class="default-cactus-sprite" src="assets/cactus-idol-preview.png" alt="" />'
     : pot.stage === -1
       ? ''
       : pot.ready
@@ -576,7 +588,7 @@ function makePot(pot, index) {
 function render() {
   refreshNaturalGrowth();
   state.pots.forEach(function (pot, index) {
-    const nextSignature = pot.stage + ":" + Number(pot.ready) + ":" + (pot.generation || 0) + ":" + (pot.cactusId || "normal") + (index === KING_PREVIEW_POT_INDEX ? ":king-preview" : "") + (index === WITHERED_PREVIEW_POT_INDEX ? ":withered-preview" : "");
+    const nextSignature = pot.stage + ":" + Number(pot.ready) + ":" + (pot.generation || 0) + ":" + (pot.cactusId || "normal") + (index === KING_PREVIEW_POT_INDEX ? ":king-preview" : "") + (index === WITHERED_PREVIEW_POT_INDEX ? ":withered-preview" : "") + (index === PUNK_PREVIEW_POT_INDEX ? ":punk-preview" : "") + (index === ROBOT_PREVIEW_POT_INDEX ? ":robot-preview" : "") + (index === IDOL_PREVIEW_POT_INDEX ? ":idol-preview" : "");
     const currentButton = nursery.querySelector('[data-pot-index="' + index + '"]');
     if (!currentButton || potSignatures[index] !== nextSignature) {
       const newButton = makePot(pot, index);
