@@ -4749,3 +4749,15 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .rarity-reveal.legend::before{
   background:radial-gradient(ellipse at 50% 50%,#fff5ee 0 4%,#f6a299a8 16%,#d9545f4d 42%,transparent 72%);
 }
+
+/* New character sprites share the same ground line and idle animations. */
+.nursery-pot:is(.cactus-mechanic,.cactus-pirate,.cactus-chef,.cactus-salaryman,.cactus-cowboy,.cactus-ghost,.cactus-surfer,.cactus-sage,.cactus-lord,.cactus-ninja) .default-cactus-sprite{
+  bottom:-8%;
+  width:125%;
+  max-width:none;
+  transform:translateX(-50%);
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 3px 2px #14231d55);
+  -webkit-mask-image:none;
+  mask-image:none;
+}

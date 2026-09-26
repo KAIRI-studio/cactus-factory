@@ -1,8 +1,8 @@
-const CACHE_NAME = "cactus-factory-2026-09-26-258";
+const CACHE_NAME = "cactus-factory-2026-09-26-259";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=258",
+  "./styles.css?v=259",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
@@ -38,7 +38,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=257",
+  "./game.js?v=259",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -62,6 +62,16 @@ const APP_FILES = [
   "./assets/cactus-punk-unified.png",
   "./assets/cactus-idol-unified.png",
   "./assets/cactus-king-unified.png",
+  "./assets/cactus-mechanic-unified.png",
+  "./assets/cactus-pirate-unified.png",
+  "./assets/cactus-chef-unified.png",
+  "./assets/cactus-salaryman-unified.png",
+  "./assets/cactus-cowboy-unified.png",
+  "./assets/cactus-ghost-unified.png",
+  "./assets/cactus-surfer-unified.png",
+  "./assets/cactus-sage-unified.png",
+  "./assets/cactus-lord-unified.png",
+  "./assets/cactus-ninja-unified.png",
   "./assets/rare-nutrient-crate-bold.png"
 ];
 
