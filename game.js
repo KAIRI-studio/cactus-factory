@@ -14,19 +14,19 @@ const CACTUS_TYPES = [
   { id: "salaryman", name: "サラリーマンサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-salaryman-unified.png", reward: 50, description: "かばんを もって しごとに いく。" },
   { id: "cowboy", name: "カウボーイサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-cowboy-unified.png", reward: 50, description: "ぼうしが じまんの たびびと。" },
   { id: "ghost", name: "おばけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ghost-unified.png", reward: 50, description: "よるに ふわふわ あらわれる。" },
-  { id: "surfer", name: "サーファーサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-surfer-unified.png", reward: 50, description: "なみに のるのが だいすき。" },
+  { id: "surfer", name: "サーファーサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-surfer-unified.png", reward: 150, description: "なみに のるのが だいすき。" },
   { id: "sage", name: "せんにんサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sage-unified.png", reward: 50, description: "やまおくで しゅぎょうを つづける。" },
   { id: "lord", name: "とのさまサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-lord-unified.png", reward: 50, description: "おうぎを ひらいて いばっている。" },
   { id: "ninja", name: "ニンジャサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ninja-unified.png", reward: 50, description: "しずかに すばやく かけぬける。" },
 ];
 const SUPER_CACTUS_IDS = CACTUS_TYPES.filter(function (type) { return type.rarityKey === "super"; }).map(function (type) { return type.id; });
+const LEGEND_CACTUS_IDS = CACTUS_TYPES.filter(function (type) { return type.rarityKey === "legend"; }).map(function (type) { return type.id; });
 
 const ACTIVE_CACTUS_IDS = new Set(CACTUS_TYPES.map(function (type) { return type.id; }));
 
 function rollCactusId() {
   const roll = Math.random() * 100;
-  if (roll < .25) return "king";
-  if (roll < .5) return "withered";
+  if (roll < .5) return LEGEND_CACTUS_IDS[Math.floor(roll / (.5 / LEGEND_CACTUS_IDS.length))];
   if (roll < 5) return SUPER_CACTUS_IDS[Math.floor((roll - .5) / (4.5 / SUPER_CACTUS_IDS.length))];
   return "normal";
 }
@@ -509,8 +509,7 @@ function growthSeconds() {
 
 function rollSpecialSeed() {
   const roll = Math.random() * 100;
-  if (roll < .5) return "king";
-  if (roll < 1) return "withered";
+  if (roll < 1) return LEGEND_CACTUS_IDS[Math.floor(roll / (1 / LEGEND_CACTUS_IDS.length))];
   return SUPER_CACTUS_IDS[Math.floor((roll - 1) / (99 / SUPER_CACTUS_IDS.length))];
 }
 
