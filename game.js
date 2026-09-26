@@ -10,7 +10,7 @@ const CACTUS_TYPES = [
   { id: "king", name: "おうさまサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-king-unified.png", reward: 150, description: "ちいさな おうかんを のせた みどりの おうさま。" },
   { id: "mechanic", name: "せいびしサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-mechanic-unified.png", reward: 50, description: "こうじょうの どうぐを つかいこなす。" },
   { id: "pirate", name: "かいぞくサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-pirate-unified.png", reward: 50, description: "たからものを さがして ぼうけんする。" },
-  { id: "chef", name: "コックサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-chef-unified.png", reward: 50, description: "おいしい りょうりを つくる。" },
+  { id: "chef", name: "コックサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-chef-no-egg.png", reward: 50, description: "おいしい りょうりを つくる。" },
   { id: "salaryman", name: "サラリーマンサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-salaryman-unified.png", reward: 50, description: "かばんを もって しごとに いく。" },
   { id: "cowboy", name: "カウボーイサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-cowboy-unified.png", reward: 50, description: "ぼうしが じまんの たびびと。" },
   { id: "ghost", name: "おばけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ghost-unified.png", reward: 50, description: "よるに ふわふわ あらわれる。" },
@@ -797,6 +797,9 @@ function harvest(indexes) {
 let swiping = false;
 let swipeStartX = 0;
 let swipeStartY = 0;
+let swipeLastX = 0;
+let swipeLastY = 0;
+let swipePointerId = null;
 let swipeIndexes = new Set();
 
 function collectSwipePot(x, y) {
@@ -804,31 +807,44 @@ function collectSwipePot(x, y) {
   const button = target && target.closest(".nursery-pot");
   if (!button || !nursery.contains(button)) return;
   const index = Number(button.dataset.potIndex);
-  if (!Number.isInteger(index) || !state.pots[index].ready) return;
+  if (!Number.isInteger(index) || swipeIndexes.has(index) || !state.pots[index].ready) return;
   swipeIndexes.add(index);
   button.classList.add("swipe-picked");
   harvest([index]);
 }
 
 nursery.addEventListener("pointerdown", function (event) {
-  if (!event.target.closest(".nursery-pot")) return;
+  if (swiping || event.pointerType === "mouse" && event.button !== 0) return;
   swiping = true;
+  swipePointerId = event.pointerId;
   swipeStartX = event.clientX;
   swipeStartY = event.clientY;
+  swipeLastX = event.clientX;
+  swipeLastY = event.clientY;
   swipeIndexes = new Set();
   nursery.setPointerCapture(event.pointerId);
   collectSwipePot(event.clientX, event.clientY);
 });
 
 nursery.addEventListener("pointermove", function (event) {
-  if (!swiping) return;
+  if (!swiping || event.pointerId !== swipePointerId) return;
   if (Math.hypot(event.clientX - swipeStartX, event.clientY - swipeStartY) > 5) event.preventDefault();
-  collectSwipePot(event.clientX, event.clientY);
+  // Check the path between events so a quick swipe cannot skip a small pot.
+  const distance = Math.hypot(event.clientX - swipeLastX, event.clientY - swipeLastY);
+  const steps = Math.max(1, Math.ceil(distance / 8));
+  for (let step = 1; step <= steps; step += 1) {
+    const fraction = step / steps;
+    collectSwipePot(swipeLastX + (event.clientX - swipeLastX) * fraction,
+      swipeLastY + (event.clientY - swipeLastY) * fraction);
+  }
+  swipeLastX = event.clientX;
+  swipeLastY = event.clientY;
 });
 
 function finishSwipe(event) {
-  if (!swiping) return;
+  if (!swiping || event.pointerId !== swipePointerId) return;
   swiping = false;
+  swipePointerId = null;
   if (nursery.hasPointerCapture(event.pointerId)) nursery.releasePointerCapture(event.pointerId);
   swipeIndexes.clear();
 }
