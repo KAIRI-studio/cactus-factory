@@ -4,10 +4,10 @@ const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
   { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10, description: "いつも げんきで にこにこ。みんなの なかま。" },
-  { id: "punk", name: "パンクサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-punk-matte-preview.png", reward: 50, description: "あかい モヒカンと くろい ベストが じまん。" },
-  { id: "idol", name: "アイドルサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-idol-matte-v2-preview.png", reward: 50, description: "おおきな リボンで みんなを えがおに するよ。" },
-  { id: "withered", name: "かれたサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-withered-matte-preview.png", reward: 150, description: "かれた からだに ふしぎな ちからを やどす。" },
-  { id: "king", name: "おうさまサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-king-simple.png", reward: 150, description: "ちいさな おうかんを のせた みどりの おうさま。" },
+  { id: "punk", name: "パンクサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-punk-unified.png", reward: 50, description: "あかい モヒカンと くろい ベストが じまん。" },
+  { id: "idol", name: "アイドルサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-idol-unified.png", reward: 50, description: "おおきな リボンで みんなを えがおに するよ。" },
+  { id: "withered", name: "かれたサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-withered-unified.png", reward: 150, description: "かれた からだに ふしぎな ちからを やどす。" },
+  { id: "king", name: "おうさまサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-king-unified.png", reward: 150, description: "ちいさな おうかんを のせた みどりの おうさま。" },
 ];
 
 const ACTIVE_CACTUS_IDS = new Set(CACTUS_TYPES.map(function (type) { return type.id; }));
