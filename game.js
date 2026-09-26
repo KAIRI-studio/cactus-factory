@@ -813,7 +813,8 @@ function collectSwipePot(x, y) {
   harvest([index]);
 }
 
-nursery.addEventListener("pointerdown", function (event) {
+document.addEventListener("pointerdown", function (event) {
+  if (document.querySelector("dialog[open]")) return;
   if (swiping || event.pointerType === "mouse" && event.button !== 0) return;
   swiping = true;
   swipePointerId = event.pointerId;
@@ -822,11 +823,10 @@ nursery.addEventListener("pointerdown", function (event) {
   swipeLastX = event.clientX;
   swipeLastY = event.clientY;
   swipeIndexes = new Set();
-  nursery.setPointerCapture(event.pointerId);
   collectSwipePot(event.clientX, event.clientY);
 });
 
-nursery.addEventListener("pointermove", function (event) {
+document.addEventListener("pointermove", function (event) {
   if (!swiping || event.pointerId !== swipePointerId) return;
   if (Math.hypot(event.clientX - swipeStartX, event.clientY - swipeStartY) > 5) event.preventDefault();
   // Check the path between events so a quick swipe cannot skip a small pot.
@@ -845,12 +845,11 @@ function finishSwipe(event) {
   if (!swiping || event.pointerId !== swipePointerId) return;
   swiping = false;
   swipePointerId = null;
-  if (nursery.hasPointerCapture(event.pointerId)) nursery.releasePointerCapture(event.pointerId);
   swipeIndexes.clear();
 }
 
-nursery.addEventListener("pointerup", finishSwipe);
-nursery.addEventListener("pointercancel", finishSwipe);
+document.addEventListener("pointerup", finishSwipe);
+document.addEventListener("pointercancel", finishSwipe);
 
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
 function makeQuestion(questionIndex) {
