@@ -4714,7 +4714,6 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   filter:drop-shadow(0 3px 2px #14231d55);
   -webkit-mask-image:none;
   mask-image:none;
-  animation:none;
 }
 
 .nursery-pot.cactus-withered .default-cactus-sprite{
@@ -4726,7 +4725,6 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   filter:drop-shadow(0 3px 2px #14231d55);
   -webkit-mask-image:none;
   mask-image:none;
-  animation:none;
 }
 
 .nursery-pot.cactus-punk .default-cactus-sprite,
@@ -4737,7 +4735,6 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   filter:drop-shadow(0 3px 2px #14231d55);
   -webkit-mask-image:none;
   mask-image:none;
-  animation:none;
 }
 .nursery-pot.cactus-punk .default-cactus-sprite{bottom:-18%;width:136.2%}
 .nursery-pot.cactus-idol .default-cactus-sprite{bottom:-8%;width:123.8%}
