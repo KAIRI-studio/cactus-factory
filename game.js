@@ -1,40 +1,23 @@
 const POT_COUNT = 24;
-// Visual-only preview. The saved pot, rarity, collection, and roll remain unchanged.
-const KING_PREVIEW_POT_INDEX = 19;
-const WITHERED_PREVIEW_POT_INDEX = 21;
-const PUNK_PREVIEW_POT_INDEX = 16;
-const ROBOT_PREVIEW_POT_INDEX = 11;
-const IDOL_PREVIEW_POT_INDEX = 23;
+const ROSTER_SHOWCASE = { 16: "punk", 19: "king", 21: "withered", 23: "idol" };
 const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
   { id: "normal", name: "みどりサボテン", rarity: "ノーマル", rarityKey: "normal", sprite: "assets/cactus-normal.png", reward: 10, description: "いつも げんきで にこにこ。みんなの なかま。" },
-  { id: "rare", name: "おはなサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-rare-flower.png", reward: 20, description: "あたまに さいた おはなが じまんの おしゃれもの。" },
-  { id: "super", name: "うさみみサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-super-bunny.png", reward: 20, description: "おおきな みみで こうじょうの かぜを かんじとる。" },
-  { id: "legend", name: "ほしのサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-star-v3.webp", reward: 20, description: "ほしの ひかりを あつめて きらきら そだつ。" },
-  { id: "superSuit", name: "エリートサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-suit.png?v=2", reward: 50, description: "けいさんも しごとも スマートに こなす エリート。" },
-  { id: "superRed", name: "あかサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-red.png", reward: 50, description: "あつい きもちを かくさない まっすぐな せいかく。" },
-  { id: "superBlue", name: "あおサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-blue.png", reward: 50, description: "いつでも おちついている クールな サボテン。" },
-  { id: "superYellow", name: "きいろサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-super-yellow.png", reward: 50, description: "まわりを あかるくする こうじょうの ムードメーカー。" },
-  { id: "legendSage", name: "せんにんサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-legend-sage-v6.png", reward: 150, description: "ながい ときを いきる サボテンたちの せんにん。" },
+  { id: "punk", name: "パンクサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-punk-matte-preview.png", reward: 50, description: "あかい モヒカンと くろい ベストが じまん。" },
+  { id: "idol", name: "アイドルサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-idol-matte-v2-preview.png", reward: 50, description: "おおきな リボンで みんなを えがおに するよ。" },
+  { id: "withered", name: "かれたサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-withered-matte-preview.png", reward: 150, description: "かれた からだに ふしぎな ちからを やどす。" },
+  { id: "king", name: "おうさまサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-king-simple.png", reward: 150, description: "ちいさな おうかんを のせた みどりの おうさま。" },
 ];
 
-const RARE_CACTUS_IDS = ["rare", "super", "legend"];
-const SUPER_CACTUS_IDS = ["superSuit", "superRed", "superBlue", "superYellow"];
-
-function randomRareCactusId() {
-  return RARE_CACTUS_IDS[Math.floor(Math.random() * RARE_CACTUS_IDS.length)];
-}
-
-function randomSuperCactusId() {
-  return SUPER_CACTUS_IDS[Math.floor(Math.random() * SUPER_CACTUS_IDS.length)];
-}
+const ACTIVE_CACTUS_IDS = new Set(CACTUS_TYPES.map(function (type) { return type.id; }));
 
 function rollCactusId() {
   const roll = Math.random() * 100;
-  if (roll < .5) return "legendSage";
-  if (roll < 2) return randomSuperCactusId();
-  if (roll < 5) return randomRareCactusId();
+  if (roll < .25) return "king";
+  if (roll < .5) return "withered";
+  if (roll < 2.75) return "punk";
+  if (roll < 5) return "idol";
   return "normal";
 }
 
@@ -64,11 +47,11 @@ function loadState() {
         if (!Number.isInteger(pot.generation)) pot.generation = 0;
         if (!pot.cactusId) pot.cactusId = "normal";
       });
-      if (!saved.collections) saved.collections = { normal: saved.harvested || 0, rare: 0, super: 0, legend: 0 };
+      if (!saved.collections) saved.collections = { normal: saved.harvested || 0 };
       if (!Number.isInteger(saved.lastViewedCollectionCount)) {
         saved.lastViewedCollectionCount = CACTUS_TYPES.filter(function (type) { return (saved.collections[type.id] || 0) > 0; }).length;
       }
-      saved.rarityVersion = 5;
+      saved.rarityVersion = 6;
       saved.specialSeedQueued = Boolean(saved.specialSeedQueued);
       if (typeof saved.soundEnabled !== "boolean") saved.soundEnabled = true;
       if (!["harvest", "math", "equipment", "done"].includes(saved.tutorialStep)) {
@@ -89,9 +72,17 @@ function loadState() {
           pot.ready = true;
           pot.startedAt = Date.now() - 70000;
         });
-        saved.pots[2].cactusId = "rare";
-        saved.pots[10].cactusId = "super";
-        saved.pots[18].cactusId = "legend";
+        Object.keys(ROSTER_SHOWCASE).forEach(function (index) { saved.pots[index].cactusId = ROSTER_SHOWCASE[index]; });
+      }
+      if (saved.rosterVersion !== 1) {
+        saved.rosterVersion = 1;
+        saved.pots.forEach(function (pot, index) {
+          pot.cactusId = ROSTER_SHOWCASE[index] || (ACTIVE_CACTUS_IDS.has(pot.cactusId) ? pot.cactusId : "normal");
+        });
+        saved.collections = Object.fromEntries(CACTUS_TYPES.map(function (type) {
+          return [type.id, type.id === "normal" ? (saved.collections.normal || 0) : 0];
+        }));
+        saved.lastViewedCollectionCount = CACTUS_TYPES.filter(function (type) { return (saved.collections[type.id] || 0) > 0; }).length;
       }
       return saved;
     }
@@ -107,15 +98,16 @@ function createInitialState() {
     tutorialStep: "harvest",
     soundEnabled: true,
     visualVersion: 4,
-    rarityVersion: 5,
-    collections: { normal: 0, rare: 0, super: 0, legend: 0 },
+    rarityVersion: 6,
+    rosterVersion: 1,
+    collections: { normal: 0, punk: 0, idol: 0, withered: 0, king: 0 },
     lastViewedCollectionCount: 0,
     specialSeedQueued: false,
     nutrientActivePot: null,
     nutrientTrackingVersion: 1,
     layoutSeed: Math.floor(Math.random() * 2147483647),
     pots: Array.from({ length: POT_COUNT }, function (_, i) {
-      const showcase = i === 2 ? "rare" : i === 10 ? "super" : i === 18 ? "legend" : "normal";
+      const showcase = ROSTER_SHOWCASE[i] || "normal";
       return { stage: 2, ready: true, startedAt: Date.now() - 70000 - i * 1700, generation: 0, cactusId: showcase };
     }),
   };
@@ -500,7 +492,9 @@ function growthSeconds() {
 
 function rollSpecialSeed() {
   const roll = Math.random() * 100;
-  return roll < 1 ? "legendSage" : roll < 10 ? randomSuperCactusId() : randomRareCactusId();
+  if (roll < .5) return "king";
+  if (roll < 1) return "withered";
+  return roll < 50.5 ? "punk" : "idol";
 }
 
 function seededUnit(index, salt) {
@@ -542,11 +536,6 @@ function makePot(pot, index) {
   const type = cactusType(pot.cactusId);
   const button = document.createElement("button");
   button.className = "nursery-pot stage-" + pot.stage + (pot.ready ? " ready" : "") + " rarity-" + type.rarityKey;
-  if (index === KING_PREVIEW_POT_INDEX) button.classList.add("king-preview-slot");
-  if (index === WITHERED_PREVIEW_POT_INDEX) button.classList.add("withered-preview-slot");
-  if (index === PUNK_PREVIEW_POT_INDEX) button.classList.add("punk-preview-slot");
-  if (index === ROBOT_PREVIEW_POT_INDEX) button.classList.add("robot-preview-slot");
-  if (index === IDOL_PREVIEW_POT_INDEX) button.classList.add("idol-preview-slot");
   button.classList.add("cactus-" + type.id);
   button.classList.add("motion-" + Math.floor(seededUnit(index, 3) * 5));
   button.type = "button";
@@ -565,17 +554,7 @@ function makePot(pot, index) {
   button.style.setProperty("--stretch-x", (.89 + seededUnit(index, 7) * .055).toFixed(3));
   button.style.setProperty("--stretch-y", (1.08 + seededUnit(index, 8) * .07).toFixed(3));
   button.setAttribute("aria-label", pot.ready ? (index + 1) + "ばんの サボテンを とる" : (index + 1) + "ばんの サボテンを そだてています");
-  const plantImage = index === KING_PREVIEW_POT_INDEX
-    ? '<img class="default-cactus-sprite" src="assets/cactus-king-matte-v2-preview.png" alt="" />'
-    : index === WITHERED_PREVIEW_POT_INDEX
-      ? '<img class="default-cactus-sprite" src="assets/cactus-withered-matte-preview.png" alt="" />'
-    : index === PUNK_PREVIEW_POT_INDEX
-      ? '<img class="default-cactus-sprite" src="assets/cactus-punk-matte-preview.png" alt="" />'
-    : index === ROBOT_PREVIEW_POT_INDEX
-      ? '<img class="default-cactus-sprite" src="assets/cactus-robot-matte-preview.png" alt="" />'
-    : index === IDOL_PREVIEW_POT_INDEX
-      ? '<img class="default-cactus-sprite" src="assets/cactus-idol-matte-v2-preview.png" alt="" />'
-    : pot.stage === -1
+  const plantImage = pot.stage === -1
       ? ''
       : pot.ready
         ? '<img class="default-cactus-sprite" src="' + type.sprite + '" alt="" />'
@@ -588,7 +567,7 @@ function makePot(pot, index) {
 function render() {
   refreshNaturalGrowth();
   state.pots.forEach(function (pot, index) {
-    const nextSignature = pot.stage + ":" + Number(pot.ready) + ":" + (pot.generation || 0) + ":" + (pot.cactusId || "normal") + (index === KING_PREVIEW_POT_INDEX ? ":king-preview" : "") + (index === WITHERED_PREVIEW_POT_INDEX ? ":withered-preview" : "") + (index === PUNK_PREVIEW_POT_INDEX ? ":punk-preview" : "") + (index === ROBOT_PREVIEW_POT_INDEX ? ":robot-preview" : "") + (index === IDOL_PREVIEW_POT_INDEX ? ":idol-preview" : "");
+    const nextSignature = pot.stage + ":" + Number(pot.ready) + ":" + (pot.generation || 0) + ":" + (pot.cactusId || "normal");
     const currentButton = nursery.querySelector('[data-pot-index="' + index + '"]');
     if (!currentButton || potSignatures[index] !== nextSignature) {
       const newButton = makePot(pot, index);

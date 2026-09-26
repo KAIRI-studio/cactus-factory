@@ -1,8 +1,8 @@
-const CACHE_NAME = "cactus-factory-2026-09-26-254";
+const CACHE_NAME = "cactus-factory-2026-09-26-255";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=254",
+  "./styles.css?v=255",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
@@ -38,7 +38,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=254",
+  "./game.js?v=255",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -58,26 +58,10 @@ const APP_FILES = [
   "./assets/sand-factory-automatic.png?v=3",
   "./assets/simple-bold-sprout.png",
   "./assets/cactus-normal.png",
-  "./assets/cactus-rare-flower.png",
-  "./assets/cactus-super-bunny.png",
-  "./assets/cactus-super-suit.png?v=2",
-  "./assets/cactus-super-red.png",
-  "./assets/cactus-super-blue.png",
-  "./assets/cactus-super-yellow.png",
-  "./assets/cactus-legend-sage-v6.png",
-  "./assets/cactus-king-preview.png",
-  "./assets/cactus-withered-preview.png",
-  "./assets/cactus-king-design-preview.png",
-  "./assets/cactus-withered-design-preview.png",
-  "./assets/cactus-punk-preview.png",
-  "./assets/cactus-robot-preview.png",
-  "./assets/cactus-idol-preview.png",
   "./assets/cactus-withered-matte-preview.png",
   "./assets/cactus-punk-matte-preview.png",
-  "./assets/cactus-robot-matte-preview.png",
-  "./assets/cactus-king-matte-v2-preview.png",
   "./assets/cactus-idol-matte-v2-preview.png",
-  "./assets/cactus-star-v3.webp",
+  "./assets/cactus-king-simple.png",
   "./assets/rare-nutrient-crate-bold.png"
 ];
 
