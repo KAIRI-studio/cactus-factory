@@ -4738,3 +4738,14 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 .nursery-pot.cactus-punk .default-cactus-sprite{bottom:-18%;width:136.2%}
 .nursery-pot.cactus-idol .default-cactus-sprite{bottom:-8%;width:123.8%}
+
+/* Legendary harvest reveal: red frame and glow. */
+.rarity-reveal.legend .rarity-reveal-card{
+  border-color:#f7b3a6;
+  background:linear-gradient(150deg,#a63e3beb,#641f27f2);
+  box-shadow:0 8px 0 #43151a,0 0 42px #d95358a0;
+}
+.rarity-reveal.legend .rarity-reveal-card small{color:#ffe1d6}
+.rarity-reveal.legend::before{
+  background:radial-gradient(ellipse at 50% 50%,#fff5ee 0 4%,#f6a299a8 16%,#d9545f4d 42%,transparent 72%);
+}
