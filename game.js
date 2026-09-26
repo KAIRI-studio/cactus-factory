@@ -566,7 +566,7 @@ function makePot(pot, index) {
   button.style.setProperty("--stretch-y", (1.08 + seededUnit(index, 8) * .07).toFixed(3));
   button.setAttribute("aria-label", pot.ready ? (index + 1) + "ばんの サボテンを とる" : (index + 1) + "ばんの サボテンを そだてています");
   const plantImage = index === KING_PREVIEW_POT_INDEX
-    ? '<img class="default-cactus-sprite" src="assets/cactus-king-matte-preview.png" alt="" />'
+    ? '<img class="default-cactus-sprite" src="assets/cactus-king-matte-v2-preview.png" alt="" />'
     : index === WITHERED_PREVIEW_POT_INDEX
       ? '<img class="default-cactus-sprite" src="assets/cactus-withered-matte-preview.png" alt="" />'
     : index === PUNK_PREVIEW_POT_INDEX
@@ -574,7 +574,7 @@ function makePot(pot, index) {
     : index === ROBOT_PREVIEW_POT_INDEX
       ? '<img class="default-cactus-sprite" src="assets/cactus-robot-matte-preview.png" alt="" />'
     : index === IDOL_PREVIEW_POT_INDEX
-      ? '<img class="default-cactus-sprite" src="assets/cactus-idol-matte-preview.png" alt="" />'
+      ? '<img class="default-cactus-sprite" src="assets/cactus-idol-matte-v2-preview.png" alt="" />'
     : pot.stage === -1
       ? ''
       : pot.ready
