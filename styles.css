@@ -4842,3 +4842,29 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .zukan-entry .zukan-picture img[src*="cactus-lord-simple"]{transform:scaleX(1.22)!important}
 .zukan-hero-stage img[src*="cactus-ninja-simple"],
 .zukan-entry .zukan-picture img[src*="cactus-ninja-simple"]{transform:scaleX(1.25)!important}
+
+/* Keep the expanded roster on the same standing line and animation. */
+.nursery-pot:is(.cactus-santa,.cactus-honey,.cactus-firefighter,.cactus-musician,.cactus-samurai,.cactus-wizard,.cactus-thief,.cactus-festival,.cactus-angel,.cactus-devil,.cactus-sumo,.cactus-phoenix,.cactus-unicorn,.cactus-sun,.cactus-moon) .default-cactus-sprite{
+  bottom:-8%;
+  max-width:none;
+  transform:translateX(-50%);
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 3px 2px #14231d55);
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+.nursery-pot.cactus-santa .default-cactus-sprite{width:113%}
+.nursery-pot.cactus-honey .default-cactus-sprite{width:115%}
+.nursery-pot.cactus-firefighter .default-cactus-sprite{width:118%}
+.nursery-pot.cactus-musician .default-cactus-sprite{width:114%}
+.nursery-pot.cactus-samurai .default-cactus-sprite{width:120%}
+.nursery-pot.cactus-wizard .default-cactus-sprite{width:115%}
+.nursery-pot.cactus-thief .default-cactus-sprite{width:113%;bottom:-10%}
+.nursery-pot.cactus-festival .default-cactus-sprite{width:117%}
+.nursery-pot.cactus-angel .default-cactus-sprite{width:123%;bottom:-12%}
+.nursery-pot.cactus-devil .default-cactus-sprite{width:115%}
+.nursery-pot.cactus-sumo .default-cactus-sprite{width:118%;bottom:-11%}
+.nursery-pot.cactus-phoenix .default-cactus-sprite{width:115%}
+.nursery-pot.cactus-unicorn .default-cactus-sprite{width:123%;bottom:-11%}
+.nursery-pot.cactus-sun .default-cactus-sprite{width:120%;bottom:-10%}
+.nursery-pot.cactus-moon .default-cactus-sprite{width:124%;bottom:-16%}
