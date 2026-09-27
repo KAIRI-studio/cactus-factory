@@ -17,7 +17,7 @@ const CACTUS_TYPES = [
   { id: "ghost", name: "おばけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ghost-simple-v263.png", reward: 50, description: "よるに ふわふわ あらわれる。" },
   { id: "surfer", name: "サーファーサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-surfer-simple-v263.png", reward: 150, description: "なみに のるのが だいすき。" },
   { id: "sage", name: "せんにんサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sage-simple-v263.png", reward: 50, description: "やまおくで しゅぎょうを つづける。" },
-  { id: "lord", name: "とのさまサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-lord-simple-v263.png", reward: 50, description: "おうぎを ひらいて いばっている。" },
+  { id: "lord", name: "とのさまサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-lord-simple-v263.png", reward: 150, description: "おうぎを ひらいて いばっている。" },
   { id: "ninja", name: "ニンジャサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ninja-simple-v263.png", reward: 50, description: "しずかに すばやく かけぬける。" },
   { id: "sleepy", name: "ねぼすけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sleepy-simple-v266.png", reward: 50, description: "いつでも ねむそう。あさは ちょっぴり にがて。" },
   { id: "robot", name: "ロボサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-robot-simple-v266.png", reward: 50, description: "ピコピコ うごく こうじょうの なかま。" },
