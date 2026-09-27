@@ -1,8 +1,8 @@
-const CACHE_NAME = "cactus-factory-2026-09-27-265";
+const CACHE_NAME = "cactus-factory-2026-09-27-266";
 const APP_FILES = [
   "./",
   "./index.html",
-  "./styles.css?v=265",
+  "./styles.css?v=266",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
@@ -38,7 +38,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=265",
+  "./game.js?v=266",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -72,6 +72,16 @@ const APP_FILES = [
   "./assets/cactus-sage-simple-v263.png",
   "./assets/cactus-lord-simple-v263.png",
   "./assets/cactus-ninja-simple-v263.png",
+  "./assets/cactus-sleepy-simple-v266.png",
+  "./assets/cactus-robot-simple-v266.png",
+  "./assets/cactus-hero-simple-v266.png",
+  "./assets/cactus-kappa-simple-v266.png",
+  "./assets/cactus-astronaut-simple-v266.png",
+  "./assets/cactus-scientist-simple-v266.png",
+  "./assets/cactus-explorer-simple-v266.png",
+  "./assets/cactus-boxer-simple-v266.png",
+  "./assets/cactus-magician-simple-v266.png",
+  "./assets/cactus-dragon-simple-v266.png",
   "./assets/rare-nutrient-crate-bold.png"
 ];
 

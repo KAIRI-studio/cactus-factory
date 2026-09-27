@@ -4811,3 +4811,24 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 #zukanDialog .zukan-page-button:not(:disabled):active{transform:translateY(2px);box-shadow:0 1px 0 #98752c}
 #zukanDialog .zukan-page-indicator{color:#23483b;font-size:12px;font-weight:900;white-space:nowrap}
+
+/* New sprites share the slim body scale and grounded idle motion. */
+.nursery-pot:is(.cactus-sleepy,.cactus-robot,.cactus-hero,.cactus-kappa,.cactus-astronaut,.cactus-scientist,.cactus-explorer,.cactus-boxer,.cactus-magician,.cactus-dragon) .default-cactus-sprite{
+  bottom:-8%;
+  max-width:none;
+  transform:translateX(-50%);
+  transform-origin:50% 100%;
+  filter:drop-shadow(0 3px 2px #14231d55);
+  -webkit-mask-image:none;
+  mask-image:none;
+}
+.nursery-pot.cactus-sleepy .default-cactus-sprite{width:110%}
+.nursery-pot.cactus-robot .default-cactus-sprite{width:118%}
+.nursery-pot.cactus-hero .default-cactus-sprite{width:118%}
+.nursery-pot.cactus-kappa .default-cactus-sprite{width:112%}
+.nursery-pot.cactus-astronaut .default-cactus-sprite{width:118%}
+.nursery-pot.cactus-scientist .default-cactus-sprite{width:120%}
+.nursery-pot.cactus-explorer .default-cactus-sprite{width:145%;bottom:-12%}
+.nursery-pot.cactus-boxer .default-cactus-sprite{width:115%}
+.nursery-pot.cactus-magician .default-cactus-sprite{width:112%}
+.nursery-pot.cactus-dragon .default-cactus-sprite{width:126%;bottom:-15%}

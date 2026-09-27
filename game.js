@@ -1,5 +1,6 @@
 const POT_COUNT = 24;
-const ROSTER_SHOWCASE = { 3: "mechanic", 5: "pirate", 7: "chef", 9: "salaryman", 11: "cowboy", 13: "ghost", 15: "surfer", 16: "punk", 17: "sage", 18: "lord", 19: "king", 20: "ninja", 21: "withered", 23: "idol" };
+const ROSTER_SHOWCASE = { 1: "sleepy", 2: "robot", 3: "mechanic", 4: "hero", 5: "pirate", 6: "kappa", 7: "chef", 8: "astronaut", 9: "salaryman", 10: "scientist", 11: "cowboy", 12: "explorer", 13: "ghost", 14: "boxer", 15: "surfer", 16: "punk", 17: "sage", 18: "lord", 19: "king", 20: "ninja", 21: "withered", 22: "dragon", 23: "idol" };
+const NEW_SHOWCASE_IDS = { 1: "sleepy", 2: "robot", 4: "hero", 6: "kappa", 8: "astronaut", 10: "scientist", 12: "explorer", 14: "boxer", 22: "dragon" };
 const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
 const CACTUS_TYPES = [
@@ -18,6 +19,16 @@ const CACTUS_TYPES = [
   { id: "sage", name: "せんにんサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sage-simple-v263.png", reward: 50, description: "やまおくで しゅぎょうを つづける。" },
   { id: "lord", name: "とのさまサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-lord-simple-v263.png", reward: 50, description: "おうぎを ひらいて いばっている。" },
   { id: "ninja", name: "ニンジャサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ninja-simple-v263.png", reward: 50, description: "しずかに すばやく かけぬける。" },
+  { id: "sleepy", name: "ねぼすけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sleepy-simple-v266.png", reward: 50, description: "いつでも ねむそう。あさは ちょっぴり にがて。" },
+  { id: "robot", name: "ロボサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-robot-simple-v266.png", reward: 50, description: "ピコピコ うごく こうじょうの なかま。" },
+  { id: "hero", name: "ヒーローサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-hero-simple-v266.png", reward: 150, description: "あかい マントで なかまを まもる。" },
+  { id: "kappa", name: "カッパサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-kappa-simple-v266.png", reward: 50, description: "あたまの おさらを たいせつに している。" },
+  { id: "astronaut", name: "うちゅうひこうしサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-astronaut-simple-v266.png", reward: 50, description: "うちゅうへ とびだす ひを ゆめみている。" },
+  { id: "scientist", name: "はかせサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-scientist-simple-v266.png", reward: 50, description: "ふしぎな くすりを けんきゅうちゅう。" },
+  { id: "explorer", name: "たんけんたいサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-explorer-simple-v266.png", reward: 50, description: "そうがんきょうで あたらしい せかいを さがす。" },
+  { id: "boxer", name: "ボクサーサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-boxer-simple-v266.png", reward: 50, description: "まいにち げんきに トレーニング。" },
+  { id: "magician", name: "マジシャンサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-magician-simple-v266.png", reward: 50, description: "ほしの ステッキで ふしぎな マジック。" },
+  { id: "dragon", name: "ドラゴンサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-dragon-simple-v266.png", reward: 150, description: "ちいさな つばさで そらを めざす。" },
 ];
 const SUPER_CACTUS_IDS = CACTUS_TYPES.filter(function (type) { return type.rarityKey === "super"; }).map(function (type) { return type.id; });
 const LEGEND_CACTUS_IDS = CACTUS_TYPES.filter(function (type) { return type.rarityKey === "legend"; }).map(function (type) { return type.id; });
@@ -100,6 +111,12 @@ function loadState() {
           if (saved.pots[index].cactusId === "normal" && saved.pots[index].ready) saved.pots[index].cactusId = ROSTER_SHOWCASE[index];
         });
       }
+      if (saved.rosterShowcaseVersion < 3) {
+        Object.keys(NEW_SHOWCASE_IDS).forEach(function (index) {
+          if (saved.pots[index].cactusId === "normal" && saved.pots[index].ready) saved.pots[index].cactusId = NEW_SHOWCASE_IDS[index];
+        });
+        saved.rosterShowcaseVersion = 3;
+      }
       return saved;
     }
   } catch {}
@@ -116,7 +133,7 @@ function createInitialState() {
     visualVersion: 4,
     rarityVersion: 6,
     rosterVersion: 1,
-    rosterShowcaseVersion: 2,
+    rosterShowcaseVersion: 3,
     collections: Object.fromEntries(CACTUS_TYPES.map(function (type) { return [type.id, 0]; })),
     lastViewedCollectionCount: 0,
     specialSeedQueued: false,
