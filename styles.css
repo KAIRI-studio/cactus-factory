@@ -4777,3 +4777,37 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .nursery-pot.cactus-sage .default-cactus-sprite{width:124%}
 .nursery-pot.cactus-lord .default-cactus-sprite{width:140%}
 .nursery-pot.cactus-ninja .default-cactus-sprite{width:103%}
+
+/* Keep collection page controls visible below the two rows of specimens. */
+#zukanDialog .zukan-pagination{
+  flex:none!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  align-items:center;
+  gap:8px;
+  min-height:54px;
+  padding:6px 10px 2px;
+  box-sizing:border-box;
+}
+#zukanDialog .zukan-pagination[hidden]{display:none!important}
+#zukanDialog .zukan-page-button{
+  min-height:42px;
+  padding:5px 8px;
+  border:2px solid #315e4a;
+  border-radius:12px;
+  background:#f3c94e;
+  box-shadow:0 3px 0 #98752c;
+  color:#193c30;
+  font-size:13px;
+  font-weight:900;
+  white-space:nowrap;
+  touch-action:manipulation;
+}
+#zukanDialog .zukan-page-button:disabled{
+  border-color:#a5b8aa;
+  background:#dfe8d9;
+  box-shadow:none;
+  color:#829589;
+}
+#zukanDialog .zukan-page-button:not(:disabled):active{transform:translateY(2px);box-shadow:0 1px 0 #98752c}
+#zukanDialog .zukan-page-indicator{color:#23483b;font-size:12px;font-weight:900;white-space:nowrap}

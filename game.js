@@ -1157,7 +1157,7 @@ function showZukanHero(type, count, entry) {
   requestAnimationFrame(function () { hero.classList.add("is-switching"); });
 }
 
-const ZUKAN_PAGE_SIZE = 12;
+const ZUKAN_PAGE_SIZE = 8;
 let zukanPage = 0;
 
 function renderZukanPage() {
@@ -1182,15 +1182,28 @@ function renderZukanPage() {
   const pagination = document.querySelector("#zukanPagination");
   pagination.replaceChildren();
   pagination.hidden = pageCount <= 1;
-  for (let pageIndex = 0; pageIndex < pageCount; pageIndex += 1) {
-    const dot = document.createElement("button");
-    dot.type = "button";
-    dot.className = "zukan-page-dot" + (pageIndex === zukanPage ? " active" : "");
-    dot.setAttribute("aria-label", String(pageIndex + 1) + "ページめ");
-    dot.setAttribute("aria-current", pageIndex === zukanPage ? "page" : "false");
-    dot.addEventListener("click", function () { zukanPage = pageIndex; renderZukanPage(); });
-    pagination.append(dot);
+  if (pageCount > 1) {
+    const previous = document.createElement("button");
+    previous.type = "button";
+    previous.className = "zukan-page-button";
+    previous.textContent = "‹ まえへ";
+    previous.disabled = zukanPage === 0;
+    previous.addEventListener("click", function () { zukanPage -= 1; renderZukanPage(); });
+
+    const indicator = document.createElement("span");
+    indicator.className = "zukan-page-indicator";
+    indicator.textContent = String(zukanPage + 1) + " / " + String(pageCount) + " ページ";
+    indicator.setAttribute("aria-live", "polite");
+
+    const next = document.createElement("button");
+    next.type = "button";
+    next.className = "zukan-page-button";
+    next.textContent = "つぎへ ›";
+    next.disabled = zukanPage === pageCount - 1;
+    next.addEventListener("click", function () { zukanPage += 1; renderZukanPage(); });
+    pagination.append(previous, indicator, next);
   }
+  document.querySelector(".zukan-list-scroll").scrollTop = 0;
 }
 
 function renderZukan() {
