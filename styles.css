@@ -4811,6 +4811,20 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 #zukanDialog .zukan-page-button:not(:disabled):active{transform:translateY(2px);box-shadow:0 1px 0 #98752c}
 #zukanDialog .zukan-page-indicator{color:#23483b;font-size:12px;font-weight:900;white-space:nowrap}
 
+/* The old full-width final legend is now a regular grid card. */
+#zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
+  border-color:#b33d32!important;
+  background:linear-gradient(150deg,#fff5ee,#f2b2aa)!important;
+  box-shadow:0 3px 0 #7f2e2938,0 0 11px #d85c5220,inset 0 1px #fff;
+}
+#zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child.selected{
+  box-shadow:0 4px 0 #526e60,0 0 0 3px #ffd85b!important;
+}
+#zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child .zukan-info small{
+  background:#d4e7cf!important;
+  color:#315b4c!important;
+}
+
 /* The selected specimen sits inside the glass panel, so size that actual card.
    Reserve the rest of the panel for both rows and the page controls. */
 #zukanDialog .station-glass-zukan>.zukan-hero{
