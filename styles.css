@@ -4765,17 +4765,17 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 
 /* Keep the rebuilt slim bodies at the established standing height. */
 .nursery-pot.cactus-punk .default-cactus-sprite{width:108%;bottom:-7%}
-.nursery-pot.cactus-idol .default-cactus-sprite{width:108%}
-.nursery-pot.cactus-withered .default-cactus-sprite{width:103%;bottom:-2%}
+.nursery-pot.cactus-idol .default-cactus-sprite{width:110%}
+.nursery-pot.cactus-withered .default-cactus-sprite{width:108%;bottom:-7%}
 .nursery-pot.cactus-mechanic .default-cactus-sprite{width:117%}
 .nursery-pot.cactus-pirate .default-cactus-sprite{width:125%}
-.nursery-pot.cactus-chef .default-cactus-sprite{width:123%}
+.nursery-pot.cactus-chef .default-cactus-sprite{width:110%}
 .nursery-pot.cactus-salaryman .default-cactus-sprite{width:107%}
 .nursery-pot.cactus-cowboy .default-cactus-sprite{width:112%}
 .nursery-pot.cactus-ghost .default-cactus-sprite{width:93%;bottom:-1%}
-.nursery-pot.cactus-surfer .default-cactus-sprite{width:130%;transform:translateX(-50%) scaleX(1.14)}
-.nursery-pot.cactus-sage .default-cactus-sprite{width:124%;transform:translateX(-50%) scaleX(1.15)}
-.nursery-pot.cactus-lord .default-cactus-sprite{width:140%;transform:translateX(-50%) scaleX(1.13)}
+.nursery-pot.cactus-surfer .default-cactus-sprite{width:112%;transform:translateX(-50%)}
+.nursery-pot.cactus-sage .default-cactus-sprite{width:112%;transform:translateX(-50%)}
+.nursery-pot.cactus-lord .default-cactus-sprite{width:112%;transform:translateX(-50%)}
 .nursery-pot.cactus-ninja .default-cactus-sprite{width:103%;transform:translateX(-50%) scaleX(1.22)}
 
 /* Keep collection page controls visible below the two rows of specimens. */
