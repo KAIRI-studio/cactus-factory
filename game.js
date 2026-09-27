@@ -22,7 +22,7 @@ const CACTUS_TYPES = [
   { id: "sleepy", name: "ねぼすけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sleepy-simple-v266.png", reward: 50, description: "いつでも ねむそう。あさは ちょっぴり にがて。" },
   { id: "robot", name: "ロボサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-robot-simple-v266.png", reward: 50, description: "ピコピコ うごく こうじょうの なかま。" },
   { id: "hero", name: "ヒーローサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-hero-simple-v266.png", reward: 150, description: "あかい マントで なかまを まもる。" },
-  { id: "kappa", name: "カッパサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-kappa-simple-v266.png", reward: 50, description: "あたまの おさらを たいせつに している。" },
+  { id: "kappa", name: "カッパサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-kappa-beak-v269.png", reward: 50, description: "くちばしと あたまの おさらが じまん。" },
   { id: "astronaut", name: "うちゅうひこうしサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-astronaut-simple-v266.png", reward: 50, description: "うちゅうへ とびだす ひを ゆめみている。" },
   { id: "scientist", name: "はかせサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-scientist-simple-v266.png", reward: 50, description: "ふしぎな くすりを けんきゅうちゅう。" },
   { id: "explorer", name: "たんけんたいサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-explorer-simple-v266.png", reward: 50, description: "そうがんきょうで あたらしい せかいを さがす。" },
