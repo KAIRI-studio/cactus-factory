@@ -1325,7 +1325,6 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .onboarding-copy b{font-size:14px;line-height:1.35;letter-spacing:.025em}
 .onboarding-skip{align-self:start;padding:5px 7px;border:1px solid #9db5a9;border-radius:9px;background:#fffdf3;color:#60736b;font:700 10px/1 "Hiragino Maru Gothic ProN","Yu Gothic",sans-serif;pointer-events:auto}
 .console-button.tutorial-focus{z-index:2;outline:4px solid #ffe171;outline-offset:-2px;animation:tutorial-console-pulse 1.25s ease-in-out infinite}
-.nursery-pot.tutorial-focus{z-index:999!important}
 .nursery-pot.tutorial-focus .sprite-crop{filter:drop-shadow(0 0 4px #fff6bd) drop-shadow(0 0 9px #ffd64f);animation:tutorial-cactus-pulse 1.2s ease-in-out infinite}
 @keyframes tutorial-console-pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.13)}}
 @keyframes tutorial-cactus-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
