@@ -1057,6 +1057,13 @@ function renderEquipment() {
   renderSoundSetting();
   document.querySelector("#equipmentTotalText").textContent = total + " / 12";
   document.querySelector("#equipmentMeterFill").style.width = (total / 12 * 100) + "%";
+  const growthMinutes = Math.round(growthSeconds() / 60);
+  const formatGrowthTime = function (minutes) {
+    return Math.floor(minutes / 60) + "じかん" + (minutes % 60 ? (minutes % 60) + "ぷん" : "");
+  };
+  document.querySelector("#equipmentGrowthGuide").textContent = total < 12
+    ? "いま " + formatGrowthTime(growthMinutes) + " → つぎのレベルで " + formatGrowthTime(growthMinutes - 10) + "（10ぷん短縮）"
+    : "ぜんぶ かいぞうして、そだつ時間が 1じかんに！";
   equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
   equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
 
