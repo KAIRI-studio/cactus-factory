@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=275" />
+  <link rel="stylesheet" href="styles.css?v=277" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=276" defer></script>
+  <script src="game.js?v=277" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -236,11 +236,16 @@
           <div class="equipment-detail" id="equipmentDetail"></div>
         </div>
         <p class="feedback" id="equipmentFeedback"></p>
+        <section class="save-settings" aria-label="あそびのきろく">
+          <b>あそびの きろく</b>
+          <p>きろくは このたんまつの ブラウザに ほぞんされます。ブラウザのデータを けすと、きろくも きえます。</p>
+          <button id="resetSaveButton" type="button">さいしょから あそぶ</button>
+        </section>
         <section class="test-tools"><small>テスト用</small><div><button id="fillTestButton" type="button">まんたんにする</button><button class="danger" id="resetTestButton" type="button">データをリセット</button></div></section>
       </div>
     </section></dialog>
     <dialog id="resetDialog"><section class="dialog-card reset-card">
-      <small>テスト用メニュー</small><h2>データをリセット？</h2><p>コイン・せつび・ずかんを、すべて最初の状態にもどします。</p>
+      <small>あそびの きろく</small><h2>さいしょから あそぶ？</h2><p>コイン・せつび・ずかんを、すべて最初の状態にもどします。この操作は取り消せません。</p>
       <div class="reset-actions"><button id="resetCancelButton" type="button">やめる</button><button class="danger" id="resetConfirmButton" type="button">リセットする</button></div>
     </section></dialog>
     <dialog id="zukanDialog"><section class="dialog-card zukan-card">
