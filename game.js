@@ -1,6 +1,5 @@
 const POT_COUNT = 24;
 const ROSTER_SHOWCASE = { 1: "sleepy", 2: "robot", 3: "mechanic", 4: "hero", 5: "pirate", 6: "kappa", 7: "chef", 8: "astronaut", 9: "salaryman", 10: "scientist", 11: "cowboy", 12: "explorer", 13: "ghost", 14: "boxer", 15: "surfer", 16: "punk", 17: "sage", 18: "lord", 19: "king", 20: "ninja", 21: "withered", 22: "dragon", 23: "idol" };
-const STARTER_SHOWCASE = { 5: "sleepy", 13: "mechanic", 20: "kappa" };
 const NEW_SHOWCASE_IDS = { 1: "sleepy", 2: "robot", 4: "hero", 6: "kappa", 8: "astronaut", 10: "scientist", 12: "explorer", 14: "boxer", 22: "dragon" };
 const STORAGE = "cactus-line-v4";
 const SOIL_SECONDS = 5 * 60;
@@ -157,8 +156,7 @@ function createInitialState() {
     nutrientTrackingVersion: 1,
     layoutSeed: Math.floor(Math.random() * 2147483647),
     pots: Array.from({ length: POT_COUNT }, function (_, i) {
-      const showcase = STARTER_SHOWCASE[i] || "normal";
-      return { stage: 2, ready: true, startedAt: Date.now() - 70000 - i * 1700, generation: 0, cactusId: showcase };
+      return { stage: 2, ready: true, startedAt: Date.now() - 70000 - i * 1700, generation: 0, cactusId: "normal" };
     }),
   };
 }
