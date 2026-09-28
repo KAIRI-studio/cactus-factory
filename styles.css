@@ -4935,3 +4935,50 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .nursery-pot.cactus-unicorn .default-cactus-sprite{width:123%;bottom:-11%}
 .nursery-pot.cactus-sun .default-cactus-sprite{width:120%;bottom:-10%}
 .nursery-pot.cactus-moon .default-cactus-sprite{width:124%;bottom:-16%}
+
+/* Keep development controls available only through the debug view. */
+body:not(.debug-mode) .test-tools{display:none!important}
+#equipmentDialog .equipment-scroll-area>.save-settings{
+  display:grid;
+  gap:7px;
+  margin:22px 3px 12px;
+  padding:13px 14px;
+  border:2px solid #5b806b;
+  border-radius:14px;
+  background:#f0f5e8ed;
+  color:#244738;
+}
+.save-settings>b{font-size:15px}
+.save-settings>p{margin:0;font-size:13px;line-height:1.55}
+.save-settings>button{
+  justify-self:start;
+  min-height:40px;
+  margin-top:3px;
+  padding:7px 12px;
+  border:2px solid #6f8b79;
+  border-radius:10px;
+  background:#fffdf2;
+  color:#345044;
+  font-size:13px;
+  font-weight:900;
+}
+
+/* Let every specimen name use two lines instead of cutting it off. */
+#zukanDialog .zukan-grid .zukan-entry .zukan-info small{font-size:8px!important}
+#zukanDialog .zukan-grid .zukan-entry .zukan-info b{
+  display:-webkit-box!important;
+  overflow:hidden!important;
+  min-height:20px!important;
+  font-size:9px!important;
+  line-height:1.1!important;
+  white-space:normal!important;
+  text-overflow:clip!important;
+  overflow-wrap:anywhere;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+#zukanDialog .zukan-grid .zukan-entry .zukan-info em{font-size:8px!important}
+#zukanDialog .zukan-grid .zukan-entry .zukan-entry-number{font-size:8px!important}
+@media(max-width:360px){
+  #zukanDialog .zukan-grid .zukan-entry .zukan-info b{font-size:8px!important;min-height:18px!important}
+}
