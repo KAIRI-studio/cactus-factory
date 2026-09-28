@@ -4983,33 +4983,52 @@ body:not(.debug-mode) .test-tools{display:none!important}
   #zukanDialog .zukan-grid .zukan-entry .zukan-info b{font-size:8px!important;min-height:18px!important}
 }
 
-/* Explain how upgrades change growth time before the equipment choices. */
+/* A quiet growth caption keeps the illustrated equipment in focus. */
 #equipmentDialog .equipment-room-shell{
   grid-template-rows:auto auto auto auto!important;
-  row-gap:10px!important;
+  row-gap:7px!important;
 }
 #equipmentDialog .equipment-growth-guide{
   grid-column:1/-1;
   grid-row:2;
   display:grid;
-  gap:2px;
-  padding:8px 11px;
-  border:2px solid #668979;
-  border-radius:12px;
-  background:#f8f6e5eb;
-  color:#244838;
-  box-shadow:0 3px 0 #3158464a;
-  line-height:1.25;
+  gap:1px;
+  padding:5px 8px 6px;
+  border-bottom:1px solid #55776378;
+  color:#294e3e;
 }
-#equipmentDialog .equipment-growth-guide b{font-size:12px}
-#equipmentDialog .equipment-growth-guide span{font-size:11px;font-weight:700}
+#equipmentDialog .equipment-growth-guide b{font-size:11px;line-height:1.2}
+#equipmentDialog .equipment-growth-guide span{font-size:11px;font-weight:700;line-height:1.2}
 #equipmentDialog .equipment-room-shell>.equipment-grid{grid-row:3!important;row-gap:14px!important}
 #equipmentDialog .equipment-room-shell>.equipment-detail{grid-row:4!important}
-#equipmentDialog .equipment-scroll-area>.save-settings{margin-top:80px}
+#equipmentDialog .equipment-scroll-area>.save-settings{
+  display:block;
+  margin:90px 3px 12px;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+#equipmentDialog .save-settings>summary{
+  width:max-content;
+  max-width:100%;
+  padding:10px 5px;
+  color:#486b59;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+#equipmentDialog .save-settings[open]{
+  padding:5px 12px 12px;
+  border:1px solid #729480;
+  border-radius:12px;
+  background:#f1f3e9ed;
+}
+#equipmentDialog .save-settings:not([open])>:not(summary){display:none!important}
 @media(max-height:700px){
-  #equipmentDialog .equipment-room-shell{row-gap:5px!important}
-  #equipmentDialog .equipment-growth-guide{padding:6px 9px}
-  #equipmentDialog .equipment-growth-guide b{font-size:11px}
-  #equipmentDialog .equipment-growth-guide span{font-size:10px}
+  #equipmentDialog .equipment-room-shell{row-gap:4px!important}
+  #equipmentDialog .equipment-growth-guide{padding:3px 5px 4px}
+  #equipmentDialog .equipment-growth-guide b,#equipmentDialog .equipment-growth-guide span{font-size:10px}
   #equipmentDialog .equipment-room-shell>.equipment-grid{row-gap:8px!important}
 }
