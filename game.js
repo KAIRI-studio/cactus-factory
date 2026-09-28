@@ -534,8 +534,8 @@ function renderSpecialNutrient() {
     : "レア栄養剤 使用中。すべてのサボテンが生えたら終了します");
 }
 function growthSeconds() {
-  const EMPTY_FACTORY_GROWTH_SECONDS = 5 * 60 * 60;
-  const REDUCTION_PER_LEVEL_SECONDS = 15 * 60;
+  const EMPTY_FACTORY_GROWTH_SECONDS = 3 * 60 * 60;
+  const REDUCTION_PER_LEVEL_SECONDS = 10 * 60;
   return EMPTY_FACTORY_GROWTH_SECONDS - equipmentTotal() * REDUCTION_PER_LEVEL_SECONDS;
 }
 
