@@ -120,7 +120,7 @@ function loadState() {
         }));
         saved.lastViewedCollectionCount = CACTUS_TYPES.filter(function (type) { return (saved.collections[type.id] || 0) > 0; }).length;
       }
-      if (saved.rosterShowcaseVersion !== 2) {
+      if (!Number.isInteger(saved.rosterShowcaseVersion) || saved.rosterShowcaseVersion < 2) {
         saved.rosterShowcaseVersion = 2;
         Object.keys(ROSTER_SHOWCASE).forEach(function (index) {
           if (saved.pots[index].cactusId === "normal" && saved.pots[index].ready) saved.pots[index].cactusId = ROSTER_SHOWCASE[index];
@@ -131,6 +131,15 @@ function loadState() {
           if (saved.pots[index].cactusId === "normal" && saved.pots[index].ready) saved.pots[index].cactusId = NEW_SHOWCASE_IDS[index];
         });
         saved.rosterShowcaseVersion = 3;
+      }
+      // Earlier builds showed the full roster even before the first harvest.
+      // Correct those untouched starters without changing an existing collection.
+      if ((Number(saved.harvested) || 0) === 0
+          && saved.pots.every(function (pot) { return pot.ready && (Number(pot.generation) || 0) === 0; })
+          && CACTUS_TYPES.every(function (type) { return (Number(saved.collections[type.id]) || 0) === 0; })
+          && saved.pots.some(function (pot) { return pot.cactusId !== "normal"; })) {
+        saved.pots.forEach(function (pot) { pot.cactusId = "normal"; });
+        localStorage.setItem(STORAGE, JSON.stringify(saved));
       }
       return saved;
     }
