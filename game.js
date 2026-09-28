@@ -1061,9 +1061,12 @@ function renderEquipment() {
   const formatGrowthTime = function (minutes) {
     return Math.floor(minutes / 60) + "じかん" + (minutes % 60 ? (minutes % 60) + "ぷん" : "");
   };
+  document.querySelector(".equipment-growth-guide b").textContent = total < 12
+    ? "せつびを 1レベル あげると 10ぷん短縮"
+    : "せつび かんせい！";
   document.querySelector("#equipmentGrowthGuide").textContent = total < 12
-    ? "いま " + formatGrowthTime(growthMinutes) + " → つぎのレベルで " + formatGrowthTime(growthMinutes - 10) + "（10ぷん短縮）"
-    : "ぜんぶ かいぞうして、そだつ時間が 1じかんに！";
+    ? "そだつまで " + formatGrowthTime(growthMinutes) + " → " + formatGrowthTime(growthMinutes - 10)
+    : "ぜんぶ かいぞう！ そだつまで 1じかん";
   equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
   equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
 
