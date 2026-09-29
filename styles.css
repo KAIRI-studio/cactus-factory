@@ -5180,3 +5180,9 @@ body:not(.debug-mode) .test-tools{display:none!important}
 }
 #mathDialog .math-timer.is-urgent{color:#a44532}
 #mathDialog .math-timer.is-urgent .math-timer-track i{background:#e6a348}
+
+/* Leave clear air between the achievement meter and the announcement card. */
+.game:has(.factory-guide:not([hidden])) .factory-progress-chip{bottom:224px!important}
+@media(max-height:700px){
+  .game:has(.factory-guide:not([hidden])) .factory-progress-chip{bottom:190px!important}
+}
