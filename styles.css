@@ -5110,3 +5110,32 @@ body:not(.debug-mode) .test-tools{display:none!important}
   .factory-progress-chip{bottom:108px!important}
   .game:has(.factory-guide:not([hidden]),.onboarding-tip:not([hidden])) .factory-progress-chip{bottom:170px!important}
 }
+
+/* The save control belongs to the equipment panel, not the painted floor. */
+#equipmentDialog .equipment-room-shell{grid-template-rows:auto auto auto auto auto!important}
+#equipmentDialog .equipment-room-shell>.save-settings{
+  grid-column:1/-1;
+  grid-row:5;
+  display:block;
+  margin:1px 8px 0;
+  padding:0;
+  border:0;
+  border-top:1px solid #6386749c;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+}
+#equipmentDialog .equipment-room-shell>.save-settings>summary{
+  display:list-item;
+  width:100%;
+  padding:8px 3px 5px;
+  color:#315b47;
+  font-size:12px;
+  font-weight:900;
+}
+#equipmentDialog .equipment-room-shell>.save-settings[open]{
+  padding:0 9px 10px;
+  border:1px solid #729480;
+  border-radius:11px;
+  background:#f1f3e9ed;
+}
