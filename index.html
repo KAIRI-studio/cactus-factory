@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=284" />
+  <link rel="stylesheet" href="styles.css?v=285" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=283" defer></script>
+  <script src="game.js?v=285" defer></script>
 </head>
 <body class="launching">
   <section class="brand-splash" id="brandSplash" aria-label="KAIRI studio">
@@ -194,7 +194,11 @@
           <b id="answerCelebrationText"></b>
         </div>
       </div>
-      <div class="answers" id="answerGrid"></div><p class="feedback" id="mathFeedback" aria-live="polite"></p>
+      <div class="answers" id="answerGrid"></div>
+      <div class="math-timer" id="mathTimer" role="timer" aria-label="のこり 5 びょう">
+        <span class="math-timer-label" id="mathTimerLabel">のこり <b id="mathTimeLeft">5</b> びょう</span>
+        <span class="math-timer-track" aria-hidden="true"><i id="mathTimerFill"></i></span>
+      </div>
       <div class="math-reward-hint" aria-label="けいさんのごほうび。10もんせいかいで、さいだい24たいのサボテンがすぐにそだちます">
         <span aria-hidden="true">🌱</span><div><small>けいさんの ごほうび</small><b>10もんせいかいで さいだい24たい すぐそだつ！</b></div>
       </div>
