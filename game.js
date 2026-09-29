@@ -1010,9 +1010,9 @@ function finishChallenge() {
   document.querySelector("#resultScore").textContent = challenge.correct;
   document.querySelector("#resultTitle").textContent = challenge.correct === 10 ? "パーフェクト！" : challenge.correct >= 7 ? "すごい！" : challenge.correct >= 4 ? "よくできました！" : "つぎも がんばろう！";
   document.querySelector("#resultMessage").textContent = "10もんちゅう " + challenge.correct + "もん せいかい";
-  document.querySelector("#grownCount").textContent = grownCount + "たい";
-  document.querySelector("#resultRewardRule").textContent = challenge.correct + "もんせいかい の ごほうび";
-  document.querySelector("#resultRewardText").textContent = grownCount > 0 ? "すぐに そだった！" : candidates.length === 0 ? "みんな そだっているよ！" : "つぎは そだてよう！";
+  document.querySelector("#grownCount").textContent = candidates.length === 0 ? "みんな" : grownCount + "たい";
+  document.querySelector("#resultRewardRule").textContent = candidates.length === 0 ? "すべての サボテンが そだっています" : challenge.correct + "もんせいかい の ごほうび";
+  document.querySelector("#resultRewardText").textContent = grownCount > 0 ? "すぐに そだった！" : candidates.length === 0 ? "そだっているよ！" : "つぎは そだてよう！";
   playSound("result");
   document.querySelector("#resultDialog").showModal();
 }
@@ -1062,10 +1062,10 @@ function renderEquipment() {
     return Math.floor(minutes / 60) + "じかん" + (minutes % 60 ? (minutes % 60) + "ぷん" : "");
   };
   document.querySelector(".equipment-growth-guide b").textContent = total < 12
-    ? "せつびを 1レベル あげると 10ぷん短縮"
+    ? "そだつ時間　1レベルで 10ぷん短縮"
     : "せつび かんせい！";
   document.querySelector("#equipmentGrowthGuide").textContent = total < 12
-    ? "そだつまで " + formatGrowthTime(growthMinutes) + " → " + formatGrowthTime(growthMinutes - 10)
+    ? formatGrowthTime(growthMinutes) + " → " + formatGrowthTime(growthMinutes - 10)
     : "ぜんぶ かいぞう！ そだつまで 1じかん";
   equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
   equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
@@ -1255,6 +1255,11 @@ function renderZukanPage() {
     pagination.append(previous, indicator, next);
   }
   document.querySelector(".zukan-list-scroll").scrollTop = 0;
+  // Keep the specimen detail in sync with the cards on the current page.
+  if (grid.firstElementChild) {
+    const firstType = pageTypes[0];
+    showZukanHero(firstType, state.collections[firstType.id] || 0, grid.firstElementChild);
+  }
 }
 
 function renderZukan() {
@@ -1273,7 +1278,7 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   save();
   zukanPage = 0;
   renderZukan();
-  const firstFound = CACTUS_TYPES.find(function (type) { return (state.collections[type.id] || 0) > 0; }) || CACTUS_TYPES[0];
+  const firstFound = CACTUS_TYPES.slice(0, ZUKAN_PAGE_SIZE).find(function (type) { return (state.collections[type.id] || 0) > 0; }) || CACTUS_TYPES[0];
   const firstFoundCount = state.collections[firstFound.id] || 0;
   const firstEntry = document.querySelector('.zukan-entry[data-cactus-id="' + firstFound.id + '"]');
   showZukanHero(firstFound, firstFoundCount, firstEntry);
