@@ -926,7 +926,10 @@ function makeQuestion(questionIndex) {
 const mathDialog = document.querySelector("#mathDialog");
 const mathProblem = document.querySelector("#mathProblem");
 const answerGrid = document.querySelector("#answerGrid");
-const mathFeedback = document.querySelector("#mathFeedback");
+const mathTimer = document.querySelector("#mathTimer");
+const mathTimerLabel = document.querySelector("#mathTimerLabel");
+let mathTimeLeft = document.querySelector("#mathTimeLeft");
+const mathTimerFill = document.querySelector("#mathTimerFill");
 const mathCard = document.querySelector("#mathDialog .math-card");
 const answerCelebration = document.querySelector("#answerCelebration");
 const answerCelebrationText = document.querySelector("#answerCelebrationText");
@@ -936,9 +939,50 @@ const score = document.querySelector("#score");
 const mathProgress = document.querySelector("#mathProgress");
 let challenge = { answered: 0, correct: 0 };
 let nextTimer;
+let questionFrame;
+let questionActive = false;
+let questionDeadline = 0;
+let pausedRemaining = 0;
+const QUESTION_TIME_MS = 5000;
+
+function stopQuestionTimer() {
+  questionActive = false;
+  cancelAnimationFrame(questionFrame);
+}
+
+function tickQuestionTimer(now) {
+  if (!questionActive) return;
+  const remaining = Math.max(0, questionDeadline - now);
+  mathTimeLeft.textContent = Math.ceil(remaining / 1000);
+  mathTimerFill.style.transform = "scaleX(" + (remaining / QUESTION_TIME_MS) + ")";
+  mathTimer.classList.toggle("is-urgent", remaining <= 2000);
+  mathTimer.setAttribute("aria-label", "のこり " + Math.ceil(remaining / 1000) + " びょう");
+  if (remaining === 0) {
+    answerQuestion(false, null, currentQuestion.correct, true);
+  } else {
+    questionFrame = requestAnimationFrame(tickQuestionTimer);
+  }
+}
+
+let currentQuestion;
+
+document.addEventListener("visibilitychange", function () {
+  if (!mathDialog.open || !questionActive) return;
+  if (document.hidden) {
+    pausedRemaining = Math.max(0, questionDeadline - performance.now());
+    cancelAnimationFrame(questionFrame);
+  } else if (pausedRemaining > 0) {
+    questionDeadline = performance.now() + pausedRemaining;
+    pausedRemaining = 0;
+    questionFrame = requestAnimationFrame(tickQuestionTimer);
+  }
+});
 
 function showQuestion() {
+  stopQuestionTimer();
+  pausedRemaining = 0;
   const q = makeQuestion(challenge.answered + 1);
+  currentQuestion = q;
   questionNumber.textContent = (challenge.answered + 1) + " / 10";
   score.textContent = challenge.correct;
   mathProblem.textContent = q.text;
@@ -948,7 +992,12 @@ function showQuestion() {
   Array.from(mathProgress.children).forEach(function (lamp, index) {
     lamp.className = index < challenge.answered ? "done" : index === challenge.answered ? "current" : "";
   });
-  mathFeedback.textContent = "";
+  mathTimerLabel.innerHTML = 'のこり <b id="mathTimeLeft">5</b> びょう';
+  // The label is rebuilt after each answer, so refresh its number reference.
+  mathTimeLeft = mathTimerLabel.querySelector("b");
+  mathTimerFill.style.transform = "scaleX(1)";
+  mathTimer.classList.remove("is-urgent");
+  mathTimer.setAttribute("aria-label", "のこり 5 びょう");
   mathCard.classList.remove("answer-correct", "answer-wrong");
   answerCelebration.hidden = true;
   answerCelebration.className = "answer-celebration";
@@ -959,9 +1008,14 @@ function showQuestion() {
     button.addEventListener("click", function () { answerQuestion(choice === q.correct, button, q.correct); });
     answerGrid.append(button);
   });
+  questionActive = true;
+  questionDeadline = performance.now() + QUESTION_TIME_MS;
+  questionFrame = requestAnimationFrame(tickQuestionTimer);
 }
 
-function answerQuestion(correct, button, correctValue) {
+function answerQuestion(correct, button, correctValue, timedOut) {
+  if (!questionActive) return;
+  stopQuestionTimer();
   answerGrid.querySelectorAll("button").forEach(function (item) { item.disabled = true; });
   challenge.answered += 1;
   mathCard.classList.remove("answer-correct", "answer-wrong");
@@ -970,20 +1024,19 @@ function answerQuestion(correct, button, correctValue) {
   answerCelebration.hidden = false;
   answerCelebration.className = "answer-celebration " + (correct ? "is-correct" : "is-wrong");
   answerSymbol.textContent = "";
-  answerCelebrationText.textContent = correct ? "せいかい！" : "ちがうよ";
-  answerCelebration.setAttribute("aria-label", correct ? "せいかい！" : "ちがうよ");
+  answerCelebrationText.textContent = timedOut ? "じかんぎれ！" : correct ? "せいかい！" : "ちがうよ";
+  answerCelebration.setAttribute("aria-label", answerCelebrationText.textContent);
+  mathTimerLabel.textContent = timedOut ? "じかんぎれ！" : correct ? "せいかい！" : "ちがうよ";
   playSound(correct ? "correct" : "wrong");
   if (correct) {
     challenge.correct += 1;
-    button.classList.add("correct");
-    mathFeedback.textContent = "そのちょうし！";
+    if (button) button.classList.add("correct");
     if (navigator.vibrate) navigator.vibrate(35);
   } else {
-    button.classList.add("wrong");
+    if (button) button.classList.add("wrong");
     answerGrid.querySelectorAll("button").forEach(function (item) {
       if (Number(item.textContent) === correctValue) item.classList.add("correct-answer");
     });
-    mathFeedback.textContent = "こたえは " + correctValue;
     if (navigator.vibrate) navigator.vibrate([35, 45, 35]);
   }
   score.textContent = challenge.correct;
@@ -1001,6 +1054,7 @@ function grownForScore(value) {
 }
 
 function finishChallenge() {
+  stopQuestionTimer();
   mathDialog.close();
   const target = grownForScore(challenge.correct);
   const candidates = state.pots.map(function (pot, index) { return { pot: pot, index: index }; }).filter(function (item) { return !item.pot.ready; });
@@ -1225,7 +1279,8 @@ function renderZukanPage() {
     entry.type = "button";
     entry.dataset.cactusId = type.id;
     entry.setAttribute("aria-pressed", "false");
-    entry.innerHTML = '<span class="zukan-entry-number">No.' + String(typeIndex + 1).padStart(2, "0") + '</span><span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + (count ? type.name : "？？？") + '</b><em>' + count + 'たい</em></span>';
+    const displayName = count ? type.name.replace(/サボテン$/, '<br><span class="cactus-name-suffix">サボテン</span>') : "？？？";
+    entry.innerHTML = '<span class="zukan-entry-number">No.' + String(typeIndex + 1).padStart(2, "0") + '</span><span class="zukan-picture"><img src="' + type.sprite + '" alt="" /></span><span class="zukan-info"><small>' + type.rarity + '</small><b>' + displayName + '</b><em>' + count + 'たい</em></span>';
     entry.addEventListener("click", function () { showZukanHero(type, count, entry); });
     grid.append(entry);
   });
@@ -1296,6 +1351,7 @@ zukanDialog.addEventListener("close", function () {
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
 });
 mathDialog.addEventListener("close", function () {
+  stopQuestionTimer();
   clearTimeout(nextTimer);
   if (state.tutorialStep === "equipment") scheduleTutorial(180);
 });
