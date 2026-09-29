@@ -5032,3 +5032,26 @@ body:not(.debug-mode) .test-tools{display:none!important}
   #equipmentDialog .equipment-growth-guide b,#equipmentDialog .equipment-growth-guide span{font-size:10px}
   #equipmentDialog .equipment-room-shell>.equipment-grid{row-gap:8px!important}
 }
+
+/* Give the specimen number and harvest count room inside each collection card. */
+#zukanDialog .zukan-grid>.zukan-entry{
+  height:136px!important;
+  min-height:136px!important;
+  grid-template-rows:54px auto!important;
+  padding-top:19px!important;
+  padding-bottom:9px!important;
+}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:54px!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:52px!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-entry-number{top:8px!important;left:9px!important}
+@media(max-width:360px){
+  #zukanDialog .zukan-grid>.zukan-entry{
+    height:128px!important;
+    min-height:128px!important;
+    grid-template-rows:50px auto!important;
+    padding-top:18px!important;
+    padding-bottom:9px!important;
+  }
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:50px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:48px!important}
+}
