@@ -5055,3 +5055,58 @@ body:not(.debug-mode) .test-tools{display:none!important}
   #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:50px!important}
   #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:48px!important}
 }
+
+/* Final visual balance across the game screens. */
+#mathDialog .problem-stage{margin-top:clamp(18px,3dvh,30px)!important}
+#mathDialog .math-reward-hint{
+  margin:clamp(32px,6dvh,60px) 5px 0!important;
+  padding:10px 12px;
+}
+#mathDialog .math-reward-hint small{font-size:10px}
+#mathDialog .math-reward-hint b{font-size:12px;line-height:1.3;white-space:normal}
+
+#equipmentDialog .equipment-growth-guide{
+  padding:7px 9px 8px;
+  border-bottom:2px solid #628b70a6;
+  background:linear-gradient(90deg,#f6f5dc75,#f6f5dc2b);
+}
+#equipmentDialog .equipment-growth-guide b{font-size:12px;line-height:1.3}
+#equipmentDialog .equipment-growth-guide span{font-size:14px;line-height:1.25}
+#equipmentDialog .equipment-scroll-area>.save-settings{margin-top:22px}
+#equipmentDialog .save-settings>summary{padding:9px 8px;font-size:13px}
+
+#zukanDialog .zukan-grid>.zukan-entry .zukan-info{gap:0!important;align-content:start!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-info small{font-size:9px!important;line-height:1.05!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-info b{
+  min-height:21px!important;
+  font-size:10px!important;
+  line-height:1.05!important;
+}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-info em{
+  margin-top:1px!important;
+  font-size:9px!important;
+  line-height:1!important;
+}
+
+.factory-progress-chip{bottom:130px!important}
+.game:has(.factory-guide:not([hidden]),.onboarding-tip:not([hidden])) .factory-progress-chip{bottom:202px!important}
+.factory-progress-card>.factory-record-label{font-size:10px;letter-spacing:.04em}
+.factory-progress-details b{font-size:15px}
+.factory-rank-copy em{font-size:12px}
+.result-growth-copy>small,.result-growth-copy>em{font-size:10px}
+.discovery-card>p{font-size:12px}
+
+@media(max-width:360px){
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-info small{font-size:8px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-info b{font-size:9px!important;min-height:19px!important}
+  #equipmentDialog .equipment-growth-guide span{font-size:13px}
+}
+@media(max-height:700px){
+  #mathDialog .problem-stage{margin-top:12px!important}
+  #mathDialog .math-reward-hint{margin-top:24px!important;padding:6px 9px}
+  #equipmentDialog .equipment-growth-guide{padding:4px 6px 5px}
+  #equipmentDialog .equipment-growth-guide b{font-size:11px}
+  #equipmentDialog .equipment-growth-guide span{font-size:12px}
+  .factory-progress-chip{bottom:108px!important}
+  .game:has(.factory-guide:not([hidden]),.onboarding-tip:not([hidden])) .factory-progress-chip{bottom:170px!important}
+}
