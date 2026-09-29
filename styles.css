@@ -5186,3 +5186,6 @@ body:not(.debug-mode) .test-tools{display:none!important}
 @media(max-height:700px){
   .game:has(.factory-guide:not([hidden])) .factory-progress-chip{bottom:190px!important}
 }
+
+/* Align the mist riser with the vertical pipe painted behind it. */
+.facility-mist{right:3%}
