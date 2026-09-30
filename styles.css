@@ -5190,3 +5190,62 @@ body:not(.debug-mode) .test-tools{display:none!important}
 /* Seat the mist riser along the left edge of the painted water tank. */
 .facility-mist{right:5%;top:25.5%}
 @media(max-height:700px){.facility-mist{top:25%}}
+
+/* Expanded record remains within the scrollable equipment scene. */
+#equipmentDialog .equipment-room-shell:has(>.save-settings[open]){
+  height:auto!important;
+  min-height:100cqh!important;
+  grid-template-rows:auto auto minmax(230px,auto) auto auto!important;
+  align-content:start!important;
+  padding-bottom:18px!important;
+}
+#equipmentDialog .equipment-room-shell>.save-settings[open]{
+  margin-top:8px;
+  margin-bottom:8px;
+}
+#equipmentDialog .equipment-room-shell>.save-settings[open] p{font-size:13px;line-height:1.5}
+
+/* The painted button needs its own disabled treatment when coins are short. */
+#equipmentDialog .equipment-detail{position:relative!important}
+#equipmentDialog .equipment-detail.is-unaffordable::after{
+  content:"";position:absolute;z-index:1;top:17%;right:2%;bottom:17%;width:32%;
+  border-radius:46%;background:#d5dec5c9;box-shadow:inset 0 0 0 2px #43665299;
+  pointer-events:none;
+}
+#equipmentDialog .equipment-cost-shortfall{
+  position:absolute;z-index:2;right:3%;bottom:20%;width:30%;
+  color:#294e3f;font-size:clamp(10px,2.9vw,13px);font-weight:900;
+  line-height:1.15;text-align:center;pointer-events:none;
+}
+#equipmentDialog .equipment-detail.is-unaffordable>.equipment-upgrade{cursor:not-allowed}
+
+/* Timeout has its own feedback, distinct from a wrong answer. */
+.problem-stage .answer-celebration.is-timeout b{
+  position:relative;display:block;width:auto;height:auto;overflow:visible;clip-path:none;
+  padding:5px 17px 8px;border:3px solid #d19d54;border-radius:20px;
+  background:#fff2cc;color:#315743;font-size:clamp(23px,7vw,31px);font-weight:1000;
+  line-height:1.2;box-shadow:0 5px 0 #173d30,0 7px 14px #061b1566;
+  animation:math-success-pop .46s cubic-bezier(.18,1.35,.36,1);
+}
+#mathDialog .math-timer-track{height:13px}
+
+/* Give secondary labels enough size to read without enlarging the card grid. */
+#zukanDialog .zukan-grid>.zukan-entry .zukan-entry-number{font-size:10px!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-info small{font-size:10px!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-info em{font-size:10px!important;line-height:1.15!important}
+#zukanDialog .zukan-hero-number{font-size:10px!important}
+.factory-progress-card>.factory-record-label{font-size:11px}
+.factory-rank-copy em{font-size:13px}
+@media(max-width:360px){
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-entry-number,
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-info small,
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-info em{font-size:9px!important}
+}
+
+/* Keep the result count and its sentence at the same visual level. */
+.result-growth-copy>p{align-items:center!important;gap:7px!important}
+.result-growth-copy>p>b{font-size:20px!important}
+.result-growth-copy>p>span{font-size:14px!important;line-height:1.25!important}
+.result-growth-copy.is-all-ready>p>b{font-size:18px!important}
+.result-growth-copy.is-all-ready>p>span{font-size:14px!important}
+.result-growth-copy>small,.result-growth-copy>em{font-size:11px!important}
