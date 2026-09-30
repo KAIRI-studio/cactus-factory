@@ -479,16 +479,16 @@ function affordableEquipmentUpgrade() {
 function factoryGuideRecommendation() {
   const foundCount = collectionFoundCount();
   if (foundCount > state.lastViewedCollectionCount) {
-    return { type: "zukan", kicker: "NEW COLLECTION", text: "あたらしい なかまを ずかんでみよう！", action: "ずかんへ" };
+    return { type: "zukan", kicker: "あたらしい なかま", text: "あたらしい なかまを ずかんでみよう！", action: "ずかんへ" };
   }
   const readyCount = state.pots.filter(function (pot) { return pot.ready; }).length;
   if (readyCount > 0) {
-    return { type: "harvest", kicker: "しゅうかく OK", text: readyCount + "たいの サボテンが まってるよ！", action: "みつける" };
+    return { type: "harvest", kicker: "しゅうかく", text: readyCount + "たいの サボテンが まってるよ！", action: "みつける" };
   }
   if (affordableEquipmentUpgrade()) {
-    return { type: "equipment", kicker: "かいぞう OK", text: "コインで せつびを つよくできるよ！", action: "せつびへ" };
+    return { type: "equipment", kicker: "せつび かいぞう", text: "コインで せつびを つよくできるよ！", action: "せつびへ" };
   }
-  return { type: "math", kicker: "GROWTH BOOST", text: "けいさんで はやく そだてよう！", action: "ちょうせん" };
+  return { type: "math", kicker: "そだつ チャンス", text: "けいさんで はやく そだてよう！", action: "ちょうせん" };
 }
 
 function renderFactoryGuide() {
@@ -1022,7 +1022,7 @@ function answerQuestion(correct, button, correctValue, timedOut) {
   void mathCard.offsetWidth;
   mathCard.classList.add(correct ? "answer-correct" : "answer-wrong");
   answerCelebration.hidden = false;
-  answerCelebration.className = "answer-celebration " + (correct ? "is-correct" : "is-wrong");
+  answerCelebration.className = "answer-celebration " + (timedOut ? "is-timeout" : correct ? "is-correct" : "is-wrong");
   answerSymbol.textContent = "";
   answerCelebrationText.textContent = timedOut ? "じかんぎれ！" : correct ? "せいかい！" : "ちがうよ";
   answerCelebration.setAttribute("aria-label", answerCelebrationText.textContent);
@@ -1064,9 +1064,13 @@ function finishChallenge() {
   document.querySelector("#resultScore").textContent = challenge.correct;
   document.querySelector("#resultTitle").textContent = challenge.correct === 10 ? "パーフェクト！" : challenge.correct >= 7 ? "すごい！" : challenge.correct >= 4 ? "よくできました！" : "つぎも がんばろう！";
   document.querySelector("#resultMessage").textContent = "10もんちゅう " + challenge.correct + "もん せいかい";
-  document.querySelector("#grownCount").textContent = candidates.length === 0 ? "みんな" : grownCount + "たい";
-  document.querySelector("#resultRewardRule").textContent = candidates.length === 0 ? "すべての サボテンが そだっています" : challenge.correct + "もんせいかい の ごほうび";
-  document.querySelector("#resultRewardText").textContent = grownCount > 0 ? "すぐに そだった！" : candidates.length === 0 ? "そだっているよ！" : "つぎは そだてよう！";
+  const allReady = candidates.length === 0;
+  const resultGrowth = document.querySelector("#resultGrowth");
+  resultGrowth.classList.toggle("is-all-ready", allReady);
+  document.querySelector("#resultRewardHeading").textContent = allReady ? "いまの ようす" : "けいさんの ごほうび";
+  document.querySelector("#grownCount").textContent = allReady ? "みんな" : grownCount + "たい";
+  document.querySelector("#resultRewardRule").textContent = allReady ? "サボテンを しゅうかくしよう！" : challenge.correct + "もんせいかい の ごほうび";
+  document.querySelector("#resultRewardText").textContent = grownCount > 0 ? "すぐに そだった！" : allReady ? "そだっているよ！" : "つぎは そだてよう！";
   playSound("result");
   document.querySelector("#resultDialog").showModal();
 }
@@ -1159,7 +1163,8 @@ function renderEquipment() {
   const level = state.equipment[item.key];
   const cost = equipmentUpgradeCost(level);
   const previewLevel = level >= 3 ? 3 : level + 1;
-  detail.className = "equipment-detail equipment-detail-" + item.key;
+  const shortfall = level < 3 ? Math.max(0, cost - state.coins) : 0;
+  detail.className = "equipment-detail equipment-detail-" + item.key + (shortfall ? " is-unaffordable" : "");
   detail.style.setProperty("--equipment-detail-art", 'url("assets/equipment-detail-' + item.key + '-lv' + level + '.webp")');
   const upgrade = document.createElement("button");
   upgrade.type = "button";
@@ -1169,6 +1174,12 @@ function renderEquipment() {
   const actionLabel = level >= 3 ? "かんせい" : "かいぞう " + cost + "コイン";
   upgrade.setAttribute("aria-label", actionLabel);
   detail.append(upgrade);
+  if (shortfall) {
+    const hint = document.createElement("span");
+    hint.className = "equipment-cost-shortfall";
+    hint.textContent = "あと" + shortfall + "コイン";
+    detail.append(hint);
+  }
 
   document.querySelector("#equipmentFeedback").textContent = "";
 }
@@ -1178,6 +1189,9 @@ document.querySelector("#equipmentButton").addEventListener("click", function ()
   equipmentDialog.showModal();
 });
 document.querySelector("#equipmentClose").addEventListener("click", function () { equipmentDialog.close(); });
+document.querySelector("#equipmentDialog .save-settings").addEventListener("toggle", function (event) {
+  if (event.target.open) requestAnimationFrame(function () { event.target.scrollIntoView({ block: "end", behavior: "smooth" }); });
+});
 document.querySelector("#equipmentDialog").addEventListener("click", function (event) {
   const select = event.target.closest(".equipment-hotspot");
   if (select) {
