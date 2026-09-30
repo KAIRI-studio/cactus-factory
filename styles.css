@@ -5192,6 +5192,11 @@ body:not(.debug-mode) .test-tools{display:none!important}
 @media(max-height:700px){.facility-mist{top:25%}}
 
 /* Expanded record remains within the scrollable equipment scene. */
+#equipmentDialog .equipment-scroll-area{
+  flex:none!important;
+  height:66dvh!important;
+  overflow-y:auto!important;
+}
 #equipmentDialog .equipment-room-shell:has(>.save-settings[open]){
   height:auto!important;
   min-height:100cqh!important;
