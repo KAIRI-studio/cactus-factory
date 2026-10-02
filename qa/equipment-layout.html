@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="ja"><meta charset="utf-8"><meta name="robots" content="noindex"><title>Cactus Factory layout QA</title>
 <style>body{margin:12px;background:#ddd;font:14px sans-serif}nav{position:sticky;top:0;z-index:2;padding:6px;background:#ddd}iframe{display:block;border:0;margin-top:12px}button{padding:8px;margin:3px}output{margin-left:12px}</style>
-<nav><button onclick="resize(375,667)">SE 375 × 667</button><button onclick="resize(390,664)">スマホ・バーあり 390 × 664</button><button onclick="resize(390,844)">16e相当 390 × 844</button><button onclick="resize(360,740)">Android相当 360 × 740</button><button onclick="resize(412,915)">Android大 412 × 915</button><button onclick="resize(1280,720)">PC 1280 × 720</button><output id="size">375 × 667</output></nav>
-<iframe id="preview" title="Game layout preview" width="375" height="667" src="../?qa=layout-293"></iframe>
+<nav><button onclick="resize(375,667)">SE 375 × 667</button><button onclick="resize(390,664)">スマホ・バーあり 390 × 664</button><button onclick="resize(390,844)">16e相当 390 × 844</button><button onclick="resize(360,740)">Android相当 360 × 740</button><button onclick="resize(412,915)">Android大 412 × 915</button><button onclick="resize(1280,720)">PC 1280 × 720</button><button onclick="document.getElementById('preview').src='../?qa=layout-'+Date.now()">最新版を読み直す</button><output id="size">375 × 667</output></nav>
+<iframe id="preview" title="Game layout preview" width="375" height="667" src="../?qa=layout-294"></iframe>
 <script>function resize(w,h){preview.width=w;preview.height=h;document.getElementById("size").textContent=w+" × "+h}</script></html>
