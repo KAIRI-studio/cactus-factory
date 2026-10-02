@@ -261,7 +261,40 @@ Object.entries(SOUND_FILES).forEach(function ([key, url]) {
   }).catch(function () { return null; }));
 });
 
+const bgmAudio = document.querySelector("#bgmAudio");
+let bgmGain, bgmMediaSource, factoryAudioStarted = false, bgmDuckUntil = 0, bgmDuckTimer;
+function updateBgmVolume() {
+  if (!bgmGain || !audioContext) return;
+  const target = !state.soundEnabled || document.hidden ? 0 :
+    performance.now() < bgmDuckUntil ? .14 : mathDialog.open ? .22 : .32;
+  bgmGain.gain.cancelScheduledValues(audioContext.currentTime);
+  bgmGain.gain.setTargetAtTime(target, audioContext.currentTime, .12);
+}
+function startBgm() {
+  if (!bgmAudio || !factoryAudioStarted || !state.soundEnabled || document.hidden) return;
+  const context = getAudioContext();
+  if (!context) return;
+  if (!bgmMediaSource) {
+    bgmMediaSource = context.createMediaElementSource(bgmAudio);
+    bgmGain = context.createGain(); bgmGain.gain.value = 0;
+    bgmMediaSource.connect(bgmGain); bgmGain.connect(context.destination);
+  }
+  updateBgmVolume();
+  bgmAudio.play().catch(function () { /* Retry on the next user gesture. */ });
+}
+function duckBgm() {
+  bgmDuckUntil = performance.now() + 2800;
+  updateBgmVolume(); clearTimeout(bgmDuckTimer);
+  bgmDuckTimer = setTimeout(updateBgmVolume, 2850);
+}
+const bgmDialogObserver = new MutationObserver(updateBgmVolume);
+document.querySelectorAll("dialog").forEach(function (dialog) {
+  bgmDialogObserver.observe(dialog, { attributes: true, attributeFilter: ["open"] });
+});
+
 function stopSounds() {
+  if (bgmAudio) bgmAudio.pause();
+  updateBgmVolume();
   soundVoices.forEach(function (voices) {
     voices.forEach(function (source) { try { source.stop(); } catch (_) {} });
   });
@@ -302,10 +335,12 @@ async function playSound(name) {
       source.disconnect(); gain.disconnect();
     };
     source.start();
+    if (key === "reward") duckBgm();
   } catch (_) { /* Audio failure must not interrupt play. */ }
 }
 
 document.addEventListener("click", function (event) {
+  if (bgmAudio && bgmAudio.paused) startBgm();
   const button = event.target.closest("button, summary");
   if (!button || button.disabled || button.closest("#answerGrid, .nursery-pot") ||
       ["soundToggle", "startGameButton", "upgradeButton"].includes(button.id) ||
@@ -314,6 +349,7 @@ document.addEventListener("click", function (event) {
 }, true);
 document.addEventListener("visibilitychange", function () {
   if (document.hidden) stopSounds();
+  else startBgm();
 });
 
 function renderSoundSetting() {
@@ -327,7 +363,7 @@ soundToggle.addEventListener("click", function () {
   state.soundEnabled = !state.soundEnabled;
   renderSoundSetting();
   save();
-  if (state.soundEnabled) playSound("tap");
+  if (state.soundEnabled) { startBgm(); playSound("tap"); }
   else stopSounds();
 });
 
@@ -421,6 +457,8 @@ function enterFactory() {
 }
 
 startGameButton.addEventListener("click", function () {
+  factoryAudioStarted = true;
+  startBgm();
   playSound("start");
   enterFactory();
 });
