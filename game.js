@@ -405,7 +405,9 @@ function scheduleTutorial(delay) {
 }
 
 function finishTutorial() {
+  const newlyFinished = state.tutorialStep !== "done";
   state.tutorialStep = "done";
+  if (newlyFinished && window.CactusInstall) window.CactusInstall.beginSuggestion();
   hideTutorial();
   save();
   renderFactoryGuide();
@@ -544,7 +546,7 @@ function affordableEquipmentUpgrade() {
 }
 
 function factoryGuideRecommendation() {
-  if (state.harvested > 0 && window.CactusInstall && window.CactusInstall.shouldSuggest()) {
+  if (window.CactusInstall && window.CactusInstall.shouldSuggest()) {
     return { type: "install", kicker: "いつでも こうじょうへ", text: window.CactusInstall.suggestionText, action: "追加する" };
   }
   const foundCount = collectionFoundCount();
@@ -1320,6 +1322,7 @@ document.querySelector("#resetSaveButton").addEventListener("click", function ()
 document.querySelector("#resetCancelButton").addEventListener("click", function () { resetDialog.close(); });
 document.querySelector("#resetConfirmButton").addEventListener("click", function () {
   state = createInitialState();
+  if (window.CactusInstall) window.CactusInstall.beginSuggestion();
   localStorage.setItem(STORAGE, JSON.stringify(state));
   resetDialog.close();
   location.reload();

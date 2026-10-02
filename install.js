@@ -19,7 +19,7 @@
   function refresh() {
     help.textContent = installLabel;
     nativeButton.textContent = installLabel;
-    help.hidden = isInstalled() || !(ios || android || promptEvent);
+    help.hidden = isInstalled();
     if (typeof renderFactoryGuide === "function") renderFactoryGuide();
   }
   function dismiss() {
@@ -41,7 +41,7 @@
     const instructions = ios
       ? ["Safariで このゲームを開く", "共有ボタン（□に↑）をタップ", "「ホーム画面に追加」→「追加」"]
       : desktop
-        ? ["ブラウザのアドレスバーの追加アイコン、またはメニューを開く", "このゲームをアプリとしてインストール", "追加したアプリから、いつでも工場へ"]
+        ? ["ChromeまたはEdgeで このゲームを開く", "アドレスバーの追加アイコン、またはメニューのインストール項目を選ぶ", "確認画面から追加して、いつでも工場へ"]
         : ["ブラウザのメニュー（⋮）を開く", "「ホーム画面に追加」または「アプリをインストール」を選ぶ", "表示された案内にそって追加"];
     steps.replaceChildren(...instructions.map(function (copy) {
       const li = document.createElement("li"); li.textContent = copy; return li;
@@ -49,7 +49,12 @@
     if (!dialog.open) dialog.showModal();
   }
   window.CactusInstall = {
-    shouldSuggest: function () { return !dismissed && !isInstalled() && (ios || android || !!promptEvent); },
+    shouldSuggest: function () { return !dismissed && !isInstalled(); },
+    beginSuggestion: function () {
+      dismissed = false;
+      try { localStorage.removeItem(key); } catch (_) {}
+      refresh();
+    },
     suggestionText: desktop ? "アプリから すぐあそべるよ" : "ホーム画面から すぐあそべるよ",
     open: open
   };
@@ -66,6 +71,7 @@
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
   nativeButton.addEventListener("click", async function () {
     if (!promptEvent) return;
+    dismiss();
     const request = promptEvent;
     promptEvent = null;
     nativeButton.disabled = true;
