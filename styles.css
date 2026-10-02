@@ -5311,3 +5311,4 @@ body:not(.debug-mode) .test-tools{display:none!important}
 
 /* Keep the achievement title intact on narrow phones. */
 .factory-progress-card h2{font-size:clamp(17px,4.8vw,22px)!important;white-space:nowrap}
+#mathDialog .math-reward-hint b{white-space:nowrap!important;line-height:1.35}
