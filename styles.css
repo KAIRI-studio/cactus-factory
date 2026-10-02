@@ -5261,7 +5261,7 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #zukanDialog .zukan-grid>.zukan-entry{position:relative!important}
 #zukanDialog .zukan-grid>.zukan-entry .zukan-info{
   position:static!important;
-  grid-template-rows:12px 30px!important;
+  grid-template-rows:12px 22px!important;
   align-content:start!important;
 }
 #zukanDialog .zukan-grid>.zukan-entry .zukan-info small{
@@ -5283,6 +5283,20 @@ body:not(.debug-mode) .test-tools{display:none!important}
   #zukanDialog .zukan-grid>.zukan-entry .zukan-info small{font-size:7px!important}
 }
 
+/* Reserve separate rows for rarity, the two-line name, and the count. */
+#zukanDialog .zukan-grid>.zukan-entry{grid-template-rows:46px auto!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:46px!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:44px!important}
+#zukanDialog .zukan-grid>.zukan-entry .zukan-info b{
+  height:22px!important;min-height:22px!important;margin:0!important;
+  font-size:10px!important;line-height:11px!important;-webkit-line-clamp:2!important;
+}
+@media(max-width:360px){
+  #zukanDialog .zukan-grid>.zukan-entry{grid-template-rows:42px auto!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:42px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:40px!important}
+}
+
 /* Both collection rows must fit above pagination, including the final legend. */
 #zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
   height:136px!important;min-height:136px!important;
@@ -5292,16 +5306,16 @@ body:not(.debug-mode) .test-tools{display:none!important}
     height:128px!important;min-height:128px!important;
   }
 }
-@media(max-height:700px){
+@media(max-height:700px), (min-width:768px) and (max-height:760px){
   #zukanDialog .zukan-grid>.zukan-entry,
   #zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
     height:112px!important;min-height:112px!important;
-    grid-template-rows:34px auto!important;
+    grid-template-rows:28px auto!important;
     padding-top:18px!important;padding-bottom:8px!important;
   }
   #zukanDialog .zukan-list-scroll .zukan-grid{row-gap:5px!important;padding-bottom:5px!important}
-  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:34px!important}
-  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:32px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:28px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:26px!important}
   #zukanDialog .zukan-grid>.zukan-entry .zukan-info{grid-template-rows:12px 22px!important}
   #zukanDialog .zukan-grid>.zukan-entry .zukan-info b{
     min-height:22px!important;font-size:9px!important;line-height:11px!important;
