@@ -545,7 +545,7 @@ function affordableEquipmentUpgrade() {
 
 function factoryGuideRecommendation() {
   if (state.harvested > 0 && window.CactusInstall && window.CactusInstall.shouldSuggest()) {
-    return { type: "install", kicker: "いつでも こうじょうへ", text: "ホーム画面から すぐあそべるよ", action: "追加する" };
+    return { type: "install", kicker: "いつでも こうじょうへ", text: window.CactusInstall.suggestionText, action: "追加する" };
   }
   const foundCount = collectionFoundCount();
   if (foundCount > state.lastViewedCollectionCount) {

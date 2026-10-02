@@ -11,6 +11,7 @@
 .install-card>small{font-size:11px;letter-spacing:.12em;color:#8b6b2b;font-weight:900}
 .install-card h2{margin:8px 0 10px;font-size:24px;line-height:1.35;letter-spacing:.02em}
 .install-lead{margin:0 0 18px;font-size:13px;line-height:1.6}
+#installHeading{white-space:pre-line}
 #installSteps{display:grid;gap:12px;margin:0 0 20px;padding:16px 14px 16px 36px;border:1px solid #9daf87;border-radius:14px;background:#e5ebd5;text-align:left;font-size:13px;line-height:1.6}
 #installSteps li{padding-left:3px}
 #installSteps li::marker{color:#987028;font-weight:900}
