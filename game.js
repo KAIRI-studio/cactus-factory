@@ -245,48 +245,76 @@ function getAudioContext() {
   return audioContext;
 }
 
-function soundTone(frequency, delay, duration, volume, type, endFrequency) {
-  const context = getAudioContext();
-  if (!context) return;
-  const start = context.currentTime + (delay || 0);
-  const oscillator = context.createOscillator();
-  const gain = context.createGain();
-  oscillator.type = type || "sine";
-  oscillator.frequency.setValueAtTime(frequency, start);
-  if (endFrequency) oscillator.frequency.exponentialRampToValueAtTime(endFrequency, start + duration);
-  gain.gain.setValueAtTime(.0001, start);
-  gain.gain.exponentialRampToValueAtTime(volume || .035, start + .012);
-  gain.gain.exponentialRampToValueAtTime(.0001, start + duration);
-  oscillator.connect(gain);
-  gain.connect(context.destination);
-  oscillator.start(start);
-  oscillator.stop(start + duration + .02);
+const SOUND_FILES = {
+  harvest: "assets/audio/harvest.mp3", tap: "assets/audio/tap.mp3",
+  correct: "assets/audio/correct.mp3", wrong: "assets/audio/wrong.mp3",
+  reward: "assets/audio/reward.mp3"
+};
+const soundBytes = new Map();
+const soundBuffers = new Map();
+const soundVoices = new Map();
+const soundLastPlayed = new Map();
+Object.entries(SOUND_FILES).forEach(function ([key, url]) {
+  soundBytes.set(key, fetch(url).then(function (response) {
+    if (!response.ok) throw new Error("Sound unavailable");
+    return response.arrayBuffer();
+  }).catch(function () { return null; }));
+});
+
+function stopSounds() {
+  soundVoices.forEach(function (voices) {
+    voices.forEach(function (source) { try { source.stop(); } catch (_) {} });
+  });
+  soundVoices.clear();
 }
 
-function playSound(name, detail) {
-  if (!state.soundEnabled) return;
-  if (name === "start") {
-    soundTone(330, 0, .16, .025, "sine", 440);
-    soundTone(495, .11, .23, .025, "sine", 660);
-  } else if (name === "harvest") {
-    soundTone(360, 0, .12, .03, "triangle", 620);
-    soundTone(760, .055, .10, .018, "sine", 940);
-  } else if (name === "correct") {
-    [523, 659, 784].forEach(function (note, index) { soundTone(note, index * .065, .16, .027, "sine"); });
-  } else if (name === "wrong") {
-    soundTone(230, 0, .18, .025, "triangle", 185);
-    soundTone(174, .13, .20, .021, "sine");
-  } else if (name === "upgrade") {
-    soundTone(150, 0, .10, .027, "square", 110);
-    soundTone(440, .09, .18, .022, "sine", 660);
-    soundTone(880, .20, .22, .018, "sine");
-  } else if (name === "result") {
-    [392, 523, 659, 784].forEach(function (note, index) { soundTone(note, index * .075, .22, .024, "sine"); });
-  } else if (name === "rare") {
-    const notes = detail === "legend" ? [392, 523, 659, 784, 1047] : detail === "super" ? [440, 554, 659, 880] : [440, 659, 880];
-    notes.forEach(function (note, index) { soundTone(note, index * .075, .24, detail === "legend" ? .028 : .022, "sine"); });
-  }
+async function playSound(name) {
+  if (!state.soundEnabled || document.hidden) return;
+  const key = name === "start" ? "tap" : ["upgrade", "result", "rare"].includes(name) ? "reward" : name;
+  if (!SOUND_FILES[key]) return;
+  const context = getAudioContext();
+  if (!context) return;
+  const requestedAt = performance.now();
+  const previous = soundLastPlayed.get(key) || -Infinity;
+  if (requestedAt - previous < (key === "harvest" ? 70 : 100)) return;
+  soundLastPlayed.set(key, requestedAt);
+  try {
+    if (!soundBuffers.has(key)) {
+      soundBuffers.set(key, soundBytes.get(key).then(function (bytes) {
+        return bytes ? context.decodeAudioData(bytes.slice(0)) : null;
+      }).catch(function () { return null; }));
+    }
+    const buffer = await soundBuffers.get(key);
+    if (!buffer || !state.soundEnabled || document.hidden || performance.now() - requestedAt > 500) return;
+    const group = key === "correct" || key === "wrong" ? "answer" : key;
+    const voices = soundVoices.get(group) || [];
+    const limit = key === "harvest" ? 3 : 1;
+    while (voices.length >= limit) { try { voices.shift().stop(); } catch (_) {} }
+    const source = context.createBufferSource();
+    const gain = context.createGain();
+    source.buffer = buffer;
+    gain.gain.value = key === "tap" ? .65 : key === "reward" ? .8 : .85;
+    source.connect(gain); gain.connect(context.destination);
+    voices.push(source); soundVoices.set(group, voices);
+    source.onended = function () {
+      const index = voices.indexOf(source);
+      if (index !== -1) voices.splice(index, 1);
+      source.disconnect(); gain.disconnect();
+    };
+    source.start();
+  } catch (_) { /* Audio failure must not interrupt play. */ }
 }
+
+document.addEventListener("click", function (event) {
+  const button = event.target.closest("button, summary");
+  if (!button || button.disabled || button.closest("#answerGrid, .nursery-pot") ||
+      ["soundToggle", "startGameButton", "upgradeButton"].includes(button.id) ||
+      button.classList.contains("equipment-upgrade")) return;
+  playSound("tap");
+}, true);
+document.addEventListener("visibilitychange", function () {
+  if (document.hidden) stopSounds();
+});
 
 function renderSoundSetting() {
   if (!soundToggle) return;
@@ -299,7 +327,8 @@ soundToggle.addEventListener("click", function () {
   state.soundEnabled = !state.soundEnabled;
   renderSoundSetting();
   save();
-  if (state.soundEnabled) playSound("correct");
+  if (state.soundEnabled) playSound("tap");
+  else stopSounds();
 });
 
 const TUTORIAL_COPY = {
