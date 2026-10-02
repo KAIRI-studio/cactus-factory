@@ -17,7 +17,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
   <link rel="stylesheet" href="styles.css?v=295" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=297" defer></script>
+  <script src="game.js?v=298" defer></script>
+  <link rel="stylesheet" href="install.css?v=298" />
+  <script src="install.js?v=298" defer></script>
 </head>
 <body class="launching">
   <audio id="bgmAudio" src="assets/audio/sunlight-bgm.mp3" preload="auto" loop hidden></audio>
@@ -115,6 +117,7 @@
         <span class="factory-guide-action" id="factoryGuideAction">みつける</span>
         <i class="factory-guide-lamp" aria-hidden="true"></i>
       </button>
+      <button id="installLater" type="button" hidden>あとで</button>
     </aside>
     <nav class="actions factory-console" aria-label="こうじょうメニュー">
       <button class="console-button equipment-control" id="equipmentButton" type="button">
@@ -242,6 +245,7 @@
           <div class="equipment-detail" id="equipmentDetail"></div>
           <details class="save-settings">
             <summary>あそびの きろく</summary>
+            <button id="installHelpButton" type="button" hidden>ホーム画面に追加</button>
             <p>きろくは このたんまつの ブラウザに ほぞんされます。ブラウザのデータを けすと、きろくも きえます。</p>
             <button id="resetSaveButton" type="button">さいしょから あそぶ</button>
           </details>
@@ -277,6 +281,18 @@
       </div>
     </section></dialog>
   </main>
+  <dialog id="installDialog" aria-labelledby="installHeading">
+    <section class="install-card">
+      <img class="install-icon" src="icons/apple-touch-icon.png" alt="" />
+      <small>サボテン工場</small>
+      <h2 id="installHeading">ホーム画面から<br />すぐに あそぼう</h2>
+      <p class="install-lead">アイコンを追加して、いつでも工場へ。</p>
+      <ol id="installSteps"></ol>
+      <button id="installNativeButton" type="button" hidden>ホーム画面に追加</button>
+      <p id="installStatus" role="status" hidden></p>
+      <button id="installClose" type="button">とじる</button>
+    </section>
+  </dialog>
   <!-- release-v271 -->
 </body>
 </html>

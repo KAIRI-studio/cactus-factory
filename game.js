@@ -544,6 +544,9 @@ function affordableEquipmentUpgrade() {
 }
 
 function factoryGuideRecommendation() {
+  if (state.harvested > 0 && window.CactusInstall && window.CactusInstall.shouldSuggest()) {
+    return { type: "install", kicker: "いつでも こうじょうへ", text: "ホーム画面から すぐあそべるよ", action: "追加する" };
+  }
   const foundCount = collectionFoundCount();
   if (foundCount > state.lastViewedCollectionCount) {
     return { type: "zukan", kicker: "あたらしい なかま", text: "あたらしい なかまを ずかんでみよう！", action: "ずかんへ" };
@@ -564,6 +567,7 @@ function renderFactoryGuide() {
     return;
   }
   const recommendation = factoryGuideRecommendation();
+  document.querySelector("#installLater").hidden = recommendation.type !== "install";
   const passive = recommendation.type === "harvest";
   factoryGuide.className = "factory-guide guide-" + recommendation.type + (passive ? " is-passive" : "");
   factoryGuide.dataset.action = recommendation.type;
@@ -578,6 +582,10 @@ function renderFactoryGuide() {
 
 factoryGuideButton.addEventListener("click", function () {
   const action = factoryGuide.dataset.action;
+  if (action === "install") {
+    window.CactusInstall.open();
+    return;
+  }
   if (action === "zukan") {
     document.querySelector("#zukanButton").click();
     return;

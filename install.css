@@ -1,0 +1,20 @@
+#installLater[hidden], #installHelpButton[hidden], #installNativeButton[hidden], #installSteps[hidden], #installStatus[hidden]{display:none!important}
+.factory-guide.guide-install .factory-guide-button{padding-right:58px}
+.factory-guide.guide-install .factory-guide-lamp{display:none}
+.factory-guide.guide-install .factory-guide-copy b{white-space:normal;font-size:11px;line-height:1.4}
+.factory-guide.guide-install .factory-guide-action{padding:7px 8px}
+#installLater{position:absolute;z-index:2;right:8px;top:50%;transform:translateY(-50%);padding:8px 3px;min-height:44px;border:0;background:transparent;color:#647465;font-size:10px;font-weight:800;box-shadow:none}
+#installDialog{width:min(360px,calc(100vw - 32px));max-height:calc(100dvh - 40px);padding:0;border:3px solid #234d3c;border-radius:25px;background:#f6f1d9;color:#234d3c;box-shadow:0 7px 0 #173a2f,0 20px 60px #061a1466;overflow:auto}
+#installDialog::backdrop{background:#092b22a6;backdrop-filter:blur(3px)}
+.install-card{padding:25px 22px 21px;text-align:center}
+.install-icon{display:block;width:68px;height:68px;margin:0 auto 13px;border:2px solid #37634d;border-radius:17px;box-shadow:0 3px 0 #bbad79}
+.install-card>small{font-size:11px;letter-spacing:.12em;color:#8b6b2b;font-weight:900}
+.install-card h2{margin:8px 0 10px;font-size:24px;line-height:1.35;letter-spacing:.02em}
+.install-lead{margin:0 0 18px;font-size:13px;line-height:1.6}
+#installSteps{display:grid;gap:12px;margin:0 0 20px;padding:16px 14px 16px 36px;border:1px solid #9daf87;border-radius:14px;background:#e5ebd5;text-align:left;font-size:13px;line-height:1.6}
+#installSteps li{padding-left:3px}
+#installSteps li::marker{color:#987028;font-weight:900}
+#installNativeButton{width:100%;min-height:48px;margin:4px 0 16px;border:2px solid #274e38;border-radius:14px;background:#f2c850;color:#234d3c;font-size:16px;font-weight:900;box-shadow:0 3px 0 #a9812b}
+#installClose{min-height:44px;min-width:120px;padding:8px 20px;border:1px solid #8a9f88;border-radius:12px;background:#f6f5e8;color:#46664d;font-size:14px;font-weight:800;box-shadow:none}
+#installStatus{margin:0 0 15px;font-size:13px;line-height:1.6}
+@media(max-width:360px){.factory-guide.guide-install .factory-guide-button{gap:5px;padding-right:53px}.factory-guide.guide-install .factory-guide-copy b{font-size:10px}.factory-guide.guide-install .factory-guide-action{font-size:8px;padding:7px 6px}}
