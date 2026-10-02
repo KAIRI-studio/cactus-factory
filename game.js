@@ -9,42 +9,43 @@ const CACTUS_TYPES = [
   { id: "idol", name: "アイドルサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-idol-slim-v271.png", reward: 50, description: "おおきな リボンで みんなを えがおに するよ。" },
   { id: "withered", name: "かれたサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-withered-slim-v271.png", reward: 150, description: "かれた からだに ふしぎな ちからを やどす。" },
   { id: "king", name: "おうさまサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-king-unified.png", reward: 150, description: "ちいさな おうかんを のせた みどりの おうさま。" },
-  { id: "mechanic", name: "せいびしサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-mechanic-simple-v263.png", reward: 50, description: "こうじょうの どうぐを つかいこなす。" },
+  { id: "mechanic", name: "せいびしサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-mechanic-simple-v263.png", reward: 30, description: "こうじょうの どうぐを つかいこなす。" },
   { id: "pirate", name: "かいぞくサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-pirate-simple-v263.png", reward: 50, description: "たからものを さがして ぼうけんする。" },
-  { id: "chef", name: "コックサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-chef-slim-v271.png", reward: 50, description: "おいしい りょうりを つくる。" },
-  { id: "salaryman", name: "サラリーマンサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-salaryman-simple-v263.png", reward: 50, description: "かばんを もって しごとに いく。" },
-  { id: "cowboy", name: "カウボーイサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-cowboy-simple-v263.png", reward: 50, description: "ぼうしが じまんの たびびと。" },
-  { id: "ghost", name: "おばけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ghost-simple-v263.png", reward: 50, description: "よるに ふわふわ あらわれる。" },
+  { id: "chef", name: "コックサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-chef-slim-v271.png", reward: 30, description: "おいしい りょうりを つくる。" },
+  { id: "salaryman", name: "サラリーマンサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-salaryman-simple-v263.png", reward: 30, description: "かばんを もって しごとに いく。" },
+  { id: "cowboy", name: "カウボーイサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-cowboy-simple-v263.png", reward: 30, description: "ぼうしが じまんの たびびと。" },
+  { id: "ghost", name: "おばけサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-ghost-simple-v263.png", reward: 30, description: "よるに ふわふわ あらわれる。" },
   { id: "surfer", name: "サーファーサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-surfer-slim-v271.png", reward: 150, description: "なみに のるのが だいすき。" },
   { id: "sage", name: "せんにんサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sage-slim-v271.png", reward: 50, description: "やまおくで しゅぎょうを つづける。" },
   { id: "lord", name: "とのさまサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-lord-slim-v271.png", reward: 150, description: "おうぎを ひらいて いばっている。" },
-  { id: "ninja", name: "ニンジャサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-ninja-simple-v263.png", reward: 50, description: "しずかに すばやく かけぬける。" },
-  { id: "sleepy", name: "ねぼすけサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sleepy-simple-v266.png", reward: 50, description: "いつでも ねむそう。あさは ちょっぴり にがて。" },
-  { id: "robot", name: "ロボサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-robot-simple-v266.png", reward: 50, description: "ピコピコ うごく こうじょうの なかま。" },
+  { id: "ninja", name: "ニンジャサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-ninja-simple-v263.png", reward: 30, description: "しずかに すばやく かけぬける。" },
+  { id: "sleepy", name: "ねぼすけサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-sleepy-simple-v266.png", reward: 30, description: "いつでも ねむそう。あさは ちょっぴり にがて。" },
+  { id: "robot", name: "ロボサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-robot-simple-v266.png", reward: 30, description: "ピコピコ うごく こうじょうの なかま。" },
   { id: "hero", name: "ヒーローサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-hero-simple-v266.png", reward: 150, description: "あかい マントで なかまを まもる。" },
-  { id: "kappa", name: "カッパサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-kappa-beak-v269.png", reward: 50, description: "くちばしと あたまの おさらが じまん。" },
+  { id: "kappa", name: "カッパサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-kappa-beak-v269.png", reward: 30, description: "くちばしと あたまの おさらが じまん。" },
   { id: "astronaut", name: "うちゅうひこうしサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-astronaut-simple-v266.png", reward: 50, description: "うちゅうへ とびだす ひを ゆめみている。" },
-  { id: "scientist", name: "はかせサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-scientist-simple-v266.png", reward: 50, description: "ふしぎな くすりを けんきゅうちゅう。" },
-  { id: "explorer", name: "たんけんたいサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-explorer-simple-v266.png", reward: 50, description: "そうがんきょうで あたらしい せかいを さがす。" },
-  { id: "boxer", name: "ボクサーサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-boxer-simple-v266.png", reward: 50, description: "まいにち げんきに トレーニング。" },
+  { id: "scientist", name: "はかせサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-scientist-simple-v266.png", reward: 30, description: "ふしぎな くすりを けんきゅうちゅう。" },
+  { id: "explorer", name: "たんけんたいサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-explorer-simple-v266.png", reward: 30, description: "そうがんきょうで あたらしい せかいを さがす。" },
+  { id: "boxer", name: "ボクサーサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-boxer-simple-v266.png", reward: 30, description: "まいにち げんきに トレーニング。" },
   { id: "magician", name: "マジシャンサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-magician-simple-v266.png", reward: 50, description: "ほしの ステッキで ふしぎな マジック。" },
   { id: "dragon", name: "ドラゴンサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-dragon-simple-v266.png", reward: 150, description: "ちいさな つばさで そらを めざす。" },
   { id: "santa", name: "サンタサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-santa-v270.png", reward: 50, description: "あかい ぼうしと しろい ひげが じまん。" },
-  { id: "honey", name: "はちみつサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-honey-v270.png", reward: 50, description: "あまい はちみつの つぼを はこんでいる。" },
-  { id: "firefighter", name: "しょうぼうしサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-firefighter-v270.png", reward: 50, description: "あかい ヘルメットで みんなを まもる。" },
-  { id: "musician", name: "おんがくかサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-musician-v270.png", reward: 50, description: "タンバリンで たのしく リズムを きざむ。" },
-  { id: "samurai", name: "さむらいサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-samurai-v270.png", reward: 50, description: "ちょんまげと かたなを たいせつに している。" },
+  { id: "honey", name: "はちみつサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-honey-v270.png", reward: 30, description: "あまい はちみつの つぼを はこんでいる。" },
+  { id: "firefighter", name: "しょうぼうしサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-firefighter-v270.png", reward: 30, description: "あかい ヘルメットで みんなを まもる。" },
+  { id: "musician", name: "おんがくかサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-musician-v270.png", reward: 30, description: "タンバリンで たのしく リズムを きざむ。" },
+  { id: "samurai", name: "さむらいサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-samurai-v270.png", reward: 30, description: "ちょんまげと かたなを たいせつに している。" },
   { id: "wizard", name: "まほうつかいサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-wizard-v270.png", reward: 50, description: "ほしの つえで まほうの れんしゅうちゅう。" },
-  { id: "thief", name: "どろぼうサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-thief-v270.png", reward: 50, description: "しましまの ふくろを かついで こっそり あるく。" },
-  { id: "festival", name: "おまつりサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-festival-v270.png", reward: 50, description: "うちわを ふって おまつりを たのしむ。" },
+  { id: "thief", name: "どろぼうサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-thief-v270.png", reward: 30, description: "しましまの ふくろを かついで こっそり あるく。" },
+  { id: "festival", name: "おまつりサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-festival-v270.png", reward: 30, description: "うちわを ふって おまつりを たのしむ。" },
   { id: "angel", name: "てんしサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-angel-v270.png", reward: 50, description: "ちいさな はねで ふわりと まいおりる。" },
   { id: "devil", name: "あくまサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-devil-v270.png", reward: 50, description: "あかい つのと マントが じまん。" },
-  { id: "sumo", name: "おすもうサボテン", rarity: "スーパーレア", rarityKey: "super", sprite: "assets/cactus-sumo-v270.png", reward: 50, description: "まわしを しめて どすこい！" },
+  { id: "sumo", name: "おすもうサボテン", rarity: "レア", rarityKey: "rare", sprite: "assets/cactus-sumo-v270.png", reward: 30, description: "まわしを しめて どすこい！" },
   { id: "phoenix", name: "フェニックスサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-phoenix-v270.png", reward: 150, description: "ほのおの はねを ひろげて はばたく。" },
   { id: "unicorn", name: "ユニコーンサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-unicorn-v270.png", reward: 150, description: "ひとつの つのに ふしぎな ひかりが やどる。" },
   { id: "sun", name: "たいようサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-sun-v270.png", reward: 150, description: "おひさまみたいに あかるく かがやく。" },
   { id: "moon", name: "つきサボテン", rarity: "レジェンド", rarityKey: "legend", sprite: "assets/cactus-moon-v270.png", reward: 150, description: "みかづきと いっしょに よるを てらす。" },
 ];
+const RARE_CACTUS_IDS = CACTUS_TYPES.filter(function (type) { return type.rarityKey === "rare"; }).map(function (type) { return type.id; });
 const SUPER_CACTUS_IDS = CACTUS_TYPES.filter(function (type) { return type.rarityKey === "super"; }).map(function (type) { return type.id; });
 const LEGEND_CACTUS_IDS = CACTUS_TYPES.filter(function (type) { return type.rarityKey === "legend"; }).map(function (type) { return type.id; });
 
@@ -52,8 +53,9 @@ const ACTIVE_CACTUS_IDS = new Set(CACTUS_TYPES.map(function (type) { return type
 
 function rollCactusId() {
   const roll = Math.random() * 100;
-  if (roll < .5) return LEGEND_CACTUS_IDS[Math.floor(roll / (.5 / LEGEND_CACTUS_IDS.length))];
-  if (roll < 5) return SUPER_CACTUS_IDS[Math.floor((roll - .5) / (4.5 / SUPER_CACTUS_IDS.length))];
+  if (roll < .1) return LEGEND_CACTUS_IDS[Math.floor(roll / (.1 / LEGEND_CACTUS_IDS.length))];
+  if (roll < 2) return SUPER_CACTUS_IDS[Math.floor((roll - .1) / (1.9 / SUPER_CACTUS_IDS.length))];
+  if (roll < 10) return RARE_CACTUS_IDS[Math.floor((roll - 2) / (8 / RARE_CACTUS_IDS.length))];
   return "normal";
 }
 
@@ -87,7 +89,7 @@ function loadState() {
       if (!Number.isInteger(saved.lastViewedCollectionCount)) {
         saved.lastViewedCollectionCount = CACTUS_TYPES.filter(function (type) { return (saved.collections[type.id] || 0) > 0; }).length;
       }
-      saved.rarityVersion = 6;
+      saved.rarityVersion = 7;
       saved.specialSeedQueued = Boolean(saved.specialSeedQueued);
       if (typeof saved.soundEnabled !== "boolean") saved.soundEnabled = true;
       if (!["harvest", "math", "equipment", "done"].includes(saved.tutorialStep)) {
@@ -155,7 +157,7 @@ function createInitialState() {
     tutorialStep: "harvest",
     soundEnabled: true,
     visualVersion: 4,
-    rarityVersion: 6,
+    rarityVersion: 7,
     rosterVersion: 1,
     rosterShowcaseVersion: 3,
     collections: Object.fromEntries(CACTUS_TYPES.map(function (type) { return [type.id, 0]; })),
@@ -626,8 +628,9 @@ function growthSeconds() {
 
 function rollSpecialSeed() {
   const roll = Math.random() * 100;
-  if (roll < 1) return LEGEND_CACTUS_IDS[Math.floor(roll / (1 / LEGEND_CACTUS_IDS.length))];
-  return SUPER_CACTUS_IDS[Math.floor((roll - 1) / (99 / SUPER_CACTUS_IDS.length))];
+  if (roll < .1) return LEGEND_CACTUS_IDS[Math.floor(roll / (.1 / LEGEND_CACTUS_IDS.length))];
+  if (roll < 19) return SUPER_CACTUS_IDS[Math.floor((roll - .1) / (18.9 / SUPER_CACTUS_IDS.length))];
+  return RARE_CACTUS_IDS[Math.floor((roll - 19) / (81 / RARE_CACTUS_IDS.length))];
 }
 
 function seededUnit(index, salt) {
@@ -1332,7 +1335,8 @@ const zukanDialog = document.querySelector("#zukanDialog");
 function zukanGroup(type) {
   if (type.rarityKey === "legend") return { key: "legend", name: "レジェンド", english: "LEGEND ARCHIVE" };
   if (type.rarityKey === "super") return { key: "super", name: "スーパーレア", english: "SPECIAL SPECIMENS" };
-  return { key: "standard", name: "ノーマル・レア", english: "STANDARD COLLECTION" };
+  if (type.rarityKey === "rare") return { key: "rare", name: "レア", english: "RARE SPECIMENS" };
+  return { key: "standard", name: "ノーマル", english: "STANDARD COLLECTION" };
 }
 
 function showZukanHero(type, count, entry) {

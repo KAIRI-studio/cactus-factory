@@ -5326,3 +5326,27 @@ body:not(.debug-mode) .test-tools{display:none!important}
 /* Keep the achievement title intact on narrow phones. */
 .factory-progress-card h2{font-size:clamp(17px,4.8vw,22px)!important;white-space:nowrap}
 #mathDialog .math-reward-hint b{white-space:nowrap!important;line-height:1.35}
+
+/* Rarity tiers share the same card layout while keeping their colors distinct. */
+.nursery-pot.rarity-rare .default-cactus-sprite{width:112%}
+.rarity-reveal.rare .rarity-reveal-card{
+  border-color:#96ddd5;
+  background:linear-gradient(150deg,#287d77ed,#164a4aef);
+  box-shadow:0 8px 0 #103d3b,0 0 25px #52c8bf66;
+}
+.rarity-reveal.rare::before{
+  background:radial-gradient(ellipse at 50% 50%,#f5fffd 0 4%,#a4e7dfa0 16%,#52c8bf40 42%,transparent 72%);
+}
+#zukanDialog .zukan-grid>.zukan-entry.rarity-rare{
+  border-color:#3b9a98;
+  background:linear-gradient(150deg,#f2fffa,#d9f0e9);
+}
+#zukanDialog .zukan-grid>.zukan-entry.rarity-rare .zukan-info small{
+  background:#a4ded4!important;color:#205c59!important;
+}
+#zukanDialog .zukan-grid>.zukan-entry.rarity-super .zukan-info small{
+  background:#f1d77d!important;color:#76530d!important;
+}
+#zukanDialog .zukan-grid>.zukan-entry.rarity-legend .zukan-info small{
+  background:#b94a40!important;color:#fff7ee!important;
+}

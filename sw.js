@@ -1,4 +1,4 @@
-const CACHE_NAME = "cactus-factory-2026-10-02-300";
+const CACHE_NAME = "cactus-factory-2026-10-03-301";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -11,7 +11,7 @@ const APP_FILES = [
   "./assets/audio/wrong.mp3",
   "./assets/audio/reward.mp3",
 
-  "./styles.css?v=295",
+  "./styles.css?v=301",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
@@ -47,7 +47,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=300",
+  "./game.js?v=301",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -117,7 +117,9 @@ self.addEventListener("install", function (event) {
 
 self.addEventListener("activate", function (event) {
   event.waitUntil(caches.keys().then(function (keys) {
-    return Promise.all(keys.filter(function (key) { return key !== CACHE_NAME; }).map(function (key) {
+    return Promise.all(keys.filter(function (key) {
+      return key.startsWith("cactus-factory-") && key !== CACHE_NAME;
+    }).map(function (key) {
       return caches.delete(key);
     }));
   }).then(function () { return self.clients.claim(); }));
