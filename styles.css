@@ -5282,3 +5282,32 @@ body:not(.debug-mode) .test-tools{display:none!important}
 @media(max-width:360px){
   #zukanDialog .zukan-grid>.zukan-entry .zukan-info small{font-size:7px!important}
 }
+
+/* Both collection rows must fit above pagination, including the final legend. */
+#zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
+  height:136px!important;min-height:136px!important;
+}
+@media(max-width:360px){
+  #zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
+    height:128px!important;min-height:128px!important;
+  }
+}
+@media(max-height:700px){
+  #zukanDialog .zukan-grid>.zukan-entry,
+  #zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
+    height:112px!important;min-height:112px!important;
+    grid-template-rows:34px auto!important;
+    padding-top:18px!important;padding-bottom:8px!important;
+  }
+  #zukanDialog .zukan-list-scroll .zukan-grid{row-gap:5px!important;padding-bottom:5px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:34px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:32px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-info{grid-template-rows:12px 22px!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-info b{
+    min-height:22px!important;font-size:9px!important;line-height:11px!important;
+    -webkit-line-clamp:2!important;
+  }
+}
+
+/* Keep the achievement title intact on narrow phones. */
+.factory-progress-card h2{font-size:clamp(17px,4.8vw,22px)!important;white-space:nowrap}
