@@ -5350,3 +5350,34 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #zukanDialog .zukan-grid>.zukan-entry.rarity-legend .zukan-info small{
   background:#b94a40!important;color:#fff7ee!important;
 }
+
+/* v302: repeatable coin purchases, in a separate scrollable shop. */
+#equipmentDialog .shop-open{display:flex;align-items:center;justify-content:space-between;gap:8px;width:calc(100% - 18px);min-height:46px;margin:4px 9px 10px;padding:10px 14px;border:2px solid #325c47;border-radius:13px;background:#f8e9af;color:#234532;font-size:16px;font-weight:900;box-shadow:0 3px 0 #31513c}
+#equipmentDialog .shop-open span{font-size:11px}
+#shopDialog{width:min(94vw,420px);max-height:92dvh;overflow:hidden}
+#shopDialog .shop-card{display:flex;flex-direction:column;max-height:90dvh;padding:23px 16px 16px;border:5px solid #345c44;background:#f7f4e4;box-shadow:inset 0 0 0 2px #d8b566,0 7px 0 #17382d;text-align:left}
+#shopDialog .shop-card>small{text-align:center;align-self:center}
+#shopDialog h2{text-align:center;color:#254632;margin:8px 40px 10px;font-size:25px}
+#shopDialog .shop-wallet{text-align:center;margin:0 0 12px;color:#355542;font-size:12px}
+#shopDialog .shop-wallet b{font-size:22px;color:#254632}
+#shopDialog .shop-scroll{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding:0 3px 4px}
+#shopDialog .shop-intro{font-size:12px;line-height:1.6;margin:0 0 12px;color:#52705c;text-align:center}
+#shopDialog .shop-products{display:grid;gap:9px}
+#shopDialog .shop-product{display:grid;grid-template-columns:42px minmax(0,1fr);align-items:center;gap:9px;min-height:93px;width:100%;padding:11px;border:2px solid #a8bb99;border-radius:14px;background:#fffdf3;color:#254632;text-align:left;cursor:pointer}
+#shopDialog .shop-product-gold{background:#fff4ce;border-color:#d8b564}
+#shopDialog .shop-product[aria-pressed="true"]{border-color:#285d3f;box-shadow:inset 0 0 0 2px #80aa68;background:#eaf1dd}
+#shopDialog .shop-icon{font-size:29px;text-align:center}
+#shopDialog .shop-product b{display:block;font-size:17px}
+#shopDialog .shop-product small{display:block;margin:4px 0;font-size:11px;line-height:1.55;font-weight:600}
+#shopDialog .shop-product strong{font-size:14px;color:#73572b}
+#shopDialog .shop-use{display:grid;gap:8px;margin-top:15px;padding:13px;border:2px solid #a8bb99;border-radius:14px;background:#eef0dd}
+#shopDialog .shop-use label{font-size:13px;font-weight:900}
+#shopDialog select{width:100%;min-height:44px;padding:8px;border:1px solid #6b876d;border-radius:8px;background:#fffdf3;color:#254632;font-size:13px}
+#shopDialog #shopHint{margin:0;font-size:11px;line-height:1.6;min-height:32px}
+#shopDialog #shopBuy{min-height:46px;padding:10px;border:2px solid #294e38;border-radius:10px;background:#365e43;color:#fff8d3;font-size:14px;font-weight:900;cursor:pointer}
+#shopDialog #shopBuy:disabled{background:#d5d9c7;border-color:#abb59f;color:#6f7b67;cursor:default}
+#shopDialog button:focus-visible,#shopDialog select:focus-visible{outline:3px solid #d09338;outline-offset:3px}
+#shopDialog .shop-feedback{min-height:20px;margin:10px 0;color:#28543b;font-size:12px;font-weight:900;text-align:center}
+#shopDialog .shop-odds{color:#55705c;font-size:11px;line-height:1.6}
+#shopDialog .shop-odds summary{min-height:30px;cursor:pointer}
+@media(max-width:360px){#shopDialog .shop-card{padding:19px 10px 12px}#shopDialog .shop-product{padding:9px;grid-template-columns:32px 1fr}#shopDialog .shop-icon{font-size:24px}}

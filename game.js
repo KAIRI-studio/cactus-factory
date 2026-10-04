@@ -103,37 +103,10 @@ function loadState() {
           if (growingRare >= 0) saved.nutrientActivePot = growingRare;
         }
       } else if (!Number.isInteger(saved.nutrientActivePot) || saved.nutrientActivePot < 0 || saved.nutrientActivePot >= POT_COUNT) saved.nutrientActivePot = null;
-      if (saved.visualVersion !== 4) {
-        saved.visualVersion = 4;
-        saved.pots.forEach(function (pot) {
-          pot.stage = 2;
-          pot.ready = true;
-          pot.startedAt = Date.now() - 70000;
-        });
-        Object.keys(ROSTER_SHOWCASE).forEach(function (index) { saved.pots[index].cactusId = ROSTER_SHOWCASE[index]; });
-      }
-      if (saved.rosterVersion !== 1) {
-        saved.rosterVersion = 1;
-        saved.pots.forEach(function (pot, index) {
-          pot.cactusId = ROSTER_SHOWCASE[index] || (ACTIVE_CACTUS_IDS.has(pot.cactusId) ? pot.cactusId : "normal");
-        });
-        saved.collections = Object.fromEntries(CACTUS_TYPES.map(function (type) {
-          return [type.id, type.id === "normal" ? (saved.collections.normal || 0) : 0];
-        }));
-        saved.lastViewedCollectionCount = CACTUS_TYPES.filter(function (type) { return (saved.collections[type.id] || 0) > 0; }).length;
-      }
-      if (!Number.isInteger(saved.rosterShowcaseVersion) || saved.rosterShowcaseVersion < 2) {
-        saved.rosterShowcaseVersion = 2;
-        Object.keys(ROSTER_SHOWCASE).forEach(function (index) {
-          if (saved.pots[index].cactusId === "normal" && saved.pots[index].ready) saved.pots[index].cactusId = ROSTER_SHOWCASE[index];
-        });
-      }
-      if (saved.rosterShowcaseVersion < 3) {
-        Object.keys(NEW_SHOWCASE_IDS).forEach(function (index) {
-          if (saved.pots[index].cactusId === "normal" && saved.pots[index].ready) saved.pots[index].cactusId = NEW_SHOWCASE_IDS[index];
-        });
-        saved.rosterShowcaseVersion = 3;
-      }
+      // Retire showcase migrations without replacing any player's plants or collection.
+      saved.visualVersion = 4;
+      saved.rosterVersion = 1;
+      saved.rosterShowcaseVersion = Math.max(3, Number(saved.rosterShowcaseVersion) || 0);
       // Earlier builds showed the full roster even before the first harvest.
       // Correct those untouched starters without changing an existing collection.
       if ((Number(saved.harvested) || 0) === 0
@@ -633,6 +606,102 @@ function rollSpecialSeed() {
   return RARE_CACTUS_IDS[Math.floor((roll - 19) / (81 / RARE_CACTUS_IDS.length))];
 }
 
+// Consumables reuse the existing save and never reset collections or growing pots.
+const SHOP_PRODUCTS = [
+  { id: "mystery", name: "ふしぎなタネ", icon: "🌱", cost: 3000, description: "育成中の1鉢に。レアが でやすいタネ。ノーマルも でるよ。" },
+  { id: "gold", name: "金のタネ", icon: "✨", cost: 10000, description: "育成中の1鉢に。レア以上 かくてい！" },
+  { id: "fertilizer", name: "ひりょう", icon: "🍃", cost: 500, description: "育成中の1鉢を 1じかん短縮。何度でも つかえるよ。" }
+];
+let selectedShopProduct = null;
+let lastShopSignature = "";
+const shopDialog = document.querySelector("#shopDialog");
+const shopPot = document.querySelector("#shopPot");
+
+function rollShopSeed(id) {
+  const roll = Math.random() * 100;
+  if (roll < .1) return LEGEND_CACTUS_IDS[Math.floor(roll / (.1 / LEGEND_CACTUS_IDS.length))];
+  const superEnd = id === "gold" ? 20 : 10;
+  if (roll < superEnd) return SUPER_CACTUS_IDS[Math.floor((roll - .1) / ((superEnd - .1) / SUPER_CACTUS_IDS.length))];
+  if (id === "gold" || roll < 40) return RARE_CACTUS_IDS[Math.floor((roll - superEnd) / ((id === "gold" ? 80 : 30) / RARE_CACTUS_IDS.length))];
+  return "normal";
+}
+function shopPotEligible(pot, index, product) {
+  return !pot.ready && (product.id === "fertilizer" || (!pot.shopSeed && state.nutrientActivePot !== index));
+}
+function shopSignature() {
+  return selectedShopProduct + ":" + state.coins + ":" + state.nutrientActivePot + ":" + state.pots.map(function (pot) { return Number(pot.ready) + ":" + (pot.shopSeed || ""); }).join("|");
+}
+function renderShop() {
+  lastShopSignature = shopSignature();
+  const product = SHOP_PRODUCTS.find(function (item) { return item.id === selectedShopProduct; });
+  document.querySelector("#shopCoins").textContent = state.coins.toLocaleString("ja-JP");
+  document.querySelectorAll("[data-shop-product]").forEach(function (button) {
+    button.setAttribute("aria-pressed", String(button.dataset.shopProduct === selectedShopProduct));
+  });
+  const previous = shopPot.value;
+  shopPot.replaceChildren();
+  if (product) state.pots.forEach(function (pot, index) {
+    if (!shopPotEligible(pot, index, product)) return;
+    const option = document.createElement("option");
+    option.value = String(index);
+    const minutes = Math.max(1, Math.ceil((growthSeconds() * 1000 - (Date.now() - pot.startedAt)) / 60000));
+    option.textContent = "はち " + (index + 1) + " ・ あと " + minutes + "ぷん" + (pot.shopSeed ? " ・ タネ使用中" : "");
+    shopPot.append(option);
+  });
+  if (Array.from(shopPot.options).some(function (option) { return option.value === previous; })) shopPot.value = previous;
+  shopPot.disabled = !shopPot.options.length;
+  const buy = document.querySelector("#shopBuy");
+  buy.disabled = !product || !shopPot.options.length || state.coins < product.cost;
+  buy.textContent = product ? product.cost.toLocaleString("ja-JP") + "コインで つかう" : "商品を えらんでね";
+  document.querySelector("#shopHint").textContent = !product ? "タネか ひりょうを えらんでね。"
+    : !shopPot.options.length ? "つかえる鉢がないよ。収穫してから また来てね。"
+    : state.coins < product.cost ? "あと " + (product.cost - state.coins).toLocaleString("ja-JP") + "コインで かえるよ！"
+    : product.id === "fertilizer" ? "残り1じかんより短いときは、すぐ収穫できるよ。" : "そだつ時間は そのまま。タネの正体は 収穫までのお楽しみ！";
+}
+function buyShopProduct() {
+  refreshNaturalGrowth();
+  const product = SHOP_PRODUCTS.find(function (item) { return item.id === selectedShopProduct; });
+  const index = shopPot.value === "" ? -1 : Number(shopPot.value);
+  const pot = state.pots[index];
+  if (!product || !pot || !shopPotEligible(pot, index, product) || state.coins < product.cost) { renderShop(); return; }
+  state.coins -= product.cost;
+  if (product.id === "fertilizer") {
+    pot.startedAt -= Math.min(3600000, Math.max(0, growthSeconds() * 1000 - (Date.now() - pot.startedAt)));
+  } else {
+    pot.cactusId = rollShopSeed(product.id);
+    pot.shopSeed = product.id;
+  }
+  save();
+  playSound("upgrade");
+  render();
+  document.querySelector("#shopFeedback").textContent = "はち " + (index + 1) + "に " + product.name + "を つかったよ！";
+  renderShop();
+}
+SHOP_PRODUCTS.forEach(function (product) {
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "shop-product shop-product-" + product.id;
+  button.dataset.shopProduct = product.id;
+  button.setAttribute("aria-pressed", "false");
+  button.innerHTML = '<span class="shop-icon" aria-hidden="true">' + product.icon + '</span><span><b>' + product.name + '</b><small>' + product.description + '</small><strong>🪙 ' + product.cost.toLocaleString("ja-JP") + '</strong></span>';
+  button.addEventListener("click", function () {
+    selectedShopProduct = product.id;
+    document.querySelector("#shopFeedback").textContent = "";
+    renderShop();
+  });
+  document.querySelector("#shopProducts").append(button);
+});
+document.querySelector("#shopOpen").addEventListener("click", function () {
+  equipmentDialog.close();
+  document.querySelector("#shopFeedback").textContent = "";
+  renderShop();
+  shopDialog.showModal();
+});
+document.querySelector("#shopClose").addEventListener("click", function () { shopDialog.close(); });
+shopDialog.addEventListener("close", function () { renderEquipment(); equipmentDialog.showModal(); });
+shopDialog.addEventListener("click", function (event) { if (event.target === shopDialog) shopDialog.close(); });
+document.querySelector("#shopBuy").addEventListener("click", buyShopProduct);
+
 function seededUnit(index, salt) {
   const generation = state.pots[index].generation || 0;
   let value = (state.layoutSeed + index * 374761393 + generation * 668265263 + salt * 1274126177) >>> 0;
@@ -724,6 +793,7 @@ function render() {
   renderFactoryProgress();
   renderSpecialNutrient();
   renderFactoryGuide();
+  if (shopDialog.open && shopSignature() !== lastShopSignature) renderShop();
   // Level-specific equipment is rendered as illustrated hardware above the base room.\n  document.querySelector(".greenhouse-back").src = FACILITY_BACKGROUNDS.base;
   game.className = game.className.replace(/\b(light|mist|air|sensor)-level-\d+\b/g, "").trim();
   Object.keys(state.equipment).forEach(function (key) { game.classList.add(key + "-level-" + state.equipment[key]); });
@@ -881,6 +951,7 @@ function harvest(indexes) {
     } else {
       pot.cactusId = rollCactusId();
     }
+    delete pot.shopSeed;
     pot.ready = false; pot.stage = -1; pot.startedAt = Date.now(); pot.generation = (pot.generation || 0) + 1;
   });
   if (!harvestedItems.length) return;
