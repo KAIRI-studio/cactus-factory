@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=302" />
+  <link rel="stylesheet" href="styles.css?v=303" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=302" defer></script>
+  <script src="game.js?v=303" defer></script>
   <link rel="stylesheet" href="install.css?v=300" />
   <script src="install.js?v=300" defer></script>
 </head>
@@ -94,6 +94,11 @@
     <section class="cultivation-zone" aria-label="24個のサボテン栽培場所">
       <div class="nursery" id="nursery"></div>
     </section>
+    <button class="dedicated-pot" id="dedicatedPot" type="button" aria-label="専用の鉢。タネをうえよう">
+      <b>とくべつな はち</b>
+      <span class="dedicated-pot-art"><img id="dedicatedPlant" src="assets/simple-bold-sprout.png" alt="" hidden /><i aria-hidden="true"></i></span>
+      <small id="dedicatedStatus">タネを うえよう</small>
+    </button>
     <aside class="special-nutrient" id="specialNutrient" role="status" aria-label="レア栄養剤 使用中" hidden><img src="assets/rare-nutrient-crate-bold.png" alt="" /></aside>
     <aside class="upgrade-celebration" id="upgradeCelebration" role="status" aria-live="assertive" hidden>
       <button class="upgrade-celebration-card" id="upgradeCelebrationClose" type="button" aria-label="強化完了のお知らせを閉じる">
@@ -260,16 +265,16 @@
       <small>そだてて、あつめよう</small><h2>🌱 ショップ</h2>
       <p class="shop-wallet">しょじコイン <b id="shopCoins">0</b> 🪙</p>
       <div class="shop-scroll">
-        <p class="shop-intro">ふつうのタネは むりょうで そだつよ。<br />とくべつなタネで、つぎの収穫を おたのしみに！</p>
+        <p class="shop-intro">とくべつなタネは 専用の鉢で そだつよ。<br />いつもの24鉢とは 別の おたのしみ！</p>
         <div class="shop-products" id="shopProducts"></div>
         <div class="shop-use">
-          <label for="shopPot">つかう はちを えらぼう</label>
-          <select id="shopPot"></select>
+          <b>とくべつな はち</b>
+          <p id="shopPotStatus">タネを うえよう</p>
           <p id="shopHint"></p>
           <button id="shopBuy" type="button" disabled>商品を えらんでね</button>
         </div>
         <p class="shop-feedback" id="shopFeedback" role="status"></p>
-        <details class="shop-odds"><summary>タネの かくりつ</summary><p>ふしぎ：N 60% / R 30% / SR 9.9% / L 0.1%<br />金：R 80% / SR 19.9% / L 0.1%<br />同じレア度の中では、どのサボテンも同じ確率。<br />タネは1鉢に1回。収穫すると、また使えるよ。</p></details>
+        <details class="shop-odds"><summary>タネの かくりつ</summary><p>ふしぎ：N 60% / R 30% / SR 9.9% / L 0.1%<br />金：R 80% / SR 19.9% / L 0.1%<br />同じレア度の中では、どのサボテンも同じ確率。<br />専用の鉢は1つ。収穫すると、次のタネを植えられるよ。<br />育成時間は通常の鉢と同じ。設備の短縮も有効です。</p></details>
       </div>
     </section></dialog>
     <dialog id="resetDialog"><section class="dialog-card reset-card">
@@ -311,6 +316,6 @@
       <button id="installClose" type="button">とじる</button>
     </section>
   </dialog>
-  <!-- release-v302 -->
+  <!-- release-v303 -->
 </body>
 </html>
