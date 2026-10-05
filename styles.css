@@ -5492,3 +5492,11 @@ body:not(.debug-mode) .test-tools{display:none!important}
 @keyframes dedicated-pot-sway{0%,100%{transform:rotate(-.7deg)}50%{transform:rotate(.7deg)}}
 @keyframes dedicated-cactus-sway{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.025)}}
 @media(prefers-reduced-motion:reduce){.dedicated-pot:not([hidden]) .dedicated-pot-art,.dedicated-pot-art>#dedicatedPlant{animation:none}}
+
+/* v317: sprouts sit in the soil; crate breathes like the nutrient bottle. */
+.dedicated-pot.is-sprout .dedicated-pot-art>#dedicatedPlant{left:26%;bottom:76%;width:48%;height:55%}
+.dedicated-pot:not([hidden]) .dedicated-pot-art{transform-origin:50% 100%;animation:nutrient-ready 1.35s ease-in-out infinite}
+#shopDialog .shop-heading{padding:0 12px}
+#shopDialog .shop-heading img{height:126px}
+@media(max-width:360px){#shopDialog .shop-heading{padding:0 10px}#shopDialog .shop-heading img{height:118px}}
+@media(prefers-reduced-motion:reduce){.dedicated-pot:not([hidden]) .dedicated-pot-art{animation:none}}
