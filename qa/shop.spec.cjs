@@ -18,7 +18,7 @@ assert.deepEqual(data('state.collections'),fixture.collections);
 assert.deepEqual(data('state.pots'),fixture.pots);
 assert.equal(run('state.shopPlant'),null);
 run('selectedShopProduct="fertilizer";buyShopProduct()');
-assert.equal(run('state.coins'),250000,'empty pot cannot use fertilizer');
+assert.equal(run('state.coins'),250000,'removed product cannot be purchased');
 run('selectedShopProduct="gold";buyShopProduct()');
 assert.equal(run('state.coins'),200000);
 assert.equal(run('state.shopPlant.shopSeed'),'gold');
@@ -27,15 +27,15 @@ assert.deepEqual(data('state.pots'),fixture.pots,'planting never touches normal 
 assert.deepEqual(data('state.collections'),fixture.collections);
 run('buyShopProduct()');assert.equal(run('state.coins'),200000,'occupied pot cannot be overwritten');
 run('state=loadState()');assert.equal(run('state.shopPlant.shopSeed'),'gold');assert.equal(run('state.specialSeedQueued'),true);
-run('selectedShopProduct="fertilizer";buyShopProduct()');
-assert.equal(run('state.coins'),199500);assert.equal(run('state.shopPlant.ready'),true);
-run('buyShopProduct()');assert.equal(run('state.coins'),199500,'ready plant cannot consume fertilizer');
+run('state.shopPlant.startedAt=Date.now()-3600001;refreshNaturalGrowth()');
+assert.equal(run('state.shopPlant.ready'),true);
+run('buyShopProduct()');assert.equal(run('state.coins'),200000,'ready plant cannot be overwritten');
 const id=run('state.shopPlant.cactusId'),reward=run('cactusType(state.shopPlant.cactusId).reward');
 run('harvestDedicatedPot()');
-assert.equal(run('state.shopPlant'),null);assert.equal(run('state.coins'),199500+reward);assert.equal(run('state.harvested'),141);
+assert.equal(run('state.shopPlant'),null);assert.equal(run('state.coins'),200000+reward);assert.equal(run('state.harvested'),141);
 assert.equal(run('state.collections['+JSON.stringify(id)+']'),(fixture.collections[id]||0)+1);
 assert.deepEqual(data('state.pots'),fixture.pots);
-run('harvestDedicatedPot()');assert.equal(run('state.coins'),199500+reward,'double harvest rejected');
+run('harvestDedicatedPot()');assert.equal(run('state.coins'),200000+reward,'double harvest rejected');
 run('selectedShopProduct="silver";buyShopProduct()');
 assert.equal(run('state.shopPlant.shopSeed'),'silver');
 run('state.shopPlant.startedAt=Date.now()-7200000;save();state=loadState();refreshNaturalGrowth()');
@@ -50,6 +50,8 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),sw=fs.readFileSy
 for(const id of ['shopDialog','shopOpen','shopClose','shopCoins','shopProducts','shopPotStatus','shopHint','shopBuy','shopFeedback','dedicatedPot','dedicatedPlant','dedicatedStatus'])assert.ok(html.includes('id="'+id+'"'));
 assert.ok(!html.includes('id="shopPot"'));
 assert.ok(html.indexOf('id="dedicatedPot"')>html.indexOf('id="nursery"'));
-for(const file of ['game.js?v=307','styles.css?v=307']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
+for(const file of ['game.js?v=308','styles.css?v=308']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
+assert.equal(run('SHOP_PRODUCTS.length'),2);
+assert.ok(source.includes('nutrientButton.innerHTML = \'<img src="assets/rare-nutrient-crate-bold.png"'));
 assert.equal(run('STORAGE'),'cactus-line-v4');
-console.log('PASS: dedicated pot lifecycle, purchase guards, fertilizer, offline/reload, collection/reward, exact odds, old saves and normal pots preserved');
+console.log('PASS: dedicated pot lifecycle, purchase guards, removed fertilizer, offline/reload, collection/reward, exact odds, old saves and normal pots preserved');

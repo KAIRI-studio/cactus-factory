@@ -611,8 +611,7 @@ function rollSpecialSeed() {
 // Consumables reuse the existing save and never reset collections or growing pots.
 const SHOP_PRODUCTS = [
   { id: "silver", name: "銀のタネ", sprite: "assets/shop-silver-seed-v307.webp", cost: 15000, description: "レア以上 かくてい！専用の鉢で そだてよう。" },
-  { id: "gold", name: "金のタネ", sprite: "assets/shop-gold-seed-v307.webp", cost: 50000, description: "スーパーレア以上 かくてい！特別な1体を そだてよう。" },
-  { id: "fertilizer", name: "ひりょう", sprite: "assets/rare-nutrient-crate-bold.png", cost: 500, description: "専用の鉢の 育成を 1じかん短縮。何度でも つかえるよ。" }
+  { id: "gold", name: "金のタネ", sprite: "assets/shop-gold-seed-v307.webp", cost: 50000, description: "スーパーレア以上 かくてい！特別な1体を そだてよう。" }
 ];
 let selectedShopProduct = null;
 let lastShopSignature = "";
@@ -628,7 +627,7 @@ function rollShopSeed(id) {
   return RARE_CACTUS_IDS[Math.floor((roll - superEnd) / (80 / RARE_CACTUS_IDS.length))];
 }
 function shopProductAvailable(product) {
-  return product.id === "fertilizer" ? Boolean(state.shopPlant && !state.shopPlant.ready) : !state.shopPlant;
+  return !state.shopPlant;
 }
 function shopSignature() {
   return selectedShopProduct + ":" + state.coins + ":" + (state.shopPlant ? Number(state.shopPlant.ready) + ":" + Math.ceil((growthSeconds() * 1000 - Date.now() + state.shopPlant.startedAt) / 60000) : "empty");
@@ -643,23 +642,18 @@ function renderShop() {
   shopPotStatus.textContent = dedicatedPotStatus();
   const buy = document.querySelector("#shopBuy");
   buy.disabled = !product || !shopProductAvailable(product) || state.coins < product.cost;
-  buy.textContent = product ? product.cost.toLocaleString("ja-JP") + "コインで " + (product.id === "fertilizer" ? "つかう" : "そだてる") : "商品を えらんでね";
-  document.querySelector("#shopHint").textContent = !product ? "タネか ひりょうを えらんでね。"
+  buy.textContent = product ? product.cost.toLocaleString("ja-JP") + "コインで " + "そだてる" : "商品を えらんでね";
+  document.querySelector("#shopHint").textContent = !product ? "タネを えらんでね。"
     : !shopProductAvailable(product) ? (state.shopPlant ? "専用の鉢の サボテンを収穫したら、次のタネを そだてられるよ。" : "まず専用の鉢に タネを うえよう。")
     : state.coins < product.cost ? "あと " + (product.cost - state.coins).toLocaleString("ja-JP") + "コインで かえるよ！"
-    : product.id === "fertilizer" ? "残り1じかんより短いときは、すぐ収穫できるよ。" : "栽培エリアの下の 専用の鉢で育つよ。正体は 収穫までのお楽しみ！";
+    : "栽培エリアの下の 専用の鉢で育つよ。正体は 収穫までのお楽しみ！";
 }
 function buyShopProduct() {
   refreshNaturalGrowth();
   const product = SHOP_PRODUCTS.find(function (item) { return item.id === selectedShopProduct; });
   if (!product || !shopProductAvailable(product) || state.coins < product.cost) { renderShop(); return; }
   state.coins -= product.cost;
-  if (product.id === "fertilizer") {
-    const pot = state.shopPlant;
-    pot.startedAt -= Math.min(3600000, Math.max(0, growthSeconds() * 1000 - (Date.now() - pot.startedAt)));
-  } else {
-    state.shopPlant = { cactusId: rollShopSeed(product.id), shopSeed: product.id, startedAt: Date.now(), stage: -1, ready: false };
-  }
+  state.shopPlant = { cactusId: rollShopSeed(product.id), shopSeed: product.id, startedAt: Date.now(), stage: -1, ready: false };
   save();
   playSound("upgrade");
   render();
@@ -1330,15 +1324,14 @@ function renderEquipment() {
     const nutrientInUse = nutrientIsInUse();
     const nutrientUnavailable = nutrientInUse || state.coins < 300;
     detail.className = "equipment-detail equipment-detail-nutrient" + (nutrientInUse ? " is-active" : "") + (nutrientUnavailable ? " is-disabled" : "");
-    detail.style.setProperty("--equipment-detail-art", nutrientInUse
-      ? 'url("assets/nutrient-purchase-panel-active.webp")'
-      : 'url("assets/nutrient-purchase-panel.webp")');
+    detail.style.removeProperty("--equipment-detail-art");
     const nutrientButton = document.createElement("button");
     nutrientButton.id = "specialSeedButton";
     nutrientButton.type = "button";
     nutrientButton.className = "nutrient-purchase";
     nutrientButton.disabled = nutrientUnavailable;
     nutrientButton.setAttribute("aria-label", nutrientInUse ? "レア栄養剤 しようちゅう" : "レア栄養剤を 300コインで こうにゅう");
+    nutrientButton.innerHTML = '<img src="assets/rare-nutrient-crate-bold.png" alt="" /><span class="nutrient-copy"><b>レアえいようざい</b><small>レアな サボテンが そだつよ</small><strong>' + (nutrientInUse ? "しようちゅう" : document.querySelector(".topbar .coin").outerHTML + " 300コインで こうにゅう") + '</strong></span>';
     detail.append(nutrientButton);
     document.querySelector("#equipmentFeedback").textContent = nutrientInUse ? "レア栄養剤を しようちゅう" : "";
     return;
@@ -1572,7 +1565,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "307" });
+      event.ports[0].postMessage({ version: "308" });
     }
   });
   window.addEventListener("load", function () {
