@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=320" />
+  <link rel="stylesheet" href="styles.css?v=321" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=320" defer></script>
+  <script src="game.js?v=321" defer></script>
   <link rel="stylesheet" href="install.css?v=300" />
   <script src="install.js?v=300" defer></script>
 </head>
@@ -151,7 +151,7 @@
             <circle cx="44" cy="46" r="3.8" fill="#e96e59" stroke="#172f28" stroke-width="2.8"/>
           </svg>
         </span>
-        <b>けいさん</b><small>10問チャレンジ</small>
+        <b>けいさん</b><small>10もんチャレンジ</small>
       </button>
       <button class="console-button zukan-control" id="zukanButton" type="button">
         <i class="console-light" aria-hidden="true"></i>
@@ -168,25 +168,27 @@
       </button>
     </nav>
     <dialog id="factoryProgressDialog"><section class="dialog-card factory-progress-card">
-      <button class="close" id="factoryProgressClose" aria-label="閉じる">×</button>
+      <button class="close" id="factoryProgressClose" aria-label="とじる">×</button>
       <small class="factory-record-label">こうじょうの きろく</small>
       <h2>こうじょうの たっせいど</h2>
       <div class="factory-rank-panel">
         <span class="factory-rank-medal" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M21 37V16c0-4 2-7 5-7s5 3 5 7v7h3v-4c0-3 2-5 4-5s4 2 4 5v7c0 5-3 8-8 8h-3v5H21zM21 29h-4c-5 0-8-3-8-8v-4c0-3 2-5 4-5s4 2 4 5v4h4"/></svg></span>
         <span class="factory-rank-copy"><small id="factoryRankLabel">こうじょう かどうちゅう</small><b id="factoryRankPercent">0%</b><em id="factoryNextGoal">まずは サボテンを みつけよう！</em></span>
       </div>
+      <p class="factory-progress-explainer">サボテンと せつびを あわせた すうじだよ。</p>
+      <div class="factory-progress-formula" id="factoryProgressFormula">サボテン 40しゅるい ＋ せつび 12レベル ＝ 52</div>
       <div class="factory-progress-details">
         <button id="factoryProgressZukan" type="button">
-          <span><b>サボテンずかん</b></span><strong id="factoryCollectionCount">0 / 5</strong><i aria-hidden="true"><em id="factoryCollectionFill"></em></i>
+          <span><b>サボテンずかん</b><small>みつけた しゅるい</small></span><strong id="factoryCollectionCount">0 / 5</strong><i aria-hidden="true"><em id="factoryCollectionFill"></em></i>
         </button>
         <button id="factoryProgressEquipment" type="button">
-          <span><b>せつびレベル</b></span><strong id="factoryEquipmentCount">0 / 12</strong><i aria-hidden="true"><em id="factoryEquipmentFill"></em></i>
+          <span><b>せつびレベル</b><small>4つの せつびの レベル</small></span><strong id="factoryEquipmentCount">0 / 12</strong><i aria-hidden="true"><em id="factoryEquipmentFill"></em></i>
         </button>
       </div>
       <div class="factory-complete-stamp" id="factoryCompleteStamp" hidden><b>こうじょう かんせい！</b><span>すべての きろくを たっせいしました</span></div>
     </section></dialog>
     <dialog id="mathDialog"><section class="dialog-card math-card">
-      <button class="close" id="mathClose" aria-label="閉じる">×</button>
+      <button class="close" id="mathClose" aria-label="とじる">×</button>
       <header class="math-illustrated-heading"><img src="assets/math-heading-v2.webp" alt="けいさんチャレンジ" /></header>
       <div class="station-glass station-glass-math">
       <div class="challenge-head">
@@ -238,7 +240,7 @@
       <div class="discovery-actions"><button id="discoveryContinue" type="button">つづける</button><button id="discoveryZukan" type="button">ずかんで みる</button></div>
     </section></dialog>
     <dialog id="equipmentDialog"><section class="dialog-card equipment-dialog-card">
-      <button class="close" id="equipmentClose" aria-label="閉じる">×</button>
+      <button class="close" id="equipmentClose" aria-label="とじる">×</button>
       <header class="equipment-illustrated-heading"><img src="assets/equipment-heading-v3.webp" alt="せつびを そだてよう" /></header>
       <div class="equipment-scroll-area">
         <button class="shop-open" id="shopOpen" type="button"><span class="shop-open-seeds" aria-hidden="true"><img src="assets/shop-silver-seed-v307.webp" alt="" /><img src="assets/shop-gold-seed-v307.webp" alt="" /></span><span class="shop-open-copy"><b>タネのおみせ</b><small>とくべつな タネを かう</small></span><span class="shop-open-arrow" aria-hidden="true">›</span></button>
@@ -246,7 +248,7 @@
           <div class="equipment-room-level"><span>ぜんたいレベル</span><b id="equipmentTotalText">0 / 12</b><div class="equipment-meter"><i id="equipmentMeterFill"></i></div></div>
           <div class="sound-setting"><span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 13h6l7-6v18l-7-6H6z"/><path d="M23 12c2 2 2 6 0 8M26 9c4 4 4 10 0 14"/></svg></span><b>おと</b><button id="soundToggle" type="button" aria-pressed="true">ON</button></div>
           <div class="coin-chip equipment-coin-chip" id="equipmentCoinMeter" aria-label="もっているコイン 120"><span class="coin" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 27V10c0-3 1.7-5 4-5s4 2 4 5v6h2v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v5c0 3-2 5-5 5h-3v4H12zM12 20H9c-3 0-5-2-5-5v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v3h2"/></svg></span><span><small>コイン</small><b id="equipmentCoinCount">120</b></span></div>
-          <div class="equipment-growth-guide" aria-live="polite"><b>そだつ時間　1レベルで 10ぷん短縮</b><span id="equipmentGrowthGuide">3じかん → 2じかん50ぷん</span></div>
+          <div class="equipment-growth-guide" aria-live="polite"><b>1レベルあがると 10ぷん はやくそだつ</b><span id="equipmentGrowthGuide">3じかん → 2じかん50ぷん</span></div>
           <div class="equipment-grid" id="equipmentGrid"></div>
           <div class="equipment-detail" id="equipmentDetail"></div>
           <details class="save-settings">
@@ -260,7 +262,7 @@
       </div>
     </section></dialog>
     <dialog id="shopDialog"><section class="dialog-card shop-card">
-      <button class="close" id="shopClose" type="button" aria-label="閉じる">×</button>
+      <button class="close" id="shopClose" type="button" aria-label="とじる">×</button>
       <header class="shop-heading"><h2><img src="assets/shop-heading-v314.webp" alt="タネのおみせ" /></h2></header>
       <div class="shop-wallet coin-chip"><span class="coin" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 27V10c0-3 1.7-5 4-5s4 2 4 5v6h2v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v5c0 3-2 5-5 5h-3v4H12zM12 20H9c-3 0-5-2-5-5v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v3h2"/></svg></span><span><small>もっているコイン</small><b id="shopCoins">0</b></span></div>
       <div class="shop-scroll">
@@ -275,11 +277,11 @@
       </div>
     </section></dialog>
     <dialog id="resetDialog"><section class="dialog-card reset-card">
-      <small>あそびの きろく</small><h2>さいしょから あそぶ？</h2><p>コイン・せつび・ずかんを、すべて最初の状態にもどします。この操作は取り消せません。</p>
+      <small>あそびの きろく</small><h2>さいしょから あそぶ？</h2><p>コイン・せつび・ずかんが、さいしょに もどるよ。いまの きろくには もどせないよ。</p>
       <div class="reset-actions"><button id="resetCancelButton" type="button">やめる</button><button class="danger" id="resetConfirmButton" type="button">リセットする</button></div>
     </section></dialog>
     <dialog id="zukanDialog"><section class="dialog-card zukan-card">
-      <button class="close" id="zukanClose" aria-label="閉じる">×</button>
+      <button class="close" id="zukanClose" aria-label="とじる">×</button>
       <header class="zukan-book-title">
         <img class="zukan-heading-art" src="assets/zukan-heading-v2.webp" alt="サボテンずかん" />
         <div class="zukan-title-meta">
@@ -313,6 +315,6 @@
       <button id="installClose" type="button">とじる</button>
     </section>
   </dialog>
-  <!-- release-v320 -->
+  <!-- release-v321 -->
 </body>
 </html>

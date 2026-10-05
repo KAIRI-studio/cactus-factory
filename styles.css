@@ -5524,3 +5524,41 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #equipmentDialog .shop-open-copy small{font-size:9px;color:#607355}
 #equipmentDialog .shop-open-arrow{position:relative;z-index:1;font-size:29px;line-height:1;color:#8a6c29}
 #equipmentDialog .shop-open:active{transform:translateY(2px);box-shadow:inset 0 0 0 2px #fff8d8,0 2px 0 #274b39}
+
+/* v321: readable instructions, calm text panels, and a clear achievement total. */
+#equipmentDialog .equipment-growth-guide b{font-size:14px;line-height:1.5}
+#equipmentDialog .equipment-growth-guide span{font-size:15px;line-height:1.4}
+#equipmentDialog .shop-open-copy small{font-size:12px;line-height:1.4}
+#equipmentDialog .nutrient-copy small{font-size:13px;line-height:1.5}
+#equipmentDialog .nutrient-copy strong{font-size:13px;line-height:1.4}
+#equipmentDialog .equipment-room-level>span{font-size:10px!important;line-height:1.3!important}
+#zukanDialog .zukan-hero-copy p{font-size:13px!important;line-height:1.5!important;overflow:visible!important}
+#zukanDialog .zukan-hero-copy em{font-size:11px!important;line-height:1.4!important}
+#zukanDialog .zukan-hero-copy small{font-size:10px!important;line-height:1.3!important}
+#shopDialog .shop-intro,#shopDialog #shopHint,#shopDialog .shop-odds{
+  padding:10px 12px;border:1px solid #b5aa7b;border-radius:12px;
+  background:#fff8e8f2;color:#294c38;font-size:13px;line-height:1.6;
+  box-shadow:0 2px 0 #274b391a;
+}
+#shopDialog .shop-intro{margin-bottom:12px}
+#shopDialog #shopHint{min-height:42px;margin:0;font-weight:700}
+#shopDialog .shop-product small{font-size:13px;line-height:1.55}
+#shopDialog .shop-odds{margin-top:12px}
+#shopDialog .shop-odds summary{display:list-item;min-height:32px;line-height:1.6;font-weight:700}
+#shopDialog .shop-feedback:empty{display:none}
+#shopDialog .shop-feedback:not(:empty){padding:9px 12px;border-radius:10px;background:#fff8e8f2;font-size:13px;line-height:1.5}
+.factory-progress-explainer{margin:14px 0 8px;color:#31543d;font-size:14px;line-height:1.6;text-align:center}
+.factory-progress-formula{margin:0 0 12px;padding:10px;border:1px solid #b9ba8b;border-radius:12px;background:#fff8de;color:#31543d;font-size:13px;font-weight:900;line-height:1.6;text-align:center;text-wrap:balance}
+.factory-progress-details button>span{display:grid;gap:4px}
+.factory-progress-details button small{font-size:12px;color:#49644b;line-height:1.4}
+@media(max-width:360px){
+  #equipmentDialog .equipment-room-level{padding:5px 4px!important}
+  #equipmentDialog .equipment-room-level>span{font-size:9px!important}
+  #equipmentDialog .equipment-growth-guide b{font-size:13px}
+  #equipmentDialog .nutrient-copy strong{font-size:12px;padding:7px}
+  #shopDialog .shop-product{grid-template-columns:75px minmax(0,1fr)}
+}
+@media(max-height:700px){
+  #zukanDialog .station-glass-zukan>.zukan-hero{height:auto!important;min-height:120px!important;flex-basis:120px!important}
+  #zukanDialog .zukan-hero-copy p{font-size:12px!important}
+}

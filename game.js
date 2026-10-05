@@ -446,7 +446,7 @@ const EQUIPMENT = [
   { key: "light", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="15" r="6"/><path d="M16 3v4M16 23v4M4 15h4M24 15h4M7.5 6.5l3 3M21.5 20.5l3 3M24.5 6.5l-3 3M10.5 20.5l-3 3"/></svg>', name: "そだてるライト", copy: "ランプが 1とう → 3とう → 5とう" },
   { key: "mist", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4C12 10 9 13.4 9 18a7 7 0 0 0 14 0c0-4.6-3-8-7-14z"/><path d="M5 27h7M15 27h5M23 27h4"/></svg>', name: "ミスト", copy: "ノズルが 1こ → 2こ → 3こ" },
   { key: "air", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="3"/><circle cx="16" cy="16" r="12"/><path d="M16 13c-1-6 1-9 4-8.2 3.1.8 2.6 5.3-1.5 9M18.6 17.5c5.7 2 7.3 5.3 5.1 7.4-2.2 2.2-5.9-.5-7.2-5M13.4 17.5c-4.7 3.9-8.4 3.3-9.2.3-.8-3 3.4-4.8 8.1-2.3"/></svg>', name: "かぜおくり", copy: "こがた → おおがた → ターボ" },
-  { key: "sensor", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="5" width="16" height="22" rx="4"/><circle cx="16" cy="19" r="3"/><path d="M12 11h8M12 14h5M5 10c-2 3.5-2 8.5 0 12M27 10c2 3.5 2 8.5 0 12"/></svg>', name: "みまもり", copy: "おんどけい → パネル → かんせい盤" },
+  { key: "sensor", icon: '<svg viewBox="0 0 32 32" aria-hidden="true"><rect x="8" y="5" width="16" height="22" rx="4"/><circle cx="16" cy="19" r="3"/><path d="M12 11h8M12 14h5M5 10c-2 3.5-2 8.5 0 12M27 10c2 3.5 2 8.5 0 12"/></svg>', name: "みまもり", copy: "おんどけい → パネル → かんせいパネル" },
 ];
 const FACILITY_BACKGROUNDS = {
   base: "assets/original-sand-factory-v2.png",
@@ -500,6 +500,7 @@ function renderFactoryProgress() {
   else if (found < CACTUS_TYPES.length) nextGoal = "あと " + (CACTUS_TYPES.length - found) + "しゅるいで ずかんかんせい";
   else nextGoal = "あと " + (12 - equipment) + "レベルで せつびかんせい";
 
+  document.querySelector("#factoryProgressFormula").textContent = "サボテン " + CACTUS_TYPES.length + "しゅるい ＋ せつび 12レベル ＝ " + maximum;
   document.querySelector("#factoryProgressCount").textContent = total + " / " + maximum;
   document.querySelector("#factoryProgressFill").style.width = percent + "%";
   factoryProgressButton.classList.toggle("is-complete", total >= maximum);
@@ -592,8 +593,8 @@ function renderSpecialNutrient() {
   specialNutrient.hidden = !inUse;
   specialNutrient.dataset.phase = state.specialSeedQueued ? "queued" : "growing";
   specialNutrient.setAttribute("aria-label", state.specialSeedQueued
-    ? "レア栄養剤 待機中。つぎに収穫した場所へ使います"
-    : "レア栄養剤 使用中。すべてのサボテンが生えたら終了します");
+    ? "レアえいようざい。つぎに サボテンを とった ばしょに つかうよ"
+    : "レアえいようざいを つかっているよ。ぜんぶ そだったら おしまい");
 }
 function growthSeconds() {
   const EMPTY_FACTORY_GROWTH_SECONDS = 3 * 60 * 60;
@@ -707,7 +708,7 @@ function renderDedicatedPot() {
   if (pot) image.src = pot.ready ? cactusType(pot.cactusId).sprite : "assets/simple-bold-sprout.png";
   document.querySelector("#dedicatedStatus").textContent = dedicatedPotStatus();
   dedicatedPot.classList.toggle("is-ready", Boolean(pot && pot.ready));
-  dedicatedPot.setAttribute("aria-label", "専用の鉢。" + dedicatedPotStatus());
+  dedicatedPot.setAttribute("aria-label", "とくべつな はち。" + dedicatedPotStatus());
 }
 function harvestDedicatedPot() {
   refreshNaturalGrowth();
@@ -823,7 +824,7 @@ function render() {
   });
   coinCount.textContent = state.coins;
   equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
-  equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
+  equipmentCoinMeter.setAttribute("aria-label", "もっているコイン " + state.coins.toLocaleString("ja-JP"));
   equipmentLevelText.textContent = equipmentTotal() + " / 12";
   renderFactoryProgress();
   renderSpecialNutrient();
@@ -1307,13 +1308,13 @@ function renderEquipment() {
     return Math.floor(minutes / 60) + "じかん" + (minutes % 60 ? (minutes % 60) + "ぷん" : "");
   };
   document.querySelector(".equipment-growth-guide b").textContent = total < 12
-    ? "そだつ時間　1レベルで 10ぷん短縮"
+    ? "1レベルあがると 10ぷん はやくそだつ"
     : "せつび かんせい！";
   document.querySelector("#equipmentGrowthGuide").textContent = total < 12
     ? formatGrowthTime(growthMinutes) + " → " + formatGrowthTime(growthMinutes - 10)
     : "ぜんぶ かいぞう！ そだつまで 1じかん";
   equipmentCoinCount.textContent = state.coins.toLocaleString("ja-JP");
-  equipmentCoinMeter.setAttribute("aria-label", "しょじコイン " + state.coins.toLocaleString("ja-JP"));
+  equipmentCoinMeter.setAttribute("aria-label", "もっているコイン " + state.coins.toLocaleString("ja-JP"));
 
   EQUIPMENT.forEach(function (item) {
     const level = state.equipment[item.key];
@@ -1338,10 +1339,10 @@ function renderEquipment() {
     nutrientButton.type = "button";
     nutrientButton.className = "nutrient-purchase";
     nutrientButton.disabled = nutrientUnavailable;
-    nutrientButton.setAttribute("aria-label", nutrientInUse ? "レア栄養剤 しようちゅう" : "レア栄養剤を 300コインで こうにゅう");
+    nutrientButton.setAttribute("aria-label", nutrientInUse ? "レアえいようざい しようちゅう" : "レアえいようざいを 300コインで かう");
     nutrientButton.innerHTML = '<img src="assets/rare-nutrient-crate-bold.png" alt="" /><span class="nutrient-copy"><b>レアえいようざい</b><small>レアな サボテンが そだつよ</small><strong>' + (nutrientInUse ? "しようちゅう" : document.querySelector(".topbar .coin").outerHTML + " 300コインで こうにゅう") + '</strong></span>';
     detail.append(nutrientButton);
-    document.querySelector("#equipmentFeedback").textContent = nutrientInUse ? "レア栄養剤を しようちゅう" : "";
+    document.querySelector("#equipmentFeedback").textContent = nutrientInUse ? "レアえいようざいを しようちゅう" : "";
     return;
   }
 
@@ -1442,7 +1443,7 @@ function showZukanHero(type, count, entry) {
   document.querySelector("#zukanHeroNumber").textContent = "No." + String(CACTUS_TYPES.indexOf(type) + 1).padStart(2, "0");
   document.querySelector("#zukanHeroRarity").textContent = type.rarity;
   document.querySelector("#zukanHeroName").textContent = count ? type.name : "？？？";
-  document.querySelector("#zukanHeroDescription").textContent = count ? type.description : "まだ はっけんされていない サボテンです。";
+  document.querySelector("#zukanHeroDescription").textContent = count ? type.description : "まだ みつけていないよ。どんな なかまかな？";
   document.querySelector("#zukanHeroCount").textContent = count + "たい しゅうかく";
   document.querySelectorAll(".zukan-entry").forEach(function (item) {
     const selected = item === entry;
@@ -1557,7 +1558,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "320" });
+      event.ports[0].postMessage({ version: "321" });
     }
   });
   window.addEventListener("load", function () {
