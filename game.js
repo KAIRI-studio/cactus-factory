@@ -1419,6 +1419,11 @@ document.querySelector("#fillTestButton").addEventListener("click", function () 
     pot.ready = true;
     pot.startedAt = Date.now() - growthSeconds() * 1000;
   });
+  if (state.shopPlant) {
+    state.shopPlant.stage = 2;
+    state.shopPlant.ready = true;
+    state.shopPlant.startedAt = Date.now() - growthSeconds() * 1000;
+  }
   potSignatures.fill("");
   save();
   render();

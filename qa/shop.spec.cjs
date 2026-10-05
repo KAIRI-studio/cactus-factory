@@ -50,6 +50,6 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),sw=fs.readFileSy
 for(const id of ['shopDialog','shopOpen','shopClose','shopCoins','shopProducts','shopPotStatus','shopHint','shopBuy','shopFeedback','dedicatedPot','dedicatedPlant','dedicatedStatus'])assert.ok(html.includes('id="'+id+'"'));
 assert.ok(!html.includes('id="shopPot"'));
 assert.ok(html.indexOf('id="dedicatedPot"')>html.indexOf('id="nursery"'));
-for(const file of ['game.js?v=303','styles.css?v=303']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
+for(const file of ['game.js?v=304','styles.css?v=304']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
 assert.equal(run('STORAGE'),'cactus-line-v4');
 console.log('PASS: dedicated pot lifecycle, purchase guards, fertilizer, offline/reload, collection/reward, exact odds, old saves and normal pots preserved');

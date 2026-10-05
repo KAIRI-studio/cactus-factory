@@ -5394,3 +5394,6 @@ body:not(.debug-mode) .test-tools{display:none!important}
 .dedicated-pot.is-ready{border-color:#987126;background:#fff0b5;box-shadow:0 4px 0 #735a2c,0 0 14px #f3d16470}
 #shopDialog #shopPotStatus{margin:0;padding:8px;border:1px solid #a1b39b;border-radius:9px;background:#fffdf3;color:#31513b;font-size:12px}
 @media(max-height:600px){.dedicated-pot{top:58%;height:72px;right:4%}.dedicated-pot>small{font-size:8px}}
+
+/* v304: temporarily visible test controls, just below the shop entrance. */
+#equipmentDialog .equipment-scroll-area>.temporary-test-tools{display:grid!important;margin:8px 9px 14px!important;padding:10px!important;border:2px dashed #829a75;border-radius:12px;background:#fff8df}
