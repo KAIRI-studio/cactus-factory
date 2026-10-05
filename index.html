@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=319" />
+  <link rel="stylesheet" href="styles.css?v=320" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=319" defer></script>
+  <script src="game.js?v=320" defer></script>
   <link rel="stylesheet" href="install.css?v=300" />
   <script src="install.js?v=300" defer></script>
 </head>
@@ -245,7 +245,7 @@
         <div class="equipment-room-shell">
           <div class="equipment-room-level"><span>ぜんたいレベル</span><b id="equipmentTotalText">0 / 12</b><div class="equipment-meter"><i id="equipmentMeterFill"></i></div></div>
           <div class="sound-setting"><span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 13h6l7-6v18l-7-6H6z"/><path d="M23 12c2 2 2 6 0 8M26 9c4 4 4 10 0 14"/></svg></span><b>おと</b><button id="soundToggle" type="button" aria-pressed="true">ON</button></div>
-          <div class="coin-chip equipment-coin-chip" id="equipmentCoinMeter" aria-label="しょじコイン 120"><span class="coin" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 27V10c0-3 1.7-5 4-5s4 2 4 5v6h2v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v5c0 3-2 5-5 5h-3v4H12zM12 20H9c-3 0-5-2-5-5v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v3h2"/></svg></span><span><small>コイン</small><b id="equipmentCoinCount">120</b></span></div>
+          <div class="coin-chip equipment-coin-chip" id="equipmentCoinMeter" aria-label="もっているコイン 120"><span class="coin" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 27V10c0-3 1.7-5 4-5s4 2 4 5v6h2v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v5c0 3-2 5-5 5h-3v4H12zM12 20H9c-3 0-5-2-5-5v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v3h2"/></svg></span><span><small>コイン</small><b id="equipmentCoinCount">120</b></span></div>
           <div class="equipment-growth-guide" aria-live="polite"><b>そだつ時間　1レベルで 10ぷん短縮</b><span id="equipmentGrowthGuide">3じかん → 2じかん50ぷん</span></div>
           <div class="equipment-grid" id="equipmentGrid"></div>
           <div class="equipment-detail" id="equipmentDetail"></div>
@@ -262,16 +262,16 @@
     <dialog id="shopDialog"><section class="dialog-card shop-card">
       <button class="close" id="shopClose" type="button" aria-label="閉じる">×</button>
       <header class="shop-heading"><h2><img src="assets/shop-heading-v314.webp" alt="タネのおみせ" /></h2></header>
-      <div class="shop-wallet coin-chip"><span class="coin" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 27V10c0-3 1.7-5 4-5s4 2 4 5v6h2v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v5c0 3-2 5-5 5h-3v4H12zM12 20H9c-3 0-5-2-5-5v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v3h2"/></svg></span><span><small>しょじコイン</small><b id="shopCoins">0</b></span></div>
+      <div class="shop-wallet coin-chip"><span class="coin" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M12 27V10c0-3 1.7-5 4-5s4 2 4 5v6h2v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v5c0 3-2 5-5 5h-3v4H12zM12 20H9c-3 0-5-2-5-5v-3c0-2 1.3-3.5 3-3.5s3 1.5 3 3.5v3h2"/></svg></span><span><small>もっているコイン</small><b id="shopCoins">0</b></span></div>
       <div class="shop-scroll">
-        <p class="shop-intro">とくべつなタネは 専用の鉢で そだつよ。<br />いつもの24鉢とは 別の おたのしみ！</p>
+        <p class="shop-intro">とくべつな はちで そだてよう！<br />いつもの サボテンとは べつの おたのしみ！</p>
         <div class="shop-products" id="shopProducts"></div>
         <div class="shop-use">
           <p id="shopHint"></p>
           <button id="shopBuy" type="button" disabled>そだてる</button>
         </div>
         <p class="shop-feedback" id="shopFeedback" role="status"></p>
-        <details class="shop-odds"><summary>タネの かくりつ</summary><p>銀：R 80% / SR 19.9% / L 0.1%<br />金：SR 99.9% / L 0.1%<br />同じレア度の中では、どのサボテンも同じ確率。<br />専用の鉢は1つ。収穫すると、次のタネを植えられるよ。<br />育成時間は通常の鉢と同じ。設備の短縮も有効です。</p></details>
+        <details class="shop-odds"><summary>どんな サボテンが でる？</summary><p>ぎんのタネ<br />レア 80%・スーパーレア 19.9%・レジェンド 0.1%<br /><br />きんのタネ<br />スーパーレア 99.9%・レジェンド 0.1%<br /><br />おなじ レアさの なかでは、みんな おなじ でやすさだよ。<br />とくべつな はちは 1つ。サボテンを とったら、つぎの タネを うえよう！<br />そだつ じかんは いつもの サボテンと おなじ。せつびを よくすると、はやく そだつよ。</p></details>
       </div>
     </section></dialog>
     <dialog id="resetDialog"><section class="dialog-card reset-card">
@@ -313,6 +313,6 @@
       <button id="installClose" type="button">とじる</button>
     </section>
   </dialog>
-  <!-- release-v319 -->
+  <!-- release-v320 -->
 </body>
 </html>

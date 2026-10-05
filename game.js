@@ -610,8 +610,8 @@ function rollSpecialSeed() {
 
 // Consumables reuse the existing save and never reset collections or growing pots.
 const SHOP_PRODUCTS = [
-  { id: "silver", name: "銀のタネ", sprite: "assets/shop-silver-seed-v307.webp", cost: 15000, description: "レア以上 かくてい！専用の鉢で そだてよう。" },
-  { id: "gold", name: "金のタネ", sprite: "assets/shop-gold-seed-v307.webp", cost: 50000, description: "スーパーレア以上 かくてい！特別な1体を そだてよう。" }
+  { id: "silver", name: "ぎんのタネ", sprite: "assets/shop-silver-seed-v307.webp", cost: 15000, description: "レアか、もっと めずらしい サボテンが そだつよ！" },
+  { id: "gold", name: "きんのタネ", sprite: "assets/shop-gold-seed-v307.webp", cost: 50000, description: "スーパーレアか レジェンドが そだつよ！" }
 ];
 let selectedShopProduct = null;
 let lastShopSignature = "";
@@ -643,9 +643,9 @@ function renderShop() {
   buy.disabled = !product || !shopProductAvailable(product) || state.coins < product.cost;
   buy.textContent = "そだてる";
   document.querySelector("#shopHint").textContent = !product ? "タネを えらんでね。"
-    : !shopProductAvailable(product) ? (state.shopPlant ? "専用の鉢の サボテンを収穫したら、次のタネを そだてられるよ。" : "まず専用の鉢に タネを うえよう。")
+    : !shopProductAvailable(product) ? "とくべつな はちの サボテンを とったら、つぎの タネを うえられるよ。"
     : state.coins < product.cost ? "あと " + (product.cost - state.coins).toLocaleString("ja-JP") + "コインで かえるよ！"
-    : "栽培エリアの下の 専用の鉢で育つよ。正体は 収穫までのお楽しみ！";
+    : "したにある とくべつな はちで そだつよ。なにが でるかは おたのしみ！";
 }
 function buyShopProduct() {
   refreshNaturalGrowth();
@@ -1557,7 +1557,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "319" });
+      event.ports[0].postMessage({ version: "320" });
     }
   });
   window.addEventListener("load", function () {
