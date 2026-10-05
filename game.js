@@ -420,6 +420,7 @@ function showTitleScreen() {
 
 function enterFactory() {
   if (startGameButton.disabled) return;
+  window.castorAnalytics?.event("game_start");
   startGameButton.disabled = true;
   screenShutter.classList.add("is-closing");
   window.setTimeout(function () {
