@@ -1413,43 +1413,9 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
 });
 
-// Keep test controls available even when an older HTML document is restored.
-let coinsTestButton = document.querySelector("#coinsTestButton");
-if (!coinsTestButton) {
-  coinsTestButton = document.createElement("button");
-  coinsTestButton.id = "coinsTestButton";
-  coinsTestButton.type = "button";
-  coinsTestButton.textContent = "コイン＋10万";
-  document.querySelector("#temporaryTestControls>div").append(coinsTestButton);
-}
-coinsTestButton.style.setProperty("display", "block", "important");
-coinsTestButton.style.setProperty("grid-column", "1 / -1", "important");
-document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v317";
-coinsTestButton.addEventListener("click", function () {
-  state.coins += 100000;
-  save();
-  render();
-});
-
-document.querySelector("#fillTestButton").addEventListener("click", function () {
-  state.pots.forEach(function (pot) {
-    pot.stage = 2;
-    pot.ready = true;
-    pot.startedAt = Date.now() - growthSeconds() * 1000;
-  });
-  if (state.shopPlant) {
-    state.shopPlant.stage = 2;
-    state.shopPlant.ready = true;
-    state.shopPlant.startedAt = Date.now() - growthSeconds() * 1000;
-  }
-  potSignatures.fill("");
-  save();
-  render();
-  equipmentDialog.close();
-});
+document.querySelector("#temporaryTestControls")?.remove();
 
 const resetDialog = document.querySelector("#resetDialog");
-document.querySelector("#resetTestButton").addEventListener("click", function () { equipmentDialog.close(); resetDialog.showModal(); });
 document.querySelector("#resetSaveButton").addEventListener("click", function () { equipmentDialog.close(); resetDialog.showModal(); });
 document.querySelector("#resetCancelButton").addEventListener("click", function () { resetDialog.close(); });
 document.querySelector("#resetConfirmButton").addEventListener("click", function () {
@@ -1591,7 +1557,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "317" });
+      event.ports[0].postMessage({ version: "318" });
     }
   });
   window.addEventListener("load", function () {

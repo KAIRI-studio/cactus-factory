@@ -5500,3 +5500,8 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #shopDialog .shop-heading img{height:126px}
 @media(max-width:360px){#shopDialog .shop-heading{padding:0 10px}#shopDialog .shop-heading img{height:118px}}
 @media(prefers-reduced-motion:reduce){.dedicated-pot:not([hidden]) .dedicated-pot-art{animation:none}}
+
+/* v318: final plant placement and removal of temporary test controls. */
+.dedicated-pot.is-ready .dedicated-pot-art>#dedicatedPlant{bottom:68%}
+.dedicated-pot.is-sprout .dedicated-pot-art>#dedicatedPlant{bottom:73%}
+#temporaryTestControls{display:none!important}
