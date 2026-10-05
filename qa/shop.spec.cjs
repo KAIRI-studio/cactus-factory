@@ -52,7 +52,7 @@ const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),sw=fs.readFileSy
 for(const id of ['shopDialog','shopOpen','shopClose','shopCoins','shopProducts','shopHint','shopBuy','shopFeedback','dedicatedPot','dedicatedPlant','dedicatedStatus'])assert.ok(html.includes('id="'+id+'"'));
 assert.ok(!html.includes('id="shopPot"'));
 assert.ok(html.indexOf('id="dedicatedPot"')>html.indexOf('id="nursery"'));
-for(const file of ['game.js?v=318','styles.css?v=318']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
+for(const file of ['game.js?v=319','styles.css?v=319']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
 assert.equal(run('SHOP_PRODUCTS.length'),2);
 assert.ok(source.includes('nutrientButton.innerHTML = \'<img src="assets/rare-nutrient-crate-bold.png"'));
 assert.equal(run('STORAGE'),'cactus-line-v4');

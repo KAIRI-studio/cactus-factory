@@ -1392,7 +1392,7 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
     state.coins -= 300;
     playSound("upgrade");
     render();
-    renderEquipment();
+    equipmentDialog.close();
     return;
   }
   const button = event.target.closest(".equipment-upgrade");
@@ -1557,7 +1557,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "318" });
+      event.ports[0].postMessage({ version: "319" });
     }
   });
   window.addEventListener("load", function () {

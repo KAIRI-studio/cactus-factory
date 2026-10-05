@@ -15,9 +15,9 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=318" />
+  <link rel="stylesheet" href="styles.css?v=319" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=318" defer></script>
+  <script src="game.js?v=319" defer></script>
   <link rel="stylesheet" href="install.css?v=300" />
   <script src="install.js?v=300" defer></script>
 </head>
@@ -241,7 +241,7 @@
       <button class="close" id="equipmentClose" aria-label="閉じる">×</button>
       <header class="equipment-illustrated-heading"><img src="assets/equipment-heading-v3.webp" alt="せつびを そだてよう" /></header>
       <div class="equipment-scroll-area">
-        <button class="shop-open" id="shopOpen" type="button">🌱 ショップ <span>タネを かう ›</span></button>
+        <button class="shop-open" id="shopOpen" type="button"><span class="shop-open-seeds" aria-hidden="true"><img src="assets/shop-silver-seed-v307.webp" alt="" /><img src="assets/shop-gold-seed-v307.webp" alt="" /></span><span class="shop-open-copy"><b>タネのおみせ</b><small>とくべつな タネを かう</small></span><span class="shop-open-arrow" aria-hidden="true">›</span></button>
         <div class="equipment-room-shell">
           <div class="equipment-room-level"><span>ぜんたいレベル</span><b id="equipmentTotalText">0 / 12</b><div class="equipment-meter"><i id="equipmentMeterFill"></i></div></div>
           <div class="sound-setting"><span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 13h6l7-6v18l-7-6H6z"/><path d="M23 12c2 2 2 6 0 8M26 9c4 4 4 10 0 14"/></svg></span><b>おと</b><button id="soundToggle" type="button" aria-pressed="true">ON</button></div>
@@ -313,6 +313,6 @@
       <button id="installClose" type="button">とじる</button>
     </section>
   </dialog>
-  <!-- release-v318 -->
+  <!-- release-v319 -->
 </body>
 </html>
