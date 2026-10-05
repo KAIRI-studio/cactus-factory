@@ -616,7 +616,7 @@ const SHOP_PRODUCTS = [
 let selectedShopProduct = null;
 let lastShopSignature = "";
 const shopDialog = document.querySelector("#shopDialog");
-const shopPotStatus = document.querySelector("#shopPotStatus");
+let shopReturnsToEquipment = false;
 const dedicatedPot = document.querySelector("#dedicatedPot");
 
 function rollShopSeed(id) {
@@ -639,10 +639,9 @@ function renderShop() {
   document.querySelectorAll("[data-shop-product]").forEach(function (button) {
     button.setAttribute("aria-pressed", String(button.dataset.shopProduct === selectedShopProduct));
   });
-  shopPotStatus.textContent = dedicatedPotStatus();
   const buy = document.querySelector("#shopBuy");
   buy.disabled = !product || !shopProductAvailable(product) || state.coins < product.cost;
-  buy.textContent = product ? product.cost.toLocaleString("ja-JP") + "コインで " + "そだてる" : "商品を えらんでね";
+  buy.textContent = "そだてる";
   document.querySelector("#shopHint").textContent = !product ? "タネを えらんでね。"
     : !shopProductAvailable(product) ? (state.shopPlant ? "専用の鉢の サボテンを収穫したら、次のタネを そだてられるよ。" : "まず専用の鉢に タネを うえよう。")
     : state.coins < product.cost ? "あと " + (product.cost - state.coins).toLocaleString("ja-JP") + "コインで かえるよ！"
@@ -653,12 +652,14 @@ function buyShopProduct() {
   const product = SHOP_PRODUCTS.find(function (item) { return item.id === selectedShopProduct; });
   if (!product || !shopProductAvailable(product) || state.coins < product.cost) { renderShop(); return; }
   state.coins -= product.cost;
-  state.shopPlant = { cactusId: rollShopSeed(product.id), shopSeed: product.id, startedAt: Date.now(), stage: -1, ready: false };
+  state.shopPlant = { cactusId: rollShopSeed(product.id), shopSeed: product.id, startedAt: Date.now(), stage: 0, ready: false };
   save();
-  playSound("upgrade");
+  shopReturnsToEquipment = false;
+  shopDialog.close();
+  equipmentDialog.close();
   render();
-  document.querySelector("#shopFeedback").textContent = "専用の鉢に " + product.name + "を つかったよ！";
-  renderShop();
+  dedicatedPot.focus();
+  playSound("tap");
 }
 SHOP_PRODUCTS.forEach(function (product) {
   const button = document.createElement("button");
@@ -674,14 +675,19 @@ SHOP_PRODUCTS.forEach(function (product) {
   });
   document.querySelector("#shopProducts").append(button);
 });
-document.querySelector("#shopOpen").addEventListener("click", function () {
+function openSeedShop(returnToEquipment) {
+  shopReturnsToEquipment = returnToEquipment;
   equipmentDialog.close();
+  selectedShopProduct = null;
   document.querySelector("#shopFeedback").textContent = "";
   renderShop();
   shopDialog.showModal();
-});
+}
+document.querySelector("#shopOpen").addEventListener("click", function () { openSeedShop(true); });
 document.querySelector("#shopClose").addEventListener("click", function () { shopDialog.close(); });
-shopDialog.addEventListener("close", function () { renderEquipment(); equipmentDialog.showModal(); });
+shopDialog.addEventListener("close", function () {
+  if (shopReturnsToEquipment) { renderEquipment(); equipmentDialog.showModal(); }
+});
 shopDialog.addEventListener("click", function (event) { if (event.target === shopDialog) shopDialog.close(); });
 document.querySelector("#shopBuy").addEventListener("click", buyShopProduct);
 
@@ -695,7 +701,7 @@ function dedicatedPotStatus() {
 function renderDedicatedPot() {
   const pot = state.shopPlant;
   const image = document.querySelector("#dedicatedPlant");
-  image.hidden = !pot || pot.stage === -1;
+  image.hidden = !pot;
   if (pot) image.src = pot.ready ? cactusType(pot.cactusId).sprite : "assets/simple-bold-sprout.png";
   document.querySelector("#dedicatedStatus").textContent = dedicatedPotStatus();
   dedicatedPot.classList.toggle("is-ready", Boolean(pot && pot.ready));
@@ -720,7 +726,7 @@ function harvestDedicatedPot() {
 dedicatedPot.addEventListener("click", function () {
   refreshNaturalGrowth();
   if (state.shopPlant && state.shopPlant.ready) harvestDedicatedPot();
-  else document.querySelector("#shopOpen").click();
+  else openSeedShop(false);
 });
 
 function seededUnit(index, salt) {
@@ -759,7 +765,7 @@ function refreshNaturalGrowth() {
   const special = state.shopPlant;
   if (special && !special.ready) {
     const elapsed = Date.now() - special.startedAt;
-    special.stage = elapsed < SOIL_SECONDS * 1000 ? -1 : 0;
+    special.stage = 0;
     if (elapsed >= duration) { special.stage = 2; special.ready = true; }
   }
 }
@@ -1565,7 +1571,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "310" });
+      event.ports[0].postMessage({ version: "311" });
     }
   });
   window.addEventListener("load", function () {

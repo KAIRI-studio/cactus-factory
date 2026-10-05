@@ -4,7 +4,7 @@ const root=path.join(__dirname,'..'),source=fs.readFileSync(path.join(root,'game
 const fixture={coins:250000,harvested:140,equipment:{light:3,mist:3,air:3,sensor:3},collections:{normal:90,king:2,punk:7,retired:5},layoutSeed:42,tutorialStep:'done',soundEnabled:false,specialSeedQueued:true,nutrientTrackingVersion:1,nutrientActivePot:null,pots:Array.from({length:24},(_,i)=>({cactusId:i===1?'king':'normal',ready:i>1,stage:i>1?2:0,startedAt:Date.now()-1200000,generation:8}))};
 fixture.pots[0].shopSeed='mystery'; // Preserve v302 purchases in their original pots.
 let stored=JSON.stringify(fixture); const elements={};
-const context=vm.createContext({console,Math:Object.create(Math),Date,localStorage:{getItem:()=>stored,setItem:(_,v)=>stored=v},document:{querySelector:s=>elements[s]||(elements[s]={open:false,textContent:''})},equipmentTotal:()=>12,playSound:()=>{},renderShop:()=>{},discoveryQueue:[],playNextDiscovery:()=>{},showRarityReveal:()=>{}});
+const context=vm.createContext({console,Math:Object.create(Math),Date,localStorage:{getItem:()=>stored,setItem:(_,v)=>stored=v},document:{querySelector:s=>elements[s]||(elements[s]={open:false,textContent:'',close:()=>elements.shopClosed=true})},shopDialog:{close:()=>elements.shopClosed=true},equipmentDialog:{close:()=>{}},equipmentTotal:()=>12,playSound:()=>{},renderShop:()=>{},discoveryQueue:[],playNextDiscovery:()=>{},showRarityReveal:()=>{}});
 function section(a,b){vm.runInContext(source.slice(source.indexOf(a),source.indexOf(b)),context)}
 vm.runInContext(source.slice(0,source.indexOf('const nursery =')),context);
 section('function growthSeconds()','function rollSpecialSeed()');
@@ -12,7 +12,7 @@ section('function refreshNaturalGrowth()','function makePot(');
 section('const SHOP_PRODUCTS','function shopSignature()');
 section('function buyShopProduct()','SHOP_PRODUCTS.forEach');
 section('function harvestDedicatedPot()','dedicatedPot.addEventListener');
-vm.runInContext('function render(){refreshNaturalGrowth();save()}',context);
+vm.runInContext('dedicatedPot.focus=()=>{};function render(){refreshNaturalGrowth();save()}',context);
 const run=c=>vm.runInContext(c,context),data=c=>JSON.parse(run('JSON.stringify('+c+')'));
 assert.deepEqual(data('state.collections'),fixture.collections);
 assert.deepEqual(data('state.pots'),fixture.pots);
@@ -21,6 +21,8 @@ run('selectedShopProduct="fertilizer";buyShopProduct()');
 assert.equal(run('state.coins'),250000,'removed product cannot be purchased');
 run('selectedShopProduct="gold";buyShopProduct()');
 assert.equal(run('state.coins'),200000);
+assert.equal(elements.shopClosed,true,'purchase returns to cultivation');
+assert.equal(run('state.shopPlant.stage'),0,'sprout appears immediately');
 assert.equal(run('state.shopPlant.shopSeed'),'gold');
 assert.notEqual(run('state.shopPlant.cactusId'),'normal');
 assert.deepEqual(data('state.pots'),fixture.pots,'planting never touches normal pots');
@@ -47,10 +49,10 @@ const odds=run(`(()=>{const random=Math.random,result={};try{for(const kind of [
 assert.deepEqual(JSON.parse(odds),{gold:{normal:0,rare:0,super:99900,legend:100},silver:{normal:0,rare:80000,super:19900,legend:100}});
 assert.ok(source.includes('delete pot.shopSeed;'),'legacy purchase cleared on normal harvest');
 const html=fs.readFileSync(path.join(root,'index.html'),'utf8'),sw=fs.readFileSync(path.join(root,'sw.js'),'utf8');
-for(const id of ['shopDialog','shopOpen','shopClose','shopCoins','shopProducts','shopPotStatus','shopHint','shopBuy','shopFeedback','dedicatedPot','dedicatedPlant','dedicatedStatus'])assert.ok(html.includes('id="'+id+'"'));
+for(const id of ['shopDialog','shopOpen','shopClose','shopCoins','shopProducts','shopHint','shopBuy','shopFeedback','dedicatedPot','dedicatedPlant','dedicatedStatus'])assert.ok(html.includes('id="'+id+'"'));
 assert.ok(!html.includes('id="shopPot"'));
 assert.ok(html.indexOf('id="dedicatedPot"')>html.indexOf('id="nursery"'));
-for(const file of ['game.js?v=310','styles.css?v=310']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
+for(const file of ['game.js?v=311','styles.css?v=311']){assert.ok(html.includes(file));assert.ok(sw.includes(file))}
 assert.equal(run('SHOP_PRODUCTS.length'),2);
 assert.ok(source.includes('nutrientButton.innerHTML = \'<img src="assets/rare-nutrient-crate-bold.png"'));
 assert.equal(run('STORAGE'),'cactus-line-v4');

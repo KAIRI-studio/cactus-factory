@@ -5450,3 +5450,13 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #equipmentDialog .equipment-coin-chip>span:last-child{padding-left:3px;padding-right:3px}
 #equipmentDialog .equipment-coin-chip b{font-size:13px;letter-spacing:0;text-overflow:clip}
 @media(max-width:360px){#equipmentDialog .equipment-room-shell{grid-template-columns:minmax(0,1fr) 72px 110px!important}#equipmentDialog .equipment-coin-chip b{font-size:12px}}
+/* v311: seed selection and one clear action, followed by field cultivation. */
+#shopDialog .shop-heading{margin:0 35px 10px 0;padding:0}
+#shopDialog .shop-heading h2{margin:0}
+#shopDialog .shop-heading img{display:block;width:100%;height:100px;object-fit:contain}
+#shopDialog .shop-use{padding:0;border:0;background:transparent;gap:8px;margin-top:12px}
+#shopDialog #shopHint{margin:0;font-size:11px;line-height:1.5}
+#shopDialog #shopBuy{width:100%;font-size:18px;min-height:48px}
+#shopDialog .shop-wallet{margin-bottom:8px}
+#shopDialog .shop-intro{font-size:10px;margin-bottom:8px}
+#shopDialog .shop-product{min-height:116px}

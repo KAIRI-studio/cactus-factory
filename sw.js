@@ -1,6 +1,7 @@
-const APP_VERSION = "310";
-const CACHE_NAME = "cactus-factory-2026-10-05-310";
+const APP_VERSION = "311";
+const CACHE_NAME = "cactus-factory-2026-10-05-311";
 const APP_FILES = [
+  "./assets/shop-heading-v311.webp",
   "./",
   "./assets/shop-pot-crate-v307.webp",
   "./assets/shop-silver-seed-v307.webp",
@@ -15,7 +16,7 @@ const APP_FILES = [
   "./assets/audio/wrong.mp3",
   "./assets/audio/reward.mp3",
 
-  "./styles.css?v=310",
+  "./styles.css?v=311",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
@@ -51,7 +52,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=310",
+  "./game.js?v=311",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
