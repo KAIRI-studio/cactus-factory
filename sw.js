@@ -1,4 +1,5 @@
-const CACHE_NAME = "cactus-factory-2026-10-05-305";
+const APP_VERSION = "306";
+const CACHE_NAME = "cactus-factory-2026-10-05-306";
 const APP_FILES = [
   "./",
   "./index.html",
@@ -11,7 +12,7 @@ const APP_FILES = [
   "./assets/audio/wrong.mp3",
   "./assets/audio/reward.mp3",
 
-  "./styles.css?v=305",
+  "./styles.css?v=306",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
@@ -47,7 +48,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=305",
+  "./game.js?v=306",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -115,6 +116,31 @@ self.addEventListener("install", function (event) {
   }).then(function () { return self.skipWaiting(); }));
 });
 
+function refreshOldPages() {
+  return self.clients.matchAll({ type: "window", includeUncontrolled: true }).then(function (clients) {
+    return Promise.all(clients.filter(function (client) {
+      return client.url.startsWith(self.registration.scope);
+    }).map(function (client) {
+      // Current pages save and acknowledge their version. Legacy pages already
+      // save after every action and on each render; reload only their document.
+      return new Promise(function (resolve) {
+        const channel = new MessageChannel();
+        const timer = setTimeout(function () { finish(null); }, 1000);
+        let done = false;
+        function finish(version) {
+          if (done) return;
+          done = true;
+          clearTimeout(timer);
+          channel.port1.close();
+          if (version === APP_VERSION) resolve();
+          else client.navigate(client.url).catch(function () {}).then(resolve);
+        }
+        channel.port1.onmessage = function (event) { finish(event.data && event.data.version); };
+        client.postMessage({ type: "CACTUS_PAGE_VERSION" }, [channel.port2]);
+      });
+    }));
+  });
+}
 self.addEventListener("activate", function (event) {
   event.waitUntil(caches.keys().then(function (keys) {
     return Promise.all(keys.filter(function (key) {
@@ -122,7 +148,7 @@ self.addEventListener("activate", function (event) {
     }).map(function (key) {
       return caches.delete(key);
     }));
-  }).then(function () { return self.clients.claim(); }));
+  }).then(function () { return self.clients.claim(); }).then(refreshOldPages));
 });
 
 self.addEventListener("fetch", function (event) {

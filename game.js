@@ -1566,9 +1566,24 @@ render();
 setInterval(function () { if (!harvestAnimationCount) render(); }, 1000);
 
 if ("serviceWorker" in navigator) {
+  let appRegistration = null;
+  function checkAppUpdate() {
+    if (appRegistration) appRegistration.update().catch(function () {});
+  }
+  navigator.serviceWorker.addEventListener("message", function (event) {
+    if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
+      save();
+      event.ports[0].postMessage({ version: "306" });
+    }
+  });
   window.addEventListener("load", function () {
-    navigator.serviceWorker.register("./sw.js").then(function (registration) {
-      registration.update();
+    navigator.serviceWorker.register("./sw.js", { updateViaCache: "none" }).then(function (registration) {
+      appRegistration = registration;
+      checkAppUpdate();
     }).catch(function () {});
+  });
+  window.addEventListener("pageshow", checkAppUpdate);
+  document.addEventListener("visibilitychange", function () {
+    if (!document.hidden) checkAppUpdate();
   });
 }
