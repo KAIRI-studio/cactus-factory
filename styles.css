@@ -5460,3 +5460,5 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #shopDialog .shop-wallet{margin-bottom:8px}
 #shopDialog .shop-intro{font-size:10px;margin-bottom:8px}
 #shopDialog .shop-product{min-height:116px}
+
+#temporaryTestControls #coinsTestButton{grid-column:1/-1;background:#f7dfa0;border-color:#9c7835}

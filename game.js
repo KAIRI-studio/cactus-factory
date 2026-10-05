@@ -1411,6 +1411,12 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
 });
 
+document.querySelector("#coinsTestButton").addEventListener("click", function () {
+  state.coins += 100000;
+  save();
+  render();
+});
+
 document.querySelector("#fillTestButton").addEventListener("click", function () {
   state.pots.forEach(function (pot) {
     pot.stage = 2;
@@ -1571,7 +1577,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "311" });
+      event.ports[0].postMessage({ version: "312" });
     }
   });
   window.addEventListener("load", function () {
