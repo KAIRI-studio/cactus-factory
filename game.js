@@ -700,6 +700,7 @@ function dedicatedPotStatus() {
 }
 function renderDedicatedPot() {
   const pot = state.shopPlant;
+  dedicatedPot.hidden = !pot;
   const image = document.querySelector("#dedicatedPlant");
   image.hidden = !pot;
   if (pot) image.src = pot.ready ? cactusType(pot.cactusId).sprite : "assets/simple-bold-sprout.png";
@@ -1422,7 +1423,7 @@ if (!coinsTestButton) {
 }
 coinsTestButton.style.setProperty("display", "block", "important");
 coinsTestButton.style.setProperty("grid-column", "1 / -1", "important");
-document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v315";
+document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v316";
 coinsTestButton.addEventListener("click", function () {
   state.coins += 100000;
   save();
@@ -1589,7 +1590,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "315" });
+      event.ports[0].postMessage({ version: "316" });
     }
   });
   window.addEventListener("load", function () {

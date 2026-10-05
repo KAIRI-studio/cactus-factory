@@ -5482,5 +5482,13 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #equipmentDialog .equipment-hotspot-air.level-3{background-position:0 100%,center!important}
 #equipmentDialog .equipment-hotspot-sensor.level-3{background-position:100% 100%,center!important}
 #equipmentDialog .equipment-hotspot.level-3>span{background:#fff1a3!important;border-color:#a78632!important;color:#5a471b!important;font-weight:900!important}
-#shopDialog .shop-card{background:linear-gradient(#fff9e8b8,#fff9e8b8),url("assets/shop-background-v315.webp") center/cover no-repeat}
-#shopDialog::backdrop{background:#153f32d9;backdrop-filter:blur(4px)}
+#shopDialog .shop-card{background:linear-gradient(#fff9e826,#fff9e826),url("assets/shop-background-v315.webp") center/cover no-repeat}
+#shopDialog::backdrop{background:#153f3299;backdrop-filter:none}
+
+/* v316: the special pot appears only while occupied, with gentle living motion. */
+.dedicated-pot[hidden]{display:none!important}
+.dedicated-pot:not([hidden]) .dedicated-pot-art{transform-origin:50% 96%;animation:dedicated-pot-sway 4.8s ease-in-out infinite}
+.dedicated-pot-art>#dedicatedPlant{transform-origin:50% 94%;animation:dedicated-cactus-sway 3.6s ease-in-out infinite}
+@keyframes dedicated-pot-sway{0%,100%{transform:rotate(-.7deg)}50%{transform:rotate(.7deg)}}
+@keyframes dedicated-cactus-sway{0%,100%{transform:rotate(-2deg) scale(1)}50%{transform:rotate(2deg) scale(1.025)}}
+@media(prefers-reduced-motion:reduce){.dedicated-pot:not([hidden]) .dedicated-pot-art,.dedicated-pot-art>#dedicatedPlant{animation:none}}
