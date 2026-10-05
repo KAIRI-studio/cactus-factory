@@ -5402,3 +5402,39 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #temporaryTestControls>div{display:grid;grid-template-columns:1fr 1fr;gap:5px}
 #temporaryTestControls button{min-height:34px;padding:5px 2px;border:1px solid #567c60;border-radius:7px;background:#e9f0df;color:#345044;font-size:11px;font-weight:900;touch-action:manipulation}
 #temporaryTestControls #resetTestButton{background:#b64f46;border-color:#883d34;color:white}
+
+/* v307: illustrated shop and a crate-mounted pot next to the nutrient crate. */
+.dedicated-pot{top:auto;bottom:calc(24.6% - 18px);left:50%;right:auto;transform:translateX(-50%);width:112px;height:146px;display:block;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;filter:drop-shadow(0 3px 2px #071b1545)}
+.dedicated-pot>b{display:none}
+.dedicated-pot .dedicated-pot-art{position:absolute;left:0;right:0;bottom:18px;width:100%;height:120px}
+.dedicated-pot-art>.dedicated-crate{inset:0;display:block;width:100%;height:100%;min-height:0;object-fit:contain;object-position:center;z-index:0}
+.dedicated-pot-art>#dedicatedPlant{left:27%;bottom:84%;width:46%;height:48%;min-height:0;object-fit:contain;object-position:bottom;z-index:1}
+.dedicated-pot>small{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:max-content;max-width:120px;padding:3px 7px;border:1px solid #48654a;border-radius:6px;background:#fff5dbe8;font-size:8px;white-space:nowrap}
+.dedicated-pot.is-ready{border:0;background:transparent;box-shadow:none;filter:drop-shadow(0 0 6px #ecc854)}
+.dedicated-pot.is-ready>small{background:#ffedab;border-color:#987126}
+@media(max-width:360px){.dedicated-pot{width:94px;height:126px}.dedicated-pot .dedicated-pot-art{height:103px}.special-nutrient{width:96px}}
+@media(max-height:600px){.dedicated-pot{top:auto;right:auto;left:50%;height:110px;width:90px}.dedicated-pot .dedicated-pot-art{height:91px}}
+#shopDialog .shop-card{padding:15px 15px 16px;background:linear-gradient(#fff9e8,#eef0de);border:5px solid #345c44}
+#shopDialog .shop-heading{flex:none;position:relative;text-align:center;margin:0 40px 10px;padding:9px 0;color:#294e3b}
+#shopDialog .shop-heading small{display:block;font-size:8px;letter-spacing:.18em;color:#947336;font-weight:900}
+#shopDialog .shop-heading h2{font-size:25px;margin:3px 0;letter-spacing:.04em}
+#shopDialog .shop-heading>span{font-size:10px;color:#5e795b}
+#shopDialog .shop-wallet{display:flex;flex:none;align-self:center;align-items:center;width:190px;min-height:53px;margin:0 0 12px;padding:6px 10px;gap:9px}
+#shopDialog .shop-wallet b{font-size:22px;line-height:1;color:#30452f}
+#shopDialog .shop-wallet small{font-size:9px}
+#shopDialog .shop-product{grid-template-columns:95px minmax(0,1fr);gap:10px;min-height:126px;padding:10px 12px;border:3px solid #769076;border-radius:15px;background:linear-gradient(140deg,#fffdf4,#e9efe2);box-shadow:0 3px 0 #64836540,inset 0 0 0 2px #fffaf0}
+#shopDialog .shop-product-gold{border-color:#b99646;background:linear-gradient(135deg,#fff9de,#f5e4b4)}
+#shopDialog .shop-product-silver{background:linear-gradient(135deg,#fafdf8,#e2ebe2)}
+#shopDialog .shop-product[aria-pressed="true"]{border-color:#285d3f;box-shadow:0 0 0 2px #c2a352,inset 0 0 0 2px #fffaf0;background:#eaf1dd}
+#shopDialog .shop-item-art{display:block;width:100%;height:100px}
+#shopDialog .shop-item-art img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 3px 2px #28473522)}
+#shopDialog .shop-product b{font-size:19px}
+#shopDialog .shop-product small{font-size:11px;line-height:1.55;margin:5px 0 8px}
+#shopDialog .shop-price.coin-chip{display:flex;align-items:center;gap:6px;justify-content:flex-start;width:max-content;min-width:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;font-size:17px;color:#705321}
+#shopDialog .shop-price.coin-chip::before,#shopDialog .shop-price.coin-chip::after{display:none}
+#shopDialog .shop-price.coin-chip>.coin{flex:0 0 25px;width:25px;height:25px;border-width:2px}
+#shopDialog .shop-price.coin-chip>.coin svg{width:17px;height:17px}
+#shopDialog .shop-price.coin-chip>span:last-child{display:block;min-width:0;height:auto;padding:0;border:0;border-radius:0;background:none;box-shadow:none}
+#shopDialog .shop-intro{font-size:11px;margin-bottom:12px}
+#shopDialog .shop-use{margin-top:14px;padding:12px;border:2px solid #799378;background:#e7eedb}
+@media(max-width:360px){#shopDialog .shop-product{grid-template-columns:75px minmax(0,1fr);padding:8px;gap:8px}#shopDialog .shop-product b{font-size:17px}#shopDialog .shop-item-art{height:88px}}

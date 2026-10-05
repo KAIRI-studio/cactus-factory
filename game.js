@@ -610,9 +610,9 @@ function rollSpecialSeed() {
 
 // Consumables reuse the existing save and never reset collections or growing pots.
 const SHOP_PRODUCTS = [
-  { id: "mystery", name: "ふしぎなタネ", icon: "🌱", cost: 3000, description: "専用の鉢で そだてよう。レアが でやすいタネ。ノーマルも でるよ。" },
-  { id: "gold", name: "金のタネ", icon: "✨", cost: 10000, description: "専用の鉢で そだてよう。レア以上 かくてい！" },
-  { id: "fertilizer", name: "ひりょう", icon: "🍃", cost: 500, description: "専用の鉢の 育成を 1じかん短縮。何度でも つかえるよ。" }
+  { id: "silver", name: "銀のタネ", sprite: "assets/shop-silver-seed-v307.webp", cost: 15000, description: "レア以上 かくてい！専用の鉢で そだてよう。" },
+  { id: "gold", name: "金のタネ", sprite: "assets/shop-gold-seed-v307.webp", cost: 50000, description: "スーパーレア以上 かくてい！特別な1体を そだてよう。" },
+  { id: "fertilizer", name: "ひりょう", sprite: "assets/rare-nutrient-crate-bold.png", cost: 500, description: "専用の鉢の 育成を 1じかん短縮。何度でも つかえるよ。" }
 ];
 let selectedShopProduct = null;
 let lastShopSignature = "";
@@ -623,10 +623,9 @@ const dedicatedPot = document.querySelector("#dedicatedPot");
 function rollShopSeed(id) {
   const roll = Math.random() * 100;
   if (roll < .1) return LEGEND_CACTUS_IDS[Math.floor(roll / (.1 / LEGEND_CACTUS_IDS.length))];
-  const superEnd = id === "gold" ? 20 : 10;
+  const superEnd = id === "gold" ? 100 : 20;
   if (roll < superEnd) return SUPER_CACTUS_IDS[Math.floor((roll - .1) / ((superEnd - .1) / SUPER_CACTUS_IDS.length))];
-  if (id === "gold" || roll < 40) return RARE_CACTUS_IDS[Math.floor((roll - superEnd) / ((id === "gold" ? 80 : 30) / RARE_CACTUS_IDS.length))];
-  return "normal";
+  return RARE_CACTUS_IDS[Math.floor((roll - superEnd) / (80 / RARE_CACTUS_IDS.length))];
 }
 function shopProductAvailable(product) {
   return product.id === "fertilizer" ? Boolean(state.shopPlant && !state.shopPlant.ready) : !state.shopPlant;
@@ -673,7 +672,7 @@ SHOP_PRODUCTS.forEach(function (product) {
   button.className = "shop-product shop-product-" + product.id;
   button.dataset.shopProduct = product.id;
   button.setAttribute("aria-pressed", "false");
-  button.innerHTML = '<span class="shop-icon" aria-hidden="true">' + product.icon + '</span><span><b>' + product.name + '</b><small>' + product.description + '</small><strong>🪙 ' + product.cost.toLocaleString("ja-JP") + '</strong></span>';
+  button.innerHTML = '<span class="shop-item-art"><img src="' + product.sprite + '" alt="" /></span><span class="shop-item-copy"><b>' + product.name + '</b><small>' + product.description + '</small><strong class="shop-price coin-chip">' + document.querySelector(".topbar .coin").outerHTML + '<span>' + product.cost.toLocaleString("ja-JP") + '</span></strong></span>';
   button.addEventListener("click", function () {
     selectedShopProduct = product.id;
     document.querySelector("#shopFeedback").textContent = "";
@@ -1573,7 +1572,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "306" });
+      event.ports[0].postMessage({ version: "307" });
     }
   });
   window.addEventListener("load", function () {
