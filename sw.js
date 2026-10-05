@@ -1,5 +1,5 @@
-const APP_VERSION = "312";
-const CACHE_NAME = "cactus-factory-2026-10-05-312";
+const APP_VERSION = "313";
+const CACHE_NAME = "cactus-factory-2026-10-05-313";
 const APP_FILES = [
   "./assets/shop-heading-v311.webp",
   "./",
@@ -16,7 +16,7 @@ const APP_FILES = [
   "./assets/audio/wrong.mp3",
   "./assets/audio/reward.mp3",
 
-  "./styles.css?v=312",
+  "./styles.css?v=313",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
@@ -52,7 +52,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=312",
+  "./game.js?v=313",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -158,7 +158,7 @@ self.addEventListener("activate", function (event) {
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
   if (event.request.mode === "navigate") {
-    event.respondWith(fetch(event.request).then(function (response) {
+    event.respondWith(fetch(event.request, { cache: "no-store" }).then(function (response) {
       const copy = response.clone();
       caches.open(CACHE_NAME).then(function (cache) { cache.put("./index.html", copy); });
       return response;

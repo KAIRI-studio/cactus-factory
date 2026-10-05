@@ -1411,7 +1411,19 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
 });
 
-document.querySelector("#coinsTestButton").addEventListener("click", function () {
+// Keep test controls available even when an older HTML document is restored.
+let coinsTestButton = document.querySelector("#coinsTestButton");
+if (!coinsTestButton) {
+  coinsTestButton = document.createElement("button");
+  coinsTestButton.id = "coinsTestButton";
+  coinsTestButton.type = "button";
+  coinsTestButton.textContent = "コイン＋10万";
+  document.querySelector("#temporaryTestControls>div").append(coinsTestButton);
+}
+coinsTestButton.style.setProperty("display", "block", "important");
+coinsTestButton.style.setProperty("grid-column", "1 / -1", "important");
+document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v313";
+coinsTestButton.addEventListener("click", function () {
   state.coins += 100000;
   save();
   render();
@@ -1577,7 +1589,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "312" });
+      event.ports[0].postMessage({ version: "313" });
     }
   });
   window.addEventListener("load", function () {
