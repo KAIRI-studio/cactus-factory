@@ -5438,3 +5438,11 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #shopDialog .shop-intro{font-size:11px;margin-bottom:12px}
 #shopDialog .shop-use{margin-top:14px;padding:12px;border:2px solid #799378;background:#e7eedb}
 @media(max-width:360px){#shopDialog .shop-product{grid-template-columns:75px minmax(0,1fr);padding:8px;gap:8px}#shopDialog .shop-product b{font-size:17px}#shopDialog .shop-item-art{height:88px}}
+/* v309: reserve room for all five coin digits, including the comma. */
+#equipmentDialog .equipment-room-shell{grid-template-columns:minmax(0,1.2fr) 82px 118px!important}
+#equipmentDialog .equipment-coin-chip{gap:3px;padding-left:4px;padding-right:4px}
+#equipmentDialog .equipment-coin-chip .coin{flex:0 0 24px;width:24px;height:24px;border-width:2px}
+#equipmentDialog .equipment-coin-chip .coin svg{width:17px;height:17px}
+#equipmentDialog .equipment-coin-chip>span:last-child{padding-left:3px;padding-right:3px}
+#equipmentDialog .equipment-coin-chip b{font-size:13px;letter-spacing:0;text-overflow:clip}
+@media(max-width:360px){#equipmentDialog .equipment-room-shell{grid-template-columns:minmax(0,1fr) 72px 110px!important}#equipmentDialog .equipment-coin-chip b{font-size:12px}}
