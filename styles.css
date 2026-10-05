@@ -3445,21 +3445,25 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 #equipmentDialog .equipment-room-shell>.equipment-grid{grid-column:1/-1!important;grid-row:2!important}
 #equipmentDialog .equipment-detail{grid-column:1/-1!important;grid-row:3!important}
 #equipmentDialog .equipment-detail-nutrient{
-  position:relative!important;display:block!important;width:100%!important;min-height:0!important;
-  aspect-ratio:3/1!important;padding:0!important;overflow:visible!important;
-  background-image:var(--equipment-detail-art)!important;background-position:center!important;
-  background-size:100% 100%!important;background-repeat:no-repeat!important;
+  position:relative!important;display:block!important;width:100%!important;min-width:0!important;min-height:0!important;
+  aspect-ratio:auto!important;padding:0!important;overflow:hidden!important;
+  background:#f4f0d9!important;border:2px solid #66886a!important;border-radius:16px!important;
 }
 #equipmentDialog .equipment-detail-nutrient .nutrient-purchase{
-  position:absolute;z-index:2;top:17%;right:1.8%;bottom:17%;width:29.5%;
-  padding:0;border:0;border-radius:42%;background:transparent;box-shadow:none;cursor:pointer;
+  position:relative!important;inset:auto!important;display:flex!important;align-items:center;gap:10px;
+  width:100%!important;min-width:0;min-height:112px;padding:10px!important;border:0;border-radius:14px;
+  background:transparent!important;box-shadow:none;color:#294e3b!important;text-align:left;cursor:pointer;
 }
-#equipmentDialog .equipment-detail-nutrient .nutrient-purchase:active:not(:disabled){transform:translateY(2px) scale(.98)}
-#equipmentDialog .equipment-detail-nutrient.is-disabled::after{
-  content:"";position:absolute;z-index:1;top:17%;right:1.8%;bottom:17%;width:29.5%;
-  border-radius:42%;background:#29483d70;box-shadow:inset 0 0 0 2px #173e3245;pointer-events:none;
-}
+#equipmentDialog .equipment-detail-nutrient .nutrient-purchase>img{display:block;width:76px!important;height:90px!important;max-width:28%;object-fit:contain;flex:0 0 76px}
+#equipmentDialog .nutrient-copy{display:flex;flex:1;min-width:0;flex-direction:column;gap:6px}
+#equipmentDialog .nutrient-copy b{font-size:16px;line-height:1.3}
+#equipmentDialog .nutrient-copy small{font-size:11px;line-height:1.4}
+#equipmentDialog .nutrient-copy strong{display:flex;align-items:center;gap:5px;font-size:11px;line-height:1.4;color:#705321}
+#equipmentDialog .nutrient-copy .coin{width:24px;height:24px;flex:0 0 24px}
+#equipmentDialog .nutrient-copy .coin svg{width:16px;height:16px}
+#equipmentDialog .equipment-detail-nutrient.is-disabled::after{display:none!important}
 #equipmentDialog .equipment-detail-nutrient .nutrient-purchase:disabled{cursor:not-allowed}
+#equipmentDialog .equipment-detail-nutrient.is-active{background:#e5eddb!important}
 @media(max-width:360px){
   #equipmentDialog .equipment-room-shell{
     grid-template-columns:minmax(116px,1.2fr) minmax(82px,.88fr) minmax(101px,1.02fr)!important;
