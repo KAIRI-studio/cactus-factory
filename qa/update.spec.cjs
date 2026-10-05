@@ -19,10 +19,10 @@ const context = vm.createContext({
   setTimeout: fn => setTimeout(fn, 5),
   self: { registration: { scope }, addEventListener: (name, fn) => handlers[name] = fn,
     clients: { claim: () => Promise.resolve(), matchAll: () => Promise.resolve([
-      client('legacy', null), client('outdated', '305'), client('current', '314'),
+      client('legacy', null), client('outdated', '305'), client('current', '315'),
       client('other-game', null, 'https://kairi-studio.github.io/kanji-quest/')
     ]) } },
-  caches: { keys: () => Promise.resolve(['cactus-factory-old','cactus-factory-2026-10-05-314','other-game']),
+  caches: { keys: () => Promise.resolve(['cactus-factory-old','cactus-factory-2026-10-05-315','other-game']),
     delete: key => { deleted.push(key); return Promise.resolve(true); } }
 });
 vm.runInContext(fs.readFileSync(require('node:path').join(__dirname, '../sw.js'), 'utf8'), context);

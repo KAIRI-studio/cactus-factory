@@ -5470,3 +5470,17 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #shopDialog .shop-heading{width:100%;margin:0 0 10px;padding:0 34px}
 #shopDialog .shop-heading img{height:110px;margin:0 auto}
 @media(max-width:360px){#equipmentDialog .nutrient-copy strong{font-size:10px;padding:6px}#shopDialog .shop-heading{padding:0 28px}}
+/* v315: planted baseline, explicit completed equipment, and a seed shop interior. */
+.dedicated-pot-art>#dedicatedPlant{bottom:65%}
+#equipmentDialog .equipment-room-level{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;row-gap:2px!important;padding:5px 8px!important;min-width:0!important}
+#equipmentDialog .equipment-room-level>span{grid-column:1!important;grid-row:1!important;font-size:8px!important;line-height:1.1!important;text-align:center!important}
+#equipmentDialog .equipment-room-level>b{grid-column:1!important;grid-row:2!important;font-size:13px!important;text-align:center!important}
+#equipmentDialog .equipment-room-level>.equipment-meter{grid-column:1!important;grid-row:3!important;width:100%!important}
+#equipmentDialog .equipment-hotspot.level-3{opacity:1!important;filter:saturate(1.08) drop-shadow(0 0 5px #ffe57d) drop-shadow(0 3px 2px #173e3238)!important;background-image:url("assets/equipment-buttons-v5.webp"),radial-gradient(ellipse at center,#fff0a6ba 0%,#f4cc5655 45%,transparent 76%)!important;background-size:200% 200%,90% 88%!important;background-repeat:no-repeat!important}
+#equipmentDialog .equipment-hotspot-light.level-3{background-position:0 0,center!important}
+#equipmentDialog .equipment-hotspot-mist.level-3{background-position:100% 0,center!important}
+#equipmentDialog .equipment-hotspot-air.level-3{background-position:0 100%,center!important}
+#equipmentDialog .equipment-hotspot-sensor.level-3{background-position:100% 100%,center!important}
+#equipmentDialog .equipment-hotspot.level-3>span{background:#fff1a3!important;border-color:#a78632!important;color:#5a471b!important;font-weight:900!important}
+#shopDialog .shop-card{background:linear-gradient(#fff9e8b8,#fff9e8b8),url("assets/shop-background-v315.webp") center/cover no-repeat}
+#shopDialog::backdrop{background:#153f32d9;backdrop-filter:blur(4px)}

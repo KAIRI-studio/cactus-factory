@@ -1320,8 +1320,8 @@ function renderEquipment() {
     hotspot.className = "equipment-hotspot equipment-hotspot-" + item.key + (selectedEquipmentKey === item.key ? " selected" : "") + " level-" + level;
     hotspot.dataset.equipmentSelect = item.key;
     hotspot.setAttribute("aria-pressed", String(selectedEquipmentKey === item.key));
-    hotspot.setAttribute("aria-label", item.name + " LV." + level);
-    hotspot.innerHTML = "<span>LV." + level + "</span>";
+    hotspot.setAttribute("aria-label", item.name + (level >= 3 ? " MAX・かいぞう かんせい" : " LV." + level));
+    hotspot.innerHTML = "<span>" + (level >= 3 ? "MAX" : "LV." + level) + "</span>";
     grid.append(hotspot);
   });
 
@@ -1422,7 +1422,7 @@ if (!coinsTestButton) {
 }
 coinsTestButton.style.setProperty("display", "block", "important");
 coinsTestButton.style.setProperty("grid-column", "1 / -1", "important");
-document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v314";
+document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v315";
 coinsTestButton.addEventListener("click", function () {
   state.coins += 100000;
   save();
@@ -1589,7 +1589,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "314" });
+      event.ports[0].postMessage({ version: "315" });
     }
   });
   window.addEventListener("load", function () {
