@@ -5397,3 +5397,8 @@ body:not(.debug-mode) .test-tools{display:none!important}
 
 /* v304: temporarily visible test controls, just below the shop entrance. */
 #equipmentDialog .equipment-scroll-area>.temporary-test-tools{display:grid!important;margin:8px 9px 14px!important;padding:10px!important;border:2px dashed #829a75;border-radius:12px;background:#fff8df}
+#temporaryTestControls{position:absolute;z-index:8;top:max(14px,env(safe-area-inset-top));left:12px;width:155px;gap:4px;padding:6px;border:2px dashed #829a75;border-radius:10px;background:#fff8df;color:#345044}
+#temporaryTestControls small{font-size:9px;font-weight:900;text-align:center}
+#temporaryTestControls>div{display:grid;grid-template-columns:1fr 1fr;gap:5px}
+#temporaryTestControls button{min-height:34px;padding:5px 2px;border:1px solid #567c60;border-radius:7px;background:#e9f0df;color:#345044;font-size:11px;font-weight:900;touch-action:manipulation}
+#temporaryTestControls #resetTestButton{background:#b64f46;border-color:#883d34;color:white}
