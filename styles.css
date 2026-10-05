@@ -5462,3 +5462,11 @@ body:not(.debug-mode) .test-tools{display:none!important}
 #shopDialog .shop-product{min-height:116px}
 
 #temporaryTestControls #coinsTestButton{grid-column:1/-1;background:#f7dfa0;border-color:#9c7835}
+/* v314: seated special cactus and clearly marked nutrient purchase action. */
+.dedicated-pot-art>#dedicatedPlant{left:18%;bottom:70%;width:64%;height:72%}
+#equipmentDialog .nutrient-copy strong{justify-content:center;width:fit-content;max-width:100%;min-height:36px;padding:7px 10px;border:2px solid #254a37;border-radius:10px;background:#365e43;color:#fff8d3;box-shadow:0 3px 0 #203f30;font-size:12px;font-weight:900}
+#equipmentDialog .nutrient-purchase:active:not(:disabled) .nutrient-copy strong{transform:translateY(2px);box-shadow:0 1px 0 #203f30}
+#equipmentDialog .nutrient-purchase:disabled .nutrient-copy strong{background:#d5d9c7;border-color:#8b9e83;color:#53664d;box-shadow:none}
+#shopDialog .shop-heading{width:100%;margin:0 0 10px;padding:0 34px}
+#shopDialog .shop-heading img{height:110px;margin:0 auto}
+@media(max-width:360px){#equipmentDialog .nutrient-copy strong{font-size:10px;padding:6px}#shopDialog .shop-heading{padding:0 28px}}

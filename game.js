@@ -1422,7 +1422,7 @@ if (!coinsTestButton) {
 }
 coinsTestButton.style.setProperty("display", "block", "important");
 coinsTestButton.style.setProperty("grid-column", "1 / -1", "important");
-document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v313";
+document.querySelector("#temporaryTestControls small").textContent = "テスト用 · v314";
 coinsTestButton.addEventListener("click", function () {
   state.coins += 100000;
   save();
@@ -1589,7 +1589,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "313" });
+      event.ports[0].postMessage({ version: "314" });
     }
   });
   window.addEventListener("load", function () {
