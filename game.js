@@ -1559,7 +1559,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "321" });
+      event.ports[0].postMessage({ version: "322" });
     }
   });
   window.addEventListener("load", function () {

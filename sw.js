@@ -1,5 +1,5 @@
-const APP_VERSION = "321";
-const CACHE_NAME = "cactus-factory-2026-10-05-321";
+const APP_VERSION = "322";
+const CACHE_NAME = "cactus-factory-2026-10-06-322";
 const APP_FILES = [
   "./assets/shop-background-v315.webp",
   "./assets/shop-heading-v314.webp",
@@ -53,7 +53,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=321",
+  "./game.js?v=322",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -158,6 +158,7 @@ self.addEventListener("activate", function (event) {
 
 self.addEventListener("fetch", function (event) {
   if (event.request.method !== "GET") return;
+  if (new URL(event.request.url).pathname === "/castor/analytics-config.json") return;
   if (event.request.mode === "navigate") {
     event.respondWith(fetch(event.request, { cache: "no-store" }).then(function (response) {
       const copy = response.clone();
