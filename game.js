@@ -612,8 +612,8 @@ function rollSpecialSeed() {
 
 // Consumables reuse the existing save and never reset collections or growing pots.
 const SHOP_PRODUCTS = [
-  { id: "silver", name: "ぎんのタネ", sprite: "assets/shop-silver-seed-v307.webp", cost: 15000, description: "レアか、もっと めずらしい サボテンが そだつよ！" },
-  { id: "gold", name: "きんのタネ", sprite: "assets/shop-gold-seed-v307.webp", cost: 50000, description: "スーパーレアか レジェンドが そだつよ！" }
+  { id: "silver", name: "ぎんのタネ", sprite: "assets/shop-silver-seed-v307.webp", cost: 5000, description: "レアか、もっと めずらしい サボテンが そだつよ！" },
+  { id: "gold", name: "きんのタネ", sprite: "assets/shop-gold-seed-v307.webp", cost: 15000, description: "スーパーレアか レジェンドが そだつよ！" }
 ];
 let selectedShopProduct = null;
 let lastShopSignature = "";
@@ -1559,7 +1559,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "322" });
+      event.ports[0].postMessage({ version: "323" });
     }
   });
   window.addEventListener("load", function () {
