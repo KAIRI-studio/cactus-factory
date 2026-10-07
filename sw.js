@@ -1,5 +1,5 @@
-const APP_VERSION = "322";
-const CACHE_NAME = "cactus-factory-2026-10-06-322";
+const APP_VERSION = "323";
+const CACHE_NAME = "cactus-factory-2026-10-07-323";
 const APP_FILES = [
   "./assets/shop-background-v315.webp",
   "./assets/shop-heading-v314.webp",
@@ -53,7 +53,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=3",
-  "./game.js?v=322",
+  "./game.js?v=323",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
