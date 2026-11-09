@@ -17,7 +17,7 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
   <link rel="stylesheet" href="styles.css?v=321" />
   <link rel="stylesheet" href="title-v3.css?v=3" />
-  <script src="game.js?v=323" defer></script>
+  <script src="game.js?v=324" defer></script>
   <link rel="stylesheet" href="install.css?v=300" />
   <script src="install.js?v=300" defer></script>
 <script src="analytics.js?v=family1" data-site="cactus-factory" defer></script>
@@ -188,7 +188,13 @@
       </div>
       <div class="factory-complete-stamp" id="factoryCompleteStamp" hidden><b>こうじょう かんせい！</b><span>すべての きろくを たっせいしました</span></div>
     </section></dialog>
-    <dialog id="mathDialog"><section class="dialog-card math-card">
+    <dialog id="mathIntro" aria-labelledby="mathIntroTitle">
+    <h2 id="mathIntroTitle">けいさんチャレンジ</h2>
+    <p>10もん・1もん5びょう。<br>こうはんは かけざん・わりざんも でるよ。</p>
+    <button type="button" id="mathStart">はじめる</button>
+    <form method="dialog"><button type="submit">もどる</button></form>
+  </dialog>
+  <dialog id="mathDialog"><section class="dialog-card math-card">
       <button class="close" id="mathClose" aria-label="とじる">×</button>
       <header class="math-illustrated-heading"><img src="assets/math-heading-v2.webp" alt="けいさんチャレンジ" /></header>
       <div class="station-glass station-glass-math">
