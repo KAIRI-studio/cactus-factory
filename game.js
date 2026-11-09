@@ -1127,6 +1127,7 @@ const questionNumber = document.querySelector("#questionNumber");
 const score = document.querySelector("#score");
 const mathProgress = document.querySelector("#mathProgress");
 let challenge = { answered: 0, correct: 0 };
+let untimedPractice = false;
 let nextTimer;
 let questionFrame;
 let questionActive = false;
@@ -1156,7 +1157,7 @@ function tickQuestionTimer(now) {
 let currentQuestion;
 
 document.addEventListener("visibilitychange", function () {
-  if (!mathDialog.open || !questionActive) return;
+  if (!mathDialog.open || !questionActive || untimedPractice) return;
   if (document.hidden) {
     pausedRemaining = Math.max(0, questionDeadline - performance.now());
     cancelAnimationFrame(questionFrame);
@@ -1198,8 +1199,11 @@ function showQuestion() {
     answerGrid.append(button);
   });
   questionActive = true;
-  questionDeadline = performance.now() + QUESTION_TIME_MS;
-  questionFrame = requestAnimationFrame(tickQuestionTimer);
+  mathTimer.hidden = untimedPractice;
+  if (!untimedPractice) {
+    questionDeadline = performance.now() + QUESTION_TIME_MS;
+    questionFrame = requestAnimationFrame(tickQuestionTimer);
+  }
 }
 
 function answerQuestion(correct, button, correctValue, timedOut) {
@@ -1273,8 +1277,13 @@ document.querySelector("#mathStart")?.addEventListener("click", function () {
   mathIntro.close();
   beginMathChallenge();
 });
+document.querySelector("#mathPractice")?.addEventListener("click", function () {
+  mathIntro.close();
+  beginMathChallenge(true);
+});
 
-function beginMathChallenge() {
+function beginMathChallenge(practice = false) {
+  untimedPractice = practice;
   if (state.tutorialStep === "math") {
     state.tutorialStep = "equipment";
     hideTutorial();
