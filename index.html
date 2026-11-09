@@ -15,7 +15,7 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
-  <link rel="stylesheet" href="styles.css?v=326" />
+  <link rel="stylesheet" href="styles.css?v=327" />
   <link rel="stylesheet" href="title-v3.css?v=326" />
   <script src="game.js?v=326" defer></script>
   <link rel="stylesheet" href="install.css?v=300" />
@@ -189,11 +189,15 @@
       <div class="factory-complete-stamp" id="factoryCompleteStamp" hidden><b>こうじょう かんせい！</b><span>すべての きろくを たっせいしました</span></div>
     </section></dialog>
     <dialog id="mathIntro" aria-labelledby="mathIntroTitle">
-    <h2 id="mathIntroTitle">けいさんチャレンジ</h2>
-    <p>10もん・1もん5びょう。<br>こうはんは かけざん・わりざんも でるよ。</p>
-    <button type="button" id="mathStart">じかんありで はじめる</button>
-    <button type="button" id="mathPractice">じかんなしで れんしゅう</button>
-    <form method="dialog"><button type="submit">もどる</button></form>
+    <section class="dialog-card math-mode-card">
+      <form method="dialog"><button class="close" type="submit" aria-label="もどる">×</button></form>
+      <h2 id="mathIntroTitle"><img src="assets/math-heading-v2.webp" alt="けいさんチャレンジ" /></h2>
+      <p>10もんの けいさんに チャレンジ！</p>
+      <div class="math-mode-options">
+        <button type="button" id="mathStart"><strong>じかんあり</strong><small>1もん 5びょう</small><span aria-hidden="true">›</span></button>
+        <button type="button" id="mathPractice"><strong>じかんなし</strong><small>じぶんの ペースで れんしゅう</small><span aria-hidden="true">›</span></button>
+      </div>
+    </section>
   </dialog>
   <dialog id="mathDialog"><section class="dialog-card math-card">
       <button class="close" id="mathClose" aria-label="とじる">×</button>
