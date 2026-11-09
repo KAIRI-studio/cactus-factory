@@ -5606,3 +5606,17 @@ body:not(.debug-mode) .test-tools{display:none!important}
   #zukanDialog .zukan-hero-copy{min-width:0;overflow-wrap:anywhere}
   #zukanDialog .zukan-pagination{flex-shrink:0!important}
 }
+
+/* Anchor the specimen and its pedestal to the same baseline at phone heights. */
+@media (max-width:600px) and (orientation:portrait){
+  #zukanDialog .zukan-hero .zukan-hero-stage{--pedestal-bottom:3px;--pedestal-height:18px}
+  #zukanDialog .zukan-hero .zukan-hero-stage::after{
+    bottom:var(--pedestal-bottom)!important;height:var(--pedestal-height)!important
+  }
+  #zukanDialog .station-glass-zukan>.zukan-hero .zukan-hero-stage img{
+    position:absolute;left:0;right:0;margin-inline:auto;
+    bottom:calc(var(--pedestal-bottom) + var(--pedestal-height) / 2);
+    height:calc(100% - var(--pedestal-bottom) - var(--pedestal-height) / 2)!important;
+    object-position:center bottom
+  }
+}
