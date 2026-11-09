@@ -5620,3 +5620,17 @@ body:not(.debug-mode) .test-tools{display:none!important}
     object-position:center bottom
   }
 }
+
+@media(max-width:600px) and (orientation:portrait){
+  #zukanDialog .zukan-heading-art{height:clamp(48px,10svh,78px)!important}
+  #zukanDialog .zukan-list-scroll{container-type:size}
+  #zukanDialog .zukan-list-scroll .zukan-grid{row-gap:6px!important;padding-block:3px!important}
+  #zukanDialog .zukan-grid>.zukan-entry,
+  #zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
+    height:clamp(91px,calc((100cqh - 16px)/2),126px)!important;
+    min-height:0!important;grid-template-rows:minmax(22px,1fr) auto!important;
+    padding-top:15px!important;padding-bottom:5px!important
+  }
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{height:100%!important;min-height:0!important}
+  #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{max-height:100%!important}
+}
