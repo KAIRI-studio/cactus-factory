@@ -1,5 +1,5 @@
 const APP_VERSION = "326";
-const CACHE_NAME = "cactus-factory-2026-10-07-328";
+const CACHE_NAME = "cactus-factory-2026-10-07-329";
 const APP_FILES = [
   "./assets/shop-background-v315.webp",
   "./assets/shop-heading-v314.webp",
@@ -17,7 +17,7 @@ const APP_FILES = [
   "./assets/audio/wrong.mp3",
   "./assets/audio/reward.mp3",
 
-  "./styles.css?v=328",
+  "./styles.css?v=329",
   "./assets/equipment-heading-v3.webp",
   "./assets/equipment-factory-frame-v4.webp",
   "./assets/equipment-detail-console-100.webp",
