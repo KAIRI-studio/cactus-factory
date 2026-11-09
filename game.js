@@ -1578,7 +1578,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "323" });
+      event.ports[0].postMessage({ version: "326" });
     }
   });
   window.addEventListener("load", function () {
