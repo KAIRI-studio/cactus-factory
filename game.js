@@ -505,7 +505,7 @@ function renderFactoryProgress() {
   document.querySelector("#factoryProgressCount").textContent = total + " / " + maximum;
   document.querySelector("#factoryProgressFill").style.width = percent + "%";
   factoryProgressButton.classList.toggle("is-complete", total >= maximum);
-  factoryProgressButton.setAttribute("aria-label", "こうじょうの たっせいど " + total + " / " + maximum + "。" + nextGoal);
+  factoryProgressButton.setAttribute("aria-label", "こうじょうの たっせいど " + total + " / " + maximum + "。ずかんと せつびの ごうけい。 " + nextGoal);
   document.querySelector("#factoryRankLabel").textContent = rank;
   document.querySelector("#factoryRankPercent").textContent = percent + "%";
   document.querySelector("#factoryNextGoal").textContent = nextGoal;
@@ -1264,14 +1264,24 @@ function finishChallenge() {
   document.querySelector("#resultDialog").showModal();
 }
 
+const mathIntro = document.querySelector("#mathIntro");
 document.querySelector("#mathButton").addEventListener("click", function () {
+  if (mathIntro) mathIntro.showModal();
+  else beginMathChallenge();
+});
+document.querySelector("#mathStart")?.addEventListener("click", function () {
+  mathIntro.close();
+  beginMathChallenge();
+});
+
+function beginMathChallenge() {
   if (state.tutorialStep === "math") {
     state.tutorialStep = "equipment";
     hideTutorial();
     save();
   }
   challenge = { answered: 0, correct: 0 }; showQuestion(); mathDialog.showModal();
-});
+}
 document.querySelector("#mathClose").addEventListener("click", function () { mathDialog.close(); });
 document.querySelector("#resultClose").addEventListener("click", function () {
   document.querySelector("#resultDialog").close();
