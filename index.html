@@ -11,7 +11,11 @@
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
   <link rel="preload" as="image" href="assets/kairi-studio-logo.png" fetchpriority="high" />
-  <style id="launch-critical">html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff}.game[aria-hidden="true"],#titleScreen[hidden]{display:none!important}body.launching{background:#fff}#brandSplash{position:fixed;z-index:1000;inset:-2px;display:flex;align-items:center;justify-content:center;width:auto;max-width:none;height:auto;min-height:calc(100dvh + 4px);margin:0;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);background:#fff}#brandSplash img{width:min(43%,210px);height:auto}</style>
+  <style id="launch-critical">html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#fff}.game[aria-hidden="true"],#titleScreen[hidden]{display:none!important}body.launching{background:#fff}#brandSplash{position:fixed;z-index:1000;inset:-2px;display:flex;align-items:center;justify-content:center;width:auto;max-width:none;height:auto;min-height:calc(100dvh + 4px);margin:0;padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);background:#fff}#brandSplash img{width:min(43%,210px);height:auto}
+    @media (min-width:1200px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)){
+      #brandSplash.brand-splash img{width:min(36%,180px)}
+    }
+  </style>
   <link rel="preload" as="image" type="image/webp" href="assets/title-hero-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-logo-v3.webp" />
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
@@ -19,6 +23,37 @@
   <link rel="stylesheet" href="title-v3.css?v=326" />
   <script src="game.js?v=326" defer></script>
   <link rel="stylesheet" href="install.css?v=300" />
+  <style>
+    #mathIntro .math-mode-card{
+      background:#dce8d8 url("assets/equipment-factory-frame-v4.webp") center top / 100% auto no-repeat;
+      padding-inline:clamp(22px,8%,32px);
+    }
+    #mathIntro .math-mode-card p{
+      width:fit-content;
+      margin-inline:auto;
+      padding:4px 10px;
+      border-radius:8px;
+      background:#eef4e4eb;
+    }
+    @media (min-width:1200px) and (min-height:850px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)){
+      #zukanDialog .station-glass-zukan{
+        --zukan-desktop-room:clamp(24px,calc(60svh - 482.4px),112px);
+        flex-basis:calc(552px + var(--zukan-desktop-room))!important;
+        height:calc(552px + var(--zukan-desktop-room))!important;
+      }
+      #zukanDialog .zukan-grid>.zukan-entry,
+      #zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
+        height:calc(136px + var(--zukan-desktop-room) * .36)!important;
+        grid-template-rows:calc(46px + var(--zukan-desktop-room) * .20) auto!important;
+      }
+      #zukanDialog .zukan-grid>.zukan-entry .zukan-picture{
+        height:calc(46px + var(--zukan-desktop-room) * .20)!important;
+      }
+      #zukanDialog .zukan-grid>.zukan-entry .zukan-picture img{
+        max-height:calc(44px + var(--zukan-desktop-room) * .20)!important;
+      }
+    }
+  </style>
   <script src="install.js?v=300" defer></script>
 <script src="analytics.js?v=family1" data-site="cactus-factory" defer></script>
 </head>
