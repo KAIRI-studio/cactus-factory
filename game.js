@@ -159,7 +159,7 @@ const equipmentLevelText = document.querySelector("#equipmentLevelText");
 const specialNutrient = document.querySelector("#specialNutrient");
 const game = document.querySelector(".game");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const desktopFactory = window.matchMedia("(min-width:1200px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse))");
+const desktopFactory = window.matchMedia("(min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse))");
 const desktopFactoryHeight = 990;
 let factoryScale = 1;
 
