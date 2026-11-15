@@ -165,20 +165,36 @@ const mobileFactoryHeight = 740;
 let factoryScale = 1;
 
 function fitFactoryViewport() {
-  const height = window.innerHeight;
-  const layoutHeight = desktopFactory.matches ? desktopFactoryHeight : mobileFactoryHeight;
-  factoryScale = Math.min(1, height / layoutHeight);
   const style = document.documentElement.style;
-  if (factoryScale < 1) {
+  const viewport = window.visualViewport;
+
+  if (desktopFactory.matches) {
+    factoryScale = Math.min(1, window.innerHeight / desktopFactoryHeight);
+    style.removeProperty("--factory-mobile-width");
+    if (factoryScale < 1) {
+      style.setProperty("--factory-layout-height", desktopFactoryHeight + "px");
+    } else {
+      style.removeProperty("--factory-layout-height");
+    }
+  } else {
+    const viewportHeight = viewport?.height || document.documentElement.clientHeight || window.innerHeight;
+    if (viewportHeight <= 0) return;
+    const layoutHeight = Math.max(mobileFactoryHeight, viewportHeight);
+    factoryScale = viewportHeight / layoutHeight;
     style.setProperty("--factory-layout-height", layoutHeight + "px");
+    style.setProperty("--factory-mobile-width", document.documentElement.clientWidth / factoryScale + "px");
+  }
+
+  if (factoryScale < 1) {
     style.setProperty("--factory-scale", String(factoryScale));
   } else {
-    style.removeProperty("--factory-layout-height");
     style.removeProperty("--factory-scale");
   }
 }
 
 window.addEventListener("resize", fitFactoryViewport);
+window.visualViewport?.addEventListener("resize", fitFactoryViewport);
+window.addEventListener("pageshow", fitFactoryViewport);
 desktopFactory.addEventListener("change", fitFactoryViewport);
 fitFactoryViewport();
 
@@ -1607,7 +1623,7 @@ if ("serviceWorker" in navigator) {
   navigator.serviceWorker.addEventListener("message", function (event) {
     if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
       save();
-      event.ports[0].postMessage({ version: "326" });
+      event.ports[0].postMessage({ version: "336" });
     }
   });
   window.addEventListener("load", function () {

@@ -21,21 +21,45 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
   <link rel="stylesheet" href="styles.css?v=334" />
   <link rel="stylesheet" href="title-v3.css?v=334" />
-  <script src="game.js?v=335" defer></script>
+  <script src="game.js?v=336" defer></script>
   <link rel="stylesheet" href="install.css?v=330" />
   <style>
     body{zoom:var(--factory-scale,1)}
-    /* The standalone shell already reserves the home gesture area. */
-    @media (max-width:600px) and (display-mode:standalone){
+    /* Fill the phone viewport with artwork and keep controls inside its safe area. */
+    @media (max-width:600px){
       :root{
-        --factory-height:calc(var(--factory-layout-height,100dvh) - var(--factory-top-gap) - var(--factory-bottom-gap));
+        --factory-height:var(--factory-layout-height,100dvh);
+        --factory-mobile-top:calc(env(safe-area-inset-top) / var(--factory-scale,1));
+        --factory-mobile-bottom:max(0px,calc(env(safe-area-inset-bottom) / var(--factory-scale,1) - var(--factory-console-gap,12px)));
       }
-      .actions.factory-console{bottom:12px}
-      .factory-guide{bottom:132px}
+      body:not(.launching){padding-top:0}
+      .game,.title-screen,.screen-shutter{
+        width:min(var(--factory-mobile-width,100vw),480px);
+        top:0
+      }
+      #equipmentDialog,#mathDialog,#zukanDialog{
+        inset:0 0 auto!important;
+        width:min(var(--factory-mobile-width,100vw),460px)!important
+      }
+      .topbar{top:max(10px,var(--factory-mobile-top))}
+      #equipmentDialog .equipment-dialog-card>.close,
+      #mathDialog .math-card>.close,
+      #zukanDialog .zukan-card>.close{top:max(9px,var(--factory-mobile-top))!important}
+      .actions.factory-console{bottom:calc(12px + var(--factory-mobile-bottom))}
+      .factory-guide{bottom:calc(132px + var(--factory-mobile-bottom))}
+      .factory-progress-chip{bottom:calc(130px + var(--factory-mobile-bottom))!important}
+      .game:has(.onboarding-tip:not([hidden])) .factory-progress-chip{bottom:calc(202px + var(--factory-mobile-bottom))!important}
+      .game:has(.factory-guide:not([hidden])) .factory-progress-chip{bottom:calc(224px + var(--factory-mobile-bottom))!important}
+      .onboarding-tip.stage-math,.onboarding-tip.stage-equipment{bottom:calc(112px + var(--factory-mobile-bottom))}
     }
-    @media (max-width:600px) and (max-height:700px) and (display-mode:standalone){
-      .actions.factory-console{bottom:9px}
-      .factory-guide{bottom:108px}
+    @media (max-width:600px) and (max-height:700px){
+      :root{--factory-console-gap:9px}
+      .actions.factory-console{bottom:calc(9px + var(--factory-mobile-bottom))}
+      .factory-guide{bottom:calc(108px + var(--factory-mobile-bottom))}
+      .factory-progress-chip{bottom:calc(108px + var(--factory-mobile-bottom))!important}
+      .game:has(.onboarding-tip:not([hidden])) .factory-progress-chip{bottom:calc(170px + var(--factory-mobile-bottom))!important}
+      .game:has(.factory-guide:not([hidden])) .factory-progress-chip{bottom:calc(190px + var(--factory-mobile-bottom))!important}
+      .onboarding-tip.stage-math,.onboarding-tip.stage-equipment{bottom:calc(98px + var(--factory-mobile-bottom))}
     }
     #zukanDialog::backdrop{
       background:#10251dcc!important;
@@ -379,6 +403,6 @@
       <button id="installClose" type="button">とじる</button>
     </section>
   </dialog>
-  <!-- release-v335 -->
+  <!-- release-v336 -->
 </body>
 </html>
