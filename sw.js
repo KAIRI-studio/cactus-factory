@@ -1,5 +1,5 @@
 const APP_VERSION = "338";
-const CACHE_NAME = "cactus-factory-save-338";
+const CACHE_NAME = "cactus-factory-splash-339";
 const APP_FILES = [
   "./assets/shop-background-v315.webp",
   "./assets/shop-heading-v314.webp",
