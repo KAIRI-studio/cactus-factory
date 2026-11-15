@@ -145,7 +145,7 @@
   50%{translate:0 -2px;filter:drop-shadow(0 9px 2px #082a1f) drop-shadow(0 18px 22px #06181173) brightness(1.055)}
 }
 
-@media (max-height:700px){
+@media (max-height:700px) and (max-width:600px){
   .title-copy{top:max(2.5%,calc(env(safe-area-inset-top) + 4px))}
   .title-logo{width:min(84%,390px)}
   .start-game{width:min(69%,310px);margin-top:-16px}

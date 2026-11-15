@@ -159,27 +159,28 @@ const equipmentLevelText = document.querySelector("#equipmentLevelText");
 const specialNutrient = document.querySelector("#specialNutrient");
 const game = document.querySelector(".game");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const desktopFactory = window.matchMedia("(min-width:601px) and (height > 700px)");
+const desktopFactory = window.matchMedia("(min-width:601px)");
 const desktopFactoryHeight = 990;
+const mobileFactoryHeight = 740;
 let factoryScale = 1;
 
-function fitDesktopFactory() {
+function fitFactoryViewport() {
   const height = window.innerHeight;
-  const fitScale = height / desktopFactoryHeight;
-  factoryScale = desktopFactory.matches ? Math.min(1, fitScale) : 1;
+  const layoutHeight = desktopFactory.matches ? desktopFactoryHeight : mobileFactoryHeight;
+  factoryScale = Math.min(1, height / layoutHeight);
   const style = document.documentElement.style;
   if (factoryScale < 1) {
-    style.setProperty("--factory-layout-height", desktopFactoryHeight + "px");
-    style.setProperty("--factory-desktop-scale", String(factoryScale));
+    style.setProperty("--factory-layout-height", layoutHeight + "px");
+    style.setProperty("--factory-scale", String(factoryScale));
   } else {
     style.removeProperty("--factory-layout-height");
-    style.removeProperty("--factory-desktop-scale");
+    style.removeProperty("--factory-scale");
   }
 }
 
-window.addEventListener("resize", fitDesktopFactory);
-desktopFactory.addEventListener("change", fitDesktopFactory);
-fitDesktopFactory();
+window.addEventListener("resize", fitFactoryViewport);
+desktopFactory.addEventListener("change", fitFactoryViewport);
+fitFactoryViewport();
 
 const brandSplash = document.querySelector("#brandSplash");
 const titleScreen = document.querySelector("#titleScreen");
