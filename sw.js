@@ -1,5 +1,5 @@
 const APP_VERSION = "336";
-const CACHE_NAME = "cactus-factory-viewport-fit-336";
+const CACHE_NAME = "cactus-factory-status-bar-337";
 const APP_FILES = [
   "./assets/shop-background-v315.webp",
   "./assets/shop-heading-v314.webp",
