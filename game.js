@@ -159,13 +159,16 @@ const equipmentLevelText = document.querySelector("#equipmentLevelText");
 const specialNutrient = document.querySelector("#specialNutrient");
 const game = document.querySelector(".game");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-const desktopFactory = window.matchMedia("(min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse))");
+const desktopFactory = window.matchMedia("(min-width:601px)");
 const desktopFactoryHeight = 990;
+const minimumFactoryScale = .75;
 let factoryScale = 1;
 
 function fitDesktopFactory() {
   const height = window.innerHeight;
-  factoryScale = desktopFactory.matches ? Math.min(1, height / desktopFactoryHeight) : 1;
+  const fitScale = height / desktopFactoryHeight;
+  factoryScale = desktopFactory.matches ? Math.max(minimumFactoryScale, Math.min(1, fitScale)) : 1;
+  document.documentElement.classList.toggle("factory-scroll-layout", desktopFactory.matches && fitScale < minimumFactoryScale);
   const style = document.documentElement.style;
   if (factoryScale < 1) {
     style.setProperty("--factory-layout-height", desktopFactoryHeight + "px");
@@ -1070,6 +1073,8 @@ function collectSwipePot(x, y) {
 
 document.addEventListener("pointerdown", function (event) {
   if (document.querySelector("dialog[open]")) return;
+  // In a scrollable window, let touch gestures scroll before harvesting on tap.
+  if (event.pointerType !== "mouse" && document.documentElement.classList.contains("factory-scroll-layout")) return;
   if (swiping || event.pointerType === "mouse" && event.button !== 0) return;
   swiping = true;
   swipePointerId = event.pointerId;

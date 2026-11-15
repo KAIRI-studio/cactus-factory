@@ -78,8 +78,8 @@ dialog::backdrop{background:#10251dcc;backdrop-filter:blur(3px)}
 .zukan-entry{appearance:none;display:flex;align-items:center;gap:7px;min-width:0;padding:7px 6px;border:2px solid #b8c9c0;border-radius:15px;background:#eef2ed;color:#26352e;text-align:left;box-shadow:0 3px 0 #1e49332b}
 .zukan-entry:active{transform:translateY(2px);box-shadow:none}.zukan-picture{display:grid;place-items:center;flex:0 0 54px;height:60px;border-radius:11px;background:#dce8df}.zukan-picture img{max-width:51px;max-height:57px;object-fit:contain}.zukan-info{display:grid;min-width:0;gap:2px}.zukan-info small{font-size:10px;font-weight:900;color:#62746b;line-height:1.2}.zukan-info b{overflow:hidden;font-size:13px;line-height:1.25;white-space:nowrap;text-overflow:ellipsis}.zukan-info em{font-size:11px;font-style:normal;color:#6d7a74}
 .zukan-entry.rarity-rare{border-color:#51a9a4}.zukan-entry.rarity-super{border-color:#e0ad31}.zukan-entry.rarity-legend{border-color:#e2a916;background:#fff7cf}.zukan-entry.not-found .zukan-picture img,.zukan-hero.not-found img{filter:brightness(0);opacity:.48}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.cultivation-zone{top:36.1%;height:21.1%}.actions{height:79px;bottom:10px}.actions button{grid-template-rows:24px 18px 13px}.actions span{font-size:19px}}
-@supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(14px,env(safe-area-inset-bottom))}@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.actions{bottom:max(10px,env(safe-area-inset-bottom))}}}
+@media (max-height:700px) and (max-width:600px){.cultivation-zone{top:36.1%;height:21.1%}.actions{height:79px;bottom:10px}.actions button{grid-template-rows:24px 18px 13px}.actions span{font-size:19px}}
+@supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(14px,env(safe-area-inset-bottom))}@media (max-height:700px) and (max-width:600px){.actions{bottom:max(10px,env(safe-area-inset-bottom))}}}
 @media (min-width:481px){body{background:#152a22}.game{box-shadow:0 0 40px #0008}}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.default-cactus-sprite,.tiny-sprout-sprite,.harvest-flyer,.harvest-particle,.harvest-reward,.coin-chip.coin-bump,.game.facility-installing::before,.game.facility-installing .rack-zone{animation:none!important}}
 
@@ -116,8 +116,8 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @keyframes rarity-reveal{0%{opacity:0;transform:scale(.92)}12%,72%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.03)}}
 @keyframes reveal-flash{0%{opacity:0;transform:scale(.7)}18%{opacity:1}100%{opacity:0;transform:scale(1.25)}}
 @media (max-width:360px){.brand-lockup{padding-right:8px}.brand-lockup b{font-size:11px}.brand-lockup small{font-size:6px}.brand-mark{width:27px;height:27px}.coin-chip{min-width:88px}.collection-progress{right:14px}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.line-plate{top:32.3%}.actions{height:82px;bottom:9px;padding:6px}.actions button{grid-template-rows:26px 18px 12px}.actions span{width:25px;height:25px;font-size:16px}}
-@supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
+@media (max-height:700px) and (max-width:600px){.line-plate{top:32.3%}.actions{height:82px;bottom:9px;padding:6px}.actions button{grid-template-rows:26px 18px 12px}.actions span{width:25px;height:25px;font-size:16px}}
+@supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px) and (max-width:600px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
 /* Keep the requested test controls available during the current play-test phase. */
 .test-tools{display:grid!important}
 .title-greenhouse{filter:saturate(.96) brightness(.9)}
@@ -171,7 +171,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @keyframes title-dust{0%{opacity:0;transform:translateY(22px) scale(.7)}20%{opacity:.65}80%{opacity:.28}100%{opacity:0;transform:translate(9px,-55px) scale(1.15)}}
 @keyframes title-cactus-sway{0%,100%{rotate:-1.5deg;scale:1 1}38%{rotate:1.7deg;scale:1.035 .97}67%{rotate:-.5deg;scale:.975 1.035}}
 @keyframes start-pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.title-copy{top:max(6%,calc(env(safe-area-inset-top) + 18px))}.title-plaque{padding:13px}.title-plaque h1{font-size:32px}.start-game{min-height:56px;margin-top:14px}.title-cactus-1,.title-cactus-2{bottom:24%}}
+@media (max-height:700px) and (max-width:600px){.title-copy{top:max(6%,calc(env(safe-area-inset-top) + 18px))}.title-plaque{padding:13px}.title-plaque h1{font-size:32px}.start-game{min-height:56px;margin-top:14px}.title-cactus-1,.title-cactus-2{bottom:24%}}
 @media (prefers-reduced-motion:reduce){.brand-splash::before,.brand-splash::after,.brand-splash img,.splash-glow,.title-light,.title-dust i,.title-cactus,.start-game{animation:none!important}.brand-splash,.title-screen{transition:none!important}}
 .test-tools{display:grid;gap:7px;margin-top:12px;padding-top:11px;border-top:1px dashed #bbc9c1}.test-tools>small{color:#78877f;font-size:10px;font-weight:900;letter-spacing:.08em}.test-tools>div{display:grid;grid-template-columns:1fr 1fr;gap:8px}.test-tools button,.reset-actions button{min-height:38px;border:1px solid #b8c8bf;border-radius:11px;background:#f8faf6;color:#345044;font-size:11px;font-weight:900;box-shadow:0 2px 0 #173b2e2c}.test-tools button:active,.reset-actions button:active{transform:translateY(2px);box-shadow:none}.test-tools button.danger,.reset-actions button.danger{border-color:#cf8d84;background:#b64f46;color:#fff;box-shadow:0 2px 0 #7e312b}.reset-card p{margin:0 0 17px;color:#66776e;font-size:13px;line-height:1.65}.reset-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}
 @media (prefers-reduced-motion:reduce){.ambient-glow,.ambient-specks i,.line-plate i,.nursery-pot.ready::after,.zukan-hero::after,.rarity-reveal,.rarity-reveal::before,.special-nutrient,.special-nutrient img{animation:none!important}.ambient-specks{display:none}.rarity-reveal{opacity:1}}
@@ -190,8 +190,8 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 #equipmentDialog{width:min(94vw,420px);max-height:calc(var(--factory-layout-height,100dvh) * 0.92);overflow:hidden}.equipment-dialog-card{max-height:calc(var(--factory-layout-height,100dvh) * 0.88);overflow-y:auto;padding:24px 18px 19px;text-align:left;scrollbar-width:none}.equipment-dialog-card::-webkit-scrollbar{display:none}.equipment-dialog-card>small{margin-right:48px}.equipment-dialog-card h2{margin:7px 48px 13px 0;font-size:22px;line-height:1.25}.equipment-summary{display:grid;gap:9px;margin-bottom:12px;padding:13px 14px;border:1px solid #5b8e77;border-radius:16px;background:linear-gradient(145deg,#285d49,#173e31);box-shadow:0 4px 0 #102f25,0 9px 18px #102f252c,inset 0 1px #ffffff25;color:#fff}.equipment-summary>div:first-child{display:flex;align-items:center;justify-content:space-between;gap:12px}.equipment-summary span{font-size:11px;font-weight:800;letter-spacing:.06em;color:#cce5d8}.equipment-summary b{font-size:16px;letter-spacing:.04em;color:#ffe37d}.equipment-meter{height:7px;overflow:hidden;border-radius:99px;background:#0b2b2199;box-shadow:inset 0 1px 2px #071f18}.equipment-meter i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#7fd39a,#f4d15f);box-shadow:0 0 9px #b9e88180;transition:width .35s ease}
 .equipment-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.equipment-item{position:relative;display:grid;grid-template-columns:48px 1fr;grid-template-rows:48px auto 7px 36px;gap:7px 8px;align-items:center;min-height:164px;padding:12px;border:1px solid #b7cbc0;border-radius:18px;background:linear-gradient(150deg,#f8faf6,#e5eee8);box-shadow:0 3px 0 #163d2f27,inset 0 1px #fff;text-align:left}.equipment-icon{display:grid;place-items:center;width:48px;height:48px;border:1px solid #b4d1c1;border-radius:15px;background:linear-gradient(145deg,#e4f2e8,#cde4d5);box-shadow:inset 0 1px #fff;color:#2d7056}.equipment-icon svg{width:29px;height:29px;overflow:visible;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}.equipment-level-badge{align-self:start;justify-self:end;padding:4px 7px;border:1px solid #c6d5cc;border-radius:99px;background:#fff;color:#526b60;font-size:9px;font-weight:900;letter-spacing:.04em}.equipment-title{grid-column:1/-1;display:grid;gap:2px;min-width:0}.equipment-title b{font-size:13px;letter-spacing:.02em}.equipment-title small{color:#708078;font-size:10px;line-height:1.35}.level-dots{grid-column:1/-1;display:flex;gap:4px;padding:0}.level-dots i{flex:1;width:auto;height:6px;border:0;border-radius:99px;background:#cfdbd4}.level-dots i.on{border:0;background:linear-gradient(90deg,#5eb976,#83ce91);box-shadow:0 0 6px #67c77b58}.equipment-upgrade{grid-column:1/-1;min-height:36px;border:0;border-radius:11px;background:linear-gradient(145deg,#347c5f,#245f49);box-shadow:0 3px 0 #163d30;color:#fff;font-size:11px;font-weight:900}.equipment-upgrade:disabled{background:#c2cbc5;box-shadow:0 2px 0 #9daaa2;color:#f6f7f5}.equipment-item.completed{border-color:#d6b14a;background:linear-gradient(150deg,#fffaf0,#f3ebce)}.equipment-item.completed .equipment-icon{border-color:#ddc16b;background:linear-gradient(145deg,#fff9dc,#ecdda5);color:#846417}.equipment-item.completed .equipment-level-badge{border-color:#ddc16b;background:#fff6d0;color:#765a14}.equipment-item.completed .level-dots i.on{background:linear-gradient(90deg,#d5a830,#f1cc58);box-shadow:0 0 6px #e6bb3f59}.equipment-dialog-card .feedback{text-align:center}.equipment-dialog-card .special-shop{border-width:1px;border-radius:17px;box-shadow:0 3px 0 #a17a1726,inset 0 1px #fff}
 @media (max-width:360px){.equipment-dialog-card{padding-right:14px;padding-left:14px}.equipment-item{grid-template-columns:43px 1fr;min-height:158px;padding:10px}.equipment-icon{width:43px;height:43px}.equipment-icon svg{width:26px;height:26px}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.actions{height:76px;bottom:9px;padding:5px}.actions button{grid-template-rows:25px 17px 12px}.actions span{width:25px;height:25px}.equipment-dialog-card{max-height:calc(var(--factory-layout-height,100dvh) * 0.91)}.equipment-item{min-height:150px;grid-template-rows:43px auto 6px 33px;padding:9px}.equipment-icon{width:43px;height:43px}}
-@supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
+@media (max-height:700px) and (max-width:600px){.actions{height:76px;bottom:9px;padding:5px}.actions button{grid-template-rows:25px 17px 12px}.actions span{width:25px;height:25px}.equipment-dialog-card{max-height:calc(var(--factory-layout-height,100dvh) * 0.91)}.equipment-item{min-height:150px;grid-template-rows:43px auto 6px 33px;padding:9px}.equipment-icon{width:43px;height:43px}}
+@supports (bottom:env(safe-area-inset-bottom)){.actions{bottom:max(12px,env(safe-area-inset-bottom))}@media (max-height:700px) and (max-width:600px){.actions{bottom:max(9px,env(safe-area-inset-bottom))}}}
 .test-tools{display:grid!important}
 .title-greenhouse{filter:saturate(.96) brightness(.9)}
 
@@ -212,7 +212,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .rarity-reveal{inset:0;display:block;place-items:initial}.rarity-reveal::before{inset:7% 6% auto;height:25%;background:radial-gradient(ellipse at 50% 50%,#fff9cf99 0 8%,#f0bd4c30 35%,transparent 70%)}.rarity-reveal-card{position:absolute;top:17%;left:50%;min-width:220px;max-width:86%;transform:translateX(-50%)}.rarity-reveal.legend::before{background:radial-gradient(ellipse at 50% 50%,#fff 0 4%,#ffe37baa 16%,#f0b82b42 42%,transparent 72%)}
 .game.facility-installing .facility-unit{animation:hardware-install .85s cubic-bezier(.2,.8,.25,1)}
 @keyframes hardware-install{0%{filter:brightness(2) drop-shadow(0 0 20px #fff2a8);transform:scale(.94)}55%{transform:scale(1.025)}100%{transform:scale(1)}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.facility-light{top:14.6%}.facility-air{top:19.9%}.facility-sensor{top:15.7%}.facility-mist{top:22.5%}.rarity-reveal-card{top:15%;transform:translateX(-50%) scale(.92)}}
+@media (max-height:700px) and (max-width:600px){.facility-light{top:14.6%}.facility-air{top:19.9%}.facility-sensor{top:15.7%}.facility-mist{top:22.5%}.rarity-reveal-card{top:15%;transform:translateX(-50%) scale(.92)}}
 @media(prefers-reduced-motion:reduce){.facility-unit,.facility-stage{animation:none!important;transition:none!important}}
 
 
@@ -291,7 +291,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .actions.factory-console .math-control .console-light{background:#f06d58}
 .actions.factory-console .equipment-control .console-light{background:#70ba7d}
 .actions.factory-console .zukan-control .console-light{background:#69a9bf}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   .actions.factory-console{height:87px;bottom:9px;padding:6px}
   .actions.factory-console .console-button{height:67px;grid-template-rows:30px 14px 9px}
   .actions.factory-console .math-control{height:76px;grid-template-rows:39px 15px 9px}
@@ -302,7 +302,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 @supports (bottom:env(safe-area-inset-bottom)){
   .actions.factory-console{bottom:max(12px,env(safe-area-inset-bottom))}
-  @media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.actions.factory-console{bottom:max(9px,env(safe-area-inset-bottom))}}
+  @media (max-height:700px) and (max-width:600px){.actions.factory-console{bottom:max(9px,env(safe-area-inset-bottom))}}
 }
 
 
@@ -454,7 +454,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .factory-guide-copy b{font-size:10.5px}
   .factory-guide-action{padding-right:8px;padding-left:8px}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   .factory-guide{right:14px;bottom:108px;left:14px;height:52px}
   .factory-guide-button{grid-template-columns:37px minmax(0,1fr) auto;gap:7px;padding-top:5px;padding-bottom:5px}
   .factory-guide-emblem{width:35px;height:35px}.factory-guide-emblem svg{width:27px;height:27px}
@@ -462,7 +462,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 }
 @supports(bottom:env(safe-area-inset-bottom)){
   .factory-guide{bottom:max(132px,calc(env(safe-area-inset-bottom) + 120px))}
-  @media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.factory-guide{bottom:max(108px,calc(env(safe-area-inset-bottom) + 97px))}}
+  @media (max-height:700px) and (max-width:600px){.factory-guide{bottom:max(108px,calc(env(safe-area-inset-bottom) + 97px))}}
 }
 @media(prefers-reduced-motion:reduce){.nursery-pot.factory-guide-focus .sprite-crop{animation:none!important}}
 
@@ -582,10 +582,10 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   white-space:nowrap;
 }
 .factory-progress-screen>i{grid-column:auto;width:100%;min-width:0}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.factory-progress-chip{left:14px;bottom:170px;height:46px}}
+@media (max-height:700px) and (max-width:600px){.factory-progress-chip{left:14px;bottom:170px;height:46px}}
 @supports(bottom:env(safe-area-inset-bottom)){
   .factory-progress-chip{bottom:max(202px,calc(env(safe-area-inset-bottom) + 190px))}
-  @media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.factory-progress-chip{bottom:max(170px,calc(env(safe-area-inset-bottom) + 159px))}}
+  @media (max-height:700px) and (max-width:600px){.factory-progress-chip{bottom:max(170px,calc(env(safe-area-inset-bottom) + 159px))}}
 }
 
 /* v148: keep factory dialogs inside the mobile viewport */
@@ -710,7 +710,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   .math-card{padding:12px 14px 17px}.math-illustrated-heading{height:101px;margin-right:36px}
   .math-card .problem{min-height:101px}.math-card .answers button{height:66px;font-size:26px}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   .math-illustrated-heading{height:88px}.math-card .challenge-head{margin-bottom:9px;padding-top:7px;padding-bottom:6px}
   .math-counter{min-height:34px}.problem-stage{margin-bottom:12px}.math-card .problem{min-height:86px;font-size:32px}
   .math-card .answers button{height:59px}.math-card .feedback{margin-top:7px}
@@ -1321,7 +1321,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .nursery-pot.tutorial-focus .sprite-crop{filter:drop-shadow(0 0 4px #fff6bd) drop-shadow(0 0 9px #ffd64f);animation:tutorial-cactus-pulse 1.2s ease-in-out infinite}
 @keyframes tutorial-console-pulse{0%,100%{filter:brightness(1)}50%{filter:brightness(1.13)}}
 @keyframes tutorial-cactus-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.onboarding-tip{min-height:68px;grid-template-columns:42px minmax(0,1fr) auto}.onboarding-mascot{width:40px;height:40px}.onboarding-mascot img{width:34px;height:37px}.onboarding-tip.stage-harvest{top:24.5%}.onboarding-tip.stage-math,.onboarding-tip.stage-equipment{bottom:98px}}
+@media (max-height:700px) and (max-width:600px){.onboarding-tip{min-height:68px;grid-template-columns:42px minmax(0,1fr) auto}.onboarding-mascot{width:40px;height:40px}.onboarding-mascot img{width:34px;height:37px}.onboarding-tip.stage-harvest{top:24.5%}.onboarding-tip.stage-math,.onboarding-tip.stage-equipment{bottom:98px}}
 @media (prefers-reduced-motion:reduce){.console-button.tutorial-focus,.nursery-pot.tutorial-focus .sprite-crop{animation:none!important}}
 
 
@@ -2702,7 +2702,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .equipment-scroll-area>.special-shop button{min-height:30px;margin-top:4px}
 .equipment-scroll-area>.feedback{display:none}
 .equipment-scroll-area>.test-tools{margin:14px 0 0;padding:10px 0 8px}
-@media (max-height:680px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:680px) and (max-width:600px){
   .equipment-dialog-card{padding-top:44px!important}
   .equipment-illustrated-heading img{max-height:90px;object-fit:contain}
   .equipment-room-shell{grid-template-rows:44px minmax(0,1fr) 68px;gap:4px}
@@ -2867,7 +2867,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   0%,100%{transform:translateY(-1px) scale(1.045)}
   50%{transform:translateY(-4px) scale(1.065)}
 }
-@media (max-height:680px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:680px) and (max-width:600px){
   .equipment-dialog-card{padding-top:42px!important}
   .equipment-illustrated-heading{height:88px;margin-bottom:2px}
   .equipment-room-shell{grid-template-rows:41px auto 78px!important;gap:3px!important;padding:6px!important}
@@ -3030,7 +3030,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   box-shadow:inset 0 3px #f4f7f2,inset 0 -3px #98a69d,0 3px 0 #527064!important;filter:none!important;
 }
 #equipmentDialog .equipment-detail>.equipment-upgrade:disabled .equipment-switch-light{background:#aeb7b0;box-shadow:none}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-room-shell>.equipment-grid{gap:14px 10px!important;padding-top:9px!important;padding-bottom:8px!important}
   #equipmentDialog .equipment-detail{min-height:118px!important;padding-top:23px!important;padding-bottom:25px!important}
 }
@@ -3054,7 +3054,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog .equipment-detail-choice{min-width:88px!important}
   #equipmentDialog .equipment-detail-choice b{font-size:13px!important}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-detail{grid-template-columns:44px minmax(86px,1fr) 35%!important}
   #equipmentDialog .equipment-detail-mini{width:46px;height:31px}
   #equipmentDialog .equipment-detail-choice{min-width:86px!important}
@@ -3126,7 +3126,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog .equipment-detail-mini{width:54px;height:37px}
   #equipmentDialog .equipment-detail-choice b{font-size:14px!important}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-illustrated-heading img{width:102%!important;margin-left:-1%}
   #equipmentDialog .equipment-room-shell>.equipment-grid{gap:9px 7px!important;padding-top:8px!important;padding-bottom:8px!important}
   #equipmentDialog .equipment-detail{min-height:101px!important;grid-template-columns:49px minmax(0,1fr) 39%!important;padding-top:20px!important;padding-bottom:21px!important}
@@ -3198,7 +3198,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog .equipment-scroll-area{padding-right:8px;padding-left:8px}
   #equipmentDialog .equipment-detail{grid-template-columns:minmax(0,1fr) 39%!important}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-dialog-card{padding-top:40px!important;padding-bottom:20px!important}
   #equipmentDialog .equipment-illustrated-heading{margin-bottom:4px}
   #equipmentDialog .equipment-room-shell>.equipment-grid{gap:12px 9px!important;padding-top:8px!important;padding-bottom:7px!important}
@@ -3255,7 +3255,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   #equipmentDialog .equipment-detail-choice{min-width:84px!important;padding-left:5px!important}
   #equipmentDialog .equipment-detail-choice b{font-size:12px!important}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-illustrated-heading img{width:102%!important;margin-left:-1%}
   #equipmentDialog .equipment-room-shell>.equipment-grid{gap:9px 7px!important;padding-top:8px!important;padding-bottom:8px!important}
   #equipmentDialog .equipment-detail{min-height:101px!important;grid-template-columns:40px minmax(82px,1fr) 35%!important;padding-top:20px!important;padding-bottom:21px!important}
@@ -3266,7 +3266,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 
 /* v195: keep the compact level panel on one line. */
 #equipmentDialog .equipment-room-level span{white-space:nowrap!important}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-room-level span{font-size:8px!important;letter-spacing:-.02em}
   #equipmentDialog .equipment-room-level{column-gap:5px!important;padding-right:7px!important;padding-left:7px!important}
   #equipmentDialog .equipment-room-level b{font-size:14px!important}
@@ -3394,7 +3394,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 #equipmentDialog .equipment-scroll-area>.test-tools{
   margin-top:calc(var(--factory-layout-height,100dvh) * 0.38)!important;
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-dialog-card{padding-top:max(38px,calc(env(safe-area-inset-top) + 14px))!important}
   #equipmentDialog .equipment-illustrated-heading{margin-bottom:2px!important}
   #equipmentDialog .equipment-room-shell>.equipment-grid{min-height:230px!important;gap:10px 7px!important;padding:12px 0 9px!important}
@@ -3515,7 +3515,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @keyframes upgrade-plate-pop{0%{opacity:0;transform:scale(.72) translateY(-12px)}72%{opacity:1;transform:scale(1.035) translateY(0)}100%{opacity:1;transform:scale(1) translateY(0)}}
 @keyframes upgrade-plate-away{0%{opacity:1;transform:scale(1) translateY(0)}100%{opacity:0;transform:scale(.92) translateY(-13px)}}
 @keyframes upgrade-sparkle{0%,100%{opacity:0;transform:rotate(45deg) scale(.25)}42%{opacity:1;transform:rotate(45deg) scale(1)}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.upgrade-celebration{top:max(calc(var(--factory-layout-height,100dvh) * 0.18),108px);width:min(88vw,350px)}}
+@media (max-height:700px) and (max-width:600px){.upgrade-celebration{top:max(calc(var(--factory-layout-height,100dvh) * 0.18),108px);width:min(88vw,350px)}}
 @media(prefers-reduced-motion:reduce){
   #equipmentDialog .equipment-hotspot{transition:none!important}
   .upgrade-celebration.show .upgrade-celebration-card{animation:none;opacity:1;transform:none}
@@ -3538,7 +3538,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .problem-stage .answer-celebration.is-wrong .answer-title-wrong{display:block;animation:math-success-pop .46s cubic-bezier(.18,1.35,.36,1)}
 .problem-stage .answer-celebration b{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
 @media(max-width:360px){.problem-stage .answer-celebration .answer-title-art{width:min(94%,248px)}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.problem-stage{margin-bottom:12px}}
+@media (max-height:700px) and (max-width:600px){.problem-stage{margin-bottom:12px}}
 @media(prefers-reduced-motion:reduce){.problem-stage .answer-celebration .answer-title-art{animation:none!important}}
 
 /* v213: keep feedback centered from its first rendered frame. */
@@ -4574,7 +4574,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 .result-growth-copy>p>span{color:#244d3d;font-size:12px;font-weight:1000;line-height:1.2}
 .result-growth-copy>em{color:#6b7d70;font-size:8px;font-style:normal;font-weight:900}
 
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   .math-reward-hint{padding-top:5px;padding-bottom:5px}
 }
 
@@ -4684,7 +4684,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
 @keyframes discovery-rays{to{transform:rotate(360deg)}}
 @keyframes discovery-pop{0%{opacity:0;transform:translateY(20px) scale(.45) rotate(-5deg)}72%{opacity:1;transform:translateY(-4px) scale(1.06) rotate(1deg)}100%{transform:none}}
 @media(prefers-reduced-motion:reduce){.discovery-rays,.discovery-stage img{animation:none!important}}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   .discovery-card{padding-top:17px;padding-bottom:14px}
   .discovery-stage{height:145px}
   .discovery-stage img{width:120px;height:120px}
@@ -4850,7 +4850,7 @@ dialog{border-radius:27px}.dialog-card{padding:28px 20px 22px;border:1px solid #
   width:87px!important;
   height:103px!important;
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #zukanDialog .station-glass-zukan>.zukan-hero{
     flex-basis:100px!important;
     min-height:100px!important;
@@ -5023,7 +5023,7 @@ body:not(.debug-mode) .test-tools{display:none!important}
   background:#f1f3e9ed;
 }
 #equipmentDialog .save-settings:not([open])>:not(summary){display:none!important}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #equipmentDialog .equipment-room-shell{row-gap:4px!important}
   #equipmentDialog .equipment-growth-guide{padding:3px 5px 4px}
   #equipmentDialog .equipment-growth-guide b,#equipmentDialog .equipment-growth-guide span{font-size:10px}
@@ -5098,7 +5098,7 @@ body:not(.debug-mode) .test-tools{display:none!important}
   #zukanDialog .zukan-grid>.zukan-entry .zukan-info b{font-size:9px!important;min-height:19px!important}
   #equipmentDialog .equipment-growth-guide span{font-size:13px}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #mathDialog .problem-stage{margin-top:12px!important}
   #mathDialog .math-reward-hint{margin-top:24px!important;padding:6px 9px}
   #equipmentDialog .equipment-growth-guide{padding:4px 6px 5px}
@@ -5180,13 +5180,13 @@ body:not(.debug-mode) .test-tools{display:none!important}
 
 /* Leave clear air between the achievement meter and the announcement card. */
 .game:has(.factory-guide:not([hidden])) .factory-progress-chip{bottom:224px!important}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   .game:has(.factory-guide:not([hidden])) .factory-progress-chip{bottom:190px!important}
 }
 
 /* Seat the mist riser along the left edge of the painted water tank. */
 .facility-mist{right:5%;top:25.5%}
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.facility-mist{top:25%}}
+@media (max-height:700px) and (max-width:600px){.facility-mist{top:25%}}
 
 /* Expanded record remains within the scrollable equipment scene. */
 #equipmentDialog .equipment-scroll-area{
@@ -5303,7 +5303,7 @@ body:not(.debug-mode) .test-tools{display:none!important}
     height:128px!important;min-height:128px!important;
   }
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))), (min-width:768px) and (max-height:760px){
+@media (max-height:700px) and (max-width:600px), (min-width:768px) and (max-height:760px){
   #zukanDialog .zukan-grid>.zukan-entry,
   #zukanDialog .zukan-grid>.zukan-entry.rarity-legend:last-child{
     height:112px!important;min-height:112px!important;
@@ -5390,7 +5390,7 @@ body:not(.debug-mode) .test-tools{display:none!important}
 .dedicated-pot-art>img[hidden]{display:none}
 .dedicated-pot.is-ready{border-color:#987126;background:#fff0b5;box-shadow:0 4px 0 #735a2c,0 0 14px #f3d16470}
 #shopDialog #shopPotStatus{margin:0;padding:8px;border:1px solid #a1b39b;border-radius:9px;background:#fffdf3;color:#31513b;font-size:12px}
-@media (max-height:600px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.dedicated-pot{top:58%;height:72px;right:4%}.dedicated-pot>small{font-size:8px}}
+@media (max-height:600px) and (max-width:600px){.dedicated-pot{top:58%;height:72px;right:4%}.dedicated-pot>small{font-size:8px}}
 
 /* v304: temporarily visible test controls, just below the shop entrance. */
 #equipmentDialog .equipment-scroll-area>.temporary-test-tools{display:grid!important;margin:8px 9px 14px!important;padding:10px!important;border:2px dashed #829a75;border-radius:12px;background:#fff8df}
@@ -5410,7 +5410,7 @@ body:not(.debug-mode) .test-tools{display:none!important}
 .dedicated-pot.is-ready{border:0;background:transparent;box-shadow:none;filter:drop-shadow(0 0 6px #ecc854)}
 .dedicated-pot.is-ready>small{background:#ffedab;border-color:#987126}
 @media(max-width:360px){.dedicated-pot{width:94px;height:126px}.dedicated-pot .dedicated-pot-art{height:103px}.special-nutrient{width:96px}}
-@media (max-height:600px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){.dedicated-pot{top:auto;right:auto;left:50%;height:110px;width:90px}.dedicated-pot .dedicated-pot-art{height:91px}}
+@media (max-height:600px) and (max-width:600px){.dedicated-pot{top:auto;right:auto;left:50%;height:110px;width:90px}.dedicated-pot .dedicated-pot-art{height:91px}}
 #shopDialog .shop-card{padding:15px 15px 16px;background:linear-gradient(#fff9e8,#eef0de);border:5px solid #345c44}
 #shopDialog .shop-heading{flex:none;position:relative;text-align:center;margin:0 40px 10px;padding:9px 0;color:#294e3b}
 #shopDialog .shop-heading small{display:block;font-size:8px;letter-spacing:.18em;color:#947336;font-weight:900}
@@ -5551,7 +5551,7 @@ body:not(.debug-mode) .test-tools{display:none!important}
   #equipmentDialog .nutrient-copy strong{font-size:12px;padding:7px}
   #shopDialog .shop-product{grid-template-columns:75px minmax(0,1fr)}
 }
-@media (max-height:700px) and (not ((min-width:601px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse)))){
+@media (max-height:700px) and (max-width:600px){
   #zukanDialog .station-glass-zukan>.zukan-hero{height:auto!important;min-height:120px!important;flex-basis:120px!important}
   #zukanDialog .zukan-hero-copy p{font-size:12px!important}
 }
