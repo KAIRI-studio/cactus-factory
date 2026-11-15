@@ -63,11 +63,12 @@ function cactusType(id) {
   return CACTUS_TYPES.find(function (type) { return type.id === id; }) || CACTUS_TYPES[0];
 }
 
-let state = loadState();
+let savedSnapshot = localStorage.getItem(STORAGE);
+let state = loadState(savedSnapshot);
 
-function loadState() {
+function loadState(snapshot) {
   try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE));
+    const saved = JSON.parse(snapshot === undefined ? localStorage.getItem(STORAGE) : snapshot);
     if (saved && saved.pots && saved.pots.length === POT_COUNT) {
       if (!Number.isInteger(saved.layoutSeed)) saved.layoutSeed = Math.floor(Math.random() * 2147483647);
       if (!saved.equipment) {
@@ -115,7 +116,6 @@ function loadState() {
           && CACTUS_TYPES.every(function (type) { return (Number(saved.collections[type.id]) || 0) === 0; })
           && saved.pots.some(function (pot) { return pot.cactusId !== "normal"; })) {
         saved.pots.forEach(function (pot) { pot.cactusId = "normal"; });
-        localStorage.setItem(STORAGE, JSON.stringify(saved));
       }
       return saved;
     }
@@ -147,7 +147,44 @@ function createInitialState() {
   };
 }
 
-function save() { localStorage.setItem(STORAGE, JSON.stringify(state)); }
+function save() {
+  if (!navigator.locks && localStorage.getItem(STORAGE) !== savedSnapshot) {
+    syncSavedState();
+    return;
+  }
+  savedSnapshot = JSON.stringify(state);
+  localStorage.setItem(STORAGE, savedSnapshot);
+}
+
+function syncSavedState() {
+  const snapshot = localStorage.getItem(STORAGE);
+  if (snapshot === savedSnapshot) return;
+  const oldSoundSetting = state.soundEnabled;
+  const oldTutorialStep = state.tutorialStep;
+  savedSnapshot = snapshot;
+  state = loadState(snapshot);
+  render();
+  if (oldTutorialStep !== state.tutorialStep) showTutorial();
+  if (oldSoundSetting !== state.soundEnabled) {
+    renderSoundSetting();
+    if (state.soundEnabled) startBgm();
+    else stopSounds();
+  }
+  if (equipmentDialog.open) renderEquipment();
+  if (zukanDialog.open) renderZukan();
+}
+
+function withSavedState(action) {
+  return function (...args) {
+    const apply = function () {
+      syncSavedState();
+      refreshNaturalGrowth();
+      return action(...args);
+    };
+    if (navigator.locks) return navigator.locks.request(STORAGE, apply);
+    return apply();
+  };
+}
 const nursery = document.querySelector("#nursery");
 const coinCount = document.querySelector("#coinCount");
 const factoryProgressButton = document.querySelector("#factoryProgressButton");
@@ -252,8 +289,8 @@ function showUpgradeCelebration(item, fromLevel, toLevel) {
 
 upgradeCelebrationClose.addEventListener("click", hideUpgradeCelebration);
 
-function getAudioContext() {
-  if (!state.soundEnabled) return null;
+function getAudioContext(allowMuted = false) {
+  if (!state.soundEnabled && !allowMuted) return null;
   const AudioContextClass = window.AudioContext || window.webkitAudioContext;
   if (!AudioContextClass) return null;
   if (!audioContext) audioContext = new AudioContextClass();
@@ -375,16 +412,20 @@ function renderSoundSetting() {
   soundToggle.setAttribute("aria-pressed", String(state.soundEnabled));
 }
 
-soundToggle.addEventListener("click", function () {
+const toggleSound = withSavedState(function () {
   state.soundEnabled = !state.soundEnabled;
   renderSoundSetting();
   save();
   if (state.soundEnabled) { startBgm(); playSound("tap"); }
   else stopSounds();
 });
+soundToggle.addEventListener("click", function () {
+  getAudioContext(true);
+  toggleSound();
+});
 
 const TUTORIAL_COPY = {
-  harvest: { number: "1 / 3", text: "サボテンを タップして しゅうかく！", target: ".nursery-pot.ready" },
+  harvest: { number: "1 / 3", text: "まず しゅうかく！ そのあと けいさんで はやく そだつよ", target: ".nursery-pot.ready" },
   math: { number: "2 / 3", text: "けいさんで はやく そだつよ！", target: "#mathButton" },
   equipment: { number: "3 / 3", text: "コインで せつびを つよくしよう！", target: "#equipmentButton" },
 };
@@ -441,7 +482,7 @@ function showNextTutorialTip() {
   scheduleTutorial(140);
 }
 
-onboardingSkip.addEventListener("click", showNextTutorialTip);
+onboardingSkip.addEventListener("click", withSavedState(showNextTutorialTip));
 
 if (new URLSearchParams(window.location.search).get("debug") === "1") {
   document.body.classList.add("debug-mode");
@@ -730,7 +771,7 @@ shopDialog.addEventListener("close", function () {
   if (shopReturnsToEquipment) { renderEquipment(); equipmentDialog.showModal(); }
 });
 shopDialog.addEventListener("click", function (event) { if (event.target === shopDialog) shopDialog.close(); });
-document.querySelector("#shopBuy").addEventListener("click", buyShopProduct);
+document.querySelector("#shopBuy").addEventListener("click", withSavedState(buyShopProduct));
 
 function dedicatedPotStatus() {
   const pot = state.shopPlant;
@@ -766,11 +807,11 @@ function harvestDedicatedPot() {
   if (item.isNew) { discoveryQueue.push(item); playNextDiscovery(); }
   else showRarityReveal(item);
 }
-dedicatedPot.addEventListener("click", function () {
+dedicatedPot.addEventListener("click", withSavedState(function () {
   refreshNaturalGrowth();
   if (state.shopPlant && state.shopPlant.ready) harvestDedicatedPot();
   else openSeedShop(false);
-});
+}));
 
 function seededUnit(index, salt) {
   const generation = state.pots[index].generation || 0;
@@ -841,7 +882,7 @@ function makePot(pot, index) {
         ? '<img class="default-cactus-sprite" src="' + type.sprite + '" alt="" />'
         : '<img class="tiny-sprout-sprite" src="assets/simple-bold-sprout.png" alt="" />';
   button.innerHTML = '<span class="sprite-crop">' + plantImage + '</span>';
-  button.addEventListener("click", function () { if (pot.ready) harvest([index]); });
+  button.addEventListener("click", function () { harvest([index]); });
   return button;
 }
 
@@ -874,7 +915,6 @@ function render() {
   // Level-specific equipment is rendered as illustrated hardware above the base room.\n  document.querySelector(".greenhouse-back").src = FACILITY_BACKGROUNDS.base;
   game.className = game.className.replace(/\b(light|mist|air|sensor)-level-\d+\b/g, "").trim();
   Object.keys(state.equipment).forEach(function (key) { game.classList.add(key + "-level-" + state.equipment[key]); });
-  save();
 }
 
 function playHarvestAnimation(item, order) {
@@ -1015,10 +1055,10 @@ function finishDiscovery(openZukan) {
 }
 
 document.querySelector("#discoveryContinue").addEventListener("click", function () { finishDiscovery(false); });
-document.querySelector("#discoveryZukan").addEventListener("click", function () { finishDiscovery(true); });
+document.querySelector("#discoveryZukan").addEventListener("click", withSavedState(function () { finishDiscovery(true); }));
 discoveryDialog.addEventListener("cancel", function (event) { event.preventDefault(); finishDiscovery(false); });
 
-function harvest(indexes) {
+const harvest = withSavedState(function (indexes) {
   const harvestedItems = [];
   indexes.forEach(function (index) {
     const pot = state.pots[index];
@@ -1065,7 +1105,7 @@ function harvest(indexes) {
     if (discoveryQueue.length) playNextDiscovery();
     else if (finishedHarvestGuide) scheduleTutorial(reduceMotion.matches ? 80 : 220);
   }, animationTime);
-}
+});
 
 let swiping = false;
 let swipeStartX = 0;
@@ -1125,6 +1165,14 @@ document.addEventListener("pointerup", finishSwipe);
 document.addEventListener("pointercancel", finishSwipe);
 
 function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+function shuffle(items) {
+  for (let i = items.length - 1; i > 0; i -= 1) {
+    const j = randomInt(0, i);
+    [items[i], items[j]] = [items[j], items[i]];
+  }
+  return items;
+}
+
 function makeQuestion(questionIndex) {
   let a;
   let b;
@@ -1154,7 +1202,7 @@ function makeQuestion(questionIndex) {
     const candidate = correct + randomInt(-range, range);
     if (candidate >= 0) choices.add(candidate);
   }
-  return { text: a + symbol + b + "＝？", correct: correct, choices: Array.from(choices).sort(function () { return Math.random() - .5; }) };
+  return { text: a + symbol + b + "＝？", correct: correct, choices: shuffle(Array.from(choices)) };
 }
 
 const mathDialog = document.querySelector("#mathDialog");
@@ -1171,7 +1219,7 @@ const answerSymbol = document.querySelector("#answerSymbol");
 const questionNumber = document.querySelector("#questionNumber");
 const score = document.querySelector("#score");
 const mathProgress = document.querySelector("#mathProgress");
-let challenge = { answered: 0, correct: 0 };
+let challenge = { answered: 0, correct: 0, layoutSeed: null };
 let untimedPractice = false;
 let nextTimer;
 let questionFrame;
@@ -1291,13 +1339,16 @@ function grownForScore(value) {
   return 0;
 }
 
-function finishChallenge() {
+const finishChallenge = withSavedState(function () {
+  if (!mathDialog.open || challenge.answered !== 10) return;
   stopQuestionTimer();
   mathDialog.close();
+  if (challenge.layoutSeed !== state.layoutSeed) return;
   const target = grownForScore(challenge.correct);
-  const candidates = state.pots.map(function (pot, index) { return { pot: pot, index: index }; }).filter(function (item) { return !item.pot.ready; });
+  const candidates = state.pots.filter(function (pot) { return !pot.ready; });
   const grownCount = Math.min(target, candidates.length);
-  candidates.sort(function () { return Math.random() - .5; }).slice(0, grownCount).forEach(function (item) { item.pot.stage = 2; item.pot.ready = true; });
+  shuffle(candidates).slice(0, grownCount).forEach(function (pot) { pot.stage = 2; pot.ready = true; });
+  if (grownCount) save();
   render();
   document.querySelector("#resultScore").textContent = challenge.correct;
   document.querySelector("#resultTitle").textContent = challenge.correct === 10 ? "パーフェクト！" : challenge.correct >= 7 ? "すごい！" : challenge.correct >= 4 ? "よくできました！" : "つぎも がんばろう！";
@@ -1311,21 +1362,24 @@ function finishChallenge() {
   document.querySelector("#resultRewardText").textContent = grownCount > 0 ? "すぐに そだった！" : allReady ? "そだっているよ！" : "つぎは そだてよう！";
   playSound("result");
   document.querySelector("#resultDialog").showModal();
-}
+});
 
 const mathIntro = document.querySelector("#mathIntro");
 document.querySelector("#mathButton").addEventListener("click", function () {
-  if (mathIntro) mathIntro.showModal();
-  else beginMathChallenge();
+  const intro = state.harvested === 0 && state.pots.every(function (pot) { return pot.ready; });
+  document.querySelector("#mathIntroDescription").textContent = intro
+    ? "そだった サボテンを さきに とると、けいさんの ごほうびで また そだつよ！"
+    : "10もんの けいさん。あそびかたを えらぼう！";
+  mathIntro.showModal();
 });
-document.querySelector("#mathStart")?.addEventListener("click", function () {
+document.querySelector("#mathStart")?.addEventListener("click", withSavedState(function () {
   mathIntro.close();
   beginMathChallenge();
-});
-document.querySelector("#mathPractice")?.addEventListener("click", function () {
+}));
+document.querySelector("#mathPractice")?.addEventListener("click", withSavedState(function () {
   mathIntro.close();
   beginMathChallenge(true);
-});
+}));
 
 function beginMathChallenge(practice = false) {
   untimedPractice = practice;
@@ -1334,7 +1388,7 @@ function beginMathChallenge(practice = false) {
     hideTutorial();
     save();
   }
-  challenge = { answered: 0, correct: 0 }; showQuestion(); mathDialog.showModal();
+  challenge = { answered: 0, correct: 0, layoutSeed: state.layoutSeed }; showQuestion(); mathDialog.showModal();
 }
 document.querySelector("#mathClose").addEventListener("click", function () { mathDialog.close(); });
 document.querySelector("#resultClose").addEventListener("click", function () {
@@ -1435,16 +1489,17 @@ function renderEquipment() {
 
   document.querySelector("#equipmentFeedback").textContent = "";
 }
-document.querySelector("#equipmentButton").addEventListener("click", function () {
+document.querySelector("#equipmentButton").addEventListener("click", withSavedState(function () {
   if (state.tutorialStep === "equipment") finishTutorial();
   renderEquipment();
   equipmentDialog.showModal();
-});
+}));
 document.querySelector("#equipmentClose").addEventListener("click", function () { equipmentDialog.close(); });
 document.querySelector("#equipmentDialog .save-settings").addEventListener("toggle", function (event) {
   if (event.target.open) requestAnimationFrame(function () { event.target.scrollIntoView({ block: "end", behavior: "smooth" }); });
 });
-document.querySelector("#equipmentDialog").addEventListener("click", function (event) {
+document.querySelector("#equipmentDialog").addEventListener("click", withSavedState(function (event) {
+  if (!equipmentDialog.open) return;
   const select = event.target.closest(".equipment-hotspot");
   if (select) {
     selectedEquipmentKey = select.dataset.equipmentSelect;
@@ -1456,6 +1511,7 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
     if (equipmentTotal() < 12 || nutrientIsInUse() || state.coins < 300) return;
     state.specialSeedQueued = true;
     state.coins -= 300;
+    save();
     playSound("upgrade");
     render();
     equipmentDialog.close();
@@ -1468,6 +1524,7 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   const cost = equipmentUpgradeCost(level);
   if (level >= 3 || state.coins < cost) return;
   state.coins -= cost; state.equipment[key] += 1;
+  save();
   const upgradedItem = EQUIPMENT.find(function (item) { return item.key === key; });
   playSound("upgrade");
   game.classList.remove("facility-installing");
@@ -1477,20 +1534,20 @@ document.querySelector("#equipmentDialog").addEventListener("click", function (e
   equipmentDialog.close();
   if (upgradedItem) window.setTimeout(function () { showUpgradeCelebration(upgradedItem, level, level + 1); }, 100);
   window.setTimeout(function () { game.classList.remove("facility-installing"); }, 900);
-});
+}));
 
 document.querySelector("#temporaryTestControls")?.remove();
 
 const resetDialog = document.querySelector("#resetDialog");
 document.querySelector("#resetSaveButton").addEventListener("click", function () { equipmentDialog.close(); resetDialog.showModal(); });
 document.querySelector("#resetCancelButton").addEventListener("click", function () { resetDialog.close(); });
-document.querySelector("#resetConfirmButton").addEventListener("click", function () {
+document.querySelector("#resetConfirmButton").addEventListener("click", withSavedState(function () {
   state = createInitialState();
   if (window.CactusInstall) window.CactusInstall.beginSuggestion();
-  localStorage.setItem(STORAGE, JSON.stringify(state));
+  save();
   resetDialog.close();
   location.reload();
-});
+}));
 
 const zukanDialog = document.querySelector("#zukanDialog");
 function zukanGroup(type) {
@@ -1585,7 +1642,7 @@ function renderZukan() {
   document.querySelector("#zukanListTotal").textContent = foundCount + " / " + CACTUS_TYPES.length;
   renderZukanPage();
 }
-document.querySelector("#zukanButton").addEventListener("click", function () {
+document.querySelector("#zukanButton").addEventListener("click", withSavedState(function () {
   state.lastViewedCollectionCount = collectionFoundCount();
   save();
   zukanPage = 0;
@@ -1595,7 +1652,7 @@ document.querySelector("#zukanButton").addEventListener("click", function () {
   const firstEntry = document.querySelector('.zukan-entry[data-cactus-id="' + firstFound.id + '"]');
   showZukanHero(firstFound, firstFoundCount, firstEntry);
   zukanDialog.showModal();
-});
+}));
 document.querySelector("#zukanClose").addEventListener("click", function () { zukanDialog.close(); });
 zukanDialog.addEventListener("close", function () {
   renderFactoryGuide();
@@ -1612,7 +1669,11 @@ mathDialog.addEventListener("close", function () {
   clearTimeout(nextTimer);
   if (state.tutorialStep === "equipment") scheduleTutorial(180);
 });
+window.addEventListener("storage", function (event) {
+  if (event.storageArea === localStorage && event.key === STORAGE) syncSavedState();
+});
 render();
+withSavedState(function () { if (savedSnapshot === null) save(); })();
 setInterval(function () { if (!harvestAnimationCount) render(); }, 1000);
 
 if ("serviceWorker" in navigator) {
@@ -1621,9 +1682,8 @@ if ("serviceWorker" in navigator) {
     if (appRegistration) appRegistration.update().catch(function () {});
   }
   navigator.serviceWorker.addEventListener("message", function (event) {
-    if (event.data && event.data.type === "CACTUS_PAGE_VERSION" && event.ports[0]) {
-      save();
-      event.ports[0].postMessage({ version: "336" });
+    if (event.data && event.data.type === "CACTUS_CHECK_PAGE_VERSION" && event.ports[0]) {
+      event.ports[0].postMessage({ version: "338" });
     }
   });
   window.addEventListener("load", function () {

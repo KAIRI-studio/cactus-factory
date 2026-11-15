@@ -1,5 +1,5 @@
-const APP_VERSION = "336";
-const CACHE_NAME = "cactus-factory-status-bar-337";
+const APP_VERSION = "338";
+const CACHE_NAME = "cactus-factory-save-338";
 const APP_FILES = [
   "./assets/shop-background-v315.webp",
   "./assets/shop-heading-v314.webp",
@@ -53,7 +53,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=334",
-  "./game.js?v=336",
+  "./game.js?v=338",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
@@ -126,8 +126,7 @@ function refreshOldPages() {
     return Promise.all(clients.filter(function (client) {
       return client.url.startsWith(self.registration.scope);
     }).map(function (client) {
-      // Current pages save and acknowledge their version. Legacy pages already
-      // save after every action and on each render; reload only their document.
+      // Check the version without asking an older tab to write its stale state.
       return new Promise(function (resolve) {
         const channel = new MessageChannel();
         const timer = setTimeout(function () { finish(null); }, 1000);
@@ -141,7 +140,7 @@ function refreshOldPages() {
           else client.navigate(client.url).catch(function () {}).then(resolve);
         }
         channel.port1.onmessage = function (event) { finish(event.data && event.data.version); };
-        client.postMessage({ type: "CACTUS_PAGE_VERSION" }, [channel.port2]);
+        client.postMessage({ type: "CACTUS_CHECK_PAGE_VERSION" }, [channel.port2]);
       });
     }));
   });
