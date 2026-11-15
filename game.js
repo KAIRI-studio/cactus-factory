@@ -159,6 +159,27 @@ const equipmentLevelText = document.querySelector("#equipmentLevelText");
 const specialNutrient = document.querySelector("#specialNutrient");
 const game = document.querySelector(".game");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const desktopFactory = window.matchMedia("(min-width:1200px) and (hover:hover) and (pointer:fine) and (not (any-pointer:coarse))");
+const desktopFactoryHeight = 990;
+let factoryScale = 1;
+
+function fitDesktopFactory() {
+  const height = window.innerHeight;
+  factoryScale = desktopFactory.matches ? Math.min(1, height / desktopFactoryHeight) : 1;
+  const style = document.documentElement.style;
+  if (factoryScale < 1) {
+    style.setProperty("--factory-layout-height", desktopFactoryHeight + "px");
+    style.setProperty("--factory-desktop-scale", String(factoryScale));
+  } else {
+    style.removeProperty("--factory-layout-height");
+    style.removeProperty("--factory-desktop-scale");
+  }
+}
+
+window.addEventListener("resize", fitDesktopFactory);
+desktopFactory.addEventListener("change", fitDesktopFactory);
+fitDesktopFactory();
+
 const brandSplash = document.querySelector("#brandSplash");
 const titleScreen = document.querySelector("#titleScreen");
 const startGameButton = document.querySelector("#startGameButton");
@@ -845,6 +866,12 @@ function playHarvestAnimation(item, order) {
   if (!button) return;
   const buttonRect = button.getBoundingClientRect();
   const gameRect = game.getBoundingClientRect();
+  const potLeft = (buttonRect.left - gameRect.left) / factoryScale;
+  const potTop = (buttonRect.top - gameRect.top) / factoryScale;
+  const potWidth = buttonRect.width / factoryScale;
+  const potHeight = buttonRect.height / factoryScale;
+  const roomWidth = gameRect.width / factoryScale;
+  const roomHeight = gameRect.height / factoryScale;
   const delay = Math.min(order * 42, 210);
   button.classList.add("harvesting");
 
@@ -852,20 +879,20 @@ function playHarvestAnimation(item, order) {
   flyer.className = "harvest-flyer";
   flyer.src = cactusType(item.cactusId).sprite;
   flyer.alt = "";
-  flyer.style.left = buttonRect.left - gameRect.left + buttonRect.width / 2 + "px";
-  flyer.style.top = buttonRect.top - gameRect.top - buttonRect.height * .08 + "px";
-  flyer.style.width = buttonRect.width * 1.03 + "px";
+  flyer.style.left = potLeft + potWidth / 2 + "px";
+  flyer.style.top = potTop - potHeight * .08 + "px";
+  flyer.style.width = potWidth * 1.03 + "px";
   const fanDirection = [-1, -.48, 0, .48, 1][(index + order) % 5];
-  const startCenterX = buttonRect.left - gameRect.left + buttonRect.width / 2;
-  const startTop = buttonRect.top - gameRect.top;
+  const startCenterX = potLeft + potWidth / 2;
+  const startTop = potTop;
   const exitX = fanDirection < -.8
-    ? -(startCenterX + buttonRect.width)
+    ? -(startCenterX + potWidth)
     : fanDirection > .8
-      ? gameRect.width - startCenterX + buttonRect.width
-      : fanDirection * gameRect.width * .72;
+      ? roomWidth - startCenterX + potWidth
+      : fanDirection * roomWidth * .72;
   const exitY = Math.abs(fanDirection) > .8
-    ? -gameRect.height * .32
-    : -(startTop + buttonRect.height * 1.45);
+    ? -roomHeight * .32
+    : -(startTop + potHeight * 1.45);
   flyer.style.setProperty("--fly-x", exitX + "px");
   flyer.style.setProperty("--fly-y", exitY + "px");
   flyer.style.setProperty("--fly-rotate", fanDirection * 42 + (index % 2 ? 7 : -7) + "deg");
@@ -875,9 +902,9 @@ function playHarvestAnimation(item, order) {
   [-1.15, -.7, -.25, .25, .7, 1.15].forEach(function (direction, particleIndex) {
     const particle = document.createElement("i");
     particle.className = "harvest-particle";
-    particle.style.left = buttonRect.left - gameRect.left + buttonRect.width / 2 + "px";
-    particle.style.top = buttonRect.top - gameRect.top + buttonRect.height * .68 + "px";
-    particle.style.setProperty("--particle-x", direction * buttonRect.width * .34 + "px");
+    particle.style.left = potLeft + potWidth / 2 + "px";
+    particle.style.top = potTop + potHeight * .68 + "px";
+    particle.style.setProperty("--particle-x", direction * potWidth * .34 + "px");
     particle.style.setProperty("--particle-y", (-16 - (particleIndex % 3) * 7) + "px");
     particle.style.animationDelay = delay + 55 + "ms";
     game.append(particle);
@@ -887,8 +914,8 @@ function playHarvestAnimation(item, order) {
   const reward = document.createElement("span");
   reward.className = "harvest-reward";
   reward.textContent = "+" + item.reward;
-  reward.style.left = buttonRect.left - gameRect.left + buttonRect.width / 2 + "px";
-  reward.style.top = buttonRect.top - gameRect.top + "px";
+  reward.style.left = potLeft + potWidth / 2 + "px";
+  reward.style.top = potTop + "px";
   reward.style.animationDelay = delay + 120 + "ms";
   game.append(reward);
   flyer.addEventListener("animationend", function () { flyer.remove(); }, { once: true });

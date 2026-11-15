@@ -4,7 +4,7 @@
 .factory-guide.guide-install .factory-guide-copy b{white-space:normal;font-size:11px;line-height:1.4}
 .factory-guide.guide-install .factory-guide-action{padding:7px 8px}
 #installLater{position:absolute;z-index:2;right:8px;top:50%;transform:translateY(-50%);padding:8px 3px;min-height:44px;border:0;background:transparent;color:#647465;font-size:10px;font-weight:800;box-shadow:none}
-#installDialog{width:min(360px,calc(100vw - 32px));max-height:calc(100dvh - 40px);padding:0;border:3px solid #234d3c;border-radius:25px;background:#f6f1d9;color:#234d3c;box-shadow:0 7px 0 #173a2f,0 20px 60px #061a1466;overflow:auto}
+#installDialog{width:min(360px,calc(100vw - 32px));max-height:calc(var(--factory-layout-height,100dvh) - 40px);padding:0;border:3px solid #234d3c;border-radius:25px;background:#f6f1d9;color:#234d3c;box-shadow:0 7px 0 #173a2f,0 20px 60px #061a1466;overflow:auto}
 #installDialog::backdrop{background:#092b22a6;backdrop-filter:blur(3px)}
 .install-card{padding:25px 22px 21px;text-align:center}
 .install-icon{display:block;width:68px;height:68px;margin:0 auto 13px;border:2px solid #37634d;border-radius:17px;box-shadow:0 3px 0 #bbad79}
