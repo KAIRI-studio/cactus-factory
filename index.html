@@ -25,6 +25,18 @@
   <link rel="stylesheet" href="install.css?v=330" />
   <style>
     body{zoom:var(--factory-scale,1)}
+    /* The standalone shell already reserves the home gesture area. */
+    @media (max-width:600px) and (display-mode:standalone){
+      :root{
+        --factory-height:calc(var(--factory-layout-height,100dvh) - var(--factory-top-gap) - var(--factory-bottom-gap));
+      }
+      .actions.factory-console{bottom:12px}
+      .factory-guide{bottom:132px}
+    }
+    @media (max-width:600px) and (max-height:700px) and (display-mode:standalone){
+      .actions.factory-console{bottom:9px}
+      .factory-guide{bottom:108px}
+    }
     #mathIntro .math-mode-card{
       background:#dce8d8 url("assets/equipment-factory-frame-v4.webp") center top / 100% auto no-repeat;
       padding-inline:clamp(22px,8%,32px);
