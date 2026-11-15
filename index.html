@@ -21,7 +21,7 @@
   <link rel="preload" as="image" type="image/webp" href="assets/title-start-v2.webp" />
   <link rel="stylesheet" href="styles.css?v=334" />
   <link rel="stylesheet" href="title-v3.css?v=334" />
-  <script src="game.js?v=334" defer></script>
+  <script src="game.js?v=335" defer></script>
   <link rel="stylesheet" href="install.css?v=330" />
   <style>
     body{zoom:var(--factory-scale,1)}
@@ -36,6 +36,10 @@
     @media (max-width:600px) and (max-height:700px) and (display-mode:standalone){
       .actions.factory-console{bottom:9px}
       .factory-guide{bottom:108px}
+    }
+    #zukanDialog::backdrop{
+      background:#10251dcc!important;
+      backdrop-filter:blur(3px)!important;
     }
     #mathIntro .math-mode-card{
       background:#dce8d8 url("assets/equipment-factory-frame-v4.webp") center top / 100% auto no-repeat;
@@ -375,6 +379,6 @@
       <button id="installClose" type="button">とじる</button>
     </section>
   </dialog>
-  <!-- release-v334 -->
+  <!-- release-v335 -->
 </body>
 </html>

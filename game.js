@@ -1588,7 +1588,7 @@ zukanDialog.addEventListener("close", function () {
     else schedulePostDiscoveryTutorial();
   }, 140);
 });
-[mathDialog, equipmentDialog, zukanDialog, resetDialog, factoryProgressDialog].forEach(function (dialog) {
+[mathDialog, resetDialog, factoryProgressDialog].forEach(function (dialog) {
   dialog.addEventListener("click", function (event) { if (event.target === dialog) dialog.close(); });
 });
 mathDialog.addEventListener("close", function () {
