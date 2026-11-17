@@ -199,6 +199,13 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const desktopFactory = window.matchMedia("(min-width:601px)");
 const desktopFactoryHeight = 990;
 const mobileFactoryHeight = 740;
+const mobileBrowser=window.matchMedia('(pointer: coarse) and (display-mode: browser)').matches &&
+  navigator.standalone!==true && CSS.supports('height','100svh');
+const stableViewport=mobileBrowser?document.createElement('div'):null;
+if(stableViewport){
+  stableViewport.style.cssText='position:fixed;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none';
+  document.documentElement.append(stableViewport);
+}
 let factoryScale = 1;
 
 function fitFactoryViewport() {
@@ -214,7 +221,7 @@ function fitFactoryViewport() {
       style.removeProperty("--factory-layout-height");
     }
   } else {
-    const viewportHeight = viewport?.height || document.documentElement.clientHeight || window.innerHeight;
+    const viewportHeight = (stableViewport && parseFloat(getComputedStyle(stableViewport).height)) || viewport?.height || document.documentElement.clientHeight || window.innerHeight;
     if (viewportHeight <= 0) return;
     const layoutHeight = Math.max(mobileFactoryHeight, viewportHeight);
     factoryScale = viewportHeight / layoutHeight;

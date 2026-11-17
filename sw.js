@@ -1,5 +1,5 @@
 const APP_VERSION = "338";
-const CACHE_NAME = "cactus-factory-splash-339";
+const CACHE_NAME = "cactus-factory-viewport-stable1";
 const APP_FILES = [
   "./assets/shop-background-v315.webp",
   "./assets/shop-heading-v314.webp",
@@ -53,7 +53,7 @@ const APP_FILES = [
   "./assets/equipment-action-upgrade-700.webp",
   "./assets/equipment-action-complete.webp",
   "./title-v3.css?v=334",
-  "./game.js?v=338",
+  "./game.js?v=viewport-stable1",
   "./manifest.webmanifest",
   "./icons/apple-touch-icon.png",
   "./icons/icon-192.png",
