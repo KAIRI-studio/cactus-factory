@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#263a31" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="サボテン工場" />
-  <title>サボテン育成ライン</title>
+  <title>サボテン工場 | CACTUS FACTORY</title>
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
   <link rel="preload" as="image" href="assets/kairi-studio-logo.png" fetchpriority="high" />
@@ -97,6 +97,12 @@
   </style>
   <script src="install.js?v=300" defer></script>
 <script src="analytics.js?v=family1" data-site="cactus-factory" defer></script>
+<meta name="description" content="たし算・ひき算・かけ算・わり算を10問練習しながら、サボテンを育てて集める無料ゲーム。">
+<style>
+a.title-guide{display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;min-height:32px;padding:4px 10px;border-radius:8px;font-size:13px;font-weight:650;line-height:1.35;text-align:center;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+a.title-guide:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+#titleScreen .title-guide{margin-top:10px;color:#fff9db;background:#193a2de8;border:1px solid #d4bd72}
+</style>
 </head>
 <body class="launching">
   <audio id="bgmAudio" src="assets/audio/sunlight-bgm.mp3" preload="auto" loop hidden></audio>
@@ -120,6 +126,7 @@
       <h1 class="sr-only">サボテン工場</h1>
       <img class="title-logo" src="assets/title-logo-v3.webp" alt="サボテン工場 CACTUS FACTORY" />
       <button class="start-game" id="startGameButton" type="button" aria-label="はじめる" disabled><img src="assets/title-start-v2.webp" alt="" aria-hidden="true" /></button>
+      <a class="title-guide" href="/castor/cactus-factory.html">あそびかた・学べること</a>
     </div>
   </section>
   <div class="screen-shutter" id="screenShutter" aria-hidden="true"><i></i><i></i><span>CACTUS FACTORY</span></div>
